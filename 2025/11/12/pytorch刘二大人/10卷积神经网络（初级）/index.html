@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>10卷积神经网络（初级） | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="二维卷积神经网络   00:03:44.271 放进卷积层，然后使通道数提升 00:04:36.639  下采样层中通道数是不变的 但是宽高会变 目的减少数据量，降低运算的需求 00:05:59.344  再做一次5x5的卷积 然后2x2的下采样 最后要把三阶向量展开成一维向量 就是挨个排序 00:07:13.014  然后利用全连接层来映射到10个输出 利用各种层，进行维度变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10卷积神经网络（初级）">
+<meta property="og:url" content="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="二维卷积神经网络   00:03:44.271 放进卷积层，然后使通道数提升 00:04:36.639  下采样层中通道数是不变的 但是宽高会变 目的减少数据量，降低运算的需求 00:05:59.344  再做一次5x5的卷积 然后2x2的下采样 最后要把三阶向量展开成一维向量 就是挨个排序 00:07:13.014  然后利用全连接层来映射到10个输出 利用各种层，进行维度变">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T13:34:37.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.383Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="卷积神经网络">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="刘二大人">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "10卷积神经网络（初级）",
+  "url": "http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T13:34:37.000Z",
+  "dateModified": "2025-11-12T14:08:33.383Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '10卷积神经网络（初级）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">10卷积神经网络（初级）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">10卷积神经网络（初级）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.383Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>二维卷积神经网络</p>
+<p><img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270341961.png" alt="image.png"> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270342041.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.videopod.episodes&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=10&amp;time=00:03:44.271">00:03:44.271</a></p>
+<p>放进卷积层，然后使通道数提升</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.videopod.episodes&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=10&amp;time=00:04:36.639">00:04:36.639</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270342626.png" alt="image.png"></p>
+<p>下采样层中通道数是不变的 但是宽高会变</p>
+<p>目的减少数据量，降低运算的需求 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.videopod.episodes&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=10&amp;time=00:05:59.344">00:05:59.344</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270359962.png" alt="image.png"></p>
+<p>再做一次5x5的卷积 然后2x2的下采样</p>
+<p>最后要把三阶向量展开成一维向量 就是挨个排序 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.videopod.episodes&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=10&amp;time=00:07:13.014">00:07:13.014</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270402261.png" alt="image.png"></p>
+<p>然后利用全连接层来映射到10个输出</p>
+<p>利用各种层，进行维度变换</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.videopod.episodes&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=10&amp;time=00:08:22.737">00:08:22.737</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411270404271.png" alt="image.png"></p>
+<p>卷积+下采样=特征提取器</p>
+<p>图像： rgb图像 栅格图像 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:11:25.291">00:11:25.291</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271338754.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:24:15.002">00:24:15.002</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271343674.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:25:19.212">00:25:19.212</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271344154.png" alt="image.png"> 取出来一个图形块 对图像块进行卷积 依次移动</p>
+<p>输出通道数 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:28:20.851">00:28:20.851</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271345524.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:29:22.737">00:29:22.737</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271345133.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:29:54.087">00:29:54.087</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271345692.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:30:10.046">00:30:10.046</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271345984.png" alt="image.png"></p>
+<p>这个就是单通道卷积的形象表示</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:30:33.601">00:30:33.601</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271346299.png" alt="image.png"></p>
+<p>三通道卷积 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:31:02.697">00:31:02.697</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271346086.png" alt="image.png"></p>
+<p>每一个通道设置一个卷积核 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:32:17.903">00:32:17.903</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271346175.png" alt="image.png"></p>
+<p>最后三维变成1维 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:33:10.285">00:33:10.285</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271347584.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:35:20.005">00:35:20.005</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271347812.png" alt="image.png"></p>
+<p>由于kernel 是3x3的所以 h和w减二</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:37:26.084">00:37:26.084</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271353971.png" alt="image.png"></p>
+<p>n个通道，就需要n个卷积核 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:39:22.814">00:39:22.814</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271355790.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:39:58.292">00:39:58.292</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271356862.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:40:29.340">00:40:29.340</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271356441.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:40:45.478">00:40:45.478</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271357770.png" alt="image.png"> 输入输出通道， 所有输入的数据都应是小批量的 生成随机输入数据 conv_layer卷积层 输入通道数量 输出通道数量 kernel大小</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:43:39.933">00:43:39.933</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271403200.png" alt="image.png"></p>
+<p>把创建的对象输入到卷积层中</p>
+<p>输入5各通道 100X100长宽 输出10个通道 10 ，98，98</p>
+<p>10是输出通道数5输入通道，3，3是卷积核大小</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:45:24.469">00:45:24.469</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271406251.png" alt="image.png"></p>
+<p>如果我们想要获得5X5的图像，而不是卷积过后3x3的</p>
+<p>我们可以在input外围添加一圈 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:46:00.422">00:46:00.422</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271407086.png" alt="image.png"> 7x7 * 5x5 -&gt; 5x5</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:47:24.915">00:47:24.915</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271408845.png" alt="image.png"></p>
+<p>最常见的就是填充0</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:47:55.476">00:47:55.476</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271409908.png" alt="image.png"></p>
+<p>这里的B是batch——size</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:48:00.548">00:48:00.548</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271411993.png" alt="image.png"></p>
+<p>构建一个卷积层 前两个变量，一个是输入通道，一个是输出通道数 pading 就是上图填0</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:48:52.672">00:48:52.672</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271412691.png" alt="image.png"></p>
+<p>构建卷积核 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:48:57.849">00:48:57.849</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271413783.png" alt="image.png"></p>
+<p>输出、输入、宽度、高度</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:49:14.835">00:49:14.835</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271413768.png" alt="image.png"></p>
+<p>这里对卷积层进行了初始化</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:49:39.334">00:49:39.334</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271415621.png" alt="image.png"></p>
+<p>如果要输出2x2的 这里就要求stride这个参数为2，也就是步长为2，一次移动两格（长宽都一样 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:49:51.532">00:49:51.532</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271416876.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:50:04.802">00:50:04.802</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271416567.png" alt="image.png"> 这个可以有效降低输出的宽高 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:50:33.270">00:50:33.270</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271417530.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:50:31.025">00:50:31.025</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271417135.png" alt="image.png"></p>
+<p>代码变动在这里</p>
+<h1><span id="下采样">下采样</span></h1>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:50:50.186">00:50:50.186</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271417264.png" alt="image.png"></p>
+<p>最大池化层</p>
+<p>分成2x2的区间，然后再这个各格子内，找最大值</p>
+<p>与通道无关，所以变换过后，通道数不变 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:51:51.468">00:51:51.468</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271418500.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:52:02.833">00:52:02.833</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271418842.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:53:01.263">00:53:01.263</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271420902.png" alt="image.png"></p>
+<p>笨比了</p>
+<p>5x5的kernel会导致图像长宽变小4 这个可以自己画个图理解一下</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:53:18.662">00:53:18.662</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271423151.png" alt="image.png"> 进行一个最大池化 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:53:41.142">00:53:41.142</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271423248.png" alt="image.png"> 输入通道和输出通道<a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:54:00.492">00:54:00.492</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271424893.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:54:10.923">00:54:10.923</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271424034.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:54:28.580">00:54:28.580</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271424517.png" alt="image.png"></p>
+<p>320个元素进行向量化，经过全连接层，映射成10 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:56:19.190">00:56:19.190</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271426396.png" alt="image.png"></p>
+<p>下面将全连接的网络改成卷积神经网络 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:56:46.689">00:56:46.689</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271427144.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:57:02.712">00:57:02.712</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271428818.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:57:18.363">00:57:18.363</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271428651.png" alt="image.png"></p>
+<p>relu是进行激活 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:57:43.856">00:57:43.856</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271429422.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:57:47.328">00:57:47.328</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271429975.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:58:14.282">00:58:14.282</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271429074.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:58:42.200">00:58:42.200</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271430809.png" alt="image.png"> 右边代码和左图有点不一样 右边代码是是 做完卷积之后先做的池化，然后做的激活 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=00:59:43.641">00:59:43.641</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271439155.png" alt="image.png"></p>
+<p>view目的就是让其映射到全连接网络所需要的输入 fc就是使用全连接层进行变换</p>
+<p>由于要进行交叉熵损失计算，所以最后一层不需要进行激活</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:00:32.903">01:00:32.903</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271441825.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:00:56.703">01:00:56.703</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271441507.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:01:58.222">01:01:58.222</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271442806.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:03:09.107">01:03:09.107</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271444145.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:03:13.584">01:03:13.584</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271444049.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:03:23.604">01:03:23.604</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271445547.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?p=10&amp;spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;time=01:04:42.246">01:04:42.246</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271446362.png" alt="image.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/">http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">卷积神经网络</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">刘二大人</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/CNN/">CNN</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">11卷积神经网络（高级）</div></div><div class="info-2"><div class="info-item-1">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div></a><a class="pagination-related" href="/2025/11/12/opengl%E5%AD%A6%E4%B9%A0/" title="opengl学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">opengl学习</div></div><div class="info-2"><div class="info-item-1">毕设相关   Qt/C++ opengl导入机械臂模型，添加ui拖拽交互，运动插补，包括关节和直线运动，可保存关节点信息_哔哩哔哩_bilibili 学习资源 12```[【B站最好】OpenGL小白到精通系列-保姆级-计算机图形学_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1aK4y1z7ii/?spm_id_from=333.337.search-card.all.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648) 123456789101112131415161718192021222324252627[Fetching Title#g3p6](https://blog.csdn.net/MASILEJFOAISEGJIAE/article/details/84840748)[现代OpenGL教程（一）：绘制三角形（imgui+OpenGL3.3）\_imgui gl绘制三角形-CSDN博客](https://blog.csdn.net/MASILEJF...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">11卷积神经网络（高级）</div></div><div class="info-2"><div class="info-item-1">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/4back%20propagation(%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%EF%BC%89/" title="4back propagation(反向传播）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">4back propagation(反向传播）</div></div><div class="info-2"><div class="info-item-1">00:01:49.339  00:02:18.624  注意这里时对损失进行求导，而不是对ŷ 00:02:33.467  00:03:04.905  image.png  第一层00:03:49.205  隐层h1第一层，是6维的 x是5维的 隐层h2 7维 写解析式太麻烦了 面对这样的复杂网络 把网络看成图 再图上进行传播梯度 基于链式法则 00:05:33.953  两层神经网络 00:06:52.853  这个转置符号无所谓 x的维数为N 00:07:26.884  00:08:01.980  00:08:29.528  h1的维数为m b1是m维 00:08:58.784  00:09:27.210  全链接神经网络的第一层 下面是第二层 00:09:52.605  00:11:58.074  把两层变成1层，不管多少层，线性变换，都可以变成1层。 为了提高模型的复杂程度 00:12:34.502  添加一个非线性的函数，用于提高复杂程度 nonliner 00:13:14.804  00:13:55.471  链式求导法则...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2线性模型</div></div><div class="info-2"><div class="info-item-1">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="3梯度下降算法的实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">3梯度下降算法的实现</div></div><div class="info-2"><div class="info-item-1">00:02:00.228  使用随机猜测 寻找ŷ − y 最小值 00:03:10.941  00:03:41.947  两个权重w1 w2 00:04:06.938  这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题 ==分治思想== 00:05:02.292  00:05:11.770  对于两个权重，进行划分，只考虑这点00:06:02.911  image.png  使用这几个点代表所有的空间 00:07:07.962  00:07:29.136  分治思想的缺点，会有如上的情况，导致无法获取最低点。有可能会错过比较好的低点 00:09:26.071  要求函数的最小值 00:10:16.901  00:10:41.308  00:11:34.211利用梯度来判断这个点需要进行的平移方向，也就 是如果梯度导数 &gt; 0 ,也就是这个点右移会上升  所以应该选择导数的负方向（下面公式中是负号），用以趋近最低点 00:12:34.364  学习率最好选的小一点 上面的算法思想： ==贪心== 00:14:53.079...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/5pytorch%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="5pytorch实现线性回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">5pytorch实现线性回归</div></div><div class="info-2"><div class="info-item-1">使用随机梯度下降 00:02:18.384  00:03:07.590  上节课的例子 因为梯度不会自动清零，为了使这次的梯度不影响下次的梯度，进行手工清零 线性回归就是恨简单的神经网络 00:06:32.614  训练步骤： 1. 前馈:算损失 2. 反馈：算梯度 3. 更新：使用梯度下降算法更新权重 00:06:33.097  00:06:50.802  要使用mini-batch 要一次性将ŷ求出来 所以需要使用矩阵运算 这里运用numpy的广播方式 00:09:36.616  就是矩阵扩充 00:10:14.863  00:11:06.105  w应该是3x3 00:12:01.227  00:12:13.883  实际上也就是向量化00:12:48.104  00:12:53.501  00:13:20.043  00:14:06.039  potrch中计算导数不再是重点因为00:13:52.605  有函数会自动计算导数 重点在于构造计算图00:14:28.914  00:14:57.107  这个被称为一个线性单元 ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">下采样</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

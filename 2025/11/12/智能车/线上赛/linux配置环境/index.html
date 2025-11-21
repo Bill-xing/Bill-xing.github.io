@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux配置环境 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="重装解决99%问题。  1.第一个实际是Ubuntu版本不对导致的问题，原先安装的22.10 2.有的问题没拍照，描述记录： 填写用户名是突然跳出来一个框，显示error，表示硬盘损坏 解决办法 （我的疑惑，是否是启动盘只能单次使用） 重新制作启动盘，删除盘，重新开始，解决问题 3.手动分区： 结合csdn，分区，选择boot磁盘。  4.当Ubuntu开机看见一对代码之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux配置环境">
+<meta property="og:url" content="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="重装解决99%问题。  1.第一个实际是Ubuntu版本不对导致的问题，原先安装的22.10 2.有的问题没拍照，描述记录： 填写用户名是突然跳出来一个框，显示error，表示硬盘损坏 解决办法 （我的疑惑，是否是启动盘只能单次使用） 重新制作启动盘，删除盘，重新开始，解决问题 3.手动分区： 结合csdn，分区，选择boot磁盘。  4.当Ubuntu开机看见一对代码之">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:07:01.925Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="操作系统">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="竞赛">
+<meta property="article:tag" content="线上赛">
+<meta property="article:tag" content="智能车">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux配置环境",
+  "url": "http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:07:01.925Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux配置环境',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">linux配置环境</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">linux配置环境</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:07:01.925Z" title="更新于 2025-11-12 23:07:01">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E7%BA%BF%E4%B8%8A%E8%B5%9B/">智能车-线上赛</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="info">
+<p>重装解决99%问题。</p>
+</div>
+<p>1.第一个实际是Ubuntu版本不对导致的问题，原先安装的22.10<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/27500914/1671411735478-225e5094-5ce2-40cc-80d5-71acd86c1cb5.jpeg"></p>
+<p>2.有的问题没拍照，描述记录：</p>
+<p>填写用户名是突然跳出来一个框，显示error，表示硬盘损坏</p>
+<p>解决办法</p>
+<p>（我的疑惑，是否是启动盘只能单次使用）</p>
+<p>重新制作启动盘，删除盘，重新开始，解决问题</p>
+<p>3.手动分区：</p>
+<p>结合csdn，分区，选择boot磁盘。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/27500914/1671411738648-9d6136af-8ee9-49f6-bb2f-c8735b13dd1e.jpeg"></p>
+<p>4.当Ubuntu开机看见一对代码之类的：</p>
+<p>不要慌等待就好，不要乱按键盘</p>
+<p>5.当删除Ubuntu之后，没改启动选项，会出现linux的界面，无法正常打开window。在界面输入exit按回车即可进入window系统</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/27500914/1671428961903-c3a5829a-ea54-443c-a552-550dc31a12aa.jpeg"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/27500914/1671428964374-ea0b1487-645f-4371-8651-57b114e0144b.jpeg"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E7%AB%9E%E8%B5%9B/">竞赛</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E4%B8%8A%E8%B5%9B/">线上赛</a><a class="post-meta__tags" href="/tags/%E6%99%BA%E8%83%BD%E8%BD%A6/">智能车</a><a class="post-meta__tags" href="/tags/Qt/">Qt</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/" title="linux学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">linux学习</div></div><div class="info-2"><div class="info-item-1">linux学习索引 【Linux】一步一步学Linux系列教程汇总（更新中……）_沧海一笑-dj的博客-CSDN博客_csdn dengjin Linux常见文件后缀以及重要的文件夹_linux下二进制文件后缀_lzfshub的博客-CSDN博客 Linux库概念，动态库和静态库的制作，如何移植第三方库_一口Linux的博客-CSDN博客 学习笔记 1) 重要快捷键 真正学习命令行之前，你先要掌握几个十分有用、必需掌握的小技巧： [Tab] 使用Tab键来进行命令补全，Tab键一般是在字母Q旁边，这个技巧给你带来的最大的好处就是当你忘记某个命令的全称时可以只输入它的开头的一部分，然后按下Tab键就可以得到提示或者帮助完成  Ctrl+c 退出  改密码  sudo passwd shiyanlou 变更用户  cd /home/lilei  ls iphone11  sudo chown shiyanlou iphone11  adduser 和 useradd 的区别是什么 答：useradd 只创建用户，不会创建用户密码和工作目录，创建...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/git%E5%92%8Cgithub%E4%BD%BF%E7%94%A8/" title="git和github使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">git和github使用</div></div><div class="info-2"><div class="info-item-1">https://rogerdudler.github.io/git-guide/index.zh.html很好用 git安装教程 git官网下载巨慢 安装包放在下面Git-2.36.1-64-bit.rar Git 详细安装教程（详解 Git 安装过程的每一个步骤）_mukes的博客-CSDN博客_git安装 出现的问题及解决办法 【Git &amp; Github】解决win10安装Git时出现“unable to set system config … exit code 128”的问题_Mculover666的博客-CSDN博客 很重要的一点，当你电脑安装过git然后又卸载掉时，记得检查是否留有.gitconfig文件，这个会导致上述错误。 基础知识 名词了解（mingw gcc g++ make cmake 有没有大佬给我讲解一下MSVC、MINGW,gcc、g++,qmake、cmake的联系和区别是什么？ - 知乎 MinGW到底是个什么ghost_leehaming的博客-CSDN博客_mingw https://zh.wikipedia.o...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="实用小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">实用小技巧</div></div><div class="info-2"><div class="info-item-1">capslock 当你在打出括号之后，经常需要将光标移动到小括号的外边，如果使用方向键则比较麻烦，比较费劲，影响打字效率。这个时候可以使用CapsLock，将capslock按键进行映射，实现快速打字 CapsLock+（常用操作）_馋学习的身子的博客-CSDN博客 官网地址：https://cjkis.me/capslock+/ 编辑右键菜单栏 Typora如何添加到右键菜单中可以打开文件夹_typora添加到右键_勇踏前人未索之境的博客-CSDN博客 ubuntu中如何设置快捷方式 linux把程序放在桌面,如何在Ubuntu 20.04中将应用程序快捷方式添加到桌面_商业学的博客-CSDN博客 把图标放到桌面上 然后从/usr/share/applications 中直接拖拽 在Ubuntu中安装Pycharm并将图标放在桌面-CSDN博客 网络命令行操作 windows 常用的网络命令_沃和莱特的博客-CSDN博客 查看端口是否被监听    netstat -ano 5 查看端口使用情况，每隔5秒查询一次，CTRL+C结束查询。 ...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">计算机网络</div></div><div class="info-2"><div class="info-item-1">VMWARE Ubuntu虚拟机和Windows10主机ping不通|Ubuntu断网、没有网络_ubuntu虚拟机ping不通主机_吃饭饭l的博客-CSDN博客 解决虚拟机桥接模式无法上网的问题_虚拟机桥接模式连不上网_.GRIT.的博客-CSDN博客 5.VM虚拟机网络设置—桥接模式_vm桥接模式_kande0707的博客-CSDN博客 嵌入式Linux开发环境搭建之Ubuntu连接网络（NAT、桥接、仅主机）_嵌入式乌班图联网_小辉_Super的博客-CSDN博客 虚拟机Ubuntu设置固定IP与主机相互通讯_ubuntu 主机ip_爬楼的猪的博客-CSDN博客 Socket通信 C++ socket通信详解_socket c++_io无心的博客-CSDN博客 网络常用命令 网络命令汇总 计网基础 了解RPC、HTTP、TCP_rpc tcp_阿飞技术的博客-CSDN博客 计算机网络的学习，推荐看如下列表的视频，进行初步了解，着重了解端口，ip，tcp的概念 bilibili ssh 什么是SSH_卖女孩的小火柴的博客-CSDN博客_ssh是什么...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/" title="linux学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">linux学习</div></div><div class="info-2"><div class="info-item-1">linux学习索引 【Linux】一步一步学Linux系列教程汇总（更新中……）_沧海一笑-dj的博客-CSDN博客_csdn dengjin Linux常见文件后缀以及重要的文件夹_linux下二进制文件后缀_lzfshub的博客-CSDN博客 Linux库概念，动态库和静态库的制作，如何移植第三方库_一口Linux的博客-CSDN博客 学习笔记 1) 重要快捷键 真正学习命令行之前，你先要掌握几个十分有用、必需掌握的小技巧： [Tab] 使用Tab键来进行命令补全，Tab键一般是在字母Q旁边，这个技巧给你带来的最大的好处就是当你忘记某个命令的全称时可以只输入它的开头的一部分，然后按下Tab键就可以得到提示或者帮助完成  Ctrl+c 退出  改密码  sudo passwd shiyanlou 变更用户  cd /home/lilei  ls iphone11  sudo chown shiyanlou iphone11  adduser 和 useradd 的区别是什么 答：useradd 只创建用户，不会创建用户密码和工作目录，创建...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" title="虚拟技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">虚拟技术</div></div><div class="info-2"><div class="info-item-1">docker 参考教程：菜鸟教程 彻底卸载 彻底卸载docker_docker卸载-CSDN博客 之前安装过docker，但是无法执行helloworld程序 安装docker出现很多问题 晚上搜了很多都没有解决，最后选择直接重装  docker尝试直接使用官方教程止步在了docker代理配置 出现了 https://blog.csdn.net/Cai_deLong/article/details/115255735参考 我之前有修改过文件传输上限，但是这次还是出现了问题，文章中配置git最低速度和最低速度时间，这里是因为超过的git的最低速度和最低速度时间，所以直接退出来了 1 引言 docker的主要用于后端工程师还有运维工程师 用途：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。  简单来说就是将应用程序与本机架构隔离开，能够避免因为环境问题出现例如编译...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/" title="鸟叔的私房菜"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">鸟叔的私房菜</div></div><div class="info-2"><div class="info-item-1">第0章 计基 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/4.html  原先cpu是有北桥和南桥 北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口 南桥用于连接速度相对较慢的，比如硬盘usb和网卡。 现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽 cpu外频：外部设备到通过前端总线（fsb），进行频率同步， 内频：fsb到cpu，cpu的频率快于fsb 倍频 cpu频率速度=外频x倍频 倍频是cpu出场已经设置好的不可更改，所以超频的一般是外频 磁盘的最小物理储存单位称之为扇区 （sector）  同一个同心圆的扇区组合成的圆就是所谓的磁道（track）  所有盘片上面的同一个磁道可以组合成所谓的柱面 （cylinder）  CMOS 主要的功能为记录主板上面的重要参数， 包括系统时间、CPU电压与频率、各项设备的I/O位址与IRQ等 BIOS 为写入到主板上某一块 flash 或 EEPROM 的程序，他可以在...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/pcl/" title="pcl"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">pcl</div></div><div class="info-2"><div class="info-item-1">Introduction — Point Cloud Library 0.0 documentation PCL(Point Cloud Library)学习指南&amp;资料推荐（2023版） 网上一些PCL学习资料-CSDN博客 01-点云滤波Filtering * - 黑马机器人 | PCL-3D点云 PCL点云库学习笔记（文章链接汇总）_Robot_Yue的博客-CSDN博客 点云数据一般是由xyz还有强度信息组成 强度信息是指反射回来的光波的强度，表示物体表面粗糙度，反射率等 点云数据格式转换 从ros中的点云数据转换到pcl中的点云数据   pcl库 主要问题是找不到pcap这个包 所以想把他删掉，然后再重新下载 后面的一堆报错表示pcl貌似版本兼容有问题  提取关键字是 undefined reference to 这里是是找不到调用的函数 最后发现是链接动态链接库的时候链接了错的动态库应该链接pcl_ros而不是PCL yum yum 和 apt 是两种不同的包管理工具，它们分别用于不同的Linux发行版，具体区别如下：...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

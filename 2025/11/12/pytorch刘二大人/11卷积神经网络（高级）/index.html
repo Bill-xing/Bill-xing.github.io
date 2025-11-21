@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>11卷积神经网络（高级） | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， google">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11卷积神经网络（高级）">
+<meta property="og:url" content="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， google">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T13:34:37.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.391Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="卷积神经网络">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="刘二大人">
+<meta property="article:tag" content="优化算法">
+<meta property="article:tag" content="线性回归">
+<meta property="article:tag" content="梯度下降">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "11卷积神经网络（高级）",
+  "url": "http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T13:34:37.000Z",
+  "dateModified": "2025-11-12T14:08:33.391Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '11卷积神经网络（高级）',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">11卷积神经网络（高级）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">11卷积神经网络（高级）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.391Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:02:06.381">00:02:06.381</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271454819.png" alt="image.png"></p>
+<p>convoltion：卷积 pooling：池化 softmax：输出 other：拼接层</p>
+<p>为了减少代码冗余： - 使用函数调用 - 构造类 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:04:05.180">00:04:05.180</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271455846.png" alt="image.png"></p>
+<p>发现这些快长得都一样 所以把其封装成类</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:06:02.235">00:06:02.235</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271457228.png" alt="image.png"></p>
+<p>有一些参数比较难选 比如kernel选哪个，</p>
+<p>googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:09:21.370">00:09:21.370</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271500013.png" alt="image.png"></p>
+<p>对于每一条路，变换之后bwh必须相同 c可以不同 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:11:39.744">00:11:39.744</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271502058.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:11:51.236">00:11:51.236</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271502939.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:11:59.066">00:11:59.066</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271502467.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:13:31.719">00:13:31.719</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271504065.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:13:30.545&amp;app=jump-video-extension">00:13:30.545</a> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:13:30.545">00:13:30.545</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271505701.png" alt="image.png"></p>
+<p>求和也就是信息融合</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:17:39.604">00:17:39.604</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271506741.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:19:24.494">00:19:24.494</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271508532.png" alt="image.png"> 上面这个的运算量太大了</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:20:06.613">00:20:06.613</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271508619.png" alt="image.png"> 直接变为原来的十分之一</p>
+<p>这个也就是1x1的卷积神经网络的作用</p>
+<p>网络中的网络：1x1卷积</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:22:11.511">00:22:11.511</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271512518.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:23:26.250">00:23:26.250</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271513406.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:24:49.219">00:24:49.219</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271515831.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:26:49.045">00:26:49.045</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271517994.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:26:57.307">00:26:57.307</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271520140.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:27:05.035">00:27:05.035</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271520480.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:27:21.746">00:27:21.746</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271520444.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:28:02.994">00:28:02.994</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271520317.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:28:25.721">00:28:25.721</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271521213.png" alt="image.png"></p>
+<p>所有的内容整合到一块，形成一个类</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:29:13.195">00:29:13.195</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271523944.png" alt="image.png"></p>
+<p>右图是构造网络 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:30:37.481">00:30:37.481</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271525757.png" alt="image.png"></p>
+<p>一共输出88个通道 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:31:02.224">00:31:02.224</a></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:31:17.952">00:31:17.952</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271525423.png" alt="image.png"></p>
+<p>这也是代码中88的由来</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:33:12.296">00:33:12.296</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271527913.png" alt="image.png"></p>
+<p>最优的是在中间，而不是最后，所以训练轮数不是越多越好 ，后面有过拟合的倾向</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:34:28.892">00:34:28.892</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271528443.png" alt="image.png"></p>
+<p>对于这种情况的操作是，将最好的版本进行存盘</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:36:12.213">00:36:12.213</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271530470.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:37:19.877">00:37:19.877</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271532693.png" alt="image.png"></p>
+<p>20层的卷积比56层更好</p>
+<p>原因有可能是：梯度消失</p>
+<p>当梯度趋近于0时，权重就得不到更新 也就是里输入比较近的块，没办法得到充分的训练</p>
+<p>训练神经网络若干个层</p>
+<p>解决办法 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:38:46.307">00:38:46.307</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271535190.png" alt="image.png"></p>
+<p>将每一层进行加锁 算完之后加锁 逐层训练</p>
+<p>这个实际上是很难执行的，因为层数很多</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:39:34.549">00:39:34.549</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271536301.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:39:48.820">00:39:48.820</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271537762.png" alt="image.png"></p>
+<p>跳连接</p>
+<p>加完了再激活</p>
+<p>重点是和x做加法 这就要求输出<span class="math inline"><em>F</em>(<em>x</em>)</span>的bchw都需要和x一致 b batch c channel 。。。 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:42:02.763">00:42:02.763</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271539017.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:42:21.659">00:42:21.659</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271539975.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:45:04.552">00:45:04.552</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271541930.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:45:47.831">00:45:47.831</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271541886.png" alt="image.png"></p>
+<p>注意最后一步顺序 先求和，再激活</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:46:59.699">00:46:59.699</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271542936.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:49:19.322">00:49:19.322</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271545754.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:49:27.563">00:49:27.563</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271545232.png" alt="image.png"></p>
+<p>接下来的学习路线 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:53:35.096">00:53:35.096</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271558813.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:53:47.566">00:53:47.566</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271558010.png" alt="image.png"></p>
+<p>最好通读一遍pytorch <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:54:13.784">00:54:13.784</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271558206.png" alt="image.png"></p>
+<p>复现一些比较经典的代码 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:54:48.217">00:54:48.217</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271559442.png" alt="image.png"></p>
+<p>跑通代码不对 应该是读代码，了解架构</p>
+<p>然后进行架构的复现，<a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:56:14.756">00:56:14.756</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271559852.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:57:10.414">00:57:10.414</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271600778.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=11&amp;time=00:57:21.636">00:57:21.636</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411271600627.png" alt="image.png"></p>
+<p>完结撒花</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/">http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">卷积神经网络</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">刘二大人</a><a class="post-meta__tags" href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">优化算法</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a><a class="post-meta__tags" href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">梯度下降</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">2线性模型</div></div><div class="info-2"><div class="info-item-1">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/" title="10卷积神经网络（初级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">10卷积神经网络（初级）</div></div><div class="info-2"><div class="info-item-1">二维卷积神经网络   00:03:44.271 放进卷积层，然后使通道数提升 00:04:36.639  下采样层中通道数是不变的 但是宽高会变 目的减少数据量，降低运算的需求 00:05:59.344  再做一次5x5的卷积 然后2x2的下采样 最后要把三阶向量展开成一维向量 就是挨个排序 00:07:13.014  然后利用全连接层来映射到10个输出 利用各种层，进行维度变换 00:08:22.737  卷积+下采样=特征提取器 图像： rgb图像 栅格图像 00:11:25.291  00:24:15.002  00:25:19.212  取出来一个图形块 对图像块进行卷积 依次移动 输出通道数 00:28:20.851  00:29:22.737  00:29:54.087  00:30:10.046  这个就是单通道卷积的形象表示 00:30:33.601  三通道卷积 00:31:02.697  每一个通道设置一个卷积核 00:32:17.903  最后三维变成1维 00:33:10.285  00:35:20.005 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/4back%20propagation(%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%EF%BC%89/" title="4back propagation(反向传播）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">4back propagation(反向传播）</div></div><div class="info-2"><div class="info-item-1">00:01:49.339  00:02:18.624  注意这里时对损失进行求导，而不是对ŷ 00:02:33.467  00:03:04.905  image.png  第一层00:03:49.205  隐层h1第一层，是6维的 x是5维的 隐层h2 7维 写解析式太麻烦了 面对这样的复杂网络 把网络看成图 再图上进行传播梯度 基于链式法则 00:05:33.953  两层神经网络 00:06:52.853  这个转置符号无所谓 x的维数为N 00:07:26.884  00:08:01.980  00:08:29.528  h1的维数为m b1是m维 00:08:58.784  00:09:27.210  全链接神经网络的第一层 下面是第二层 00:09:52.605  00:11:58.074  把两层变成1层，不管多少层，线性变换，都可以变成1层。 为了提高模型的复杂程度 00:12:34.502  添加一个非线性的函数，用于提高复杂程度 nonliner 00:13:14.804  00:13:55.471  链式求导法则...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/5pytorch%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="5pytorch实现线性回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">5pytorch实现线性回归</div></div><div class="info-2"><div class="info-item-1">使用随机梯度下降 00:02:18.384  00:03:07.590  上节课的例子 因为梯度不会自动清零，为了使这次的梯度不影响下次的梯度，进行手工清零 线性回归就是恨简单的神经网络 00:06:32.614  训练步骤： 1. 前馈:算损失 2. 反馈：算梯度 3. 更新：使用梯度下降算法更新权重 00:06:33.097  00:06:50.802  要使用mini-batch 要一次性将ŷ求出来 所以需要使用矩阵运算 这里运用numpy的广播方式 00:09:36.616  就是矩阵扩充 00:10:14.863  00:11:06.105  w应该是3x3 00:12:01.227  00:12:13.883  实际上也就是向量化00:12:48.104  00:12:53.501  00:13:20.043  00:14:06.039  potrch中计算导数不再是重点因为00:13:52.605  有函数会自动计算导数 重点在于构造计算图00:14:28.914  00:14:57.107  这个被称为一个线性单元 ...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/9%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/" title="9多分类问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">9多分类问题</div></div><div class="info-2"><div class="info-item-1">使用softmax 00:01:46.755 00:01:58.457  十个分类神经网络应该如何设计 00:03:21.365  希望的要求： 输出之间竞争性 输出就是一个分布 1. 概率大于0 2. 概率求和为1 00:08:00.963  00:09:30.429  00:10:29.210  求和之后结果为100:12:58.619  00:13:42.719  00:14:09.852  00:14:49.264  00:14:59.977  交叉熵 00:18:14.365  00:19:17.457  00:19:36.942  00:20:50.262  00:21:47.606  00:22:31.144  最后一层是不需要手动进行非线性激活的，因为交叉熵损失会直接激活  00:24:38.539  00:24:21.657  2表示这个第二个元素最大 0表示第0个元素最大 1表示第一个元素最大 y_pred和预测的比较拟合，所以第一个预测算出来的损失会比较小 00:26:14.653  00:26:40.399  思考交叉熵和nl...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/7%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E8%BE%93%E5%85%A5/" title="7处理多维输入"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">7处理多维输入</div></div><div class="info-2"><div class="info-item-1">输入有多个特征 每一行被叫做一个样本 00:01:22.739  meiyili 每一列被称为特征 excel常用空格 tab ，进行分割 00:10:22.816  00:10:06.374  00:12:37.613  00:13:38.352  00:14:24.317  一组一组的运算转换成矩阵运算（向量化的运算） 为什么要变换： 因为可以并行计算，这个样利用cpu或者gpu的并行计算能力 00:15:14.284   上图是上节课的 可以用于与这节课的图片进行对比 把多层logist回归相连就可以构建多层神将网路 00:17:12.583  00:17:28.402 这里列的数量对应特征00:17:50.766  00:18:23.748  这样可以再接一层，让2维的再降到1维 00:20:31.314  00:21:21.153  我们的目标是8d-&gt;1d的非线性变换函数 σ函数被叫做激活函数 00:23:26.486  可以维度一直下降 也可以维度一直上升 00:24:23.852  中间的隐层越多，学习能力越强 如果...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2线性模型</div></div><div class="info-2"><div class="info-item-1">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

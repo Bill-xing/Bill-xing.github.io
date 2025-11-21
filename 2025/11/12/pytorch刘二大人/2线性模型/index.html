@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2线性模型 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2线性模型">
+<meta property="og:url" content="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T13:34:37.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.411Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="刘二大人">
+<meta property="article:tag" content="线性回归">
+<meta property="article:tag" content="数据集">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2线性模型",
+  "url": "http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T13:34:37.000Z",
+  "dateModified": "2025-11-12T14:08:33.411Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2线性模型',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">2线性模型</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">2线性模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.411Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:01:57.536">00:01:57.536</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252328031.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:02:38.739">00:02:38.739</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252328692.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:03:56.345">00:03:56.345</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252329875.png" alt="image.png"></p>
+<p>仅有输入的数据，在测试或者推理阶段</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:04:40.157">00:04:40.157</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252330250.png" alt="image.png"></p>
+<p>数据集交给算法，得到预测算法，使用模型只进行预测</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:05:46.753">00:05:46.753</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252330606.png" alt="image.png"></p>
+<p>知道输出值-》监督学习</p>
+<p>测试集用于评价模型好坏</p>
+<p>数据集分成两个部分 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:08:42.608">00:08:42.608</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252332416.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:10:06.592">00:10:06.592</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252332015.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:12:21.957">00:12:21.957</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252334748.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:13:54.806">00:13:54.806</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252334193.png" alt="image.png"></p>
+<p>深度学习训练最大问题：<strong>过拟合</strong> 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别</p>
+<p>需要模型有比较好的泛化能力</p>
+<p>训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:15:00.775">00:15:00.775</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411252337468.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:17:13.524">00:17:13.524</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260030741.png" alt="image.png"></p>
+<p>其实就是找到<span class="math inline"><em>f</em>(<em>x</em>)</span> 线性模型是最基本的，可以最开始测试是否可用</p>
+<p>预测出来的加上y heater <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:20:28.689">00:20:28.689</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260032440.png" alt="image.png"></p>
+<p>如何找到斜率为2</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:21:44.731">00:21:44.731</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260033551.png" alt="image.png"></p>
+<p><span class="math inline"><em>ŷ</em>(<em>k</em>) − <em>y</em>(<em>k</em>)</span> 偏差值用于评估数据值与实际值之间的偏差</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:23:46.391">00:23:46.391</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260038242.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:25:59.132">00:25:59.132</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260038026.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:27:17.885">00:27:17.885</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260039422.png" alt="image.png"></p>
+<p>mean是平均loss <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260039819.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:28:34.368">00:28:34.368</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260039819.png" alt="image.png"> 损失函数 平均平方误差（mse）</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:29:37.160">00:29:37.160</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260040364.png" alt="image.png"> 使用穷举法的思路 就是挨个w计算损失 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:30:41.118">00:30:41.118</a></p>
+<p><img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260041408.png" alt="image.png"> 在所有损失中选取最小的 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:32:32.288">00:32:32.288</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260042430.png" alt="image.png"></p>
+<p>前馈函数 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:32:11.320">00:32:11.320</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260042949.png" alt="image.png"></p>
+<p>数据集保存 输入输出要分开</p>
+<p>相同的样本是一类，比如1和右边的0是一对 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:32:22.783&amp;app=jump-video-extension">00:32:22.783</a></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:32:42.605">00:32:42.605</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260043245.png" alt="image.png"></p>
+<p>损失函数 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:33:04.537">00:33:04.537</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260044005.png" alt="image.png"> 两个列表用于存放<strong>权重</strong>和 <strong>权重对应的损失值</strong></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:33:40.332">00:33:40.332</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260045491.png" alt="image.png"></p>
+<p>间隔为0.1 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:33:57.217">00:33:57.217</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260045890.png" alt="image.png"></p>
+<p>前馈 计算损失 损失值相加，没有均值 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:35:32.139">00:35:32.139</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260048742.png" alt="image.png"> 画图</p>
+<p>这个表不很常用</p>
+<p>因为上面这个图很难用来判断是否收敛 最常使用epoc（轮数）作为横坐标 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:37:18.063">00:37:18.063</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260051155.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:37:29.365">00:37:29.365</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260052854.png" alt="image.png"> 上面是训练集的图像</p>
+<p>下面红色的是开发集的数据<a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:37:55.434">00:37:55.434</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260052181.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:38:03.049">00:38:03.049</a></p>
+<figure>
+<img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260053142.png" alt="image.png"><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>这个点是收敛点</p>
+<p>深度学习需要可视化，python绘图</p>
+<p>常用visdom</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=2&amp;time=00:42:33.380">00:42:33.380</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260058648.png" alt="image.png"></p>
+<p>np中的meshgrid()很重要</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/">http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">刘二大人</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">数据集</a><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">11卷积神经网络（高级）</div></div><div class="info-2"><div class="info-item-1">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="3梯度下降算法的实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">3梯度下降算法的实现</div></div><div class="info-2"><div class="info-item-1">00:02:00.228  使用随机猜测 寻找ŷ − y 最小值 00:03:10.941  00:03:41.947  两个权重w1 w2 00:04:06.938  这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题 ==分治思想== 00:05:02.292  00:05:11.770  对于两个权重，进行划分，只考虑这点00:06:02.911  image.png  使用这几个点代表所有的空间 00:07:07.962  00:07:29.136  分治思想的缺点，会有如上的情况，导致无法获取最低点。有可能会错过比较好的低点 00:09:26.071  要求函数的最小值 00:10:16.901  00:10:41.308  00:11:34.211利用梯度来判断这个点需要进行的平移方向，也就 是如果梯度导数 &gt; 0 ,也就是这个点右移会上升  所以应该选择导数的负方向（下面公式中是负号），用以趋近最低点 00:12:34.364  学习率最好选的小一点 上面的算法思想： ==贪心== 00:14:53.079...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/6%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92/" title="6逻辑斯蒂回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">6逻辑斯蒂回归</div></div><div class="info-2"><div class="info-item-1">mnist数据集 00:01:43.327  手写数据的数据集 10个分类 00:02:24.593  判断y属于集合中的哪一个，这个叫做分类问题 00:06:02.081  表示他属于某一个类的概率，选择最大的 00:06:54.719  torchvison包含了一些典型的训练集 train=1-&gt; train train=0 -&gt;test 00:09:23.751  00:10:34.118  y的值维0 或1 这个叫做二分类问题 00:13:38.275  00:14:36.865  00:16:18.710  00:16:31.844  00:17:54.518  左图被称为饱和函数 00:18:19.386  00:19:19.394  将ŷ带入σ(x) 就可以将ŷ 的范围限制在（0，1） 00:20:49.142  sigmid函数的条件： 1. 函数值有极限 2. 单调增函数 3. 饱和函数 logistic是sigmid中最典型的函数，所以约定俗成就用logistic代替sigmid，但实际上sigmid还有很...</div></div></div></a><a class="pagination-related" href="/2025/11/12/xiaotuidui_pytorch_practice/5%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" title="5数据加载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">5数据加载</div></div><div class="info-2"><div class="info-item-1">00:02:09.538  dataset用于将数据进行标记，标记label 00:02:52.896  dataloader为网络提供不同的数据形式 00:04:13.403  dateset需要考虑，主要实现以下功能 - 如何获取每一个数据以及label - 告诉我们总共有多少数据 00:05:51.702 00:05:48.542  数据集分为训练数据集和测试数据集 第二种数据集00:07:12.051  这里面还有标注的label 或者直接把label直接标注在图片上  配置终端代理前 配置终端代理后，网速还是很感人 12set HTTP_PROXY=http://127.0.0.1:7890set HTTPS_PROXY=http://127.0.0.1:7890  nnd还是失败了 一样的报错还是，加载超时  image.png  nnd网络抽风 要测试您的代理配置是否成功，有几种方法可以查看您是否能够通过代理访问外部网络。以下是一些常用的测试方法： 方法 1: 使用 curl 命令 如果您的系统上安装了 curl，您可以在命令提示符中...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/9%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/" title="9多分类问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">9多分类问题</div></div><div class="info-2"><div class="info-item-1">使用softmax 00:01:46.755 00:01:58.457  十个分类神经网络应该如何设计 00:03:21.365  希望的要求： 输出之间竞争性 输出就是一个分布 1. 概率大于0 2. 概率求和为1 00:08:00.963  00:09:30.429  00:10:29.210  求和之后结果为100:12:58.619  00:13:42.719  00:14:09.852  00:14:49.264  00:14:59.977  交叉熵 00:18:14.365  00:19:17.457  00:19:36.942  00:20:50.262  00:21:47.606  00:22:31.144  最后一层是不需要手动进行非线性激活的，因为交叉熵损失会直接激活  00:24:38.539  00:24:21.657  2表示这个第二个元素最大 0表示第0个元素最大 1表示第一个元素最大 y_pred和预测的比较拟合，所以第一个预测算出来的损失会比较小 00:26:14.653  00:26:40.399  思考交叉熵和nl...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">11卷积神经网络（高级）</div></div><div class="info-2"><div class="info-item-1">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Xing">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:author" content="Xing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Xing',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Xing</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/" title="opencv学习">opencv学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">OpenCV轮廓相关操作 C++_opencv hierarchyc++_cold暖的博客-CSDN博客 图像处理马老师写的文档超级详细 vscode使用 cmake cmake常用命令 123456789101112131415161718cmake_minimum_required(VERSION 3.15)//用于指示最低cmake的版本project(demo)set(OpenCV_DIR /home/xing/opencv-4.5.3/build)//将4.5.3的路径添加到opencvdir中，以便于下面的findpackage进行搜索# find_package(OpenCV REQUIRED)find_package(OpenCV 4.5.3 REQUIRED)#添加头文件include_directories($&#123;OpenCV_INCLUDE_DIRS&#125;)add_executable(zuoye $&#123;PROJECT_SOURCE_DIR&#125;/zuoye.cpp)#链接库文件target_link_libraries...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/ros/" title="ros">ros</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">ros1 ros命名空间 由浅到深理解ROS（3）-命名空间 - jason来自星星 - 博客园 ros2 名词解释 abi 是二进制接口 详细讲解 api 是编程的接口 cli 命令行界面(Command Line Interface)  tui 终端用户界面(Terminal User Interface) 也就是在cli的基础上添加了点图形化的东西，更好看 colcon 可以理解成ros1中的catkin,编译的工具 oop 面向对象编程 也就是说在写程序前，要先想好些什么类，生成一个什么样的对象，这个对象需要什么功能，有什么作用。把这些需求集中在类中 pop 面向过程编程 需要啥功能写啥函数 基础知识 python ros2中面向过程编程 1234567891011import rclpyfrom rclpy.node import Nodedef main(args=None):	rclpy.init(args=args)	node=Node(&quot;li4&quot;)	node.get_logger().in...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/ubuntu%E5%B0%8F%E7%9F%A5%E8%AF%86/" title="ubuntu小知识">ubuntu小知识</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">ubuntu 进入 recovery mode_ubuntu recovery mode_Mr. Sun_的博客-CSDN博客resume: 退出 recovery 模式，然后正常启动； clean: 尝试清理垃圾文件，腾出更多的空间； dpkg: 修复损坏的包； fsck: 检查所有文件系统； grub: 更新 grub 的启动载入器； network: 启动网络； root: 进入命令行模式； system-summary: 系统概览，查看电脑的基本信息； </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E5%9D%90%E6%A0%87%E7%B3%BB%E8%BD%AC%E6%8D%A2/" title="坐标系转换">坐标系转换</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">关于旋转矩阵的左乘与右乘问题_旋转矩阵左乘和右乘的区别_希望coding不秃头的博客-CSDN博客 传统计算机视觉学习笔记 PnP解算及SolvePnp用法_opencv pnp_寒韩Glory的博客-CSDN博客 pnp数学原理 pnp(Perspective-n-Point 四种解决算法（DLT、P3P、EPnP、BA） DLT P3P:P3P问题是已知三个3D目标点与其2D投影之间的对应关系，来确定标定相机的位姿问题。 EPnP BA  旋转方式 左手系与右手系 图片理解_左手系和右手系的区别_一骑红尘荔枝来的博客-CSDN博客 slam学习——旋转向量、旋转矩阵、欧拉角、四元素的概念和运用_前途似海_来日方长的博客-CSDN博客 旋转向量 旋转矩阵 欧拉角 四元数 旋转 对于右手系，逆时针旋转是正向。 像素坐标系到相机坐标系 目的是获取相机中目标物体到相机的距离（在这里就是平移矩阵 这里的像素坐标系和图像坐标系，只是涉及到二维平面的平移，像素坐标系是以右上角为（0，0），图像坐标系是以图片的中间为（0，0） 阅读了官方文档之后...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E6%84%9F%E7%9F%A5%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96/" title="感知规划决策">感知规划决策</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">自动驾驶 自动驾驶综述|定位、感知、规划常见算法汇总 简单的将自动驾驶分成感知规划控制 SLAM | 激光SLAM中开源算法对比-CSDN博客 感知： 建图 fast-lio Cartographer SLAM | 激光SLAM中开源算法对比-CSDN博客 定位 amcl 规划： Navigation–导航算法（局部视野导航）–DWA、TAB_majingming123的博客-CSDN博客 这方面的优化主要有两个方向一个是基于图优化 导航 基本上就是nav1或者nav2然后在这个框架下调用算法 全局规划： Dijkstra算法、A算法_dijkstra算法和a算法_Jason.Li_0012的博客-CSDN博客、 自动驾驶 | 路径规划算法Dijkstra与A*_3Ｄ视觉工坊的博客-CSDN博客 a*还有迪杰斯特拉 局部规划： teb和dwa 决策 控制： 决策系统负责 定位 定位这块，市面上的主要是基于gps，但是由于有一些道路信号不好，比如峡谷，荒郊野岭。主流的有三种定位方式：激光雷达，相机，激光雷达加相机 激光雷达的缺点...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%94%B5%E8%84%91%E8%B0%83%E8%AF%95/" title="电脑调试">电脑调试</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">小电脑的选择 11代nuc 盘一盘NVIDIA Jetson家族的前浪和后浪！ 入门级nano 中级AGX Xavier 作为现在AI计算的扛把子 超高级Jetson TX2 高级Xavier NX 算力性能区别 英特尔的NUC迷你电脑有什么特点？NUC适合什么样的用户群（黑苹果）？ 由于nuc用的是英特尔的集显，所以没有办法使用cuda 各种机器性能参数比较 ssh远程连接 如何判断网线是否连上 1.直接看ui， 2.通过ifconfig 主要看网卡那一栏，如果没有具体的ipv4地址那一般就是没有连接上 这是一个网络接口的信息列表，通常用于诊断和配置网络连接。以下是每个接口的意思和说明：  enp57s0：  flags=4099：表示接口的状态标志。这个接口是启用的（UP），可以广播数据（BROADCAST），支持多播（MULTICAST）。 mtu 1500：表示最大传输单元，即可以在一次数据包中传输的最大字节数。 ether c8:7f:54:ca:bf:31：表示接口的物理地址（MAC地址）。 txqueuelen 1000...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/2-2%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8Acubemx%E9%85%8D%E7%BD%AE/" title="2-2模块使用以及cubemx配置">2-2模块使用以及cubemx配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/">rtos-韦东山rtos视频</a></span></div><div class="content">00:03:14.621  会用到i2c的发送函数 需要初始化引脚 需要使用stm32cubemx进行引脚初始化 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/" title="相机学习">相机学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="content">后续学习使用视觉slam十四讲.pdf用了都说好 相机学习 相机基本工作原理 camera理论基础和工作原理_weixin_30316097的博客-CSDN博客 (干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客 【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客 结构 感光元件 也就是光线照射到，成像的位置。以前的胶片相机的感光原件是银盐，也就是胶片。 现在的数码相机是cmos或者ccd。这个感光元件把光线信息记录下来保存，数码相机这里涉及到模数转换。 模数转换的意思就是将模拟信号转换成数字信号。 模拟信号就是直接采集出来的信号，数字信号是用于给电子元器件进行处理的信号。 对于计算机来说，2进制，01便于计算机记录处理数据， 模拟信号和数字信号的区别和特点_数字信号与模拟信号的区别_高原低谷的博客-CSDN博客  cmos CMOS Image Sensor原理简述 Complementary Metal-Oxide Semiconductor 中...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/qt%E4%BC%98%E5%8C%96/" title="qt优化">qt优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E5%88%86%E5%8C%BA%E8%B5%9B/">智能车-分区赛</a></span></div><div class="content">Qt 自定义标题栏，最小化、最大化、关闭窗口，双击最大化，鼠标拖动等效果实现_qt自定义标题栏_wang_chao118的博客-CSDN博客 目标是弄成这个样子      我的第一版ui  我的第二版 此处为语雀卡片，点击链接查看 难点在于界面的切换 https://github.com/mouming233/qt/tree/nihao 详情见我的github 时间节点 5月12日能够初步实现多级界面和视频嵌入的功能 多级界面 Qt之多界面切换编程_qt多界面编程_七 六 伍的博客-CSDN博客 能够做到显示多级界面 此处为语雀卡片，点击链接查看 1234567void MainWindow::on_pushButton_2_clicked()&#123;    Server *gui1=new Server;    gui1-&gt;show();    this-&gt;hide();&#125; 外部程序ui嵌入qt程序 QT 如何把外部程序嵌入到QT界面_qt 嵌入其他程序_hellokandy的博客-CSDN博客 Qt源码解...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/%E5%88%86%E5%8C%BA%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E4%B8%8A%E6%9C%BA%E5%BC%80%E5%8F%91/" title="分区赛技术报告 上机开发">分区赛技术报告 上机开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E5%88%86%E5%8C%BA%E8%B5%9B/">智能车-分区赛</a></span></div><div class="content">1.程序基本功能 上位机调度软件包含与导航功能包的socket通信实现、轻舟机器人坐标的显示、初始等待区、装货区、卸货区位置发送命令按钮、摄像头图像显示视觉识别效果，同时将视觉识别的图片进行标注，然后传回上位机。此外还可以直接从文件中加载目标点坐标，不必每次都手动输入即可实现通过上位机下发目标点，调度轻舟机器人去往指定位置，且会实时显示下位机位置，并对于目标点的到达信息以彩色字体高亮显示，使目标点切换更加迅速及时。 1.技术任务要求  上位机开发工具不做限制 视频回显视觉识别效果 显示实时画面和侦察情况  2.运行环境 2.1服务端  小车作为服务端 使用python编写Server用于接收  2.2客户端  选择windows作为服务端，因为有多个小车 使用qt5作为软件的集成开发环境 兼有python3.7写的python程序作为外部调用  3.流程分析 3.1功能分析 客户端 出于便于控制小车，以及考虑小车重启会出现问题，断联重连是否便于连接之类的问题，考虑将线上赛的服务端（windows端）改成客户端。 上位机程序可以查看视...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/"><span class="card-category-list-name">pytorch刘二大人</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rm-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"><span class="card-category-list-name">rm-奇技淫巧</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">rm-学习记录</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/"><span class="card-category-list-name">rtos-韦东山rtos入门</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/"><span class="card-category-list-name">rtos-韦东山rtos视频</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"><span class="card-category-list-name">区块链</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B0%8F%E5%9C%9F%E5%A0%86pytorch%E5%AE%9E%E8%B7%B5/"><span class="card-category-list-name">小土堆pytorch实践</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E5%88%86%E5%8C%BA%E8%B5%9B/"><span class="card-category-list-name">智能车-分区赛</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 1.16em; color: #999b9e">性能</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/" style="font-size: 1.24em; color: #999fa7">机器人</a> <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 1.1em; color: #999">模块化</a> <a href="/tags/%E5%BC%80%E5%8F%91%E6%9D%BF/" style="font-size: 1.1em; color: #999">开发板</a> <a href="/tags/PCL/" style="font-size: 1.1em; color: #999">PCL</a> <a href="/tags/%E5%A4%9A%E5%88%86%E7%B1%BB/" style="font-size: 1.1em; color: #999">多分类</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">笔记工具</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.21em; color: #999ea4">操作系统</a> <a href="/tags/Python/" style="font-size: 1.41em; color: #99a6b7">Python</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 1.47em; color: #99a8bc">问题解决</a> <a href="/tags/ROS/" style="font-size: 1.3em; color: #99a1ac">ROS</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 1.27em; color: #99a0a9">数据集</a> <a href="/tags/FreeRTOS/" style="font-size: 1.16em; color: #999b9e">FreeRTOS</a> <a href="/tags/LaTeX/" style="font-size: 1.16em; color: #999b9e">LaTeX</a> <a href="/tags/%E7%9B%B8%E6%9C%BA/" style="font-size: 1.19em; color: #999ca1">相机</a> <a href="/tags/%E9%9F%A6%E4%B8%9C%E5%B1%B1/" style="font-size: 1.19em; color: #999ca1">韦东山</a> <a href="/tags/3D%E6%B8%B2%E6%9F%93/" style="font-size: 1.1em; color: #999">3D渲染</a> <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.13em; color: #999a9c">卷积神经网络</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 1.21em; color: #999ea4">实践</a> <a href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" style="font-size: 1.19em; color: #999ca1">构建工具</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 1.13em; color: #999a9c">图像处理</a> <a href="/tags/C/" style="font-size: 1.21em; color: #999ea4">C++</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" style="font-size: 1.1em; color: #999">反向传播</a> <a href="/tags/%E6%99%BA%E8%83%BD%E8%BD%A6/" style="font-size: 1.21em; color: #999ea4">智能车</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.24em; color: #999fa7">嵌入式</a> <a href="/tags/Obsidian/" style="font-size: 1.21em; color: #999ea4">Obsidian</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">视频学习</a> <a href="/tags/%E7%82%B9%E4%BA%91/" style="font-size: 1.1em; color: #999">点云</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.5em; color: #99a9bf">调试</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.13em; color: #999a9c">设计模式</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.16em; color: #999b9e">硬件</a> <a href="/tags/RM/" style="font-size: 1.33em; color: #99a2af">RM</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 1.39em; color: #99a4b4">项目实践</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81/" style="font-size: 1.19em; color: #999ca1">加密货币</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 1.19em; color: #999ca1">导航</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.44em; color: #99a7ba">编程</a> <a href="/tags/%E7%AB%9E%E8%B5%9B/" style="font-size: 1.36em; color: #99a3b1">竞赛</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 1.27em; color: #99a0a9">优化算法</a> <a href="/tags/%E6%8C%96%E7%9F%BF/" style="font-size: 1.13em; color: #999a9c">挖矿</a> <a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.27em; color: #99a0a9">技巧</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">62</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">62</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-11-21T08:36:50.510Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

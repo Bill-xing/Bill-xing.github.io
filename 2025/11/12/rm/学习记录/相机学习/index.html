@@ -1,0 +1,693 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>相机学习 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="后续学习使用视觉slam十四讲.pdf用了都说好 相机学习 相机基本工作原理 camera理论基础和工作原理_weixin_30316097的博客-CSDN博客 (干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客 【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客 结构 感光元件 也就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相机学习">
+<meta property="og:url" content="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="后续学习使用视觉slam十四讲.pdf用了都说好 相机学习 相机基本工作原理 camera理论基础和工作原理_weixin_30316097的博客-CSDN博客 (干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客 【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客 结构 感光元件 也就是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:07:01.881Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="项目实践">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="ROS">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="相机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "相机学习",
+  "url": "http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:07:01.881Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '相机学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">相机学习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">相机学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:07:01.881Z" title="更新于 2025-11-12 23:07:01">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>后续学习使用<a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/attachments/yuque/0/2023/pdf/27500914/1694399263961-006cb7cc-44ae-4f34-acae-0cbd5359729a.pdf">视觉slam十四讲.pdf</a>用了都说好</p>
+<h1><span id="相机学习">相机学习</span></h1>
+<h2><span id="相机基本工作原理">相机基本工作原理</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30316097/article/details/97088529?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169435516116800226565517%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169435516116800226565517&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-97088529-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86&amp;spm=1018.2226.3001.4187">camera理论基础和工作原理_weixin_30316097的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/x454045816/article/details/106686677?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-106686677.142%5Ev93%5EchatgptT3_2&amp;spm=1018.2226.3001.4187">(干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43533553/article/details/125406156?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-4-125406156.142%5Ev93%5EchatgptT3_2&amp;spm=1018.2226.3001.4187">【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客</a></p>
+<h3><span id="结构">结构</span></h3>
+<h4><span id="感光元件">感光元件</span></h4>
+<p>也就是光线照射到，成像的位置。以前的胶片相机的感光原件是银盐，也就是胶片。</p>
+<p>现在的数码相机是cmos或者ccd。这个感光元件把光线信息记录下来保存，数码相机这里涉及到<u>模数转换</u>。</p>
+<p>模数转换的意思就是将模拟信号转换成数字信号。</p>
+<p>模拟信号就是直接采集出来的信号，数字信号是用于给电子元器件进行处理的信号。</p>
+<p>对于计算机来说，2进制，01便于计算机记录处理数据，</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_55255438/article/details/125398267">模拟信号和数字信号的区别和特点_数字信号与模拟信号的区别_高原低谷的博客-CSDN博客</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694343648663-07dc071e-19d8-43f7-a1f1-3f5d3d9a3e75.png"></p>
+<h5><span id="cmos">cmos</span></h5>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/158502818">CMOS Image Sensor原理简述</a></p>
+<p><font style="color:rgb(100, 100, 100);">Complementary Metal-Oxide Semiconductor</font></p>
+<p>中文翻译过来就是互补金属半导体氧化物半导体</p>
+<p><a href="#ikWdm">coms参数详解</a></p>
+<h5><span id="ccd电荷耦合">ccd（<font style="color:rgb(51, 51, 51);">电荷耦合</font></span></h5>
+<p>相对于cmos更好的</p>
+<p><font style="color:rgb(18, 18, 18);">1. 全局快门，2. 非常低的噪音，3. 很高的帧频</font></p>
+<h4><span id="快门">快门</span></h4>
+<p>快门就是相机中用来控制光线照射感光元件时间的装置。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694341454972-80438fe7-796b-4fa3-917f-cf66b6452fd6.webp"><img src="https://cdn.nlark.com/yuque/0/2023/gif/27500914/1694343208406-5a860fe6-3af5-41a3-96fa-a421001ddbaa.gif"></p>
+<p>通俗一点说快门就是一个帘子，挡在幕布前面</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/129008800">摄影入门基础——快门速度</a></p>
+<h4><span id="光圈">光圈</span></h4>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694344987043-723c01c8-caa4-47d4-9695-2c6f665a33f8.webp"></p>
+<h4><span id="中央处理器cpu">中央处理器cpu</span></h4>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/154058171">15秒了解CPU、GPU、TPU的关系</a></p>
+<p>没看错，确实相机也有中央处理器（不过是针对数码相机</p>
+<p>这里的中央处理器主要负责整台相机的所有动作，开机控制相机</p>
+<h4><span id="图像处理器gpu">图像处理器gpu</span></h4>
+<p><strong><font style="color:rgb(18, 18, 18);">Graphics Processing Unit</font></strong></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/496782453">图像处理器概述 (XK-ISP)</a></p>
+<p>很多相机的中央处理器和图像处理器继承到了一块芯片上</p>
+<p>它主要负责将光学图像信号（模拟信号）转换成数字信号，也就是照片和视频。然后再保存到sd卡中</p>
+<h3><span id="工作流程">工作流程</span></h3>
+<p>对于<strong>数码相机</strong>来说</p>
+<ol type="1">
+<li>透过镜头的光线照射在图像传感器上，此时为模拟信号</li>
+<li>有数字影像处理器将多种图像模拟信号转换成模拟信号</li>
+<li>完成信号数据化之后，照片数据传输到存储卡保存</li>
+</ol>
+<h2><span id="相机成像模型">相机成像模型</span></h2>
+<p><font style="color:rgb(18, 18, 18);">成像原理是小孔成像</font></p>
+<p><font style="color:rgb(18, 18, 18);">学习文档</font></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chentravelling/article/details/53558096">计算机视觉：相机成像原理：世界坐标系、相机坐标系、图像坐标系、像素坐标系之间的转换_生活没有if-else的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23090593">相机的那些事儿 (二)成像模型</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/csxiaoshui/article/details/65446125">旋转变换（一）旋转矩阵_csxiaoshui的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/hero-rm/uqpee6/xs1cpm#DCaj7">自瞄——位姿解算</a></p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/hero-rm/uqpee6/yhv9hf#eWMIb">相机与坐标变换</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/FLYMANJB/p/13426401.html">单目相机成像过程 - 疯狂的荷兰人 - 博客园</a></p>
+<h2><span id="全局快门和卷帘快门">全局快门和卷帘快门</span></h2>
+<p>首先要了解什么是快门，以及相机的基本结构</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mahui85/article/details/128803661?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169435934416800225589664%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169435934416800225589664&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-128803661-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=%E5%8D%B7%E5%B8%98%E5%BF%AB%E9%97%A8&amp;spm=1018.2226.3001.4187">【转】：卷帘快门（Rolling Shutter）与全局快门（Global Shutter）_mahui85的博客-CSDN博客</a></p>
+<p>这个是收集光线的不同方式</p>
+<h2><span id="工业相机镜头参数">工业相机镜头参数</span></h2>
+<p>相机核心参数iso，光圈，快门</p>
+<h3><span id="焦段和焦距">焦段和焦距</span></h3>
+<p>资料索引：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38759835">https://zhuanlan.zhihu.com/p/38759835</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38759835">https://zhuanlan.zhihu.com/p/38759835</a></p>
+<p>焦距和焦段这两个概念其实很类似，大致可以说是一个东西</p>
+<p>焦距就是镜头的光学中心到传感器的距离</p>
+<p>焦段就是指变焦镜头焦距的变化范围</p>
+<p>焦距是一个准确数字，焦段是一段范围</p>
+<p><strong>1.8的意思是可变焦1.8倍</strong></p>
+<p><font style="color:rgb(51, 51, 51);">比如50mm 1.8F中50mm就是焦距。可以说50mm焦距也可以说是50mm焦段</font></p>
+<p><font style="color:rgb(18, 18, 18);">一般来说，焦距的数字越小，则表示单反相机的焦距越短，拍摄的视角则越广，取景的范围也越广阔。反之则相反。</font></p>
+<p><font style="color:rgb(18, 18, 18);">焦段的不同会导致整张照片记录的画面范围和画面视角都有所不同，总共有</font></p>
+<p><font style="color:rgb(18, 18, 18);">超广角、广角、人像、人文、长焦、超长焦、微距等之分</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694347297597-fe26b293-1705-4902-96c8-4ed1b3cb7ebd.webp"></p>
+<p>我们手机上的广角镜头就是属于短焦距镜头</p>
+<h3><span id="曝光时间快门">曝光时间（快门）</span></h3>
+<p>也就是coms在光线下面暴露的时长，也就是快门开关的时间长度。一般来说曝光时间越长，照片越亮。<img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694347868155-e013089f-a773-4ae5-9488-823a2c6b9084.webp"></p>
+<p><font style="color:rgb(18, 18, 18);">但是记录的信息也会越多，因为它记录了这一段时间内的光线信息，也就是更容易糊掉（糊掉不太准确 可以用记录的光线信息就更多来理解 而光线信息就是图像）</font><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694347883544-74339de3-84ad-42ef-8b75-4267453b4ffd.webp"></p>
+<h3><span id="cmos参数">cmos参数</span></h3>
+<h4><span id="大小尺寸靶面尺寸">大小尺寸（靶面尺寸）</span></h4>
+<p><font style="color:rgb(18, 18, 18);">种类</font></p>
+<p><font style="color:rgb(18, 18, 18);">有全画幅 </font></p>
+<p><font style="color:rgb(18, 18, 18);">半（残）画幅（APS-C画幅）</font></p>
+<p><font style="color:rgb(18, 18, 18);">更小的小画幅</font></p>
+<p><font style="color:rgb(18, 18, 18);">更大的中画幅（少见）</font><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694348046096-2ab0e7bc-caf8-4f78-8030-015c1385eb9d.webp"></p>
+<p>摄影圈有一句话，叫底大一级压死人</p>
+<p>这里的底大就可以理解为我们cmos画幅的大小</p>
+<p>像素决定了我们相机分辨率的最大值，<font style="color:rgb(18, 18, 18);">约等于相机最大拍摄分辨率的乘积，那么分辨率又是什么呢分辨率就是图片的纵向像素点 X 横向像素点，通俗说 就是</font><strong><font style="color:rgb(18, 18, 18);">图像的大小尺寸</font></strong><font style="color:rgb(18, 18, 18);">。</font></p>
+<p><font style="color:rgb(18, 18, 18);">分辨率越大越清晰， 图片也越大。如果还是不懂 看这三张实拍图对比就大概能知道了</font><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694348185651-476d73bd-e215-4950-b6ce-0fbe1b14d6ba.webp"></p>
+<p><font style="color:rgb(18, 18, 18);">图像传感器的感光部分的大小。常见的靶面有1/4’‘、1/3’‘、1/2’‘、2/3’‘、1’’等几种，当然也有其他规格。靶面尺寸规格见下表。</font><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694355922450-8c833311-f0f5-4e41-808b-2e5d6f5c2d2f.webp"></p>
+<p>这里的这里是英寸的意思，是矩形对角线的长度</p>
+<h3><span id="景深">景深</span></h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67389489">影响因素</a></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%99%AF%E6%B7%B1">维基百科-景深</a></p>
+<p><font style="color:rgb(32, 33, 34);background-color:rgb(248, 249, 250);">景深指的是相机对焦点前后相对清晰的成像范围</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694348417837-a939e640-3c02-4cf4-bca0-42feef19af57.png"></p>
+<p><font style="color:rgb(32, 33, 34);">景深通常由物距、镜头</font><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%84%A6%E8%B7%9D">焦距</a><font style="color:rgb(32, 33, 34);">，以及镜头的</font><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%89%E5%9C%88%E5%80%BC">光圈值</a><font style="color:rgb(32, 33, 34);">所决定（相对于焦距的</font><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%89%E5%9C%88">光圈</a><font style="color:rgb(32, 33, 34);">大小）</font><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694348655882-b3157cf7-9615-49ee-a20d-5b50c19960ad.webp"></p>
+<p>不同景深对比</p>
+<p><strong><font style="color:rgb(18, 18, 18);">景深的影响要素</font></strong></p>
+<p><font style="color:rgb(18, 18, 18);">景深的影响要素有三：一是光圈的大小。二是焦距的长短。三是拍摄距离的远近。</font></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/469336769"><font style="color:rgb(18, 18, 18);">https://zhuanlan.zhihu.com/p/469336769</font></a></p>
+<h3><span id="光圈大小">光圈大小</span></h3>
+<p><a target="_blank" rel="noopener" href="https://www.ithome.com/0/648/156.htm#:~:text=%E6%8E%A8%E7%AE%97%E4%B8%80%E9%81%8D%E8%AE%A9%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E5%85%89%E5%9C%88%201%2001%E3%80%81%E9%95%9C%E5%A4%B4%E7%9A%84%E7%BA%B3%E5%85%89%E8%83%BD%E5%8A%9B%20%E5%92%B1%E4%BB%AC%E5%85%88%E4%BB%8E%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%A6%82%E5%BF%B5%E5%85%A5%E6%89%8B%EF%BC%9A%E9%95%9C%E5%A4%B4%E5%8F%AF%E4%BB%A5%E7%BA%B3%E5%85%89%EF%BC%8C%E6%8B%8D%E7%85%A7%E6%97%B6%E9%95%9C%E5%A4%B4%E5%85%88%E7%BA%B3%E5%85%89%EF%BC%8C%E5%86%8D%E5%B0%86%E5%85%89%E7%BA%BF%E4%BC%A0%E9%80%81%E5%88%B0%20CMOS%20%E4%B8%8A%E6%88%90%E5%83%8F%E3%80%82%20%E9%95%9C%E5%A4%B4%E7%BA%B3%E5%85%89%E7%9A%84%E5%A4%9A%E5%B0%91%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%BD%B1%E5%93%8D%E7%85%A7%E7%89%87%E7%9A%84%E6%98%8E%E6%9A%97%E7%A8%8B%E5%BA%A6%E3%80%82%20%E4%BA%BA%E4%BB%AC%E7%94%A8%E2%80%9C%E7%9B%B8%E5%AF%B9%E5%AD%94%E5%BE%84%E2%80%9D%E6%9D%A5%E8%A1%A8%E7%A4%BA%E4%B8%80%E4%B8%AA%E9%95%9C%E5%A4%B4%E7%BA%B3%E5%85%89%E7%9A%84%E5%A4%9A%E5%B0%91%EF%BC%8C%E7%9B%B8%E5%AF%B9%E5%AD%94%E5%BE%84%E5%B0%B1%E6%98%AF%E2%80%9C%E6%9C%89%E6%95%88%E5%AD%94%E5%BE%84,F2%20%E5%A4%A7%201%20%E6%A1%A3%EF%BC%8CF1.4%20%E7%9A%84%E8%BF%9B%E5%85%89%E9%87%8F%E6%98%AF%20F2%20%E7%9A%84%E4%B8%A4%E5%80%8D%E3%80%82%20">为什么 F 越大光圈越小，F2\2.8\4 等数字怎样计算？推算一遍让你彻底弄懂光圈 - IT之家</a></p>
+<p>这个主要是控制进光量的</p>
+<p><font style="color:rgb(18, 18, 18);">在相机中，光圈用“</font><strong><font style="color:rgb(18, 18, 18);">F+数字</font></strong><font style="color:rgb(18, 18, 18);">”的形式表示，</font><strong><font style="color:rgb(18, 18, 18);">如图3</font></strong><font style="color:rgb(18, 18, 18);">方框内显示的F3.5就是光圈。F后面的数字越大，表示光圈越小；F后面的数字越小，表示光圈越大。</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694351471059-39ad1d50-5e4d-4b9a-88f2-47ce1ea3e9e0.webp"><img src="https://cdn.nlark.com/yuque/0/2023/webp/27500914/1694351483035-4c837c35-a04b-42a4-9526-9f3ab61aeecc.webp"></p>
+<p>光圈具体尺寸计算</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694351865156-d64fe56f-1fad-4cb6-bb56-4dbe31842136.png"></p>
+<p>这里看到了<strong>手动调节光圈</strong><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/27500914/1694508318731-1773fe06-586a-41e3-b30b-0e080c00888d.jpeg"></p>
+<p>相机上可以看到两个可以调节的东西，靠近镜头的是调节焦距的，另一个是光圈的（这个好像被什么胶给粘死了。</p>
+<p><strong>这里的1：2.0就是用来就按光圈值的</strong></p>
+<p><font style="color:#333333;">光圈：光圈值，是镜头的</font><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%84%A6%E8%B7%9D/1880759">焦距</a><font style="color:#333333;">/镜头通光直径得出的相对值（相对孔径的倒数）。例如针对50mm的</font><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A0%87%E5%87%86%E9%95%9C%E5%A4%B4/10925944">标准镜头</a><font style="color:#333333;">而言（这里的50指的是焦距），最大的通光直径（也就是孔径）为29.5mm，其最大光圈的计算值为50mm÷29.5mm=F1.7，这样就能够理解同一</font><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%98%E7%84%A6%E9%95%9C%E5%A4%B4/2971419">变焦镜头</a><font style="color:#333333;">在不同的焦距下，虽然最大的通光直径相同，但是换算之后其最大光圈是不同的。F值越大，光圈越小，反之，F值越小，光圈越大。</font></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/F%20%E6%95%B0/22129903#:~:text=%E7%9B%B8%E5%AF%B9%E5%AD%94%E5%BE%84%E7%9A%84%E5%80%92%E6%95%B0%EF%BC%8C%E4%BE%BF%E7%A7%B0%E4%B8%BA%E9%95%9C%E5%A4%B4%E7%9A%84%E5%85%89%E5%9C%88%E7%B3%BB%E6%95%B0%EF%BC%88%E5%8F%88%E7%A7%B0F%E5%80%BC%EF%BC%89%E3%80%82,%E9%82%A3%E4%B9%88%EF%BC%8C%E6%8C%89%E7%85%A7%E8%BF%99%E4%B8%AA%E5%AE%9A%E4%B9%89%EF%BC%8C%E4%B8%8A%E9%9D%A2%E4%B8%BE%E4%BE%8B%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%85%89%E5%9C%88%E6%98%AF2.0%E3%80%82%20%E5%9B%A0%E4%B8%BA%E5%85%89%E5%9C%88%E6%95%B0%E6%98%AF%E7%9B%B8%E5%AF%B9%E5%AD%94%E5%BE%84%E7%9A%84%E5%80%92%E6%95%B0%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%85%89%E5%9C%88%E6%95%B0%E8%B6%8A%E5%B0%8F%EF%BC%8C%E9%95%9C%E5%A4%B4%E9%80%9A%E8%BF%87%E5%85%89%E7%BA%BF%E7%9A%84%E8%83%BD%E5%8A%9B%E8%B6%8A%E5%BC%BA%E3%80%82">F 数_百度百科</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21427664">如何理解 ISO、快门、光圈、曝光这几个概念？ - 知乎</a></p>
+<p><font style="color:#333333;">光圈系数跟F值是一个意思，不过表达方法不同，他用的是1:2代表F2，1:1.4代表F1.4</font></p>
+<p><font style="color:#333333;"></font></p>
+<h3><span id="iso">iso</span></h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/129007925">数码相机的感光度——ISO</a></p>
+<p>也就是感光度。是感光元件对于光的灵敏程度</p>
+<p>过曝 的意思是过度曝光，也就是亮度太大了</p>
+<p>欠爆 就是缺少，亮度低</p>
+<p>也就是说当在较暗的环境中，使用高iso也能达到成像照片比较亮的效果，但代价是会产生一些噪点</p>
+<p>在较亮环境中使用低iso就可以</p>
+<p>iso 可以对于一些过爆欠爆的情况进行一个处理</p>
+<ul>
+<li><font style="color:rgb(18, 18, 18);">其一是</font><strong><font style="color:rgb(18, 18, 18);">快门速度</font></strong><font style="color:rgb(18, 18, 18);">，更高的感光度能获得更快的快门速度，这一点比较容易理解；</font></li>
+<li><font style="color:rgb(18, 18, 18);">其二是</font><strong><font style="color:rgb(18, 18, 18);">画质</font></strong><font style="color:rgb(18, 18, 18);">，越低的感光度带来更细腻的成像质量，而高感光度的画质则是噪点比较大。</font><br>
+<font style="color:rgb(18, 18, 18);">说到这里补充一个概念——</font><strong><font style="color:rgb(18, 18, 18);">噪点</font></strong><font style="color:rgb(18, 18, 18);">。</font></li>
+</ul>
+<p><font style="color:rgb(100, 100, 100);">主要是指CCD将光信号转为电信号接收并输出的过程中所产生的影像中的粗糙部分。</font></p>
+<h3><span id="色深">色深</span></h3>
+<p>比如说一个图片，分为三色到rgb，每个色道的颜色深浅程度为色深，</p>
+<p>一般来说色深为8bit，也就是256个，表示这个色彩的变化范围是0-256</p>
+<h3><span id="像元尺寸">像元尺寸</span></h3>
+<p><font style="color:rgb(77, 77, 77);">是指一个像素在长和宽方向上所代表的实际大小</font></p>
+<p><font style="color:rgb(77, 77, 77);">目前工业数字相机像元尺寸一般为3μm-10μm，一般像元尺寸越小，制造难度越大，图像质量也越不容易提高。</font></p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/hero-rm/uqpee6/gvb9hr#8fPNX"><strong><font style="color:#DF2A3F;">如何计算</font></strong></a></p>
+<p><font style="color:rgb(77, 77, 77);">像元尺寸 X 总</font><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%83%8F%E7%B4%A0&amp;spm=1001.2101.3001.7020">像素</a><font style="color:rgb(77, 77, 77);">大小（分辨率） = 感光芯片尺寸（图像区域大小）</font></p>
+<h3><span id="fov视场角">fov（视场角）</span></h3>
+<p>视野范围</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liushao1031177/article/details/116667572?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169435730616800192263979%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169435730616800192263979&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-116667572-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=fov&amp;spm=1018.2226.3001.4187">项目杂识-FOV（视场角）_黑山老妖的笔记本的博客-CSDN博客</a></p>
+<h2><span id="坐标系转换">坐标系转换</span></h2>
+<p>前导知识</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41841073/article/details/126887271?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169439404716800192298653%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169439404716800192298653&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-126887271-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=yaw&amp;spm=1018.2226.3001.4187">三维空间中的Pitch、Yaw、Roll值_yaw值_流浪打工人的博客-CSDN博客</a></p>
+<p>roll翻滚，所以是飞机轴线</p>
+<p>pitch上下点头，所以是飞机平面的垂直于飞机轴线的直线</p>
+<p>yaw 左右摆头，所以是垂直于飞机平面的轴</p>
+<p>首先要清楚这里需要了解的有哪几个<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/281967460">坐标系</a></p>
+<ul>
+<li>世界坐标系：用于描述相机的位置。（坐标原点固定）</li>
+<li>相机坐标系：光心为原点（相机）（三维）</li>
+<li>理想图像坐标系：光心为图像中点（二维）</li>
+<li>真实图像坐标系（也就是像素坐标系）：原点为图想左上角</li>
+<li>数字化图像坐标系</li>
+</ul>
+<p><a href="#XraCX">学习资料索引</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395241563-9cdf493c-5d59-4c47-8704-db7ef7492cd1.png"></p>
+<h3><span id="世界坐标系-gt相机坐标系">世界坐标系-&gt;相机坐标系</span></h3>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694394726091-a10cb362-7548-4f3e-a24b-8e3111637563.png"></p>
+<p>通过旋转平移，让两个坐标系的xyz轴重合。</p>
+<p>这里将旋转矩阵和平移矩阵进行融合</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694394881896-72395fca-2788-4238-8e1e-ec5ea7f65df1.png"></p>
+<p>下面这个就是相机的内参矩阵</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694394893304-b9cabda8-4563-420c-8361-e26af41ebcd4.png"></p>
+<p>R表示的是旋转量，T表示的是平移量</p>
+<p>至于为什么能够旋转平移，详见相机模型，文档中有对于数学知识的详细介绍</p>
+<h3><span id="相机坐标系-gt图像坐标系">相机坐标系-&gt;图像坐标系</span></h3>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395446416-24a43981-b61f-48a4-b297-0920d187e0e8.png"></p>
+<p>相似三角形</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395465210-617c43ba-2d6d-499a-9dc8-1b95b93895bb.png"></p>
+<h3><span id="图像坐标系-gt像素坐标系">图像坐标系-&gt;像素坐标系</span></h3>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395491384-cc50544b-3e40-40d4-b40f-70f151759e23.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395540311-f5169c91-70cb-4c94-9a16-03cf4bddff9c.png"></p>
+<p>主要就是缩放和平移</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395637481-a8b90134-8057-4998-b126-5e6f1a1b1ebe.png"></p>
+<h3><span id="总结">总结</span></h3>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395669827-ce930208-adf6-4925-bbc6-91a1149798d9.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694395678408-b9ac83a1-b77b-4717-8793-720da30a7146.png"></p>
+<p>内参：就是刚体转换是使用的矩阵</p>
+<p>外参：就是第二步和第三部的矩阵相乘</p>
+<p><font style="color:rgb(77, 77, 77);">相机外参随着世界坐标系与相机坐标系的相对位置而变。相机的旋转、平移(相机的位姿由它的旋转矩阵R和平移向量t来描述)，用于描述在静态场景下相机的运动，或者在相机固定时，运动物体的刚性运动。相比于不变的内参，外参会随着相机运动发生改变。</font></p>
+<ul>
+<li><font style="color:rgb(77, 77, 77);">从相机坐标系转换到像素坐标系中，相机内参的作用</font></li>
+<li><font style="color:rgb(77, 77, 77);">从世界坐标系转换到相机坐标系中，相机外参的作用</font></li>
+</ul>
+<h2><span id="相机畸变">相机畸变</span></h2>
+<h3><span id="分类">分类</span></h3>
+<h4><span id="径向畸变">径向畸变</span></h4>
+<p><sup><strong><font style="color:rgb(51, 51, 51);">原因</font></strong></sup><sup><font style="color:rgb(51, 51, 51);">：在相机制造过程中，很难保证镜头的厚度完全均匀，由于制造工艺的原因，通常为这种情况为中间厚、边缘薄，因而光线在远离透镜中心的地方，会发生更大程度的扭曲，这种现象在鱼眼相机（桶形畸变）中尤为明显。</font></sup></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694396716883-4ed115cb-e6b7-4093-9c49-5ddb15c88272.png"><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694396720762-3c8ed70e-e957-4513-aa9e-17eb3d485e64.png"><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694396723468-621fdbcf-1679-4fbf-889f-8284f5213014.png"><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694396725497-50a5d6d9-ae36-40aa-92a7-c1c0c4ca4789.png"></p>
+<p>枕形畸变 桶形畸变</p>
+<h4><span id="切向畸变">切向畸变</span></h4>
+<p>原因：切向畸变产生的原因在于相机在制造过程中，成像平面与透镜平面不平行，产生了透视变换。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/27500914/1694396852137-d588de71-e45c-44b0-8233-412d85be2aa8.jpeg"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694396906480-07ea4e9e-1fc3-44bb-b858-3dd7060c48cb.png"></p>
+<h3><span id="去畸变方法">去畸变方法</span></h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/FLYMANJB/p/13426401.html#1%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E7%B3%BB---%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E7%B3%BB">单目相机成像过程 - 疯狂的荷兰人 - 博客园</a></p>
+<p>对于径向畸变</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399504206-6c8e4a86-3e8e-4317-ac4c-3a4c6bc7d455.png"></p>
+<p>对于切向畸变</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399524178-32ee57cc-5a10-4e29-a36b-1186d1927d25.png"></p>
+<p>我们实际生活中遇到的问题一般是二者结合的情况</p>
+<p>这里我们直接将两个畸变矫正相加</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399580169-fe16de1b-372d-46ce-b3d5-0847444c869a.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399667117-efaba0a6-adc6-478a-9704-18e97a8c409d.png"></p>
+<h4><span id="chatgpt的回答">chatgpt的回答</span></h4>
+<p>去除单目相机图像的畸变通常需要进行畸变校正。畸变通常分为径向畸变和切向畸变两种类型。径向畸变是由于透镜曲率引起的，而切向畸变是由于透镜安装不够完美引起的。以下是一般的步骤：</p>
+<ol type="1">
+<li><strong>获取相机参数</strong>：
+<ul>
+<li>获取相机的内参，包括焦距、主点坐标和透镜畸变系数。这些参数通常可以从相机制造商的文档或相机标定工具中获取。</li>
+</ul></li>
+<li><strong>图像坐标到相机坐标的转换</strong>：
+<ul>
+<li>对于每个图像点，将其从像素坐标系转换为相机坐标系。这可以使用以下公式完成：</li>
+</ul></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Xc = (x - cx) / fx</span><br><span class="line">Yc = (y - cy) / fy</span><br></pre></td></tr></table></figure>
+<p>其中，<code>(x, y)</code> 是图像中的像素坐标，<code>(Xc, Yc)</code> 是相机坐标系中的坐标，<code>(cx, cy)</code> 是主点坐标，<code>(fx, fy)</code> 是焦距。</p>
+<ol start="3" type="1">
+<li><strong>去除径向畸变</strong>：
+<ul>
+<li>径向畸变是由于透镜的曲率引起的，通常用多项式模型进行建模。去除径向畸变的一种常见方法是使用以下公式进行校正：</li>
+<li><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399580169-fe16de1b-372d-46ce-b3d5-0847444c869a.png"></li>
+</ul></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Xc_corr = Xc * (1 + k1 * r^2 + k2 * r^4 + k3 * r^6)</span><br><span class="line">Yc_corr = Yc * (1 + k1 * r^2 + k2 * r^4 + k3 * r^6)</span><br></pre></td></tr></table></figure>
+<p>其中，<code>(Xc_corr, Yc_corr)</code> 是校正后的相机坐标，<code>r</code> 是点 <code>(Xc, Yc)</code> 到主点的距离，<code>k1</code>、<code>k2</code> 和 <code>k3</code> 是径向畸变系数。</p>
+<ol start="4" type="1">
+<li><strong>去除切向畸变</strong>：
+<ul>
+<li>切向畸变通常由于透镜的安装不够完美引起，可以使用以下公式进行校正：</li>
+<li><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694399580169-fe16de1b-372d-46ce-b3d5-0847444c869a.png"></li>
+</ul></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Xc_corr = Xc_corr + (2 * p1 * Xc_corr * Yc_corr + p2 * (r^2 + 2 * Xc_corr^2))</span><br><span class="line">Yc_corr = Yc_corr + (p1 * (r^2 + 2 * Yc_corr^2) + 2 * p2 * Xc_corr * Yc_corr)</span><br></pre></td></tr></table></figure>
+<p>其中，<code>p1</code> 和 <code>p2</code> 是切向畸变系数。</p>
+<ol start="5" type="1">
+<li><strong>相机坐标到图像坐标的转换</strong>：
+<ul>
+<li>将校正后的相机坐标转换回图像坐标系，使用以下公式：</li>
+</ul></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_corrected = (Xc_corr * fx) + cx</span><br><span class="line">y_corrected = (Yc_corr * fy) + cy</span><br></pre></td></tr></table></figure>
+<p>其中，<code>(x_corrected, y_corrected)</code> 是校正后的图像坐标，<code>(fx, fy)</code> 是焦距，<code>(cx, cy)</code> 是主点坐标。</p>
+<ol start="6" type="1">
+<li><strong>应用校正</strong>：
+<ul>
+<li>将校正后的坐标 <code>(x_corrected, y_corrected)</code> 应用到图像上，即可得到去畸变的图像。</li>
+</ul></li>
+</ol>
+<p>以上是一般的去畸变步骤。在实际应用中，可以使用各种计算机视觉库和工具来进行畸变校正，例如OpenCV等。通常需要事先对相机进行标定以获取内参参数。</p>
+<h4><span id="总结">总结</span></h4>
+<p><font style="color:rgb(0, 0, 0);">相机畸变现象发生的位置：</font></p>
+<ul>
+<li><strong><font style="color:rgb(0, 0, 0);">世界坐标系 -&gt; 相机坐标系</font></strong><font style="color:rgb(0, 0, 0);">，刚体变换，不存在畸变现象；</font></li>
+<li><strong><font style="color:rgb(0, 0, 0);">相机坐标系 -&gt; 图像坐标系</font></strong><font style="color:rgb(0, 0, 0);">，也就是成像过程，理想情况下是相似三角形，但实际由于相机制造、装配的原因，成像过程存在畸变现象；</font></li>
+<li><strong><font style="color:rgb(0, 0, 0);">图像坐标系 -&gt; 像素坐标系</font></strong><font style="color:rgb(0, 0, 0);">，坐标原点、单位不同，仅仅平移与缩放，不存在畸变现象；</font></li>
+</ul>
+<h2><span id="gtk参数理解">gtk参数理解</span></h2>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/hero-rm/uqpee6/wni2vf#xaMgs">好文索引</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694433531732-4e066aca-2e9b-4f89-bc61-51eb0107466d.png"></p>
+<p>resolution:是分辨率</p>
+<p>toggle mode：是控制快门的一些设置，</p>
+<p>continous:也就是连续拍照</p>
+<p>sw-toggle：就是点击下面按钮会重新拍照</p>
+<p>hw：不知道</p>
+<p>polarity:极性</p>
+<p>Exposure：</p>
+<p>mode</p>
+<p>auto</p>
+<p>target:</p>
+<p>flicker:闪烁，这里我觉得是视频帧率的意思</p>
+<p>manual</p>
+<p>gain:增益的意思</p>
+<p>我的理解就是给色深进行增益</p>
+<pre><code>gain是增益的意思，增益效应就是乘法运算（不同的数值乘以同一个数，数值越大的，乘完的结果更大），所以gain的默认值为“1”，图像不会有任何变化。但是如果增益不是1，而是比1大的数，这个时候对于越亮的部分就越有影响，对于暗的部分影响就没有那么大，最暗的部分0乘增益后还是0。</code></pre>
+<p>time:曝光时间</p>
+<p>ISP PROCESSING(isp也就是图像信号处理器）（processing的意思是进程）</p>
+<p><font style="color:rgb(51, 51, 51);">据专业人士介绍，ISP的具体处理流程如下：镜头将光信号投射到传感器的感光区域后，传感器进行光电转换，并将拜耳格式的原始图像发送给ISP。然后ISP处理算法，将RGB空间域的图像输出到后端视频捕获单元。在这个过程中，ISP通过其上运行的固件控制ISP逻辑，从而相应地控制镜头和传感器，然后完成自动光圈、自动曝光、自动白平衡等功能。其中，固件的操作是由视频捕获单元的中断驱动的。PQ工具工具通过网口或串口完成ISP的在线图像质量调整。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">ISP算法处理</font></strong><font style="color:rgb(51, 51, 51);">可以对拜耳图像执行黑电平补偿、镜头阴影校正、坏像素校正、颜色插值、拜耳噪声消除和白平衡（AWB）校正、色彩校正、伽马校正、色彩空间转换（RGB到YUV）、色彩噪声去除和边缘增强、YUV色彩空间中的色彩和对比度增强。然后以 YUV 或 RGB 格式输出数据。它通过I/O接口传输到CPU进行处理，用于图像存储和显示。</font></p>
+<p><strong><font style="color:#DF2A3F;">我们常说的图片的锐化、降噪和色彩优化都是在ISP中处理的。并且ISP还负责实现相位、激光和对比度等混合对焦操作，并为多个摄像头等提供支持。重要的任务是手机摄影不可或缺的关键部分。</font></strong></p>
+<p>sharpen:锐度,分辨率锐度。是让图像看起来更加清晰</p>
+<p>H-image:</p>
+<p>V-image:</p>
+<p>Parameter:(参数</p>
+<p>这个也就是用来保存以前调试的参数</p>
+<p>Mapping tabble:</p>
+<p>Gamma:也就是灰度值</p>
+<p>contrast：对比度</p>
+<p>SNAP SETTING：</p>
+<p>拍照，快照。</p>
+<h2><span id="去畸变操作学习">去畸变操作学习</span></h2>
+<p>棋盘格法</p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/attachments/yuque/0/2023/zip/27500914/1694451784441-f5e7579c-6914-429c-bde1-ec47ffce91bc.zip">img.zip</a></p>
+<p>遇到的问题也是和夏天怡一样的问题，没有修改像素值<img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694451771250-f1f100ad-52f3-4df9-824a-9fc096d2b25b.png"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ALIUHOP/article/details/112176359">Matlab 使用 Camera Calibrator工具箱——相机标定_matlab camera calibrator_笑着灬up的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45718019/article/details/105823053">使用Matlab做相机标定（获取相机的内外参数矩阵）_相机外参矩阵计如何获取_开门儿大弟子的博客-CSDN博客</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>内参矩阵</th>
+<th>Intrinsic Matrix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>焦距</td>
+<td>Focal Length</td>
+</tr>
+<tr class="even">
+<td>主点</td>
+<td>Principal Point</td>
+</tr>
+<tr class="odd">
+<td>径向畸变</td>
+<td>Radial Distortion</td>
+</tr>
+<tr class="even">
+<td>切向畸变</td>
+<td>Tangential Distortion</td>
+</tr>
+<tr class="odd">
+<td>旋转矩阵</td>
+<td>Rotation Matrices</td>
+</tr>
+<tr class="even">
+<td>平移向量</td>
+<td>Translation Vectors</td>
+</tr>
+<tr class="odd">
+<td>平均重投影误差</td>
+<td>Mean Reprojection Error</td>
+</tr>
+<tr class="even">
+<td>重投影误差</td>
+<td>Reprojection Errors</td>
+</tr>
+<tr class="odd">
+<td>重投影点</td>
+<td>Reprojected Points</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694453589550-aff467f1-088f-45a4-aca6-2abd887d69b1.png"></p>
+<p>目前觉得这个误差可能有点大</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694492411375-a1f5a1a7-e3ac-4f45-872a-3886cb2e686a.png"></p>
+<p>以物体为中心的角度</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694492486023-3d3fe7bd-6877-4a08-8373-b4f38936c756.png"></p>
+<p>五个角度</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694492508833-bba77840-cffa-4c76-9f92-54b9053a0724.png">以相机为中心</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694492527695-e310e52c-1597-4fed-a4d8-2a8948b69cd2.png"></p>
+<p>这个是经过了剔除之后的柱形图</p>
+<p>后来我把原来的一个角度给删掉了（因为亮度比较低</p>
+<p>重新拍了一组角度</p>
+<p>最终效果</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694494099886-f48be628-db5e-4680-b8fa-51a958884090.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694494108815-dcdcd55d-0c73-4893-9004-971c99d7ed42.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694494123780-5eb5b287-d09e-4fc0-baf1-4e5c9884625f.png"></p>
+<table>
+<thead>
+<tr class="header">
+<th>内参矩阵</th>
+<th>Intrinsic Matrix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>焦距</td>
+<td>Focal Length</td>
+</tr>
+<tr class="even">
+<td>主点</td>
+<td>Principal Point</td>
+</tr>
+<tr class="odd">
+<td>径向畸变</td>
+<td>Radial Distortion</td>
+</tr>
+<tr class="even">
+<td>切向畸变</td>
+<td>Tangential Distortion</td>
+</tr>
+<tr class="odd">
+<td>旋转矩阵</td>
+<td>Rotation Matrices</td>
+</tr>
+<tr class="even">
+<td>平移向量</td>
+<td>Translation Vectors</td>
+</tr>
+<tr class="odd">
+<td>平均重投影误差</td>
+<td>Mean Reprojection Error</td>
+</tr>
+<tr class="even">
+<td>重投影误差</td>
+<td>Reprojection Errors</td>
+</tr>
+<tr class="odd">
+<td>重投影点</td>
+<td>Reprojected Points</td>
+</tr>
+</tbody>
+</table>
+<p>看了去年的才发现原来0.5的误差很高。。。。。。</p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/attachments/yuque/0/2023/zip/27500914/1694496924231-f077c620-2238-457e-90fc-662926bf1522.zip">final_result.zip</a></p>
+<p>径向畸变 ：</p>
+<p>final_result.RadialDistortion</p>
+<p>ans =</p>
+<p>-0.0958 -0.1560</p>
+<p>切向畸变：</p>
+<p>final_result.TangentialDistortion</p>
+<p>ans =</p>
+<pre><code> 0     0</code></pre>
+<p>内参矩阵：</p>
+<p>final_result.Intrinsics.K</p>
+<p>ans =</p>
+<p>1.0e+03 *float</p>
+<pre><code>1.0388         0    0.3231
+
+     0    1.0423    0.2461
+
+     0         0    0.0010</code></pre>
+<p>重新调焦之后进行相机标定</p>
+<p>五个角度 横着倾角2，竖着倾角2，还有平着的1（由于竖着往下亮度很低，所以就没拍</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694519101870-c42f6269-78d4-4b64-8edb-84e990ed7385.png"></p>
+<p>拍了70张最后留了27张，最终误差还是在0.39</p>
+<blockquote>
+<blockquote>
+<p>cameraParams.Intrinsics.K</p>
+</blockquote>
+</blockquote>
+<p>ans =</p>
+<p>1.0e+03 *</p>
+<pre><code>1.0631         0    0.3233
+
+     0    1.0607    0.2314
+
+     0         0    0.0010</code></pre>
+<p>cameraParams.RadialDistortion</p>
+<p>ans =</p>
+<p>-0.2128 2.3775</p>
+<blockquote>
+<blockquote>
+<p>cameraParams.TangentialDistortion</p>
+</blockquote>
+</blockquote>
+<p>ans =</p>
+<pre><code> 0     0</code></pre>
+<h3><span id="去畸变参数应用">去畸变参数应用</span></h3>
+<p>我觉得可以理解成对焦（对于变焦镜头来说）</p>
+<p>增长焦距<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142648872">https://zhuanlan.zhihu.com/p/142648872</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mindvision.com.cn/uploadfiles/%E4%BA%A7%E5%93%81%E7%99%BD%E7%9A%AE%E4%B9%A6/SUA%E7%B3%BB%E5%88%97/MV-SUA33GC-M.pdf"><del>我使用的相机型号</del></a><del>貌似是没有变焦这个功能</del>（有的，在相机上，我没有看到。。。。。</p>
+<p>本次任务是在6~7米处识别清除装甲板（差不多将物体方到了离相机6米左右的位置）</p>
+<p>这个参数对于相机来说叫拍摄距离</p>
+<p>以下是一些影响拍摄距离的因素：</p>
+<ol type="1">
+<li><strong>焦距</strong>：镜头的焦距决定了相机能够捕捉的场景范围和细节。较短的焦距（广角镜头）适用于拍摄广大场景，而较长的焦距（长焦镜头）用于拍摄远处的对象。焦距还影响了景深，即图像中清晰的前景和背景范围。</li>
+<li><strong>光圈大小</strong>：光圈的大小（用F值表示）影响了相机的进光量。较大的光圈（较小的F值）能够捕捉更多光线，适用于低光条件下的拍摄。较小的光圈（较大的F值）可以增加景深，使更多的前景和背景保持清晰。</li>
+<li><strong>快门时间</strong>：较长时间的快门，能使cmos捕获更多的光线，</li>
+<li><strong>传感器尺寸</strong>：相9机传感器的大小对拍摄结果产生影响。较大的传感器通常能够捕捉更多的细节和提供更好的低光性能，但相机也会更大更重。</li>
+<li><strong>目标大小</strong>：要拍摄的目标的大小也是重要因素。较大的目标通常在较远的距离上更容易捕捉，而小目标可能需要更长焦距的镜头或更近的拍摄距离。</li>
+<li><strong>镜头质量</strong>：镜头的质量会影响图像的清晰度和畸变程度。高质量的镜头通常能够提供更锐利的图像，并减少光学畸变。</li>
+<li><strong>光线条件</strong>：光线条件是拍摄距离的重要因素。在低光条件下，可能需要更大的光圈和较高的ISO设置来获得足够的曝光。</li>
+</ol>
+<h4><span id="去畸变参数在c-opencv中的使用">去畸变参数在c++ opencv中的使用</span></h4>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/94244568">相机标定之张正友标定法数学原理详解（含python源码）</a></p>
+<p>数学原理太难了，看了一会没看明白，先放个链接。。。。。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_18894441/article/details/122983176?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169449728216800215064917%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169449728216800215064917&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-122983176-null-null.142%5Ev93%5EchatsearchT3_2&amp;utm_term=opencv%20c%2B%2B%E5%8E%BB%E7%95%B8%E5%8F%98&amp;spm=1018.2226.3001.4187">关于OpenCV中的去畸变 c++_opencv c++ undistort_小白菜的点滴成长的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/d9/d0c/group__calib3d.html#ga7a6c4e032c97f03ba747966e6ad862b1">OpenCV: Camera Calibration and 3D Reconstruction</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48592526/article/details/120393764?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169450094116800188560515%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169450094116800188560515&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-120393764-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=getOptimalNewCameraMatrix&amp;spm=1018.2226.3001.4187#t4">学习笔记 – opencv图像去畸变_opencv 畸变参数_昼行plus的博客-CSDN博客</a></p>
+<p>主要是依据这个文档学习的去畸变</p>
+<p><strong><font style="color:#DF2A3F;">矩阵的输入</font></strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    <span class="type">const</span> cv::Mat K = (cv::<span class="built_in">Mat_</span>&lt;<span class="type">double</span>&gt;(<span class="number">3</span>,<span class="number">3</span>) &lt;&lt; <span class="number">1038.8</span>, <span class="number">0</span>,<span class="number">323.1</span>, <span class="number">0</span>, <span class="number">1042.3</span>,<span class="number">246.1</span>, <span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 畸变参数</span></span><br><span class="line"><span class="comment">//    double k1 = -0.28340811, k2 = 0.07395907, p1 = 0.00019359, p2 = 1.76187114e-05;</span></span><br><span class="line">    <span class="type">const</span> cv::Mat D = (cv::<span class="built_in">Mat_</span>&lt;<span class="type">double</span>&gt; ( <span class="number">5</span>,<span class="number">1</span> ) &lt;&lt;  <span class="number">0.0</span>,<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
+<h5><span id="getoptimalnewcameramatrix-initundistortrectifymap-remap-矫正图像"><font style="color:rgb(180, 180, 180) !important;">getOptimalNewCameraMatrix + initUndistortRectifyMap + remap 矫正图像</font></span></h5>
+<p><font style="color:rgb(180, 180, 180) !important;"></font></p>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/d9/d0c/group__calib3d.html#ga7a6c4e032c97f03ba747966e6ad862b1">OpenCV: Camera Calibration and 3D Reconstruction</a></p>
+<p><strong>首先</strong>通过<font style="color:rgb(180, 180, 180) !important;">getOptimalNewCameraMatrix获得新的相机内参矩阵</font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">cv::getOptimalNewCameraMatrix</span>	</span></span><br><span class="line"><span class="function"><span class="params">(	</span></span></span><br><span class="line"><span class="params"><span class="function">		InputArray 	cameraMatrix,                  <span class="comment">// 相机内参矩阵</span></span></span></span><br><span class="line"><span class="params"><span class="function">        InputArray 	distCoeffs,                    <span class="comment">// 相机畸变参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">        Size 	        imageSize,                     <span class="comment">// 图像尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="type">double</span> 	        alpha,                         <span class="comment">// 缩放比例</span></span></span></span><br><span class="line"><span class="params"><span class="function">        								<span class="comment">//当alpha=1时，所有像素均保留，但存在黑色边框。</span></span></span></span><br><span class="line"><span class="params"><span class="function">										<span class="comment">//当alpha=0时，损失最多的像素，没有黑色边框。</span></span></span></span><br><span class="line"><span class="params"><span class="function">        Size 	        newImgSize = Size(),           <span class="comment">// 校正后的图像尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">        Rect * 	        validPixROI = <span class="number">0</span>,               <span class="comment">// 输出感兴趣区域设置</span></span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="type">bool</span> 	        centerPrincipalPoint = <span class="literal">false</span>   <span class="comment">// 可选标志</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span>	</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+<p>在相机畸变校正过程中，获取新的相机内参矩阵（New Camera Matrix）是一个重要的步骤，通常通过OpenCV等库函数中的<code>getOptimalNewCameraMatrix</code>函数来完成。这一步的主要目的是优化图像的投影变换，以最大程度地保留有用的图像信息，同时最小化畸变引入的误差。以下是为什么要首先获取新的相机内参矩阵的一些原因：</p>
+<ol type="1">
+<li><font style="color:rgb(180, 180, 180) !important;"> </font><strong>畸变校正</strong><font style="color:rgb(180, 180, 180) !important;">：相机的畸变（主要是径向畸变和切向畸变）会导致图像中的直线弯曲和图像变形。通过获取新的相机内参矩阵，可以将这些畸变纠正，使图像更接近于理想的几何投影。 </font></li>
+<li><font style="color:rgb(180, 180, 180) !important;"> </font><strong>最小信息丢失</strong><font style="color:rgb(180, 180, 180) !important;">：在畸变校正过程中，通常会对图像进行裁剪或者拉伸，以适应校正后的图像空间。新的相机内参矩阵的目标是最小化这些操作对图像信息的丢失，确保尽可能多的保留原始图像中的内容。 </font></li>
+<li><font style="color:rgb(180, 180, 180) !important;"> </font><strong>减小计算复杂度</strong><font style="color:rgb(180, 180, 180) !important;">：通过获取新的相机内参矩阵，可以将畸变校正过程中的计算复杂度降低。这是因为它可以限制校正后图像的区域，使得在校正后的图像空间中，只有有用的像素才会被计算和存储。 </font></li>
+<li><font style="color:rgb(180, 180, 180) !important;"> </font><strong>改善后续处理</strong><font style="color:rgb(180, 180, 180) !important;">：校正后的图像更容易用于后续的计算和处理任务，如目标检测、图像匹配等。获取新的相机内参矩阵可以使这些任务更加准确和可靠。 </font></li>
+<li><font style="color:rgb(180, 180, 180) !important;"> </font><strong>去除无效区域</strong><font style="color:rgb(180, 180, 180) !important;">：畸变校正可能会导致图像边界处的一些像素位置不可见或不包含有用信息。新的相机内参矩阵可以帮助去除这些无效区域，使得图像更干净。 </font></li>
+</ol>
+<p><font style="color:rgb(180, 180, 180) !important;">总之，获取新的相机内参矩阵是畸变校正的一个关键步骤，旨在优化图像的几何变换，以提高图像质量并减小处理的复杂性。这个矩阵的选择需要根据具体的应用和需求进行优化。</font></p>
+<p><strong>第二次</strong>使用<font style="color:rgb(180, 180, 180) !important;">initUndistortRectifyMap获取变换之后的像素坐标</font></p>
+<p>mapx和mapy</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Mat NewCameraMatrix;</span><br><span class="line">Mat map1,map2;</span><br><span class="line"></span><br><span class="line">NewCameraMatrix= <span class="built_in">getOptimalNewCameraMatrix</span>(K,D,cv::<span class="built_in">Size</span>(<span class="number">640</span>,<span class="number">480</span>),<span class="number">1</span>,cv::<span class="built_in">Size</span>(<span class="number">640</span>,<span class="number">480</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">initUndistortRectifyMap</span>(K,D,cv::<span class="built_in">Mat</span>(),NewCameraMatrix,cv::<span class="built_in">Size</span>(<span class="number">640</span>,<span class="number">480</span>),CV_32FC1,map1,map2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mat img_revert;</span><br><span class="line"><span class="built_in">remap</span>(img,img_revert,map1,map2,INTER_LINEAR);</span><br><span class="line">cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;img_revert&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">cv::<span class="built_in">imshow</span>(<span class="string">&quot;img_revert&quot;</span>, img_revert);</span><br><span class="line"><span class="type">int</span> key = cv::<span class="built_in">waitKey</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>第三次</strong></p>
+<p>将原始图像中的像素映射到矫正之后的图像的指定位置</p>
+<h5><span id="undistort">undistort</span></h5>
+<p>这个也就是集成了上面那三个中的后两个</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">cv::undistort</span>	</span></span><br><span class="line"><span class="function"><span class="params">(	</span></span></span><br><span class="line"><span class="params"><span class="function">		InputArray 	src,                        <span class="comment">// 原始图像</span></span></span></span><br><span class="line"><span class="params"><span class="function">        OutputArray 	dst,                    <span class="comment">// 矫正图像</span></span></span></span><br><span class="line"><span class="params"><span class="function">        InputArray 	cameraMatrix,               <span class="comment">// 原相机内参矩阵</span></span></span></span><br><span class="line"><span class="params"><span class="function">        InputArray 	distCoeffs,                 <span class="comment">// 相机畸变参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">        InputArray 	newCameraMatrix = noArray() <span class="comment">// 新相机内参矩阵</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span>	</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::<span class="built_in">undistort</span>(RawImage, UndistortImage, K, D, K);</span><br></pre></td></tr></table></figure>
+<h5><span id></span></h5>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694504105420-15aa02f5-21af-4239-acec-fdbb5c65869c.png"></p>
+<p>处理之后的效果对比</p>
+<p>我觉得区别不大（可能因为原来相机的焦距本来就挺大的）（畸变的不严重）</p>
+<h5><span id="调参记录">调参记录</span></h5>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694508652551-aec1324f-7beb-41e4-bc0c-a8a3257121df.png"></p>
+<p>首先是gain，这个就是iso，也就是调节光敏感程度</p>
+<p>这个有利有弊，小则噪点少但是图片比较暗。大噪点多图片亮</p>
+<p>曝光时间多了也会导致噪点增加</p>
+<p>为了增加亮度，提高gain，提高time</p>
+<p>为了轮廓清晰，直接把sharpen提到最高（但是这个好像没有办法输入</p>
+<p>色道增益就是以图片看清楚颜色为目的调</p>
+<p>灰度值提高用来给画面增亮</p>
+<h5><span id="最后效果">最后效果</span></h5>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694520469848-386c5183-16bf-47e7-8503-01faf78b0877.png"></p>
+<p>能大概看出来是个4</p>
+<h1><span id="问题寄录">问题寄录</span></h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694510148310-2d365456-dba4-4948-b86f-58200edf759d.png">没有插相机或者没有监测到相机会出现这个报错</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694510274297-4f2141fe-8c69-4ed8-9ffc-180f288bf6ab.png">一个是设置的分辨率问题，一个是可能usb接口松动之类的，导致程序这个通道异常中断，这种情况直接重新插拔相机就可以了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694509297421-ec427cdb-c0bd-4883-aa87-aa94b8168ff8.png"></p>
+<p>有疑或这个单位是什么ms？</p>
+<p>五个角度 横着倾角2，竖着倾角2，还有平着的1（由于竖着往下亮度很低，所以就没拍（应该怎么处理</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694519101870-c42f6269-78d4-4b64-8edb-84e990ed7385.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/">http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/">项目实践</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/ROS/">ROS</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="post-meta__tags" href="/tags/%E7%9B%B8%E6%9C%BA/">相机</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/qt%E4%BC%98%E5%8C%96/" title="qt优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">qt优化</div></div><div class="info-2"><div class="info-item-1">Qt 自定义标题栏，最小化、最大化、关闭窗口，双击最大化，鼠标拖动等效果实现_qt自定义标题栏_wang_chao118的博客-CSDN博客 目标是弄成这个样子      我的第一版ui  我的第二版 此处为语雀卡片，点击链接查看 难点在于界面的切换 https://github.com/mouming233/qt/tree/nihao 详情见我的github 时间节点 5月12日能够初步实现多级界面和视频嵌入的功能 多级界面 Qt之多界面切换编程_qt多界面编程_七 六 伍的博客-CSDN博客 能够做到显示多级界面 此处为语雀卡片，点击链接查看 1234567void MainWindow::on_pushButton_2_clicked()&#123;    Server *gui1=new Server;    gui1-&gt;show();    this-&gt;hide();&#125; 外部程序ui嵌入qt程序 QT 如何把外部程序嵌入到QT界面_qt 嵌入其他程序_hellokandy的博客-CSDN博客 Qt源码解...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/2-2%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8Acubemx%E9%85%8D%E7%BD%AE/" title="2-2模块使用以及cubemx配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2-2模块使用以及cubemx配置</div></div><div class="info-2"><div class="info-item-1">00:03:14.621  会用到i2c的发送函数 需要初始化引脚 需要使用stm32cubemx进行引脚初始化 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E5%9D%90%E6%A0%87%E7%B3%BB%E8%BD%AC%E6%8D%A2/" title="坐标系转换"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">坐标系转换</div></div><div class="info-2"><div class="info-item-1">关于旋转矩阵的左乘与右乘问题_旋转矩阵左乘和右乘的区别_希望coding不秃头的博客-CSDN博客 传统计算机视觉学习笔记 PnP解算及SolvePnp用法_opencv pnp_寒韩Glory的博客-CSDN博客 pnp数学原理 pnp(Perspective-n-Point 四种解决算法（DLT、P3P、EPnP、BA） DLT P3P:P3P问题是已知三个3D目标点与其2D投影之间的对应关系，来确定标定相机的位姿问题。 EPnP BA  旋转方式 左手系与右手系 图片理解_左手系和右手系的区别_一骑红尘荔枝来的博客-CSDN博客 slam学习——旋转向量、旋转矩阵、欧拉角、四元素的概念和运用_前途似海_来日方长的博客-CSDN博客 旋转向量 旋转矩阵 欧拉角 四元数 旋转 对于右手系，逆时针旋转是正向。 像素坐标系到相机坐标系 目的是获取相机中目标物体到相机的距离（在这里就是平移矩阵 这里的像素坐标系和图像坐标系，只是涉及到二维平面的平移，像素坐标系是以右上角为（0，0），图像坐标系是以图片的中间为（0，0） 阅读了官方文档之后...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%94%B5%E8%84%91%E8%B0%83%E8%AF%95/" title="电脑调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">电脑调试</div></div><div class="info-2"><div class="info-item-1">小电脑的选择 11代nuc 盘一盘NVIDIA Jetson家族的前浪和后浪！ 入门级nano 中级AGX Xavier 作为现在AI计算的扛把子 超高级Jetson TX2 高级Xavier NX 算力性能区别 英特尔的NUC迷你电脑有什么特点？NUC适合什么样的用户群（黑苹果）？ 由于nuc用的是英特尔的集显，所以没有办法使用cuda 各种机器性能参数比较 ssh远程连接 如何判断网线是否连上 1.直接看ui， 2.通过ifconfig 主要看网卡那一栏，如果没有具体的ipv4地址那一般就是没有连接上 这是一个网络接口的信息列表，通常用于诊断和配置网络连接。以下是每个接口的意思和说明：  enp57s0：  flags=4099：表示接口的状态标志。这个接口是启用的（UP），可以广播数据（BROADCAST），支持多播（MULTICAST）。 mtu 1500：表示最大传输单元，即可以在一次数据包中传输的最大字节数。 ether c8:7f:54:ca:bf:31：表示接口的物理地址（MAC地址）。 txqueuelen 1000...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/2022qt%E5%AD%A6%E4%B9%A0/" title="2022qt学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2022qt学习</div></div><div class="info-2"><div class="info-item-1">QTmodel.zip QT GUI编程_子羽丿的博客-CSDN博客这篇博客相当好，强推 bilibili html5 player 学习视频 qt下载安装 下面这个文档写的很详细 Qt安装包下载（Windows平台）_Alex-L的博客-CSDN博客 QT的下载与安装（QT5.9.1）_Qi_1337的博客-CSDN博客_qt 5.9.1安装及配置 qt学习 小知识 知识点速记 argc时命令行变量的数量，argv时命令行变量的数组 QApplication是应用程序对象，有且仅有一个 Widget w;窗口对象默认不会显示，必须调用show方法显示从窗口 return a.exec();让应用程序对象进入消息循环，让代码阻塞到此行 1234567891011#include &quot;widget.h&quot;#include &lt;QApplication&gt;int main(int argc, char *argv[])&#123;    QApplication a(argc, argv);    Widget w;    w.s...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/anaconda%E4%BD%BF%E7%94%A8/" title="anaconda使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">anaconda使用</div></div><div class="info-2"><div class="info-item-1">conda环境配置 anaconda | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror PackagesNotFoundError: The following packages are not available from current channels的解决办法_正在学习的黄老师的博客-CSDN博客 Anaconda添加，删除镜像源_conda删除镜像源_有问号de小朋友的博客-CSDN博客 conda常用命令汇总_conda命令_Iareges的博客-CSDN博客 为conda配置国内镜像，加速conda下载安装Python包的速度_conda加速_凯旋.Lau的博客-CSDN博客 Opencv Python Headless :: Anaconda.org Anaconda的虚拟环境的包在哪里？（详细教程）_anaconda创建的虚拟环境存储在哪_仭的博客-CSDN博客 运行 Python 文件遇到问题 ModuleNotFoundError: No module named ‘yaml’  时，...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/cmake/" title="cmake"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">cmake</div></div><div class="info-2"><div class="info-item-1">1.“~” 表示主目录，也就是当前登录用户的用户目录 比如用户是“zheng”,则mac电脑的用户目录就是/users/zheng； 2.“/”是指根目录，所有目录最顶层的目录； 3.“./”表示当前目录，一般和其他文件夹或者文件结合使用，指当前目录下的东西. CMake Reference Documentation — CMake 3.28.0-rc2 Documentation 这个是官方文档，英语好的，已经有基础的可以直接看这个 Linux下CMake简明教程_爱就是恒久忍耐的博客-CSDN博客_cmake CMake教程（常见变量）_project_source_dir_开始沸腾了的博客-CSDN博客  CMakeLists：在catkin_make期间生成文件，如xxxConfig.Cmake导出本包的资源 加入到catkin_INCLUDE_DIRS和catkin_LIBRARIES，find_package本包依赖所需依赖(包含依赖包并不会递归其依赖的子包为依赖，因为CMakeLists是独立的)。 Package.xml：是了解一个包的所有入...</div></div></div></a><a class="pagination-related" href="/2025/11/12/opengl%E5%AD%A6%E4%B9%A0/" title="opengl学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">opengl学习</div></div><div class="info-2"><div class="info-item-1">毕设相关   Qt/C++ opengl导入机械臂模型，添加ui拖拽交互，运动插补，包括关节和直线运动，可保存关节点信息_哔哩哔哩_bilibili 学习资源 12```[【B站最好】OpenGL小白到精通系列-保姆级-计算机图形学_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1aK4y1z7ii/?spm_id_from=333.337.search-card.all.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648) 123456789101112131415161718192021222324252627[Fetching Title#g3p6](https://blog.csdn.net/MASILEJFOAISEGJIAE/article/details/84840748)[现代OpenGL教程（一）：绘制三角形（imgui+OpenGL3.3）\_imgui gl绘制三角形-CSDN博客](https://blog.csdn.net/MASILEJF...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">相机学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">相机基本工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">感光元件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">cmos</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.1.1.1.2.</span> <span class="toc-text">ccd（电荷耦合</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">快门</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">光圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">中央处理器cpu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">图像处理器gpu</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">工作流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">相机成像模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">全局快门和卷帘快门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">工业相机镜头参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.1.</span> <span class="toc-text">焦段和焦距</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.2.</span> <span class="toc-text">曝光时间（快门）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.3.</span> <span class="toc-text">cmos参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">大小尺寸（靶面尺寸）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.4.</span> <span class="toc-text">景深</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.5.</span> <span class="toc-text">光圈大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.6.</span> <span class="toc-text">iso</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.7.</span> <span class="toc-text">色深</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.8.</span> <span class="toc-text">像元尺寸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.9.</span> <span class="toc-text">fov（视场角）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.5.</span> <span class="toc-text">坐标系转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.1.</span> <span class="toc-text">世界坐标系-&gt;相机坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.2.</span> <span class="toc-text">相机坐标系-&gt;图像坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.3.</span> <span class="toc-text">图像坐标系-&gt;像素坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.6.</span> <span class="toc-text">相机畸变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.6.1.</span> <span class="toc-text">分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">径向畸变</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">切向畸变</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.6.2.</span> <span class="toc-text">去畸变方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">chatgpt的回答</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.7.</span> <span class="toc-text">gtk参数理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.8.</span> <span class="toc-text">去畸变操作学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.8.1.</span> <span class="toc-text">去畸变参数应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.8.1.1.</span> <span class="toc-text">去畸变参数在c++ opencv中的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.8.1.1.1.</span> <span class="toc-text">getOptimalNewCameraMatrix + initUndistortRectifyMap + remap 矫正图像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.8.1.1.2.</span> <span class="toc-text">undistort</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.8.1.1.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.8.1.1.4.</span> <span class="toc-text">调参记录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.8.1.1.5.</span> <span class="toc-text">最后效果</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">问题寄录</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

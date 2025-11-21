@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>鸟叔的私房菜 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第0章 计基 https:&#x2F;&#x2F;wizardforcel.gitbooks.io&#x2F;vbird-linux-basic-4e&#x2F;content&#x2F;4.html  原先cpu是有北桥和南桥 北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口 南桥用于连接速度相对较慢的，比如硬盘usb和网卡。 现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽 cpu外频">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸟叔的私房菜">
+<meta property="og:url" content="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="第0章 计基 https:&#x2F;&#x2F;wizardforcel.gitbooks.io&#x2F;vbird-linux-basic-4e&#x2F;content&#x2F;4.html  原先cpu是有北桥和南桥 北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口 南桥用于连接速度相对较慢的，比如硬盘usb和网卡。 现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽 cpu外频">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:07:01.842Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="项目实践">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技巧">
+<meta property="article:tag" content="RM">
+<meta property="article:tag" content="文档排版">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "鸟叔的私房菜",
+  "url": "http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:07:01.842Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '鸟叔的私房菜',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">鸟叔的私房菜</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">鸟叔的私房菜</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:07:01.842Z" title="更新于 2025-11-12 23:07:01">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/rm-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">rm-奇技淫巧</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1><span id="第0章">第0章</span></h1>
+<h2><span id="计基">计基</span></h2>
+<p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/4.html">https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/4.html</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/jpeg/27500914/1705891950550-743b58a6-f115-4e98-93f7-1df1f7474f7d.jpeg"></p>
+<p>原先cpu是有北桥和南桥</p>
+<p>北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口</p>
+<p>南桥用于连接速度相对较慢的，比如硬盘usb和网卡。</p>
+<p>现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽</p>
+<p>cpu外频：外部设备到通过前端总线（fsb），进行频率同步，</p>
+<p>内频：fsb到cpu，cpu的频率快于fsb</p>
+<p>倍频</p>
+<p>cpu频率速度=外频x倍频</p>
+<p>倍频是cpu出场已经设置好的不可更改，所以<code>超频</code>的一般是外频</p>
+<p><font style="color:rgb(51, 51, 51);">磁盘的最小物理储存单位称之为扇区 （sector）</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">同一个同心圆的扇区组合成的圆就是所谓的磁道（track）</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">所有盘片上面的同一个磁道可以组合成所谓的柱面 （cylinder）</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">CMOS</font></p>
+<p><font style="color:rgb(51, 51, 51);">主要的功能为记录主板上面的重要参数， 包括系统时间、CPU电压与频率、各项设备的I/O位址与IRQ等</font></p>
+<p><font style="color:rgb(51, 51, 51);">BIOS</font></p>
+<p><font style="color:rgb(51, 51, 51);">为写入到主板上某一块 flash 或 EEPROM 的程序，他可以在开机的时候执行，以载入CMOS当中的参数， 并尝试调用储存设备中的开机程序，进一步进入操作系统当中</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53199242">五类网线、六类网线、屏蔽网线、RJ45、RJ11的区别</a></p>
+<p>网线选择</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/jpeg/27500914/1705989770967-5908e9cd-fd42-452e-918a-d3a45e83e356.jpeg"></p>
+<h5><span id="编码系统">编码系统</span></h5>
+<h6><span id="latex">latex</span></h6>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012501459/article/details/49617805">常用数学符号的 LaTeX 表示方法_latex 指数函数-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/yuque/gpvawt/math">如何插入数学公式</a></p>
+<h6><span id="中文编码系统">中文编码系统</span></h6>
+<p>最开始使用big5这种编码表，每个中文字会占用2byte，可以有 <img src="https://cdn.nlark.com/yuque/__latex/b9651ceb832167b5c23984e5e56f197c.svg" alt="image">种汉字，<img src="https://cdn.nlark.com/yuque/__latex/d8aeea1b71b6c47fb697dfe22ed832ca.svg" alt="image"> 6w个汉字，，实际上big5定义了1w多个汉字，但是很多中文利用big5无法显示，所以才会有造字程序</p>
+<p>之后国际组织iso/iec制定了unicode编码系统，俗称的utf8（万国码）就是这个。</p>
+<h2><span id="程序运行">程序运行</span></h2>
+<p>编译器，让让高阶程序转变成机器码<img src="https://cdn.nlark.com/yuque/0/2024/gif/27500914/1705992561239-313679a0-42a0-401c-89ef-03f01ae3a43f.gif"></p>
+<p>操作系统让我们不用重复撰写控制码</p>
+<h3><span id="1操作系统">1.操作系统</span></h3>
+<h4><span id="11操作系统核心kernel">1.1操作系统核心（kernel</span></h4>
+<p>操作系统也是一组程序</p>
+<p>不过这组程序的重点是<strong>管理电脑的所有活动</strong>和<strong>驱动系统中的所有硬件</strong></p>
+<blockquote>
+<p><font style="color:rgb(51, 51, 51);">那么操作系统的功能就是让CPU可以开始判断逻辑与运算数值、 让内存可以开始载入/读出数据与程序码、让硬盘可以开始被存取、让网卡可以开始传输数据、 让所有周边可以开始运行等等</font></p>
+<p><font style="color:rgb(51, 51, 51);">存取硬盘、网络功能、CPU资源取得等</font></p>
+</blockquote>
+<p><font style="color:rgb(51, 51, 51);">上述功能即使操作系统的内核</font></p>
+<p>操作系统的核心主要是管理硬件和提供相关的能力，如果使用者不小心将核心程序破坏，将会导致整个系统的崩溃，因此核心程序放置到内存当中是收到保护的，而且开机之后就一直贮存在内存当中</p>
+<h4><span id="12-系统调度system-call">1.2 系统调度（system call</span></h4>
+<p>核心只会进行电脑系统的资源分配，</p>
+<p>操作系统除了核心程序之外，还会提供一组开发接口，也就是<strong>系统调度层</strong></p>
+<p>软件与核心关系比较大。从软件到核心这步就是<strong>系统调度</strong></p>
+<p>硬件与核心关系比较大，应用程序</p>
+<p>使用者到软件关系比较。内核</p>
+<ul>
+<li><strong>核心至少需要有以下功能</strong></li>
+</ul>
+<p><strong>系统调用接口</strong>，这是为了方便陈旭开发着轻易与核心进行交流，进一步利用硬件资源</p>
+<p><strong>程序管理</strong>，也就是所谓的多任务环境，多个程序同时等待cpu运算处理，核心需要能够控制这些工作，让cpu资源有效的分配（决定哪个程序优先执行</p>
+<p><strong>内存管理</strong>，控制整个操作系统的内存管理，系统的所有程序码还有数据都必须先放到虚拟内存当中，内存不足时可以提供内存交换功能。</p>
+<p><strong>文件系统管理</strong>，也就是对于文件格式的识别与文件修改</p>
+<blockquote>
+<p>例如：</p>
+<p>windows98的核心认识ntfs文件格式的硬盘，所以就无法使用这个格式的文件。</p>
+</blockquote>
+<p><strong>设备驱动</strong>：硬件管理是核心的主要工作之一，由于有”可载入模块”所以可以将<strong>驱动程序</strong>编辑成<strong>模块</strong>。不需要重新编译核心</p>
+<h4><span id="13操作系统和驱动程序">1.3操作系统和驱动程序</span></h4>
+<p>硬件设备不断更新，较新的谁被我们的操作系统不识别。</p>
+<blockquote>
+<p>就比如之前遇到ubuntu无法上网，因为网卡太新，ubuntu20.04无法自己安装驱动，需要我们手动编译安装</p>
+</blockquote>
+<p>操作系统应该如何驱动这些设备呢？</p>
+<p>为了克服这些困难，操作系统通常会预留一些接口给开发商，用于他们利用接口开发硬件的驱动程序。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1705996490783-5e5aefe7-0b21-47d0-b246-dc761cf1ee20.png"></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">操作系统必须要能够驱动硬件，如此应用程序才能够使用该硬件功能；</font></li>
+<li><font style="color:rgb(51, 51, 51);">一般来说，操作系统会提供开发接口，让开发商制作他们的驱动程序；</font></li>
+<li><font style="color:rgb(51, 51, 51);">要使用新硬件功能，必须要安装厂商提供的驱动程序才行；</font></li>
+<li><font style="color:rgb(51, 51, 51);">驱动程序是由厂商提供的，与操作系统开发者无关。</font></li>
+</ul>
+<h3><span id="2-应用程序"><font style="color:rgb(51, 51, 51);">2 应用程序</font></span></h3>
+<p>驱动也属于一种应用程序，都是使用操作系统预留的开发接口进行开发。</p>
+<h2><span id="重点回顾">重点回顾</span></h2>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">计算机的定义为：“接受使用者输入指令与数据，经由中央处理器的数学与逻辑单元运算处理后，以产生或储存成有用的信息”；</font></li>
+<li><font style="color:rgb(51, 51, 51);">电脑的五大单元包括：输入单元、输出单元、控制单元、算数逻辑单元、存储单元五大部分。其中CPU占有控制、算术逻辑单元，存储单元又包含内存与辅助内存；</font></li>
+<li><font style="color:rgb(51, 51, 51);">数据会流进/流出内存是CPU所发布的控制命令，而CPU实际要处理的数据则完全来自于内存；</font></li>
+<li><font style="color:rgb(51, 51, 51);">CPU依设计理念主要分为：精简指令集（RISC）与复杂指令集（CISC）系统；</font></li>
+<li><font style="color:rgb(51, 51, 51);">关于CPU的频率部分：外频指的是CPU与外部元件进行数据传输时的速度，倍频则是CPU内部用来加速工作性能的一个倍数， 两者相乘才是CPU的频率速度；</font></li>
+<li><font style="color:rgb(51, 51, 51);">新的 CPU 设计中，已经将北桥的内存控制芯片整合到 CPU 内，而 CPU 与内存、显卡沟通的总线通常称为系统总线。 南桥就是所谓的输入输出（I/O）总线，主要在联系硬盘、USB、网卡等周边设备；</font></li>
+<li><font style="color:rgb(51, 51, 51);">CPU每次能够处理的数据量称为字组大小（word size），字组大小依据CPU的设计而有32位与64位。 我们现在所称的电脑是32或64位主要是依据这个 CPU解析的字组大小而来的！</font></li>
+<li><font style="color:rgb(51, 51, 51);">个人电脑的内存主要元件为动态随机存取内存（Dynamic Random Access Memory, DRAM）， 至于CPU内部的第二层高速缓存则使用静态随机存取内存（Static Random Access Memory, SRAM）；</font></li>
+<li><font style="color:rgb(51, 51, 51);">BIOS（Basic Input Output System）是一套程序，这套程序是写死到主板上面的一个内存芯片中， 这个内存芯片在没有通电时也能够将数据记录下来，那就是只读存储器（Read Only Memory, ROM）；</font></li>
+<li><font style="color:rgb(51, 51, 51);">目前主流的外接卡接口大多为 PCIe 接口，且最新为 PCIe 3.0，单信道速度高达 1GBytes/s</font></li>
+<li><font style="color:rgb(51, 51, 51);">常见的显卡连接到屏幕的接口有 HDMI/DVI/D-Sub/Display port 等等。HDMI 可同时传送影像与声音。</font></li>
+<li><font style="color:rgb(51, 51, 51);">传统硬盘的组成为：圆形盘片、机械手臂、 磁头与主轴马达所组成的，其中盘片的组成为扇区、磁道与柱面；</font></li>
+<li><font style="color:rgb(51, 51, 51);">磁盘连接到主板的接口大多为 SATA 或 SAS，目前台式机主流为 SATA 3.0，理论极速可达 600MBytes/s。</font></li>
+<li><font style="color:rgb(51, 51, 51);">常见的文字编码为 ASCII，繁体中文编码主要有 Big5 及 UTF8 两种，目前主流为 UTF8</font></li>
+<li><font style="color:rgb(51, 51, 51);">操作系统（Operating System, OS）其实也是一组程序， 这组程序的重点在于管理电脑的所有活动以及驱动系统中的所有硬件。</font></li>
+<li><font style="color:rgb(51, 51, 51);">电脑主要以二进制作为单位，常用的磁盘容量单位为Bytes，其单位换算为1 Byte = 8bits。</font></li>
+<li><font style="color:rgb(51, 51, 51);">最阳春的操作系统仅在驱动与管理硬件，而要使用硬件时，就得需要通过应用软件或者是壳程序（shell）的功能， 来调用操作系统操纵硬件工作。目前称为操作系统的，除了上述功能外，通常已经包含了日常工作所需要的应用软件在内了。</font></li>
+</ul>
+<h1><span id="第1章-linux特性">第1章 linux特性</span></h1>
+<p><font style="color:rgb(51, 51, 51);">Linux由于是Open Source的操作系统，所以他的程序码可以被修改成适合在各种机器上面运行的， 也就是说，Linux是具有“可移植性”，这可是很重要的一个功能喔！</font><img src="https://cdn.nlark.com/yuque/0/2024/jpeg/27500914/1705998516001-8410f00e-a077-491e-beb1-c33d0184fabb.jpeg"></p>
+<p><font style="color:rgb(51, 51, 51);">1960年代初期麻省理工学院（MIT）发展了所谓的： “相容分时系统（Compatible Time-Sharing System, CTSS）”， 它可以让大型主机通过提供数个终端机（terminal）以连线进入主机，来利用主机的资源进行运算工作。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Dennis_Ritchie"><font style="color:rgb(51, 51, 51);">Dennis Ritchie</font></a><font style="color:rgb(51, 51, 51);"> 将B语言重新改写成C语言，再以C语言重新改写与编译Unics的核心， 最后正名与发行出Unix的正式版本！</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">操作系统是直接嵌入于产品当中的，理论上你不应该会更动到这个操作系统， 所以就称为嵌入式系统啦！</font><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706056890701-b40b0399-6380-45ac-b1f5-9e82904cb887.png"></p>
+<h1><span id="第2章-主机规划和磁盘分区">第2章 主机规划和磁盘分区</span></h1>
+<h2><span id="21linux与硬件的搭配">2.1linux与硬件的搭配</span></h2>
+<p>磁盘阵列（raid）</p>
+<p><font style="color:rgb(51, 51, 51);">是利用硬件技术将数个硬盘整合成为一个大硬盘的方法，操作系统只会看到最后被整合起来的大硬盘。 由于磁盘阵列是由多个硬盘组成，所以可以达成速度性能、备份等任务。更多相关的磁盘阵列我们会在</font><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/Text/index.html">第十四章</a><font style="color:rgb(51, 51, 51);">中介绍的。</font></p>
+<h3><span id="磁盘格式分类"><font style="color:rgb(51, 51, 51);">磁盘格式分类</font></span></h3>
+<ul>
+<li>mbr</li>
+<li>gpt</li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">早期磁盘第一个扇区里面含有的重要信息我们称为MBR （Master Boot Record） 格式，但是有雨近年来，磁盘扇区容量不断扩大，造成读写上出现了一些困扰，甚至有些大于2TB 以上的磁盘分区已经让某些操作系统无法存取。因此后来又多了一个新的磁盘分区格式，称为 GPT （GUID partition table）</font></p>
+<p><font style="color:rgb(51, 51, 51);">那么盘片有点像下面这样：</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/jpeg/27500914/1706116846971-26796a85-8f87-4f17-874a-d54e65f83052.jpeg"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706117003436-0f3f092d-46ae-432d-a98b-04b3675d3af5.png"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/660797961#:~:text=%E7%A3%81%E9%81%93%EF%BC%88track%EF%BC%89%E6%95%B0%EF%BC%9A%E7%A3%81%E9%81%93%E4%BB%8E%E7%9B%98%E7%89%87%E5%A4%96%E5%9C%88%E5%BE%80%E5%86%85%E5%9C%88%E7%BC%96%E5%8F%B70%E7%A3%81%E9%81%93%EF%BC%8C1%E7%A3%81%E9%81%93%E2%80%A6%EF%BC%8C%E9%9D%A0%E8%BF%91%E4%B8%BB%E8%BD%B4%E7%9A%84%E5%90%8C%E5%BF%83%E5%9C%86%E7%94%A8%E4%BA%8E%E5%81%9C%E9%9D%A0%E7%A3%81%E5%A4%B4%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE%EF%BC%9B%20%E6%9F%B1%E9%9D%A2%EF%BC%88cylinder%EF%BC%89%E6%95%B0%EF%BC%9A%E7%AD%89%E4%BA%8E%E7%A3%81%E9%81%93%E6%95%B0%E9%87%8F%EF%BC%8C%E6%89%80%E6%9C%89%E7%A3%81%E7%89%87%E4%B8%AD%E5%8D%8A%E5%BE%84%E7%9B%B8%E5%90%8C%E7%9A%84%E5%90%8C%E5%BF%83%E7%A3%81%E9%81%93%E6%9E%84%E6%88%90%E2%80%9C%E6%9F%B1%E9%9D%A2%22%EF%BC%8C%E6%84%8F%E6%80%9D%E6%98%AF%E8%BF%99%E4%B8%80%E7%B3%BB%E5%88%97%E7%9A%84%E7%A3%81%E9%81%93%E5%9E%82%E7%9B%B4%E5%8F%A0%E5%9C%A8%E4%B8%80%E8%B5%B7%EF%BC%8C%E5%B0%B1%E5%BD%A2%E6%88%90%E4%B8%80%E4%B8%AA%E6%9F%B1%E9%9D%A2%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%82,%E7%AE%80%E5%8D%95%E5%9C%B0%E7%90%86%E8%A7%A3%EF%BC%8C%E6%9F%B1%E9%9D%A2%E5%B0%B1%E6%98%AF%E7%A3%81%E9%81%93%EF%BC%9B%20%E6%89%87%E5%8C%BA%EF%BC%88sector%EF%BC%89%E6%95%B0%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A3%81%E9%81%93%E9%83%BD%E8%A2%AB%E5%88%87%E5%88%86%E6%88%90%E5%BE%88%E5%A4%9A%E6%89%87%E5%BD%A2%E5%8C%BA%E5%9F%9F%EF%BC%8C%E6%AF%8F%E4%B8%AA%E7%A3%81%E9%81%93%E7%9A%84%E6%89%87%E5%8C%BA%E6%95%B0%E9%87%8F%E7%9B%B8%E5%90%8C%EF%BC%9B%20%E5%9C%86%E7%9B%98%EF%BC%88platter%EF%BC%89%E6%95%B0%EF%BC%9A%E5%B0%B1%E6%98%AF%E7%9B%98%E7%89%87%E7%9A%84%E6%95%B0%E9%87%8F%E3%80%82">硬盘基础知识-磁头 柱面 扇区理解</a></p>
+<p>磁道=柱面</p>
+<p>磁头（磁盘两面各一个）</p>
+<p>每个磁道有几个扇区</p>
+<p><font style="color:rgb(25, 27, 31);">3.5寸1.44M 软盘，有两个磁头，正反两面各一个；80个磁道（即80个圆圈）；每个磁道有18个扇区；每个扇区为512字节。</font></p>
+<p><font style="color:rgb(25, 27, 31);">软盘容量 = 512字节/扇区 x 2面 x 80磁道（柱面）/面 x 18扇区/磁道 = 1440 KB</font></p>
+<p><font style="color:rgb(25, 27, 31);">磁头，即面：编号[0, 1]</font></p>
+<p><font style="color:rgb(25, 27, 31);">80个磁道，即柱面（圆圈）：编号[0, 79]</font></p>
+<p><font style="color:rgb(25, 27, 31);">18个扇区：编号[1, 18]</font></p>
+<p><font style="color:rgb(25, 27, 31);">相对扇区号[0, 2879]：相对扇区号按照柱面排序，即从最外头的圆圈到最里头的圆圈。</font></p>
+<p><font style="color:rgb(25, 27, 31);">0柱面正面（即磁头号为0）的1-18扇区为0-17号相对扇区，0柱面反面（即磁头号为2）的1-18扇区为18-35号相对扇区，然后是1柱面，2柱面，直到79柱面。</font></p>
+<p><font style="color:rgb(25, 27, 31);"></font></p>
+<p><font style="color:rgb(25, 27, 31);">mbr是机械硬盘开头第一个扇区的名称</font></p>
+<p><font style="color:rgb(25, 27, 31);">主要存了两个数据</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">主要开机记录区（Master Boot Record, MBR）：可以安装开机管理程序的地方，有446 Bytes</font></li>
+<li><font style="color:rgb(51, 51, 51);">分区表（partition table）：记录整颗硬盘分区的状态，有64 Bytes</font></li>
+</ul>
+<p><strong><font style="color:rgb(51, 51, 51);">分区的最小单位“通常”为柱面（cylinder）</font></strong><img src="https://cdn.nlark.com/yuque/0/2024/gif/27500914/1706118444409-552250e2-ff39-4dc2-b885-55d8fe1ce869.gif"><img src="https://cdn.nlark.com/yuque/0/2024/gif/27500914/1706118448012-867adfea-6455-45d3-b50a-7f4846f77c19.gif"></p>
+<p>p是<code>主要分区</code>，e是<code>扩展分区</code>之后细分的叫做<code>逻辑分区</code></p>
+<p>gpt的出现主要是为了大量存储的时候方便使用</p>
+<blockquote>
+<p><font style="color:rgb(51, 51, 51);">那在 Linux 下面就会看到有一颗 70TB 左右的磁盘！ 如果使用 MBR 的话…那得要 2TB/2TB 的割下去，虽然 Linux kernel 现在已经可以通过某些机制让磁盘分区高过 63 个以上，但是这样就得要割出将近 40 个分区～ 真要命… 为了解决这个问题，所以后来就有 GPT 这个磁盘分区的格式出现了！</font></p>
+</blockquote>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">gpt分区格式可以分2t以上的硬盘，而mbr不可以</font></p>
+<p><font style="color:rgb(51, 51, 51);">并不是所有的操作系统都可以读取到 GPT 的磁盘分区格式喔！</font></p>
+<p><font style="color:rgb(51, 51, 51);">由于gpt分区已经没有所谓的主、延伸、逻辑分区概念，所以每个区都可以被看作是主分区</font></p>
+<h3><span id="开机启动bios和uefi-bios">开机启动bios和uefi bios</span></h3>
+<p>早期的是bios启动</p>
+<p>现在的大多是uefi启动</p>
+<p>bios是开机之后，计算机系统会执行的第一个程序</p>
+<p><font style="color:rgb(51, 51, 51);">接下来</font><strong><font style="color:rgb(51, 51, 51);">BIOS会去分析计算机里面有哪些储存设备</font></strong><font style="color:rgb(51, 51, 51);">，我们以硬盘为例，BIOS会依据使用者的设置去取得能够开机的硬盘， 并且到该硬盘里面去读取第一个扇区的MBR位置。 MBR这个仅有446 Bytes的硬盘容量里面会放置最基本的</font><strong><font style="color:rgb(51, 51, 51);">开机管理程序</font></strong><font style="color:rgb(51, 51, 51);">， 此时BIOS就功成圆满，而接下来就是MBR内的开机管理程序的工作了。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">这个开机管理程序的目的是在载入（load）核心文件</font></strong></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">简单的说，整个开机流程到操作系统之前的动作应该是这样的：</font></p>
+<ol type="1">
+<li><font style="color:rgb(51, 51, 51);">BIOS：开机主动执行的固件，会认识第一个可开机的设备；</font></li>
+<li><font style="color:rgb(51, 51, 51);">MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</font></li>
+<li><font style="color:rgb(51, 51, 51);">开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</font></li>
+<li><font style="color:rgb(51, 51, 51);">核心文件：开始操作系统的功能…</font></li>
+</ol>
+<h3><span id><font style="color:rgb(51, 51, 51);"></font></span></h3>
+<p><font style="color:rgb(51, 51, 51);">为什么要先装window后装linux</font> <font style="color:rgb(51, 51, 51);">那现在请你想一想，为什么人家常常说：“如果要安装多重开机， 最好先安装Windows再安装Linux”呢？这是因为：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">Linux在安装的时候，你可以选择将开机管理程序安装在MBR或各别分区的开机扇区， 而且Linux的loader可以手动设置菜单（就是上图的M1, M2…），所以你可以在Linux的boot loader里面加入Windows开机的选项；</font></li>
+<li><font style="color:rgb(51, 51, 51);">Windows在安装的时候，他的安装程序会主动的覆盖掉MBR以及自己所在分区的开机扇区，你没有选择的机会， 而且他没有让我们自己选择菜单的功能。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">因此，如果先安装Linux再安装Windows的话，那MBR的开机管理程序就只会有Windows的项目，而不会有Linux的项目 （因为原本在MBR内的Linux的开机管理程序就会被覆盖掉）。 那需要重新安装Linux一次吗？当然不需要，你只要用尽各种方法来处理MBR的内容即可。 例如利用Linux的救援模式来挽救MBR啊！</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">uefi为什么要出现</font></p>
+<p><font style="color:rgb(51, 51, 51);">bios只有16位的程序。</font></p>
+<p><font style="color:rgb(51, 51, 51);"> BIOS 其实不懂 GPT 耶！还得要通过 GPT 提供相容模式才能够读写这个磁盘设备</font></p>
+<p><font style="color:rgb(51, 51, 51);">UEFI 使用 C 程序语言，比起使用组合语言的传统 BIOS 要更容易开发。也因为使用 C 语言来撰写，因此如果开发者够厉害，甚至可以在 UEFI 开机阶段就让该系统了解 TCP/IP 而直接上网！ 根本不需要进入操作系统耶！这让小型系统的开发充满各式各样的可能性！</font><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706145865597-7633a6f0-eb91-4a0a-bdb8-dc9f14988e5a.png"><font style="color:rgb(51, 51, 51);">从上头我们可以发现，与传统的 BIOS 不同，UEFI 简直就像是一个低阶的操作系统～甚至于连主板上面的硬件资源的管理， 也跟操作系统相当类似，只需要载入驱动程序即可控制操作。同时由于程控得宜，一般来说，使用 UEFI 接口的主机，在开机的速度上要比 BIOS 来的快上许多！ 因此很多人都觉得 UEFI 似乎可以发展成为一个很有用的操作系统耶～不过，关于这个，你无须担心未来除了 Linux 之外，还得要增加学一个 UEFI 的操作系统啦！为啥呢？</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h4><span id="为什么我们需要关闭安全启动"><font style="color:rgb(51, 51, 51);">为什么我们需要关闭安全启动</font></span></h4>
+<p><font style="color:rgb(51, 51, 51);">此外，由于过去 cracker 经常借由 BIOS 开机阶段来破坏系统，并取得系统的控制权，因此 UEFI 加入了一个所谓的安全启动 （secure boot） 机制， 这个机制代表着即将开机的操作系统必须要被 UEFI 所验证，否则就无法顺利开机！微软用了很多这样的机制来管理硬件。 不过加入这个机制后，许多的操作系统，包括 Linux ，就很有可能无法顺利开机喔！所以，某些时刻，你可能得要将 UEFI 的 secure boot 功能关闭， 才能够顺利的进入 Linux 哩！ （这一点让自由软件工作者相当感冒啦！）</font></p>
+<p><font style="color:rgb(51, 51, 51);">与 BIOS 模式相比，虽然 UEFI 可以直接取得 GPT 的分区表，不过最好依旧拥有 BIOS boot 的分区支持， 同时，为了与 windows 相容，并且提供其他第三方厂商所使用的 UEFI 应用程序储存的空间，你必须要格式化一个 vfat 的文件系统， 大约提供 512MB 到 1G 左右的容量，以让其他 UEFI 执行较为方便</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);"></font></strong></p>
+<p><strong><font style="color:rgb(51, 51, 51);">挂载</font></strong></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706146821265-a5681c75-0a8a-476a-b5b1-16f28687ac69.png"></p>
+<p><font style="color:rgb(51, 51, 51);">上图中假设我的硬盘分为两个分区，partition 1是挂载到根目录，至于partition 2则是挂载到/home这个目录。 这也就是说，当我的数据放置在/home内的各次目录时，数据是放置到partition 2的，如果不是放在/home下面的目录， 那么数据就会被放置到partition 1了！</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706147221755-4f66c06f-8710-4cca-8811-ef75b7f268e0.png"><font style="color:rgb(51, 51, 51);">hhhhh</font></p>
+<h1><span id="第四章"><font style="color:rgb(51, 51, 51);">第四章</font></span></h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706183701595-4db8d5c4-8d62-49bc-8aa7-4c0534fef40a.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706183732305-2daca4c0-2eb9-48d3-ad58-9141e27fc9e8.png"><img src="https://cdn.nlark.com/yuque/0/2024/png/27500914/1706183721463-1c22e904-22e7-41b8-9042-062edb969a72.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/">http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/">项目实践</a><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E6%8A%80%E5%B7%A7/">技巧</a><a class="post-meta__tags" href="/tags/RM/">RM</a><a class="post-meta__tags" href="/tags/%E6%96%87%E6%A1%A3%E6%8E%92%E7%89%88/">文档排版</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/" title="1课程概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">1课程概述</div></div><div class="info-2"><div class="info-item-1">00:05:53.480  百问网这个是韦东山的老家 第2章 单片机程序设计模式 | 百问网这个是文档教学 </div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" title="虚拟技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">虚拟技术</div></div><div class="info-2"><div class="info-item-1">docker 参考教程：菜鸟教程 彻底卸载 彻底卸载docker_docker卸载-CSDN博客 之前安装过docker，但是无法执行helloworld程序 安装docker出现很多问题 晚上搜了很多都没有解决，最后选择直接重装  docker尝试直接使用官方教程止步在了docker代理配置 出现了 https://blog.csdn.net/Cai_deLong/article/details/115255735参考 我之前有修改过文件传输上限，但是这次还是出现了问题，文章中配置git最低速度和最低速度时间，这里是因为超过的git的最低速度和最低速度时间，所以直接退出来了 1 引言 docker的主要用于后端工程师还有运维工程师 用途：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。  简单来说就是将应用程序与本机架构隔离开，能够避免因为环境问题出现例如编译...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" title="虚拟技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">虚拟技术</div></div><div class="info-2"><div class="info-item-1">docker 参考教程：菜鸟教程 彻底卸载 彻底卸载docker_docker卸载-CSDN博客 之前安装过docker，但是无法执行helloworld程序 安装docker出现很多问题 晚上搜了很多都没有解决，最后选择直接重装  docker尝试直接使用官方教程止步在了docker代理配置 出现了 https://blog.csdn.net/Cai_deLong/article/details/115255735参考 我之前有修改过文件传输上限，但是这次还是出现了问题，文章中配置git最低速度和最低速度时间，这里是因为超过的git的最低速度和最低速度时间，所以直接退出来了 1 引言 docker的主要用于后端工程师还有运维工程师 用途：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。  简单来说就是将应用程序与本机架构隔离开，能够避免因为环境问题出现例如编译...</div></div></div></a><a class="pagination-related" href="/2025/11/12/opengl%E5%AD%A6%E4%B9%A0/" title="opengl学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">opengl学习</div></div><div class="info-2"><div class="info-item-1">毕设相关   Qt/C++ opengl导入机械臂模型，添加ui拖拽交互，运动插补，包括关节和直线运动，可保存关节点信息_哔哩哔哩_bilibili 学习资源 12```[【B站最好】OpenGL小白到精通系列-保姆级-计算机图形学_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1aK4y1z7ii/?spm_id_from=333.337.search-card.all.click&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648) 123456789101112131415161718192021222324252627[Fetching Title#g3p6](https://blog.csdn.net/MASILEJFOAISEGJIAE/article/details/84840748)[现代OpenGL教程（一）：绘制三角形（imgui+OpenGL3.3）\_imgui gl绘制三角形-CSDN博客](https://blog.csdn.net/MASILEJF...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/" title="ubuntu扩容"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">ubuntu扩容</div></div><div class="info-2"><div class="info-item-1">Ubuntu20.04根目录/home目录扩容（双系统，亲测有效）_ubuntu home扩容双硬盘_放p给你玩的博客-CSDN博客 我的home挂载点和空闲区域间隔很远，但是gparted可以实现空间的左右移动，但是这样操作存在风险，你点击应用是会弹出这样的弹窗（还好最后没有什么问题），我看评论区有人都打不开系统了，只能说有惊无险 有惊无险 还好还好 总体来说就是使用gparted 然后使用启动盘进入测试系统，进行分区（类似windows上的磁盘管理） </div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">小技巧</div></div><div class="info-2"><div class="info-item-1">修改ubuntu中右键菜单 Ubuntu20.04设置右键打开terminator_nautilus-actions in 20.04_圣彼得堡的钟的博客-CSDN博客 如何删除软件 Ubuntu卸载软件：3种卸载方式_ubuntu 卸载软件-CSDN博客 破解xmind http://www.hushowly.com/articles/1943我是没有尝试破解，因为我目前没有这个需求 我觉得基础功能也够用（主要是因为不怎么做思维导图） xmind使用指南 05-思维导图Xmind快速入门_xmindcsdn-CSDN博客 常用命令 有空可以常看看这个文档 上面的文档基本上只有基础的命令（但是经常容易忘 UID 表示用户ID PID 表示进程号 PPID 表示父进程号 TIME 表示执行时间 CMD 表示执行命令 cd的使用技巧： cd ./cd ../cd ~/cd -： cd表示切换目录，而cd后跟一个点表示切换到当前目录-_-|||，cd后跟两个点表示切换到上一级目录，而cd后跟一个波浪线则表示切换到用户目录，cd后跟 - 减号可以在最...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/nav2/" title="nav2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">nav2</div></div><div class="info-2"><div class="info-item-1">学习资料 动手学ROS2 Nav2中文网 | Nav2 中文网 在上一次gazebo卡死强制退出之后，就无法打开  重启就好了。。。不要随便的ctrlZ 之后又出现了gazebo无法打开的情况  直接卡死 具体原因：是因为model库加载不正确导致的，gazebo软件开启的时候会自动从网络下载模型，然而，从外网下载过程非常的漫长，很难加载成功。 学过ros的对gazebo仿真软件应该都不会陌生，但是有时启动真的很烦人，经常卡在这个地方很长时间，查阅资料 gazebo软件开启的时候会自动从国外官网下载模型，因此这个过程比较漫长，原因是网站在国外，下载不顺畅。有一个加速启动的方法就是断开网络连接启动，但频频断网还是不太方便。 手动杀死gazebo（保证杀死） 1killall gzserver &amp;&amp; killall gzclient  按照文章里的把这个文件全部注释了没有用 最后选择断网来解决 有可能是launch文件中的某写模型路径不对 gazebo使用  这个表示坐标点的位置 先标出来初试坐标 1234567mkdir -...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%94%B5%E8%84%91%E8%B0%83%E8%AF%95/" title="电脑调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">电脑调试</div></div><div class="info-2"><div class="info-item-1">小电脑的选择 11代nuc 盘一盘NVIDIA Jetson家族的前浪和后浪！ 入门级nano 中级AGX Xavier 作为现在AI计算的扛把子 超高级Jetson TX2 高级Xavier NX 算力性能区别 英特尔的NUC迷你电脑有什么特点？NUC适合什么样的用户群（黑苹果）？ 由于nuc用的是英特尔的集显，所以没有办法使用cuda 各种机器性能参数比较 ssh远程连接 如何判断网线是否连上 1.直接看ui， 2.通过ifconfig 主要看网卡那一栏，如果没有具体的ipv4地址那一般就是没有连接上 这是一个网络接口的信息列表，通常用于诊断和配置网络连接。以下是每个接口的意思和说明：  enp57s0：  flags=4099：表示接口的状态标志。这个接口是启用的（UP），可以广播数据（BROADCAST），支持多播（MULTICAST）。 mtu 1500：表示最大传输单元，即可以在一次数据包中传输的最大字节数。 ether c8:7f:54:ca:bf:31：表示接口的物理地址（MAC地址）。 txqueuelen 1000...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第0章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">计基</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.1.0.0.1.</span> <span class="toc-text">编码系统</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link"><span class="toc-number">1.1.0.0.1.1.</span> <span class="toc-text">latex</span></a></li><li class="toc-item toc-level-6"><a class="toc-link"><span class="toc-number">1.1.0.0.1.2.</span> <span class="toc-text">中文编码系统</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">程序运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1.1操作系统核心（kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">1.2 系统调度（system call</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">1.3操作系统和驱动程序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">2 应用程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">重点回顾</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">第1章 linux特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">第2章 主机规划和磁盘分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">2.1linux与硬件的搭配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.1.</span> <span class="toc-text">磁盘格式分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.2.</span> <span class="toc-text">开机启动bios和uefi bios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.3.</span> <span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">为什么我们需要关闭安全启动</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">第四章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

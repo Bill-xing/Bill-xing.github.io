@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>3梯度下降算法的实现 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="00:02:00.228  使用随机猜测 寻找ŷ − y 最小值 00:03:10.941  00:03:41.947  两个权重w1 w2 00:04:06.938  这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题 &#x3D;&#x3D;分治思想&#x3D;&#x3D; 00:05:02.292  00:05:11.770  对于两个权重，进行划分，只考虑这点00:06:02.911  image.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3梯度下降算法的实现">
+<meta property="og:url" content="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="00:02:00.228  使用随机猜测 寻找ŷ − y 最小值 00:03:10.941  00:03:41.947  两个权重w1 w2 00:04:06.938  这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题 &#x3D;&#x3D;分治思想&#x3D;&#x3D; 00:05:02.292  00:05:11.770  对于两个权重，进行划分，只考虑这点00:06:02.911  image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T13:34:37.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.424Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="项目实践">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="刘二大人">
+<meta property="article:tag" content="优化算法">
+<meta property="article:tag" content="数据集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "3梯度下降算法的实现",
+  "url": "http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T13:34:37.000Z",
+  "dateModified": "2025-11-12T14:08:33.424Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '3梯度下降算法的实现',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">3梯度下降算法的实现</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">3梯度下降算法的实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.424Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:02:00.228">00:02:00.228</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260102975.png" alt="image.png"></p>
+<p>使用随机猜测 寻找<span class="math inline"><em>ŷ</em> − <em>y</em></span> 最小值 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:03:10.941">00:03:10.941</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260104165.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:03:41.947">00:03:41.947</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260104870.png" alt="image.png"></p>
+<p>两个权重<span class="math inline"><em>w</em><sub>1</sub> <em>w</em><sub>2</sub></span> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:04:06.938">00:04:06.938</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260106757.png" alt="image.png"></p>
+<p>这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题</p>
+<p>==分治思想== <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:05:02.292">00:05:02.292</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260109805.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:05:11.770">00:05:11.770</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260109086.png" alt="image.png"></p>
+<p>对于两个权重，进行划分，只考虑这点<a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:06:02.911">00:06:02.911</a></p>
+<figure>
+<img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260109151.png" alt="image.png"><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>使用这几个点代表所有的空间</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:07:07.962">00:07:07.962</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260108092.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:07:29.136">00:07:29.136</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260110973.png" alt="image.png"></p>
+<p>分治思想的缺点，会有如上的情况，导致无法获取最低点。有可能会错过比较好的低点</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:09:26.071">00:09:26.071</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260112867.png" alt="image.png"></p>
+<p>要求函数的最小值</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:10:16.901">00:10:16.901</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260112571.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:10:41.308">00:10:41.308</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260113444.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:11:34.211">00:11:34.211</a>利用梯度来判断这个点需要进行的平移方向，也就 是如果梯度导数<span class="math inline"> &gt; 0</span> ,也就是这个点右移会上升 <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260114563.png" alt="image.png"></p>
+<p>所以应该选择导数的负方向（下面公式中是负号），用以趋近最低点 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:12:34.364">00:12:34.364</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260115425.png" alt="image.png"></p>
+<p>学习率最好选的小一点</p>
+<p>上面的算法思想： ==贪心==</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:14:53.079">00:14:53.079</a></p>
+<figure>
+<img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260117548.png" alt="image.png"><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>这个被称为非凸函数 就是有一些局部最优点 其实也就极小点</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:15:55.797">00:15:55.797</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260117195.png" alt="image.png"></p>
+<p>很容易陷入局部最优点</p>
+<p>经验总结实际中很少局部最优点</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:17:40.073">00:17:40.073</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260119702.png" alt="image.png"></p>
+<p>但是鞍点比较麻烦，<a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:18:09.680">00:18:09.680</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260119521.png" alt="image.png"></p>
+<p>因为这里的梯度等于0，也就是g=0，导致陷入鞍点，无法继续往下走</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:19:07.140">00:19:07.140</a></p>
+<figure>
+<img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260120455.png" alt="image.png"><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>其实就是凹凸函数转变点 比较麻烦 就是二阶导数变化点</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:20:30.631">00:20:30.631</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260121106.png" alt="image.png"></p>
+<p>对损失函数进行求导 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:22:23.748">00:22:23.748</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260123724.png" alt="image.png"> 更新</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:22:53.109">00:22:53.109</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260123212.png" alt="image.png"></p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:23:28.097">00:23:28.097</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260123557.png" alt="image.png"></p>
+<p>猜测初始值 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:23:31.518">00:23:31.518</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260123079.png" alt="image.png"></p>
+<p>前馈</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:24:09.830">00:24:09.830</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260125876.png" alt="image.png"></p>
+<p>损失函数 这里的xs 和 ys <del>感觉有点突兀</del> nnd我是zz，这里是局部变量。 这里表示训练集</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:24:41.133">00:24:41.133</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260128005.png" alt="image.png"> 梯度计算 损失函数求完导数的形式 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:25:21.186">00:25:21.186</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260129742.png" alt="image.png"></p>
+<p>训练过程 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:26:33.213">00:26:33.213</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260131994.png" alt="image.png"></p>
+<p>注意这里的学习率<span class="math inline"><em>α</em></span> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:27:05.232">00:27:05.232</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260132191.png" alt="image.png"> 训练结果</p>
+<p>随着训练过程 cost越来越低 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:27:48.557">00:27:48.557</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260133012.png" alt="image.png"></p>
+<p>w是权重，权重更新，w是全局变量</p>
+<p>最后的这个 4 8 表示当输入量为4时，输出量为8，也就是乘上了w 在收敛之后w固定在了2 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:28:11.612">00:28:11.612</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260138611.png" alt="image.png"></p>
+<p>前面记录损失的下降速度非常快 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:29:12.852">00:29:12.852</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260138666.png" alt="image.png"></p>
+<p>上面是实际的波动过程 总体上时收敛的就可以接受</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:29:43.378">00:29:43.378</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260139335.png" alt="image.png"></p>
+<p>实际中的图像上面一样不平滑所以画图的时候可以进行 <strong>指数加权均值</strong> 用来平滑曲线</p>
+<p>公式就是修改cost <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:30:40.479">00:30:40.479</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260142070.png" alt="image.png"></p>
+<p>公式如有上图右下</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:30:48.855">00:30:48.855</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260142813.png" alt="image.png"> <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:30:57.135">00:30:57.135</a> 错误典范，最后发散了，这个横坐标时epoc</p>
+<p>常见错误时学习率太大了</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:31:49.535">00:31:49.535</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260143618.png" alt="image.png"></p>
+<p>梯度下降不常用 最常用的还是随机梯度下降 gradient 使用的整个损失，也就是平均损失，作为依据</p>
+<p>而随机梯度下降则是，N个样本中的随机挑选的一个的损失函数 单个样本损失对权重求导</p>
+<p>使用原因</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:33:26.555">00:33:26.555</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260145648.png" alt="image.png"></p>
+<p>为了解决鞍点问题</p>
+<p>所有的点都是有噪声的 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:34:09.693">00:34:09.693</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260146446.png" alt="image.png"> 引入一个随机噪声，可能会把我们向前推进</p>
+<p>这个被实践证明有效</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:34:41.757">00:34:41.757</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260146016.png" alt="image.png"></p>
+<p>这里的损失函数计算不再计算平均值 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:35:13.138">00:35:13.138</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260147954.png" alt="image.png"></p>
+<p>这里的梯度不再除以样本量</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:35:28.803">00:35:28.803</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260147521.png" alt="image.png"></p>
+<p>所有使用的样本都会导致权重的更新 对于每一个样本进行权重更新</p>
+<p><a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:37:15.354">00:37:15.354</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260149081.png" alt="image.png"> <strong>梯度下降</strong>可以使用并行算法，算的快</p>
+<p>这里可以理解为，由于没有了均值计算，每一次的权重更新都会导致后续权重更新受到影响，所以 <strong>随机梯度下降</strong>不可以并行 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:37:46.642">00:37:46.642</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260150813.png" alt="image.png"></p>
+<table>
+<thead>
+<tr class="header">
+<th>算法</th>
+<th>时间复杂度</th>
+<th>训练结果好坏</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>随机梯度算法</td>
+<td>高</td>
+<td>好</td>
+</tr>
+<tr class="even">
+<td>梯度算法</td>
+<td>低</td>
+<td>坏</td>
+</tr>
+</tbody>
+</table>
+<p>批量的随机梯度下降 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:40:05.899">00:40:05.899</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260153730.png" alt="image.png"></p>
+<p>mini-batsh=batch batch解释： 使用数据集中的小批量的随机梯度下降 <a href="jv://?url=https://www.bilibili.com/video/BV1Y7411d7Ys/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:41:06.314">00:41:06.314</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202411260154991.png" alt="image.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/">http://example.com/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/">项目实践</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">刘二大人</a><a class="post-meta__tags" href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">优化算法</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">数据集</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/5pytorch%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="5pytorch实现线性回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">5pytorch实现线性回归</div></div><div class="info-2"><div class="info-item-1">使用随机梯度下降 00:02:18.384  00:03:07.590  上节课的例子 因为梯度不会自动清零，为了使这次的梯度不影响下次的梯度，进行手工清零 线性回归就是恨简单的神经网络 00:06:32.614  训练步骤： 1. 前馈:算损失 2. 反馈：算梯度 3. 更新：使用梯度下降算法更新权重 00:06:33.097  00:06:50.802  要使用mini-batch 要一次性将ŷ求出来 所以需要使用矩阵运算 这里运用numpy的广播方式 00:09:36.616  就是矩阵扩充 00:10:14.863  00:11:06.105  w应该是3x3 00:12:01.227  00:12:13.883  实际上也就是向量化00:12:48.104  00:12:53.501  00:13:20.043  00:14:06.039  potrch中计算导数不再是重点因为00:13:52.605  有函数会自动计算导数 重点在于构造计算图00:14:28.914  00:14:57.107  这个被称为一个线性单元 ...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">1overview</div></div><div class="info-2"><div class="info-item-1">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/6%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92/" title="6逻辑斯蒂回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">6逻辑斯蒂回归</div></div><div class="info-2"><div class="info-item-1">mnist数据集 00:01:43.327  手写数据的数据集 10个分类 00:02:24.593  判断y属于集合中的哪一个，这个叫做分类问题 00:06:02.081  表示他属于某一个类的概率，选择最大的 00:06:54.719  torchvison包含了一些典型的训练集 train=1-&gt; train train=0 -&gt;test 00:09:23.751  00:10:34.118  y的值维0 或1 这个叫做二分类问题 00:13:38.275  00:14:36.865  00:16:18.710  00:16:31.844  00:17:54.518  左图被称为饱和函数 00:18:19.386  00:19:19.394  将ŷ带入σ(x) 就可以将ŷ 的范围限制在（0，1） 00:20:49.142  sigmid函数的条件： 1. 函数值有极限 2. 单调增函数 3. 饱和函数 logistic是sigmid中最典型的函数，所以约定俗成就用logistic代替sigmid，但实际上sigmid还有很...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2线性模型</div></div><div class="info-2"><div class="info-item-1">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/9%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/" title="9多分类问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">9多分类问题</div></div><div class="info-2"><div class="info-item-1">使用softmax 00:01:46.755 00:01:58.457  十个分类神经网络应该如何设计 00:03:21.365  希望的要求： 输出之间竞争性 输出就是一个分布 1. 概率大于0 2. 概率求和为1 00:08:00.963  00:09:30.429  00:10:29.210  求和之后结果为100:12:58.619  00:13:42.719  00:14:09.852  00:14:49.264  00:14:59.977  交叉熵 00:18:14.365  00:19:17.457  00:19:36.942  00:20:50.262  00:21:47.606  00:22:31.144  最后一层是不需要手动进行非线性激活的，因为交叉熵损失会直接激活  00:24:38.539  00:24:21.657  2表示这个第二个元素最大 0表示第0个元素最大 1表示第一个元素最大 y_pred和预测的比较拟合，所以第一个预测算出来的损失会比较小 00:26:14.653  00:26:40.399  思考交叉熵和nl...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">11卷积神经网络（高级）</div></div><div class="info-2"><div class="info-item-1">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/5pytorch%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="5pytorch实现线性回归"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">5pytorch实现线性回归</div></div><div class="info-2"><div class="info-item-1">使用随机梯度下降 00:02:18.384  00:03:07.590  上节课的例子 因为梯度不会自动清零，为了使这次的梯度不影响下次的梯度，进行手工清零 线性回归就是恨简单的神经网络 00:06:32.614  训练步骤： 1. 前馈:算损失 2. 反馈：算梯度 3. 更新：使用梯度下降算法更新权重 00:06:33.097  00:06:50.802  要使用mini-batch 要一次性将ŷ求出来 所以需要使用矩阵运算 这里运用numpy的广播方式 00:09:36.616  就是矩阵扩充 00:10:14.863  00:11:06.105  w应该是3x3 00:12:01.227  00:12:13.883  实际上也就是向量化00:12:48.104  00:12:53.501  00:13:20.043  00:14:06.039  potrch中计算导数不再是重点因为00:13:52.605  有函数会自动计算导数 重点在于构造计算图00:14:28.914  00:14:57.107  这个被称为一个线性单元 ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

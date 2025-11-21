@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>opencv学习 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="OpenCV轮廓相关操作 C++_opencv hierarchyc++_cold暖的博客-CSDN博客 图像处理马老师写的文档超级详细 vscode使用 cmake cmake常用命令 123456789101112131415161718cmake_minimum_required(VERSION 3.15)&#x2F;&#x2F;用于指示最低cmake的版本project(demo)set(OpenC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="opencv学习">
+<meta property="og:url" content="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="OpenCV轮廓相关操作 C++_opencv hierarchyc++_cold暖的博客-CSDN博客 图像处理马老师写的文档超级详细 vscode使用 cmake cmake常用命令 123456789101112131415161718cmake_minimum_required(VERSION 3.15)&#x2F;&#x2F;用于指示最低cmake的版本project(demo)set(OpenC">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:07:01.854Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="GUI">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="梯度下降">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编辑器">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "opencv学习",
+  "url": "http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:07:01.854Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'opencv学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">opencv学习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">opencv学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:07:01.854Z" title="更新于 2025-11-12 23:07:01">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">rm-学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43003108/article/details/127104352?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169417808216800222823707%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169417808216800222823707&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-127104352-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=opencv%E8%BD%AE%E5%BB%93%E6%A3%80%E6%B5%8Bc%2B%2B&amp;spm=1018.2226.3001.4187">OpenCV轮廓相关操作 C++_opencv hierarchyc++_cold暖的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/gf5gexqtblewquc0#wkuHR">图像处理</a>马老师写的文档超级详细</p>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/ulizzbdcxx1isatg#HXiy0">vscode使用</a></p>
+<h1><span id="cmake">cmake</span></h1>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/ngyk81ebqdgsmce0#vROY9">cmake常用命令</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.15)//用于指示最低cmake的版本</span><br><span class="line"></span><br><span class="line">project(demo)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set(OpenCV_DIR /home/xing/opencv-4.5.3/build)//将4.5.3的路径添加到opencvdir中，以便于下面的findpackage进行搜索</span><br><span class="line"># find_package(OpenCV REQUIRED)</span><br><span class="line">find_package(OpenCV 4.5.3 REQUIRED)</span><br><span class="line"></span><br><span class="line">#添加头文件</span><br><span class="line">include_directories($&#123;OpenCV_INCLUDE_DIRS&#125;)</span><br><span class="line"></span><br><span class="line">add_executable(zuoye $&#123;PROJECT_SOURCE_DIR&#125;/zuoye.cpp)</span><br><span class="line"></span><br><span class="line">#链接库文件</span><br><span class="line">target_link_libraries(zuoye  $&#123;OpenCV_LIBS&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>和opencv进行链接</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/challenglistic/article/details/130138476?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=find_package&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-130138476.nonecase&amp;spm=1018.2226.3001.4187">【cmake学习】find_package 详解_仲夏夜之梦~的博客-CSDN博客</a></p>
+<p>这块需要深入理解以下<a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/ngyk81ebqdgsmce0#MXNNs">find_package</a></p>
+<h1><span id="opencv常用函数">opencv常用函数</span></h1>
+<h2><span id="split">split</span></h2>
+<p><font style="color:#DF2A3F;">用于将多通道图片转换成单通道图片</font></p>
+<p>实际上是bgr</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void split(InputArray m, OutputArrayOfArrays mv);</span><br></pre></td></tr></table></figure>
+<p>InputArray:输入数组，也就是输入的图片</p>
+<p>OutputArrayOfArrays：填函数的输出数组或者输出的vector容器。也就是有多个相同类型的容器</p>
+<p>vector<mat> channels;</mat></p>
+<p>比如三通道的图片，容器channels中就有了三个类型为Mat的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;opencv2/core/core.hpp&gt;</span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"> </span><br><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">void main()&#123;</span><br><span class="line">    vector&lt;Mat&gt; channels;</span><br><span class="line">    Mat imageBlueChannel;</span><br><span class="line">    Mat imageGreenChannel;</span><br><span class="line">    Mat imageRedChannel;</span><br><span class="line">    Mat srcImage4 = imread(&quot;mogu.jpg&quot;);</span><br><span class="line">    imshow(&quot;【原始图】&quot;, srcImage4);</span><br><span class="line"> </span><br><span class="line">    //把一个3通道图像转换成3个单通道图像</span><br><span class="line">    split(srcImage4, channels);</span><br><span class="line">    imageBlueChannel = channels.at(0);</span><br><span class="line">    imageGreenChannel = channels.at(1);</span><br><span class="line">    imageRedChannel = channels.at(2);</span><br><span class="line"> </span><br><span class="line">    //显示单通道图像</span><br><span class="line">    imshow(&quot;【BlueChannel】&quot;, imageBlueChannel);</span><br><span class="line">    imshow(&quot;【GreenChannel】&quot;, imageGreenChannel);</span><br><span class="line">    imshow(&quot;【RedChannel】&quot;, imageRedChannel);</span><br><span class="line"> </span><br><span class="line">    waitKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里区分以下两种访问vector的方法</p>
+<p>.at()</p>
+<p><font style="color:rgba(0, 0, 0, 0.75);">最主要的区别就是</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">.at()</font><font style="color:rgba(0, 0, 0, 0.75);">会额外检查访问是否越界，如果越界，会抛出</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">exception</font><font style="color:rgba(0, 0, 0, 0.75);">，所以使用</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">.at()</font><font style="color:rgba(0, 0, 0, 0.75);">时</font><strong><font style="color:rgba(0, 0, 0, 0.75);">程序运行速度较慢</font></strong><font style="color:rgba(0, 0, 0, 0.75);">。</font></p>
+<p><font style="color:rgb(79, 79, 79);">二者优点</font></p>
+<ul>
+<li><font style="color:rgb(77, 77, 77);">一般来说用</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);"><a href></a></font><font style="color:rgb(77, 77, 77);">效率更高，尤其是需要对索引值进行复杂的计算或者单纯不需要检查是否越界时。</font></li>
+<li><font style="color:rgb(77, 77, 77);">更好的做法是默认用</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">.at()</font><font style="color:rgb(77, 77, 77);">，这样代码尽管很慢但不会产生bug；</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);"><a href></a></font><font style="color:rgb(77, 77, 77);">更适合对程序效率要求比较高的场景。</font></li>
+</ul>
+<p><a href></a>缺点</p>
+<p>索引值越界时程序不会报错，但会一路莽下去，在向量非空的情况下，即使下标越界，也有可能对应的内存是可读写的，至于读到的是什么内容，或者写到什么地方，就是随机事件了。</p>
+<p>由于<a href></a>不做边界检查，哪怕越界了也会返回一个引用，当然这个引用是错误的引用，如何不小心调用了这个引用对象的方法，会直接导致应用退出。</p>
+<h2><span id="threshold">threshold</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouzhiyao960211/article/details/88021154">Opencv中的Threshold用法（二值化图像）_子翊寒的博客-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal, thresh = cv2.threshold(需要处理的图像，阈值，分配的值，阈值处理模式选择)</span><br></pre></td></tr></table></figure>
+<p><strong>输入</strong>：</p>
+<p>参数1，需要处理的图像：注意，需要处理的图像需要被转成灰度图像（后面小试一下部分会讲解）</p>
+<p>参数2，阈值：设定阈值，分界值</p>
+<p>参数3，分配的值：如果一个像素的灰度值，大于或者小于（取决于参数4的选择）阈值，会被赋予分配的值</p>
+<p>参数4，阈值处理模式选择：（下面讲解）</p>
+<p>cv2.THRESH_BINARY</p>
+<p>cv2.THRESH_BINARY_INV</p>
+<p>cv2.THRESH_TRUNC</p>
+<p>cv2.THRESH_TOZERO</p>
+<p>cv2.THRESH_TOZERO_INV</p>
+<p><strong><font style="color:rgb(77, 77, 77);">输出</font></strong><font style="color:rgb(77, 77, 77);">：</font></p>
+<p><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">retVal</font><font style="color:rgb(77, 77, 77);">，在这些用法中，可以简单理解为返回输入参数中的阈值。</font></p>
+<p><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">thresh</font><font style="color:rgb(77, 77, 77);">，返回处理后的图像。</font></p>
+<p><strong>阈值处理模式:</strong></p>
+<ol type="1">
+<li>THRESH—BINARY
+<ol type="1">
+<li>如果像素值大于阈值，像素值就会被设为参数3</li>
+<li><strong>小于</strong>等于阈值，设定为<strong>0</strong></li>
+</ol></li>
+<li>cv2.THRESH_BINARY_INV
+<ol type="1">
+<li>这个是上面一种情况的反转</li>
+<li>如果像素值<strong>大于</strong>阈值，像素值为<strong>0</strong></li>
+<li>小于等于阈值，设定为参数3</li>
+</ol></li>
+<li>cv2.THRESH_TRUNC
+<ol type="1">
+<li>如果像素大于阈值，设定为阈值</li>
+<li>小于等于阈值，保持原像素值</li>
+</ol></li>
+<li>cv2.THRESH_TOZERO
+<ol type="1">
+<li>大于阈值，保持原像素值</li>
+<li>小于等于，设定为0</li>
+</ol></li>
+<li>cv2.THRESH_TOZERO_INV
+<ol type="1">
+<li>与上一种相反</li>
+<li>大于阈值，设定为0</li>
+<li>小于等于，保持原像素值</li>
+</ol></li>
+</ol>
+<h2><span id="像素之间的几何运算andornot">像素之间的几何运算and/or/not</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zjy123078_zjy/article/details/105651470?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169400672616800188559018%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169400672616800188559018&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-2-105651470-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=opencv%E5%9B%BE%E5%83%8F%E4%B8%8E%E6%93%8D%E4%BD%9C%20and&amp;spm=1018.2226.3001.4187">OpenCV：像素之间的几何运算（and/or/not）_opencv 两张图数值求or_长大的小蚂蚁的博客-CSDN博客</a></p>
+<h2><span id="getstructuringelement">getStructuringElement</span></h2>
+<p>用于创建卷积核</p>
+<p>卷积就是图像的每个像素点按卷积核进行的赋值，核</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">kernel = cv2.getStructuringElement(a,b,c): # 得到一个结构元素（卷积核）。主要用于后续的腐蚀、膨胀、开、闭等运算。</span><br><span class="line">因为这些运算都是依赖于卷积核的，不同的卷积核（形状、大小）对图形的腐蚀、膨胀操作效果不一样</span><br><span class="line"></span><br><span class="line">输入参数：</span><br><span class="line"> 		a设定卷积核的形状、b设定卷积核的大小、c表示描点的位置，一般 c = 1，表示描点位于中心。</span><br><span class="line">返回值：</span><br><span class="line"> 		返回指定形状和尺寸的结构元素（一般是返回一个矩形）、也就是腐蚀/膨胀用的核的大小。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>c表示矛点也就是卷积核的中心。</p>
+<p>如果 anchor 设置为 (1, 1)，则表示结构元素的锚点位于中心，而如果设置为 (0, 0)，则表示锚点位于结构元素的左上角。</p>
+<p>它会移动，覆盖图片中所有的像素</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694011607999-a43b8710-4bca-4ba1-b3a3-4147dd192d10.png"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/LaoYuanPython/article/details/108841819?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%8D%B7%E7%A7%AF%E6%A0%B8%E5%A6%82%E4%BD%95%E7%A7%BB%E5%8A%A8&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-108841819.142%5Ev93%5EchatgptT3_2&amp;spm=1018.2226.3001.4187">数字图像处理：理解什么是卷积（滤波）、卷积核以及相关参考资料-CSDN博客</a></p>
+<h2><span id="morphologyex"><font style="color:rgb(79, 79, 79);">morphologyEx</font></span></h2>
+<p>文档参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38566632/article/details/121746410?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=getStructuringElement&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-121746410.142%5Ev93%5EchatgptT3_2&amp;spm=1018.2226.3001.4187">OpenCV morphologyEx、erode、dilate、getStructuringElement （形态学算子）_opencv的getstructuingelement函数的作用_MechMaster的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga67493776e3ad1a3df63883829375201f">OpenCV: Image Filtering</a></p>
+<p>强大的opencv库</p>
+<p>可以直接进行八种图像形态学操作</p>
+<p><font style="color:rgba(0, 0, 0, 0.75);">它可以通过调整参数 </font><strong><font style="color:rgba(0, 0, 0, 0.75);">op</font></strong><font style="color:rgba(0, 0, 0, 0.75);"> 完成八种操作：</font><strong><font style="color:rgba(0, 0, 0, 0.75);">腐蚀、膨胀、开运算、闭运算、顶帽、黑帽、梯度、击中击不中。</font></strong><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694011986333-2abace5f-35d5-43fb-b9d3-a7f5d2219dc1.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void morphologyEx(</span><br><span class="line">	InputArray src, </span><br><span class="line">	OutputArray dst,</span><br><span class="line">	int op, </span><br><span class="line">	InputArray kernel,</span><br><span class="line">	Point anchor = Point(-1, -1),//意思是以内核的中心点为茅点。</span><br><span class="line">	int iterations = 1,</span><br><span class="line">	int borderType = BORDER_CONSTANT,</span><br><span class="line">	const Scalar&amp; borderValue = morphologyDefaultBorderValue()</span><br><span class="line">	);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//腐蚀</span><br><span class="line">	morphologyEx(m_SrcImg2, m_DstImg, MORPH_ERODE, elementEllipse, Point(-1, -1), m_nIterations);</span><br></pre></td></tr></table></figure>
+<h2><span id="get">.get()</span></h2>
+<p>Videocapture类下面的成员函数</p>
+<h2><span id="findcontours">findcontours</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43003108/article/details/127104352?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169417808216800222823707%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169417808216800222823707&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-127104352-null-null.142%5Ev93%5EchatgptT3_2&amp;utm_term=opencv%E8%BD%AE%E5%BB%93%E6%A3%80%E6%B5%8Bc%2B%2B&amp;spm=1018.2226.3001.4187">OpenCV轮廓相关操作 C++_opencv hierarchyc++_cold暖的博客-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void cv::findContours	(	</span><br><span class="line">		InputOutputArray 	image,</span><br><span class="line">    OutputArrayOfArrays 	contours,</span><br><span class="line">    OutputArray 	hierarchy,</span><br><span class="line">    int 	mode,</span><br><span class="line">    int 	method,</span><br><span class="line">    Point 	offset = Point() </span><br><span class="line">)	</span><br></pre></td></tr></table></figure>
+<p>第三个参数表示层级<font style="color:rgb(77, 77, 77);">每个轮廓对应的属性（例如拓扑信息）</font></p>
+<p><font style="color:rgb(77, 77, 77);">mode表示轮廓的检索模式</font><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694179938307-47e2bc1d-e753-49d3-9ee9-ad35ee201d69.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694180005148-ab930d0f-f8b6-4eb0-a978-18aae5a9eacf.png"></p>
+<p><font style="color:rgb(77, 77, 77);">method表示寻找轮廓时使用的近似算法</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694179902664-b02fb9e3-6b0a-4840-961f-cb04b335d260.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694179993323-ae24c136-b978-4e64-8e7d-37c77ac1d228.png"></p>
+<h2><span id="drawcontours">drawContours</span></h2>
+<p>画图用的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void drawContours( InputOutputArray image, InputArrayOfArrays contours,</span><br><span class="line">                              int contourIdx, const Scalar&amp; color,</span><br><span class="line">                              int thickness = 1, int lineType = LINE_8,</span><br><span class="line">                              InputArray hierarchy = noArray(),</span><br><span class="line">                              int maxLevel = INT_MAX, Point offset = Point() );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li><strong>image</strong>是输入输出图片；</li>
+<li><strong>contours</strong>是cv::findContours()检测到的所有轮廓；</li>
+<li><strong>contourIdx</strong>是取第几个轮廓；</li>
+<li><strong>color</strong>是轮廓的颜色；</li>
+<li><strong>thickness</strong>是轮廓的线宽（注意这个参数为-1时会填充整个轮廓）；</li>
+<li><strong>lineType</strong>是线的形式；</li>
+<li><strong>hierarchy</strong>为关于层级的可选参数，只有绘制部分轮廓时才会用到；</li>
+<li><strong>maxLevel</strong>为绘制轮廓的最高级别，这个参数只有hierarchy有效的时候才有效（maxLevel=0，绘制与输入轮廓属于同一等级的所有轮廓即输入轮廓和与其相邻的轮廓、maxLevel=1, 绘制与输入轮廓同一等级的所有轮廓与其子节点、maxLevel=2，绘制与输入轮廓同一等级的所有轮廓与其子节点以及子节点的子节点）；</li>
+<li><strong>offset</strong>为轮廓偏移量，配合ROI使用。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;opencv2\opencv.hpp&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	cv::Mat src = cv::imread(&quot;1_0.png&quot;, -1);</span><br><span class="line"></span><br><span class="line">	std::vector&lt;std::vector&lt;cv::Point&gt;&gt; contours;</span><br><span class="line">	std::vector&lt;cv::Vec4i&gt; hierarchy;</span><br><span class="line">	cv::findContours(src, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);  //只找最外层轮廓</span><br><span class="line"></span><br><span class="line">	cv::Mat dst;</span><br><span class="line">	cv::cvtColor(src, dst, cv::COLOR_GRAY2BGR);</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; contours.size(); ++i) &#123;  //绘制所有轮廓</span><br><span class="line">		cv::drawContours(dst, contours, i, cv::Scalar(0, 255, 0), -1);  //thickness为-1时为填充整个轮廓</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cv::imshow(&quot;dst&quot;, dst);</span><br><span class="line">	cv::waitKey();</span><br><span class="line"></span><br><span class="line">	cv::destroyAllWindows();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2><span id="countourarea">countourArea()</span></h2>
+<p>获取轮廓面积的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">double contourArea( InputArray contour, bool oriented = false );</span><br><span class="line">double arcLength( InputArray curve, bool closed );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">contour</font><font style="color:rgb(77, 77, 77);">表示单个轮廓构成的点集；</font></p>
+<p><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">oriented</font><font style="color:rgb(77, 77, 77);">为面积的方向性，true表示面积具有方向性，false表示不具有方向性。</font></p>
+<h2><span id="minarearect">minAreaRect</span></h2>
+<p>RotatedRect这个类包含了很多成员函数</p>
+<p>用于获取最小外接矩形的四个角点坐标，还包含这个图形相对于x轴的旋转角度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RotatedRect minAreaRect( InputArray points );</span><br><span class="line">minAreaRects[i].angle/表示角度</span><br><span class="line">minAreaRects[i].points（pts[]）//返回四个角点,存储在pts数组中</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;opencv2\opencv.hpp&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	cv::Mat src = cv::imread(&quot;1_0.png&quot;, -1);</span><br><span class="line"></span><br><span class="line">	std::vector&lt;std::vector&lt;cv::Point&gt;&gt; contours;</span><br><span class="line">	std::vector&lt;cv::Vec4i&gt; hierarchy;</span><br><span class="line">	cv::findContours(src, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);  //只找最外层轮廓</span><br><span class="line"></span><br><span class="line">	cv::Mat dst;  //用于绘制结果</span><br><span class="line">	cv::cvtColor(src, dst, cv::COLOR_GRAY2BGR);</span><br><span class="line"></span><br><span class="line">	std::vector&lt;cv::RotatedRect&gt; minAreaRects(contours.size());  //存储轮廓的最小外接矩形</span><br><span class="line"></span><br><span class="line">	cv::Point2f ps[4];  //外接矩形四个端点的集合</span><br><span class="line">	for (int i = 0; i &lt; contours.size(); ++i) &#123;  //遍历所有轮廓</span><br><span class="line">		minAreaRects[i] = cv::minAreaRect(contours[i]);  //获取轮廓的最小外接矩形</span><br><span class="line">		minAreaRects[i].points(ps);  //将最小外接矩形的四个端点复制给ps数组</span><br><span class="line"></span><br><span class="line">		for (int j = 0; j &lt; 4; j++) &#123;  //绘制最小外接轮廓的四条边</span><br><span class="line">			line(dst, cv::Point(ps[j]), cv::Point(ps[(j + 1) % 4]), cv::Scalar(0, 255, 0), 2);</span><br><span class="line">			cv::putText(dst, std::to_string(j), ps[j], 0, 1, cv::Scalar(0, 0, 255), 2);  //将点集按顺序显示在图上</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		printf(&quot;minAreaRects[%d]的旋转角度为%f\n&quot;, i, minAreaRects[i].angle);  //输出旋转角度</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cv::imshow(&quot;dst&quot;, dst);</span><br><span class="line">	cv::waitKey();</span><br><span class="line"></span><br><span class="line">	cv::destroyAllWindows();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">minAreaRects[0]的旋转角度为90.000000</span><br><span class="line">minAreaRects[1]的旋转角度为52.678967</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2><span id="boundingrect">boundingRect</span></h2>
+<p>返回一个矩形变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rect boundingRect( InputArray array );</span><br></pre></td></tr></table></figure>
+<h1><span id="滤波器">滤波器</span></h1>
+<h2><span id="图像形态学滤波">图像形态学滤波</span></h2>
+<p><a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/gf5gexqtblewquc0">图像处理</a> 写得很详细很易懂</p>
+<h3><span id="腐蚀">腐蚀</span></h3>
+<p><a href="#AKYIC">getStructuring</a></p>
+<p>腐蚀的步骤就是用卷积核B的描点（此处就是中心点），来对齐A中的每一个小方格，然后选取卷积核B的方格中的数据的最小值，意思就是当B的描点对齐A的边界方格的时候，那么B的其他四个方格可能位于A图像中的0像素点，那么最小值就是0，那么就把卷积核B的描点对应的A中的小方格设为0，这就导致使用腐蚀操作后，我我们能看到的白色区域减少的原因。</p>
+<h3><span id="膨胀">膨胀</span></h3>
+<p><font style="color:rgb(77, 77, 77);">原理与腐蚀操作一样，只不过是取最大像素值，其他地方没差别。</font></p>
+<p><font style="color:rgb(77, 77, 77);"></font></p>
+<h3><span id="开闭运算"><font style="color:rgb(77, 77, 77);">开闭运算</font></span></h3>
+<p><font style="color:rgb(77, 77, 77);">开运算：</font><strong><font style="color:rgb(77, 77, 77);">先腐蚀，再膨胀</font></strong><font style="color:rgb(77, 77, 77);">，可</font><strong><font style="color:rgb(77, 77, 77);">清除一些亮的像素点</font></strong><font style="color:rgb(77, 77, 77);">，放大局部低亮度的区域，在纤细点处分离物体，并且在平滑较大物体的边界的同时不明显改变其面积。</font></p>
+<p><font style="color:rgb(77, 77, 77);">闭运算：</font><strong><font style="color:rgb(77, 77, 77);">先膨胀，再腐蚀</font></strong><font style="color:rgb(77, 77, 77);">，可</font><strong><font style="color:rgb(77, 77, 77);">清除一些暗的像素点</font></strong><font style="color:rgb(77, 77, 77);">，即排除小型黑洞（黑色区域）。</font></p>
+<h1><span id="基于边缘的分割方式">基于边缘的分割方式</span></h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44686138/article/details/130233773">基于边缘的分割方法_边缘分割_大大Cameo的博客-CSDN博客</a></p>
+<h2><span id="canny">Canny</span></h2>
+<p><font style="color:rgb(77, 77, 77);">它通过计算图像的梯度来检测边缘。</font></p>
+<p><font style="color:rgb(77, 77, 77);"></font></p>
+<h2><span id="sobel"><font style="color:rgb(77, 77, 77);">Sobel</font></span></h2>
+<p><font style="color:rgb(77, 77, 77);">其原理是将一个二维的图像与一个Sobel算子进行卷积，从而得到图像的边缘信息。</font></p>
+<h2><span id="roberts"><font style="color:rgb(77, 77, 77);">Roberts</font></span></h2>
+<p><font style="color:rgb(77, 77, 77);">它是基于交叉差分的梯度算法，通过局部差分计算检测边缘线条。</font></p>
+<h2><span id="prewitt"><font style="color:rgb(77, 77, 77);">Prewitt</font></span></h2>
+<p><font style="color:rgb(77, 77, 77);">对于复杂的图像，采用Roberts算子不能较好地得到图像的边缘，需要采用更加复杂的3X3的算子，如Prewitt算子</font></p>
+<h2><span id="log"><font style="color:rgb(77, 77, 77);">Log</font></span></h2>
+<p><font style="color:rgb(77, 77, 77);">该算子是通过先对图像进行高斯滤波，然后计算拉普拉斯算子来检测图像中的边缘。</font></p>
+<p><font style="color:rgb(77, 77, 77);"></font></p>
+<h2><span id="总结"><font style="color:rgb(77, 77, 77);">总结</font></span></h2>
+<p>Prewitt算子和Sobel算子：Prewitt算子和Sobel算子都是基于梯度的边缘检测算子，它们的模板非常相似，只是在模板中的权值不同。Prewitt算子的模板是由3x3的权值矩阵组成，而Sobel算子的模板则是由5x5的权值矩阵组成。此外，Sobel算子在计算梯度时采用的是加权平均值，因此在图像处理中更为常用。</p>
+<p>Roberts算子：Roberts算子是一种比较简单的边缘检测算子，其模板是由2x2的权值矩阵组成，比Prewitt和Sobel算子的模板更小。它的计算速度很快，但是它对噪声比较敏感，检测到的边缘也比较粗糙。</p>
+<p>Canny算子：Canny算子是一种非常经典的边缘检测算法，它在检测到边缘时具有较高的准确性和稳定性。与其他算子不同，Canny算子包括多个步骤，包括高斯平滑、计算梯度、非极大值抑制、双阈值处理和边缘链接等。</p>
+<p>LOG算子：LOG算子是一种基于高斯滤波的边缘检测算子，它先对图像进行高斯平滑，然后使用拉普拉斯算子计算边缘。与其他算子不同，LOG算子能够检测到更细微的边缘，但是由于使用了高斯滤波，它可能会丢失一些细节信息。</p>
+<p>总的来说，不同的边缘检测算子适用于不同的场景和需求。选择合适的算子需要根据具体的情况进行选择和调整，以得到最佳的边缘检测效果。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44686138/article/details/130233773">基于边缘的分割方法_边缘分割_大大Cameo的博客-CSDN博客</a></p>
+<h1><span id="常用几何变换">常用几何变换</span></h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangSHU21/article/details/131141066?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=opencv%20%E7%AD%89%E6%AF%94%E4%BE%8B%E7%BC%A9%E5%B0%8F&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-131141066.nonecase&amp;spm=1018.2226.3001.4187">(opencv)图像几何变换——缩放_opencv缩放图像-CSDN博客</a></p>
+<h2><span id="缩放">缩放</span></h2>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga5bb5a1fea74ea38e1a5445ca803ff121">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hysterisis/article/details/112381220">OpenCV 图像缩放：cv.resize() 函数详解_cv::resize_零度蛋花粥的博客-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void resize( InputArray src, OutputArray dst,</span><br><span class="line">             Size dsize, double fx = 0, double fy = 0,</span><br><span class="line">             int interpolation = INTER_LINEAR );</span><br></pre></td></tr></table></figure>
+<p><strong>参数说明</strong></p>
+<ol type="1">
+<li>InputArray类型的src，输入图像，如Mat类型。</li>
+<li>OutputArray类型的dst，输出图像，其尺寸由第三个参数dsize决定。</li>
+<li>Size类型的dsize，输出图像的大小。如果它等于，则大小等于Size(round(fx<em>src.cols)，round(fy</em>src.rows))。</li>
+<li>double类型的fx，沿水平轴的缩放系数，默认值为0，当其等于0时，其数值由该式计算：(double)dsize.width/src.cols；</li>
+<li>double类型的fy，沿垂直轴的缩放系数，默认值为0，当其等于0时，其数值由该式计算：(double)dsize.height/src.rows；</li>
+<li>int类型的interpolation，表示不同的插值方式，默认为INTER_LINEAR（线性插值）。</li>
+</ol>
+<p>其中，可选的插值方式有：</p>
+<p>INTER_NEAREST，最邻近插值。</p>
+<p>INTER_LINEAR，线性插值。</p>
+<p>INTER_CUBIC，三次样条插值，适合放大图像用。</p>
+<p>INTER_AREA，区域插值，适合缩小图像用。</p>
+<p>INTER_LANCZOS4，Lancazos插值。</p>
+<p>INTER_LINEAR_EXACT ，位精确双线性插值。</p>
+<p>INTER_MAX，内插码掩模。</p>
+<p>WARP_FILL_OUTLIERS，官方解释：flag, fills all of the destination image pixels. If some of them correspond to outliers in the source image, they are set to zero 。</p>
+<p>WARP_INVERSE_MAP，官方解释：flag, inverse transf4ormation。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resize(frame,rframe,Size(0, 0),0.5,0.5,INTER_AREA);</span><br></pre></td></tr></table></figure>
+<h2><span id="平移">平移</span></h2>
+<h2><span id="旋转">旋转</span></h2>
+<h2><span id="仿射">仿射</span></h2>
+<h1><span id="常用操作">常用操作</span></h1>
+<h2><span id="循环播放视频">循环播放视频</span></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;opencv2/core/core.hpp&gt;</span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;</span><br><span class="line">#include &lt;opencv2/imgproc/imgproc.hpp&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"> </span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    cv::VideoCapture cap(&quot;001.mp4&quot;);   </span><br><span class="line">      </span><br><span class="line">    int frame_counter = 0;</span><br><span class="line">    while (true)</span><br><span class="line">    &#123;</span><br><span class="line">      cap &gt;&gt; frame;</span><br><span class="line">      if (!frame.data)</span><br><span class="line">      &#123;</span><br><span class="line">         printf(&quot;Image not loaded&quot;);</span><br><span class="line">         return -1;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      frame_counter += 1;</span><br><span class="line">      if (frame_counter == int(cap.get(cv::CAP_PROP_FRAME_COUNT)))&#123;</span><br><span class="line">          frame_counter = 0;</span><br><span class="line">          cap.set(cv::CAP_PROP_POS_FRAMES, 0);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      cv::imshow(&quot;demo&quot;, frame);</span><br><span class="line">      char(key)=(char)cv::waitKey(1);</span><br><span class="line">      if(key==27)</span><br><span class="line">          break;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">frame_counter += 1;</span><br><span class="line">      if (frame_counter == int(cap.get(cv::CAP_PROP_FRAME_COUNT)))&#123;</span><br><span class="line">          frame_counter = 0;</span><br><span class="line">          cap.set(cv::CAP_PROP_POS_FRAMES, 0);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要了解Videocapture类的成员函数。如set get</p>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">官方文档</a></p>
+<p>cap.get(cv::CAP_PROP_FRAME_COUNT)是来获得视频的最大帧数。也就是说如果当前帧率达到最大帧，就会把counter归零，同时把cap 置回第0帧的位置</p>
+<h2><span id="通过外接轮廓获取面积-进行图像筛选">通过外接轮廓获取面积 进行图像筛选</span></h2>
+<h3><span id="使用api">使用api</span></h3>
+<p>findContours用于获取轮廓点集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void findContours( InputArray image, OutputArrayOfArrays contours,</span><br><span class="line">                              OutputArray hierarchy, int mode,</span><br><span class="line">                              int method, Point offset = Point());</span><br><span class="line"></span><br><span class="line">void findContours( InputArray image, OutputArrayOfArrays contours,</span><br><span class="line">                              int mode, int method, Point offset = Point());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>boundRect[i]=minAreaRect(contours[i]);</p>
+<p>boundRect[i].points(ps);</p>
+<p>获取到最小外接矩形</p>
+<p>不过这个类比较特殊，他无法直接通过rectangle画出</p>
+<p>他必须使用四个角点分别画出</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;<span class="number">4</span> ; j++)</span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="built_in">line</span>(rframe,ps[j],ps[(j<span class="number">+1</span>)%<span class="number">4</span>],<span class="built_in">Scalar</span>(<span class="number">0</span>,<span class="number">255</span>,<span class="number">255</span>),<span class="number">2</span>);<span class="comment">//绘制矩形  </span></span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<p>不过面积可以直接通过这个类下面的一个成员函数直接获得</p>
+<h2><span id="视频文件读写">视频文件读写</span></h2>
+<p><strong><font style="color:rgb(17, 24, 39);background-color:rgb(247, 247, 248);">VideoWriter类</font></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VideoWriter(const String&amp; filename, int fourcc, double fps, Size frameSize, bool isColor = true);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><font style="background-color:rgb(247, 247, 248);">filename</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：要保存的视频文件的名称。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">fourcc</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：FourCC（Four Character Code）是一个四字符的编解码器标识码，用于指定视频编码器的类型。例如，</font><strong><font style="background-color:rgb(247, 247, 248);">cv::VideoWriter::fourcc(‘M’, ‘J’, ‘P’, ‘G’)</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);"> 表示使用MJPG编码器。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">fps</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：视频的帧率（帧每秒）。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">frameSize</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：视频帧的大小，通常使用 </font><strong><font style="background-color:rgb(247, 247, 248);">cv::Size(width, height)</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);"> 来指定宽度和高度。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">isColor</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：一个布尔值，指定视频是否为彩色。默认为 </font><strong><font style="background-color:rgb(247, 247, 248);">true</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">，表示彩色视频。</font></li>
+</ul>
+<p><strong><font style="background-color:rgb(247, 247, 248);">方法：</font></strong></p>
+<ul>
+<li><strong><font style="background-color:rgb(247, 247, 248);">open</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：打开视频文件以准备写入帧。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">write</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：将一帧图像写入视频文件。</font></li>
+<li><strong><font style="background-color:rgb(247, 247, 248);">release</font></strong><font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">：完成写入操作并关闭视频文件。</font></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;opencv2/opencv.hpp&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cv::VideoCapture cap(0); // 打开摄像头</span><br><span class="line">    if (!cap.isOpened()) &#123;</span><br><span class="line">        std::cerr &lt;&lt; &quot;Error: Camera not found!&quot; &lt;&lt; std::endl;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int fourcc = cv::VideoWriter::fourcc(&#x27;M&#x27;, &#x27;J&#x27;, &#x27;P&#x27;, &#x27;G&#x27;); // MJPG编码器</span><br><span class="line">    double fps = 30.0;</span><br><span class="line">    cv::Size frameSize(cap.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_HEIGHT));</span><br><span class="line">    cv::VideoWriter writer(&quot;output.avi&quot;, fourcc, fps, frameSize, true); // 打开视频文件以写入</span><br><span class="line"></span><br><span class="line">    if (!writer.isOpened()) &#123;</span><br><span class="line">        std::cerr &lt;&lt; &quot;Error: Could not open video file for writing!&quot; &lt;&lt; std::endl;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        cap &gt;&gt; frame; // 从摄像头读取一帧</span><br><span class="line">        if (frame.empty()) &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.write(frame); // 将帧写入视频文件</span><br><span class="line"></span><br><span class="line">        cv::imshow(&quot;Video&quot;, frame);</span><br><span class="line">        if (cv::waitKey(30) == 27) &#123;</span><br><span class="line">            break; // 按下ESC键退出循环</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    writer.release(); // 完成写入并关闭视频文件</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2><span id="滑动框">滑动框</span></h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">namedWindow</span>(<span class="string">&quot;trackbar&quot;</span>, WINDOW_AUTOSIZE);</span><br><span class="line"><span class="built_in">createTrackbar</span>(<span class="string">&quot;flag_gray&quot;</span>, <span class="string">&quot;trackbar&quot;</span>, &amp;flag_gray, <span class="number">255</span>);</span><br><span class="line"><span class="keyword">while</span>(True)</span><br><span class="line">    &#123;</span><br><span class="line">                <span class="built_in">threshold</span>(redminblue, out,flag, <span class="number">255</span>, THRESH_BINARY);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">cv::namedWindow</span>	<span class="params">(	<span class="type">const</span> String &amp; 	winname,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">int</span> 	flags = WINDOW_AUTOSIZE </span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b">OpenCV: High-level GUI</a></p>
+<table>
+<thead>
+<tr class="header">
+<th><strong><font style="color:rgb(96, 32, 32);">flags</font></strong></th>
+<th><font style="color:rgb(0, 0, 0);">Flags of the window. The supported flags are: (</font><a target="_blank" rel="noopener" href="https://docs.opencv.org/4.x/d0/d90/group__highgui__window__flags.html#gabf7d2c5625bc59ac130287f925557ac3">cv::WindowFlags</a><br><font style="color:rgb(0, 0, 0);">)</font></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1694270395093-e2277c20-de9a-43c5-ab4c-915addbf2ecd.png"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cv::createTrackbar</span>	<span class="params">(	</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> String &amp; 	trackbarname,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> String &amp; 	winname,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">int</span> * 	value,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">int</span> 	count,</span></span></span><br><span class="line"><span class="params"><span class="function">    TrackbarCallback 	onChange = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">void</span> * 	userdata = <span class="number">0</span> </span></span></span><br><span class="line"><span class="params"><span class="function">)</span>	</span></span><br></pre></td></tr></table></figure>
+<p><strong><font style="color:rgb(0, 0, 0);">参数</font></strong></p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong><font style="color:rgb(96, 32, 32);">跟踪栏名称</font></strong></th>
+<th><font style="color:rgb(0, 0, 0);">创建的跟踪栏的名称。</font></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><font style="color:rgb(96, 32, 32);">温名</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">将用作所创建跟踪栏的父级的窗口的名称。</font></td>
+</tr>
+<tr class="even">
+<td><strong><font style="color:rgb(96, 32, 32);">价值</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">指向整数变量的可选指针，其值反映滑块的位置。创建时，滑块位置由此变量定义。</font></td>
+</tr>
+<tr class="odd">
+<td><strong><font style="color:rgb(96, 32, 32);">计数</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">滑块的最大位置。最小位置始终为 0。</font></td>
+</tr>
+<tr class="even">
+<td><strong><font style="color:rgb(96, 32, 32);">在更改</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">指向每次滑块更改位置时要调用的函数的指针。这个函数应该原型化为 void Foo（int，void*）;，其中第一个参数是跟踪栏位置，第二个参数是用户数据（请参阅下一个参数）。如果回调是 NULL 指针，则不调用回调，只更新值。</font></td>
+</tr>
+<tr class="odd">
+<td><strong><font style="color:rgb(96, 32, 32);">用户数据</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">按原样传递到回调的用户数据。它可用于处理跟踪栏事件，而无需使用全局变量。</font></td>
+</tr>
+</tbody>
+</table>
+<h1><span id="问题">问题</span></h1>
+<p>我在<a target="_blank" rel="noopener" href="https://hitwhlc.yuque.com/smartcar/daily/ulizzbdcxx1isatg#HXiy0">c_cpp_properties</a>中设置本地opencv的路径，但是最后编译过程中还是使用cmakelist中写好的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;includePath&quot;: [</span><br><span class="line">                &quot;$&#123;workspaceFolder&#125;/**&quot;,</span><br><span class="line">                // &quot;/home/xing/opencv-4.5.3&quot;,</span><br><span class="line">                // &quot;/home/xing/opencv-4.5.3/include&quot;,//头文件变成红色</span><br><span class="line">                &quot;/usr/include/opencv4&quot;//只有这个会让opencv的头文件变成白色</span><br><span class="line">            ],</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/">http://example.com/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/opencv%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/GUI/">GUI</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/CNN/">CNN</a><a class="post-meta__tags" href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">梯度下降</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/ros/" title="ros"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">ros</div></div><div class="info-2"><div class="info-item-1">ros1 ros命名空间 由浅到深理解ROS（3）-命名空间 - jason来自星星 - 博客园 ros2 名词解释 abi 是二进制接口 详细讲解 api 是编程的接口 cli 命令行界面(Command Line Interface)  tui 终端用户界面(Terminal User Interface) 也就是在cli的基础上添加了点图形化的东西，更好看 colcon 可以理解成ros1中的catkin,编译的工具 oop 面向对象编程 也就是说在写程序前，要先想好些什么类，生成一个什么样的对象，这个对象需要什么功能，有什么作用。把这些需求集中在类中 pop 面向过程编程 需要啥功能写啥函数 基础知识 python ros2中面向过程编程 1234567891011import rclpyfrom rclpy.node import Nodedef main(args=None):	rclpy.init(args=args)	node=Node(&quot;li4&quot;)	node.get_logger().in...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/pcl/" title="pcl"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">pcl</div></div><div class="info-2"><div class="info-item-1">Introduction — Point Cloud Library 0.0 documentation PCL(Point Cloud Library)学习指南&amp;资料推荐（2023版） 网上一些PCL学习资料-CSDN博客 01-点云滤波Filtering * - 黑马机器人 | PCL-3D点云 PCL点云库学习笔记（文章链接汇总）_Robot_Yue的博客-CSDN博客 点云数据一般是由xyz还有强度信息组成 强度信息是指反射回来的光波的强度，表示物体表面粗糙度，反射率等 点云数据格式转换 从ros中的点云数据转换到pcl中的点云数据   pcl库 主要问题是找不到pcap这个包 所以想把他删掉，然后再重新下载 后面的一堆报错表示pcl貌似版本兼容有问题  提取关键字是 undefined reference to 这里是是找不到调用的函数 最后发现是链接动态链接库的时候链接了错的动态库应该链接pcl_ros而不是PCL yum yum 和 apt 是两种不同的包管理工具，它们分别用于不同的Linux发行版，具体区别如下：...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E5%9D%90%E6%A0%87%E7%B3%BB%E8%BD%AC%E6%8D%A2/" title="坐标系转换"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">坐标系转换</div></div><div class="info-2"><div class="info-item-1">关于旋转矩阵的左乘与右乘问题_旋转矩阵左乘和右乘的区别_希望coding不秃头的博客-CSDN博客 传统计算机视觉学习笔记 PnP解算及SolvePnp用法_opencv pnp_寒韩Glory的博客-CSDN博客 pnp数学原理 pnp(Perspective-n-Point 四种解决算法（DLT、P3P、EPnP、BA） DLT P3P:P3P问题是已知三个3D目标点与其2D投影之间的对应关系，来确定标定相机的位姿问题。 EPnP BA  旋转方式 左手系与右手系 图片理解_左手系和右手系的区别_一骑红尘荔枝来的博客-CSDN博客 slam学习——旋转向量、旋转矩阵、欧拉角、四元素的概念和运用_前途似海_来日方长的博客-CSDN博客 旋转向量 旋转矩阵 欧拉角 四元数 旋转 对于右手系，逆时针旋转是正向。 像素坐标系到相机坐标系 目的是获取相机中目标物体到相机的距离（在这里就是平移矩阵 这里的像素坐标系和图像坐标系，只是涉及到二维平面的平移，像素坐标系是以右上角为（0，0），图像坐标系是以图片的中间为（0，0） 阅读了官方文档之后...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%94%B5%E8%84%91%E8%B0%83%E8%AF%95/" title="电脑调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">电脑调试</div></div><div class="info-2"><div class="info-item-1">小电脑的选择 11代nuc 盘一盘NVIDIA Jetson家族的前浪和后浪！ 入门级nano 中级AGX Xavier 作为现在AI计算的扛把子 超高级Jetson TX2 高级Xavier NX 算力性能区别 英特尔的NUC迷你电脑有什么特点？NUC适合什么样的用户群（黑苹果）？ 由于nuc用的是英特尔的集显，所以没有办法使用cuda 各种机器性能参数比较 ssh远程连接 如何判断网线是否连上 1.直接看ui， 2.通过ifconfig 主要看网卡那一栏，如果没有具体的ipv4地址那一般就是没有连接上 这是一个网络接口的信息列表，通常用于诊断和配置网络连接。以下是每个接口的意思和说明：  enp57s0：  flags=4099：表示接口的状态标志。这个接口是启用的（UP），可以广播数据（BROADCAST），支持多播（MULTICAST）。 mtu 1500：表示最大传输单元，即可以在一次数据包中传输的最大字节数。 ether c8:7f:54:ca:bf:31：表示接口的物理地址（MAC地址）。 txqueuelen 1000...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/" title="相机学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">相机学习</div></div><div class="info-2"><div class="info-item-1">后续学习使用视觉slam十四讲.pdf用了都说好 相机学习 相机基本工作原理 camera理论基础和工作原理_weixin_30316097的博客-CSDN博客 (干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客 【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客 结构 感光元件 也就是光线照射到，成像的位置。以前的胶片相机的感光原件是银盐，也就是胶片。 现在的数码相机是cmos或者ccd。这个感光元件把光线信息记录下来保存，数码相机这里涉及到模数转换。 模数转换的意思就是将模拟信号转换成数字信号。 模拟信号就是直接采集出来的信号，数字信号是用于给电子元器件进行处理的信号。 对于计算机来说，2进制，01便于计算机记录处理数据， 模拟信号和数字信号的区别和特点_数字信号与模拟信号的区别_高原低谷的博客-CSDN博客  cmos CMOS Image Sensor原理简述 Complementary Metal-Oxide Semiconductor 中...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/qt%E4%BC%98%E5%8C%96/" title="qt优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">qt优化</div></div><div class="info-2"><div class="info-item-1">Qt 自定义标题栏，最小化、最大化、关闭窗口，双击最大化，鼠标拖动等效果实现_qt自定义标题栏_wang_chao118的博客-CSDN博客 目标是弄成这个样子      我的第一版ui  我的第二版 此处为语雀卡片，点击链接查看 难点在于界面的切换 https://github.com/mouming233/qt/tree/nihao 详情见我的github 时间节点 5月12日能够初步实现多级界面和视频嵌入的功能 多级界面 Qt之多界面切换编程_qt多界面编程_七 六 伍的博客-CSDN博客 能够做到显示多级界面 此处为语雀卡片，点击链接查看 1234567void MainWindow::on_pushButton_2_clicked()&#123;    Server *gui1=new Server;    gui1-&gt;show();    this-&gt;hide();&#125; 外部程序ui嵌入qt程序 QT 如何把外部程序嵌入到QT界面_qt 嵌入其他程序_hellokandy的博客-CSDN博客 Qt源码解...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/2022qt%E5%AD%A6%E4%B9%A0/" title="2022qt学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2022qt学习</div></div><div class="info-2"><div class="info-item-1">QTmodel.zip QT GUI编程_子羽丿的博客-CSDN博客这篇博客相当好，强推 bilibili html5 player 学习视频 qt下载安装 下面这个文档写的很详细 Qt安装包下载（Windows平台）_Alex-L的博客-CSDN博客 QT的下载与安装（QT5.9.1）_Qi_1337的博客-CSDN博客_qt 5.9.1安装及配置 qt学习 小知识 知识点速记 argc时命令行变量的数量，argv时命令行变量的数组 QApplication是应用程序对象，有且仅有一个 Widget w;窗口对象默认不会显示，必须调用show方法显示从窗口 return a.exec();让应用程序对象进入消息循环，让代码阻塞到此行 1234567891011#include &quot;widget.h&quot;#include &lt;QApplication&gt;int main(int argc, char *argv[])&#123;    QApplication a(argc, argv);    Widget w;    w.s...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/cmake/" title="cmake"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">cmake</div></div><div class="info-2"><div class="info-item-1">1.“~” 表示主目录，也就是当前登录用户的用户目录 比如用户是“zheng”,则mac电脑的用户目录就是/users/zheng； 2.“/”是指根目录，所有目录最顶层的目录； 3.“./”表示当前目录，一般和其他文件夹或者文件结合使用，指当前目录下的东西. CMake Reference Documentation — CMake 3.28.0-rc2 Documentation 这个是官方文档，英语好的，已经有基础的可以直接看这个 Linux下CMake简明教程_爱就是恒久忍耐的博客-CSDN博客_cmake CMake教程（常见变量）_project_source_dir_开始沸腾了的博客-CSDN博客  CMakeLists：在catkin_make期间生成文件，如xxxConfig.Cmake导出本包的资源 加入到catkin_INCLUDE_DIRS和catkin_LIBRARIES，find_package本包依赖所需依赖(包含依赖包并不会递归其依赖的子包为依赖，因为CMakeLists是独立的)。 Package.xml：是了解一个包的所有入...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">cmake</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">opencv常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">split</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">threshold</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">像素之间的几何运算and&#x2F;or&#x2F;not</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">getStructuringElement</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text">morphologyEx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.6.</span> <span class="toc-text">.get()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.7.</span> <span class="toc-text">findcontours</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.8.</span> <span class="toc-text">drawContours</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.9.</span> <span class="toc-text">countourArea()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.10.</span> <span class="toc-text">minAreaRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.11.</span> <span class="toc-text">boundingRect</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">图像形态学滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.1.</span> <span class="toc-text">腐蚀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.2.</span> <span class="toc-text">膨胀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.3.</span> <span class="toc-text">开闭运算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">基于边缘的分割方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">Canny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">Sobel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">Roberts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text">Prewitt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text">Log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.6.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">常用几何变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">缩放</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">平移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">旋转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.4.</span> <span class="toc-text">仿射</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text">循环播放视频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">通过外接轮廓获取面积 进行图像筛选</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.1.</span> <span class="toc-text">使用api</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.3.</span> <span class="toc-text">视频文件读写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.4.</span> <span class="toc-text">滑动框</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">问题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

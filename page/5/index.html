@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Xing">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:author" content="Xing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Xing',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Xing</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/%E8%BF%9E%E9%80%9A/" title="连通">连通</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E7%BA%BF%E4%B8%8A%E8%B5%9B/">智能车-线上赛</a></span></div><div class="content">服务端 GitHub - mouming233/qt 切记，进行通信的时候不要使用clash，不要打开系统代理 出现的问题： 当按下按键时，ui界面立马闪退 输入端口号无法进行连接 出现的问题https://www.bilibili.com/video/BV1LB4y1F7P7?t=87.8&amp;p=13 此处为语雀卡片，点击链接查看 QT的ui界面按钮点不了、不更新、无响应的可能原因_qt设计点不了_你洪哥的博客-CSDN博客 QT小记:QT程序异常结束的可能原因_吻等离子的博客-CSDN博客 QT程序异常结束问题分析_泱生的博客-CSDN博客 原因：指针未初始化，导致内存泄漏，这个问题很常见，需要重视 解决办法：提前初始化 此处为语雀卡片，点击链接查看 ip地址问题使用127.0.0.1可以但是选择本机ip地址不行 计算机原理—127.0.0.1是什么_lipviolet的博客-CSDN博客  客户端 初步思路 目前已经了初步的思路，打算在一周内实现思路，完成ui界面的设计  最开始我有一个疑惑，是选择多客户端还是多线程，考虑到可...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/%E5%85%B6%E4%BB%96%E6%8A%80%E8%83%BD/" title="其他技能">其他技能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/">智能车-视觉培训</a></span></div><div class="content">markdown 如何阅读.md文件 最简单的方法： 下载Typora 然后破解 typora激活方法及使用教程_soft_0711的博客-CSDN博客_typora激活 markdown基础语法 Markdown 语法手册 （完整整理版）_witnessai1的博客-CSDN博客_markdown语法手册 pdf 容易遇到的问题 图片无法显示 由于此次培训的图片来源于github 所以在浏览培训文档的时候也需要使用clash windows下修改环境变量用不用重启    其实只要理解了环境变量的原理就可以做出正确的判断。环境变量是一些系统变量，这些变量对运行的任意一个程序都有效。最简单的确认方法就是 cmd.exe 程序。单击“开始”-&gt;“运行”，然后输入 cmd，回车，在启动的命令行窗口中输入set，之后就可以看到一大堆各种各样的环境变量显示在屏幕上。而修改环境变量则是通过“控制面板”-&gt;“系统”-&gt;“高级”-&gt;“环境变量”对话框进行的。 这里要理解的是，一个程序启动时，环境变量被复制到该程序所在的环境中，在该程序执行...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/opencv%E5%AD%A6%E4%B9%A0/" title="opencv学习">opencv学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/">智能车-视觉培训</a></span></div><div class="content">chapter1 读取基本操作 1234#include &lt;opencv2/imgcodecs.hpp&gt;#include &lt;opencv2/highgui.hpp&gt;#include &lt;opencv2/imgproc.hpp&gt;#include &lt;iostream&gt; 导入图片 可以用 12std::stringcv::imread  也可以命名空间，直接使用，不用写std：：string之类的 12using namespace cv;using namespace std; 利用string存储路径 1string path = &quot;Resources/test.png&quot;; 使用mat从路径导入图片 1Mat img = imread(path); imread 1Mat cv::imread(const String&amp;filename,int flags=IMREAD_COLOR)  返回值 Mat 类型, 即返回读取的图像，读取图像失败时返回一个空的矩阵对象（Mat::dat...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/vscode%E4%BD%BF%E7%94%A8/" title="vscode使用">vscode使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E7%BA%BF%E4%B8%8A%E8%B5%9B/">智能车-线上赛</a></span></div><div class="content">小技巧 小知识 当添加信息会显示绿色 修改一个文件会显示橙色 制界面大小  自动补全 常用快捷键 多选同名，同时修改ctrl+D，按几下就几个同时被选中 向左缩进：Ctrl + [ 或者 Shift+Tab 向右缩进：Ctrl + ] 或者 Tab vscode常用快捷键_vscode快捷键_新阿伟先生的博客-CSDN博客 vscode 前端快捷键_前端黄大仙的博客-CSDN博客_vscode前端快捷键 便于快捷操作 我自行设置了光标的移动alt+u和alt+i 整段移动：选中一段文字之后，按住alt+方向键 环境配置 教程：Visual Studio Code(VSCode)调用Dev C编译C++_m.Y随缘的博客-CSDN博客_vscode使用devc编译器 编译器和解释器的区别 什么是编译器？什么是解释器？_编译器 解释器_xiawucha159的博客-CSDN博客 python解释器到底是什么？ 让我们看看编译器和解释器之间的主要区别 1、编译器将一个程序作为一个整体进行翻译，而解释器则一条一条地翻译一个程序 2、在编译器的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="神经网络">神经网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E8%A7%86%E8%A7%89%E5%9F%B9%E8%AE%AD/">智能车-视觉培训</a></span></div><div class="content">什么是感知机？ 感知机（perceptron）是二分类的线性分类模型，属于监督学习算法。输入为实例的特征向量，输出为实例的类别（取+1和-1）。感知机旨在求出将输入空间中的实例划分为两类的分离超平面。为求得超平面，感知机导入了基于误分类的损失函数，利用梯度下降法对损失函数进行最优化求解。 神经网络主体的流程是怎样的？    每个神经元有一个节点和传输通道，节点接收数据，并且向下传输数据 有阈值设置，如果数据的值超过设置的阈值才会触发向下的传输。 什么是激活函数？ 将非0到1区间的数更改到0到1的区间内 表示没信号和有信号的函数    我们所学的矩阵运算在神经网络中为什么很有用？  什么是偏导？什么是梯度？什么是梯度下降？它们在神经网络中扮演着怎样的角色？ 偏导：在多维坐标系中某一个方向的导数，表示因变量在某一个方向的变化率 梯度：可以理解成曲线的斜率，即数据的变化幅度（山坡的陡峭程度） 梯度下降：求解函数最小值的办法，按照梯度进行下一步操作，同时控制步长 什么是反向传播？它是如何实现的？ 为了修正误差，改变隐藏层到输出层的权重，以及输入层...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/10%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%89/" title="10卷积神经网络（初级）">10卷积神经网络（初级）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="content">二维卷积神经网络   00:03:44.271 放进卷积层，然后使通道数提升 00:04:36.639  下采样层中通道数是不变的 但是宽高会变 目的减少数据量，降低运算的需求 00:05:59.344  再做一次5x5的卷积 然后2x2的下采样 最后要把三阶向量展开成一维向量 就是挨个排序 00:07:13.014  然后利用全连接层来映射到10个输出 利用各种层，进行维度变换 00:08:22.737  卷积+下采样=特征提取器 图像： rgb图像 栅格图像 00:11:25.291  00:24:15.002  00:25:19.212  取出来一个图形块 对图像块进行卷积 依次移动 输出通道数 00:28:20.851  00:29:22.737  00:29:54.087  00:30:10.046  这个就是单通道卷积的形象表示 00:30:33.601  三通道卷积 00:31:02.697  每一个通道设置一个卷积核 00:32:17.903  最后三维变成1维 00:33:10.285  00:35:20.005 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/11%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="11卷积神经网络（高级）">11卷积神经网络（高级）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="content">之前学习的都是线性的串行结构 就是上一个的输出作为下个的输入 00:02:06.381  convoltion：卷积 pooling：池化 softmax：输出 other：拼接层 为了减少代码冗余： - 使用函数调用 - 构造类 00:04:05.180  发现这些快长得都一样 所以把其封装成类 00:06:02.235  有一些参数比较难选 比如kernel选哪个， googlenet的思路是，再一个块中，使用多个kernnel 然后对结果进行评价，让最优的kernel权重增加 00:09:21.370  对于每一条路，变换之后bwh必须相同 c可以不同 00:11:39.744  00:11:51.236  00:11:59.066  00:13:31.719  00:13:30.545 00:13:30.545  求和也就是信息融合 00:17:39.604  00:19:24.494  上面这个的运算量太大了 00:20:06.613  直接变为原来的十分之一 这个也就是1x1的卷积神经网络的作用 网络中的网络：1x1卷积 00:...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型">2线性模型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="content">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/1overview/" title="1overview">1overview</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="content">目标实现一个学习系统 理解简单的神经网络（nn）/dl 00:11:46.636  人类智能 1. 通过信息进行推理 2. 看到照片与抽象概念结合：预测 00:19:29.936  mechine learning 就是代替人脑 目前常用的都是监督学习 算法思维： - 穷举 - 贪心 - 分治 - 动态规划 深度学习：有数据集 找出算法 机器学习 计算过程也就是函数来源于数据，而不是人工（基于统计） 00:24:01.499  dl属于表示学习rl 00:28:28.199  求原函数 首先构造知识库 00:29:14.598  00:29:41.156  实现类似人类智能的就算ai 00:32:34.716  对于复杂问题，基于规则的代码，人类难以维护 经典机器学习：手工提取特征。最重要要把 00:34:05.608  重点是使用机器学习找到中间的f(x) 00:34:40.521  表示学习还要通过学习获得特征 维度诅咒 00:36:43.485  特征2维就需要102 如果是3维就103 00:39:08.956  10维空间映射到3维 0...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="3梯度下降算法的实现">3梯度下降算法的实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/">pytorch刘二大人</a></span></div><div class="content">00:02:00.228  使用随机猜测 寻找ŷ − y 最小值 00:03:10.941  00:03:41.947  两个权重w1 w2 00:04:06.938  这个搜索量太大了 穷举法搜不过来 搜索区间过大导致问题 ==分治思想== 00:05:02.292  00:05:11.770  对于两个权重，进行划分，只考虑这点00:06:02.911  image.png  使用这几个点代表所有的空间 00:07:07.962  00:07:29.136  分治思想的缺点，会有如上的情况，导致无法获取最低点。有可能会错过比较好的低点 00:09:26.071  要求函数的最小值 00:10:16.901  00:10:41.308  00:11:34.211利用梯度来判断这个点需要进行的平移方向，也就 是如果梯度导数 &gt; 0 ,也就是这个点右移会上升  所以应该选择导数的负方向（下面公式中是负号），用以趋近最低点 00:12:34.364  学习率最好选的小一点 上面的算法思想： ==贪心== 00:14:53.079...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/"><span class="card-category-list-name">pytorch刘二大人</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rm-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"><span class="card-category-list-name">rm-奇技淫巧</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rm-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">rm-学习记录</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/"><span class="card-category-list-name">rtos-韦东山rtos入门</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/"><span class="card-category-list-name">rtos-韦东山rtos视频</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"><span class="card-category-list-name">区块链</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B0%8F%E5%9C%9F%E5%A0%86pytorch%E5%AE%9E%E8%B7%B5/"><span class="card-category-list-name">小土堆pytorch实践</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E5%88%86%E5%8C%BA%E8%B5%9B/"><span class="card-category-list-name">智能车-分区赛</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 1.16em; color: #999b9e">性能</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/" style="font-size: 1.24em; color: #999fa7">机器人</a> <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 1.1em; color: #999">模块化</a> <a href="/tags/%E5%BC%80%E5%8F%91%E6%9D%BF/" style="font-size: 1.1em; color: #999">开发板</a> <a href="/tags/PCL/" style="font-size: 1.1em; color: #999">PCL</a> <a href="/tags/%E5%A4%9A%E5%88%86%E7%B1%BB/" style="font-size: 1.1em; color: #999">多分类</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">笔记工具</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.21em; color: #999ea4">操作系统</a> <a href="/tags/Python/" style="font-size: 1.41em; color: #99a6b7">Python</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 1.47em; color: #99a8bc">问题解决</a> <a href="/tags/ROS/" style="font-size: 1.3em; color: #99a1ac">ROS</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 1.27em; color: #99a0a9">数据集</a> <a href="/tags/FreeRTOS/" style="font-size: 1.16em; color: #999b9e">FreeRTOS</a> <a href="/tags/LaTeX/" style="font-size: 1.16em; color: #999b9e">LaTeX</a> <a href="/tags/%E7%9B%B8%E6%9C%BA/" style="font-size: 1.19em; color: #999ca1">相机</a> <a href="/tags/%E9%9F%A6%E4%B8%9C%E5%B1%B1/" style="font-size: 1.19em; color: #999ca1">韦东山</a> <a href="/tags/3D%E6%B8%B2%E6%9F%93/" style="font-size: 1.1em; color: #999">3D渲染</a> <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.13em; color: #999a9c">卷积神经网络</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 1.21em; color: #999ea4">实践</a> <a href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" style="font-size: 1.19em; color: #999ca1">构建工具</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 1.13em; color: #999a9c">图像处理</a> <a href="/tags/C/" style="font-size: 1.21em; color: #999ea4">C++</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" style="font-size: 1.1em; color: #999">反向传播</a> <a href="/tags/%E6%99%BA%E8%83%BD%E8%BD%A6/" style="font-size: 1.21em; color: #999ea4">智能车</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.24em; color: #999fa7">嵌入式</a> <a href="/tags/Obsidian/" style="font-size: 1.21em; color: #999ea4">Obsidian</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">视频学习</a> <a href="/tags/%E7%82%B9%E4%BA%91/" style="font-size: 1.1em; color: #999">点云</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.5em; color: #99a9bf">调试</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.13em; color: #999a9c">设计模式</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.16em; color: #999b9e">硬件</a> <a href="/tags/RM/" style="font-size: 1.33em; color: #99a2af">RM</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 1.39em; color: #99a4b4">项目实践</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81/" style="font-size: 1.19em; color: #999ca1">加密货币</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 1.19em; color: #999ca1">导航</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.44em; color: #99a7ba">编程</a> <a href="/tags/%E7%AB%9E%E8%B5%9B/" style="font-size: 1.36em; color: #99a3b1">竞赛</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 1.27em; color: #99a0a9">优化算法</a> <a href="/tags/%E6%8C%96%E7%9F%BF/" style="font-size: 1.13em; color: #999a9c">挖矿</a> <a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.27em; color: #99a0a9">技巧</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">62</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">62</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-11-21T08:36:50.510Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

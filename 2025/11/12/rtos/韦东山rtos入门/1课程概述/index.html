@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>1课程概述 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="00:05:53.480  百问网这个是韦东山的老家 第2章 单片机程序设计模式 | 百问网这个是文档教学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1课程概述">
+<meta property="og:url" content="http://example.com/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="00:05:53.480  百问网这个是韦东山的老家 第2章 单片机程序设计模式 | 百问网这个是文档教学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:01:45.326Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="实时操作系统">
+<meta property="article:tag" content="硬件">
+<meta property="article:tag" content="RTOS">
+<meta property="article:tag" content="FreeRTOS">
+<meta property="article:tag" content="单片机">
+<meta property="article:tag" content="韦东山">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "1课程概述",
+  "url": "http://example.com/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:01:45.326Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '1课程概述',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">1课程概述</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">1课程概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:01:45.326Z" title="更新于 2025-11-12 23:01:45">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/rtos-%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/">rtos-韦东山rtos入门</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a href="jv://?url=https://www.bilibili.com/video/BV1Jw411i7Fz/?spm_id_from=333.788.player.switch&amp;vd_source=d521037e2f7ecb75ef4d2baefe35f648&amp;p=3&amp;time=00:05:53.480">00:05:53.480</a> <img src="https://xingnote.oss-cn-beijing.aliyuncs.com/minenotebook/202412011714981.png" alt="image.png"></p>
+<p><a target="_blank" rel="noopener" href="https://download.100ask.net/index.html">百问网</a>这个是韦东山的老家</p>
+<p><a target="_blank" rel="noopener" href="https://rtos.100ask.net/zh/FreeRTOS/DShanMCU-F103/chapter2.html#_2-2-3-%E5%90%8C%E6%AD%A5%E6%93%8D%E4%BD%9C">第2章 单片机程序设计模式 | 百问网</a>这个是文档教学</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/">http://example.com/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/1%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%BF%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">实时操作系统</a><a class="post-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a><a class="post-meta__tags" href="/tags/RTOS/">RTOS</a><a class="post-meta__tags" href="/tags/FreeRTOS/">FreeRTOS</a><a class="post-meta__tags" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a><a class="post-meta__tags" href="/tags/%E9%9F%A6%E4%B8%9C%E5%B1%B1/">韦东山</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/4%E5%BC%80%E5%8F%91%E6%9D%BF%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="4开发板使用说明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">4开发板使用说明</div></div><div class="info-2"><div class="info-item-1">因为某些引脚公用，所以，不能同时使用一些外设   </div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/" title="鸟叔的私房菜"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">鸟叔的私房菜</div></div><div class="info-2"><div class="info-item-1">第0章 计基 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/4.html  原先cpu是有北桥和南桥 北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口 南桥用于连接速度相对较慢的，比如硬盘usb和网卡。 现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽 cpu外频：外部设备到通过前端总线（fsb），进行频率同步， 内频：fsb到cpu，cpu的频率快于fsb 倍频 cpu频率速度=外频x倍频 倍频是cpu出场已经设置好的不可更改，所以超频的一般是外频 磁盘的最小物理储存单位称之为扇区 （sector）  同一个同心圆的扇区组合成的圆就是所谓的磁道（track）  所有盘片上面的同一个磁道可以组合成所谓的柱面 （cylinder）  CMOS 主要的功能为记录主板上面的重要参数， 包括系统时间、CPU电压与频率、各项设备的I/O位址与IRQ等 BIOS 为写入到主板上某一块 flash 或 EEPROM 的程序，他可以在...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/2%E5%8D%95%E7%89%87%E6%9C%BA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="2单片机设计模式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2单片机设计模式</div></div><div class="info-2"><div class="info-item-1">第2章 单片机程序设计模式 | 百问网 逻辑设计模式 [[Excalidraw/Drawing 2024-12-05 22.40.35.excalidraw]] 前面三种方法都无法解决降低两种耗时函数之间的影响。 第四种方法可以解决，但是实践困难 轮询设计模式 123456789// 经典单片机程序: 轮询void main()&#123;    while (1)    &#123;        喂一口饭();        回一个信息();    &#125;&#125; 就是while循环按照从上到下的顺序依次调用函数 缺点： 如果一个函数时间太长就会导致下一个函数长时间无法被执行 前后台 123456789101112131415// 前后台程序void main()&#123;    while (1)    &#123;        // 后台程序        喂一口饭();    &#125;&#125;// 前台程序void 滴_中断()&#123;    回一个信息();&#125; 其实就是stm32中的中断程序 如果这个中断信息...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E5%85%A5%E9%97%A8/4%E5%BC%80%E5%8F%91%E6%9D%BF%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="4开发板使用说明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">4开发板使用说明</div></div><div class="info-2"><div class="info-item-1">因为某些引脚公用，所以，不能同时使用一些外设   </div></div></div></a><a class="pagination-related" href="/2025/11/12/rtos/%E9%9F%A6%E4%B8%9C%E5%B1%B1rtos%E8%A7%86%E9%A2%91/2-2%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8Acubemx%E9%85%8D%E7%BD%AE/" title="2-2模块使用以及cubemx配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2-2模块使用以及cubemx配置</div></div><div class="info-2"><div class="info-item-1">00:03:14.621  会用到i2c的发送函数 需要初始化引脚 需要使用stm32cubemx进行引脚初始化 </div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/qt%E4%BC%98%E5%8C%96/" title="qt优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">qt优化</div></div><div class="info-2"><div class="info-item-1">Qt 自定义标题栏，最小化、最大化、关闭窗口，双击最大化，鼠标拖动等效果实现_qt自定义标题栏_wang_chao118的博客-CSDN博客 目标是弄成这个样子      我的第一版ui  我的第二版 此处为语雀卡片，点击链接查看 难点在于界面的切换 https://github.com/mouming233/qt/tree/nihao 详情见我的github 时间节点 5月12日能够初步实现多级界面和视频嵌入的功能 多级界面 Qt之多界面切换编程_qt多界面编程_七 六 伍的博客-CSDN博客 能够做到显示多级界面 此处为语雀卡片，点击链接查看 1234567void MainWindow::on_pushButton_2_clicked()&#123;    Server *gui1=new Server;    gui1-&gt;show();    this-&gt;hide();&#125; 外部程序ui嵌入qt程序 QT 如何把外部程序嵌入到QT界面_qt 嵌入其他程序_hellokandy的博客-CSDN博客 Qt源码解...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E5%88%86%E5%8C%BA%E8%B5%9B/%E5%88%86%E5%8C%BA%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E4%B8%8A%E6%9C%BA%E5%BC%80%E5%8F%91/" title="分区赛技术报告 上机开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">分区赛技术报告 上机开发</div></div><div class="info-2"><div class="info-item-1">1.程序基本功能 上位机调度软件包含与导航功能包的socket通信实现、轻舟机器人坐标的显示、初始等待区、装货区、卸货区位置发送命令按钮、摄像头图像显示视觉识别效果，同时将视觉识别的图片进行标注，然后传回上位机。此外还可以直接从文件中加载目标点坐标，不必每次都手动输入即可实现通过上位机下发目标点，调度轻舟机器人去往指定位置，且会实时显示下位机位置，并对于目标点的到达信息以彩色字体高亮显示，使目标点切换更加迅速及时。 1.技术任务要求  上位机开发工具不做限制 视频回显视觉识别效果 显示实时画面和侦察情况  2.运行环境 2.1服务端  小车作为服务端 使用python编写Server用于接收  2.2客户端  选择windows作为服务端，因为有多个小车 使用qt5作为软件的集成开发环境 兼有python3.7写的python程序作为外部调用  3.流程分析 3.1功能分析 客户端 出于便于控制小车，以及考虑小车重启会出现问题，断联重连是否便于连接之类的问题，考虑将线上赛的服务端（windows端）改成客户端。 上位机程序可以查看视...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

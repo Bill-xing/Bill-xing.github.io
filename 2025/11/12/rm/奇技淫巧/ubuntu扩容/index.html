@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ubuntu扩容 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Ubuntu20.04根目录&#x2F;home目录扩容（双系统，亲测有效）_ubuntu home扩容双硬盘_放p给你玩的博客-CSDN博客 我的home挂载点和空闲区域间隔很远，但是gparted可以实现空间的左右移动，但是这样操作存在风险，你点击应用是会弹出这样的弹窗（还好最后没有什么问题），我看评论区有人都打不开系统了，只能说有惊无险 有惊无险 还好还好 总体来说就是使用gparted 然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu扩容">
+<meta property="og:url" content="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="Ubuntu20.04根目录&#x2F;home目录扩容（双系统，亲测有效）_ubuntu home扩容双硬盘_放p给你玩的博客-CSDN博客 我的home挂载点和空闲区域间隔很远，但是gparted可以实现空间的左右移动，但是这样操作存在风险，你点击应用是会弹出这样的弹窗（还好最后没有什么问题），我看评论区有人都打不开系统了，只能说有惊无险 有惊无险 还好还好 总体来说就是使用gparted 然">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.527Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="技巧">
+<meta property="article:tag" content="RM">
+<meta property="article:tag" content="机器人">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ubuntu扩容",
+  "url": "http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T14:08:33.527Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ubuntu扩容',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">ubuntu扩容</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">ubuntu扩容</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.527Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/rm-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">rm-奇技淫巧</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_72129546/article/details/128126226?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=ubuntu%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9%E5%8F%8C%E7%B3%BB%E7%BB%9F&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-4-128126226.142%5Ev96%5Epc_search_result_base2&amp;spm=1018.2226.3001.4187">Ubuntu20.04根目录/home目录扩容（双系统，亲测有效）_ubuntu home扩容双硬盘_放p给你玩的博客-CSDN博客</a></p>
+<p>我的home挂载点和空闲区域间隔很远，但是gparted可以实现空间的左右移动，但是这样操作存在风险，你点击应用是会弹出这样的弹窗（还好最后没有什么问题），我看评论区有人都打不开系统了，只能说有惊无险</p>
+<p>有惊无险</p>
+<p>还好还好</p>
+<p>总体来说就是使用gparted</p>
+<p>然后使用启动盘进入测试系统，进行分区（类似windows上的磁盘管理）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/">http://example.com/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ubuntu%E6%89%A9%E5%AE%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a><a class="post-meta__tags" href="/tags/%E6%8A%80%E5%B7%A7/">技巧</a><a class="post-meta__tags" href="/tags/RM/">RM</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/">机器人</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">小技巧</div></div><div class="info-2"><div class="info-item-1">修改ubuntu中右键菜单 Ubuntu20.04设置右键打开terminator_nautilus-actions in 20.04_圣彼得堡的钟的博客-CSDN博客 如何删除软件 Ubuntu卸载软件：3种卸载方式_ubuntu 卸载软件-CSDN博客 破解xmind http://www.hushowly.com/articles/1943我是没有尝试破解，因为我目前没有这个需求 我觉得基础功能也够用（主要是因为不怎么做思维导图） xmind使用指南 05-思维导图Xmind快速入门_xmindcsdn-CSDN博客 常用命令 有空可以常看看这个文档 上面的文档基本上只有基础的命令（但是经常容易忘 UID 表示用户ID PID 表示进程号 PPID 表示父进程号 TIME 表示执行时间 CMD 表示执行命令 cd的使用技巧： cd ./cd ../cd ~/cd -： cd表示切换目录，而cd后跟一个点表示切换到当前目录-_-|||，cd后跟两个点表示切换到上一级目录，而cd后跟一个波浪线则表示切换到用户目录，cd后跟 - 减号可以在最...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ros2%E4%B8%AD%E7%9A%84log%E7%B3%BB%E7%BB%9F/" title="ros2中的log系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ros2中的log系统</div></div><div class="info-2"><div class="info-item-1">ROS2官方教程：日志与日志记录器配置_ros2 loglevel-CSDN博客 std::cout、printf 和 RCLCPP_INFO的对比-CSDN博客 官网文档 如何实现节点输出的记录    ROS 机器人技术 - rosbag 详细使用教程！ 记录和回放数据 [待校准@8079] — ROS 2 documentation 文档 可以直接输出成yaml文件，也算是一种记录    ROS2 日志管理与可视化 在rqt中可以直接将roslog出来的文件的数据输出成csv格式    而ros自己的 日志和日志记录器配置例程 [待校准@7762] — ROS 2 documentation 文档  这个文件夹下面的log是ros2自己进行日志记录的地方，所有的输出都变成log文件。每次运行都会有输出  以前使用的c++输出到文件当中  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E9%B8%9F%E5%8F%94%E7%9A%84%E7%A7%81%E6%88%BF%E8%8F%9C/" title="鸟叔的私房菜"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">鸟叔的私房菜</div></div><div class="info-2"><div class="info-item-1">第0章 计基 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/4.html  原先cpu是有北桥和南桥 北桥主要用于cpu和一些需要链接速度快的设备，比如内存和显示接口 南桥用于连接速度相对较慢的，比如硬盘usb和网卡。 现在的芯片将北桥集成进了cpu，节约了水处理时间，同时也不会消耗更多的带宽 cpu外频：外部设备到通过前端总线（fsb），进行频率同步， 内频：fsb到cpu，cpu的频率快于fsb 倍频 cpu频率速度=外频x倍频 倍频是cpu出场已经设置好的不可更改，所以超频的一般是外频 磁盘的最小物理储存单位称之为扇区 （sector）  同一个同心圆的扇区组合成的圆就是所谓的磁道（track）  所有盘片上面的同一个磁道可以组合成所谓的柱面 （cylinder）  CMOS 主要的功能为记录主板上面的重要参数， 包括系统时间、CPU电压与频率、各项设备的I/O位址与IRQ等 BIOS 为写入到主板上某一块 flash 或 EEPROM 的程序，他可以在...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/linux/" title="linux"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">linux</div></div><div class="info-2"><div class="info-item-1">linux内核学习 Linux内核源码分析（完整版）_哔哩哔哩_bilibili Linux内核讲解视频 - 视频 - 内核技术中文网 - 构建全国最权威的内核技术交流分享论坛 常用命令 ubuntu篇—文件压缩与解压_ubuntu压缩文件_心惠天意的博客-CSDN博客 文件压缩与解压缩 一：ubuntu下解压和压缩tgz文件 参数： -c ：create 建立压缩档案的参数； -x ： 解压缩压缩档案的参数； -z ： 是否需要用gzip压缩； -v： 压缩的过程中显示档案； -f： 置顶文档名，在f后面立即接文件名，不能再加参数 1 将tgz文件解压到指定目录 12345tar zxvf a.tgz -C 指定目录# 比如将/app/a.tgz解压到  /app/b 目录tar zxvf /app/a.tgz -C /app/b  2 将指定目录压缩到指定文件  123# 比如将b 目录压缩到  a.tgz tar czvf a.tgz b 加权限 chmod chmod命令可以修改文件或文件夹的读写权限 chmod命令的两种方式：...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/" title="markdown语法总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">markdown语法总结</div></div><div class="info-2"><div class="info-item-1">Markdown 语法 格式化笔记 - Obsidian 中文帮助 - Obsidian Publish 支持哪些快捷键 </div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">小技巧</div></div><div class="info-2"><div class="info-item-1">修改ubuntu中右键菜单 Ubuntu20.04设置右键打开terminator_nautilus-actions in 20.04_圣彼得堡的钟的博客-CSDN博客 如何删除软件 Ubuntu卸载软件：3种卸载方式_ubuntu 卸载软件-CSDN博客 破解xmind http://www.hushowly.com/articles/1943我是没有尝试破解，因为我目前没有这个需求 我觉得基础功能也够用（主要是因为不怎么做思维导图） xmind使用指南 05-思维导图Xmind快速入门_xmindcsdn-CSDN博客 常用命令 有空可以常看看这个文档 上面的文档基本上只有基础的命令（但是经常容易忘 UID 表示用户ID PID 表示进程号 PPID 表示父进程号 TIME 表示执行时间 CMD 表示执行命令 cd的使用技巧： cd ./cd ../cd ~/cd -： cd表示切换目录，而cd后跟一个点表示切换到当前目录-_-|||，cd后跟两个点表示切换到上一级目录，而cd后跟一个波浪线则表示切换到用户目录，cd后跟 - 减号可以在最...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" title="虚拟技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">虚拟技术</div></div><div class="info-2"><div class="info-item-1">docker 参考教程：菜鸟教程 彻底卸载 彻底卸载docker_docker卸载-CSDN博客 之前安装过docker，但是无法执行helloworld程序 安装docker出现很多问题 晚上搜了很多都没有解决，最后选择直接重装  docker尝试直接使用官方教程止步在了docker代理配置 出现了 https://blog.csdn.net/Cai_deLong/article/details/115255735参考 我之前有修改过文件传输上限，但是这次还是出现了问题，文章中配置git最低速度和最低速度时间，这里是因为超过的git的最低速度和最低速度时间，所以直接退出来了 1 引言 docker的主要用于后端工程师还有运维工程师 用途：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。  简单来说就是将应用程序与本机架构隔离开，能够避免因为环境问题出现例如编译...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/ros2%E4%B8%AD%E7%9A%84log%E7%B3%BB%E7%BB%9F/" title="ros2中的log系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">ros2中的log系统</div></div><div class="info-2"><div class="info-item-1">ROS2官方教程：日志与日志记录器配置_ros2 loglevel-CSDN博客 std::cout、printf 和 RCLCPP_INFO的对比-CSDN博客 官网文档 如何实现节点输出的记录    ROS 机器人技术 - rosbag 详细使用教程！ 记录和回放数据 [待校准@8079] — ROS 2 documentation 文档 可以直接输出成yaml文件，也算是一种记录    ROS2 日志管理与可视化 在rqt中可以直接将roslog出来的文件的数据输出成csv格式    而ros自己的 日志和日志记录器配置例程 [待校准@7762] — ROS 2 documentation 文档  这个文件夹下面的log是ros2自己进行日志记录的地方，所有的输出都变成log文件。每次运行都会有输出  以前使用的c++输出到文件当中  </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

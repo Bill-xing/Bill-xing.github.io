@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>1，2pytorch环境安装 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基于anaconda 1安装anaconda 2安装python环境 3安装pytorch 4测试pytorch环境 1234567pythonimport torch#不报错表示安装成功torch.cuda.is_available()true#输出表示可以使用gpu 可能会遇到的问题： 在使用代理的情况下 直接使用官网的命令无法安装， 可以查看当前cmd是否开启了代理 如果没有配置 手动配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1，2pytorch环境安装">
+<meta property="og:url" content="http://example.com/2025/11/12/xiaotuidui_pytorch_practice/1%EF%BC%8C2pytorch%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="基于anaconda 1安装anaconda 2安装python环境 3安装pytorch 4测试pytorch环境 1234567pythonimport torch#不报错表示安装成功torch.cuda.is_available()true#输出表示可以使用gpu 可能会遇到的问题： 在使用代理的情况下 直接使用官网的命令无法安装， 可以查看当前cmd是否开启了代理 如果没有配置 手动配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T13:34:37.000Z">
+<meta property="article:modified_time" content="2025-11-12T14:08:33.706Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="问题解决">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="实践">
+<meta property="article:tag" content="Python环境">
+<meta property="article:tag" content="小土堆">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "1，2pytorch环境安装",
+  "url": "http://example.com/2025/11/12/xiaotuidui_pytorch_practice/1%EF%BC%8C2pytorch%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T13:34:37.000Z",
+  "dateModified": "2025-11-12T14:08:33.706Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/xiaotuidui_pytorch_practice/1%EF%BC%8C2pytorch%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '1，2pytorch环境安装',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">1，2pytorch环境安装</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">1，2pytorch环境安装</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T13:34:37.000Z" title="发表于 2025-11-12 21:34:37">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T14:08:33.706Z" title="更新于 2025-11-12 22:08:33">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B0%8F%E5%9C%9F%E5%A0%86pytorch%E5%AE%9E%E8%B7%B5/">小土堆pytorch实践</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>基于anaconda 1安装anaconda 2安装python环境 3安装pytorch 4测试pytorch环境 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">import torch</span><br><span class="line">#不报错表示安装成功</span><br><span class="line"></span><br><span class="line">torch.cuda.is_available()</span><br><span class="line">true#输出表示可以使用gpu</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>可能会遇到的问题： 在使用代理的情况下 直接使用官网的命令无法安装， 可以查看当前cmd是否开启了代理 如果没有配置 手动配置 注意这里pip是否走的是系统代理</p>
+<p>环境配置中出现的问题</p>
+<p>安装jupytorch的时候出现的问题 <a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoxian666/article/details/136421120">Jupyter notebook报错：No module named ‘jupyter_server.contents‘_no module named jupyter-CSDN博客</a> 运行jupyter notebook的时候 出现没有jupyter_server的报错 尝试了网址中的方法 然后在头文件中引入了jupyter_server</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/xiaotuidui_pytorch_practice/1%EF%BC%8C2pytorch%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">http://example.com/2025/11/12/xiaotuidui_pytorch_practice/1%EF%BC%8C2pytorch%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E5%AE%9E%E8%B7%B5/">实践</a><a class="post-meta__tags" href="/tags/Python%E7%8E%AF%E5%A2%83/">Python环境</a><a class="post-meta__tags" href="/tags/%E5%B0%8F%E5%9C%9F%E5%A0%86/">小土堆</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/xiaotuidui_pytorch_practice/3%E4%B8%A4%E5%A4%A7%E6%B3%95%E5%AE%9D/" title="3两大法宝"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">3两大法宝</div></div><div class="info-2"><div class="info-item-1">00:02:15.884  00:04:01.915   image.png  这个是dir(torch.cuda)的目录  这两个下面的目录就不一样了， aval下面有双下滑线 这是一种规范，表示这个变量不可以被篡改 help主要针对于函数 这里的available（）表示为函数  返回一个bool类型的变量 表示当前cuda可用 </div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/7%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E8%BE%93%E5%85%A5/" title="7处理多维输入"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">7处理多维输入</div></div><div class="info-2"><div class="info-item-1">输入有多个特征 每一行被叫做一个样本 00:01:22.739  meiyili 每一列被称为特征 excel常用空格 tab ，进行分割 00:10:22.816  00:10:06.374  00:12:37.613  00:13:38.352  00:14:24.317  一组一组的运算转换成矩阵运算（向量化的运算） 为什么要变换： 因为可以并行计算，这个样利用cpu或者gpu的并行计算能力 00:15:14.284   上图是上节课的 可以用于与这节课的图片进行对比 把多层logist回归相连就可以构建多层神将网路 00:17:12.583  00:17:28.402 这里列的数量对应特征00:17:50.766  00:18:23.748  这样可以再接一层，让2维的再降到1维 00:20:31.314  00:21:21.153  我们的目标是8d-&gt;1d的非线性变换函数 σ函数被叫做激活函数 00:23:26.486  可以维度一直下降 也可以维度一直上升 00:24:23.852  中间的隐层越多，学习能力越强 如果...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/xiaotuidui_pytorch_practice/5%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" title="5数据加载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">5数据加载</div></div><div class="info-2"><div class="info-item-1">00:02:09.538  dataset用于将数据进行标记，标记label 00:02:52.896  dataloader为网络提供不同的数据形式 00:04:13.403  dateset需要考虑，主要实现以下功能 - 如何获取每一个数据以及label - 告诉我们总共有多少数据 00:05:51.702 00:05:48.542  数据集分为训练数据集和测试数据集 第二种数据集00:07:12.051  这里面还有标注的label 或者直接把label直接标注在图片上  配置终端代理前 配置终端代理后，网速还是很感人 12set HTTP_PROXY=http://127.0.0.1:7890set HTTPS_PROXY=http://127.0.0.1:7890  nnd还是失败了 一样的报错还是，加载超时  image.png  nnd网络抽风 要测试您的代理配置是否成功，有几种方法可以查看您是否能够通过代理访问外部网络。以下是一些常用的测试方法： 方法 1: 使用 curl 命令 如果您的系统上安装了 curl，您可以在命令提示符中...</div></div></div></a><a class="pagination-related" href="/2025/11/12/pytorch%E5%88%98%E4%BA%8C%E5%A4%A7%E4%BA%BA/2%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="2线性模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2线性模型</div></div><div class="info-2"><div class="info-item-1">深度学习顺序 1. 准备数据集 2. 模型选择 3. 训练 4. 推理 00:01:57.536  00:02:38.739  00:03:56.345  仅有输入的数据，在测试或者推理阶段 00:04:40.157  数据集交给算法，得到预测算法，使用模型只进行预测 00:05:46.753  知道输出值-》监督学习 测试集用于评价模型好坏 数据集分成两个部分 00:08:42.608  00:10:06.592  00:12:21.957  00:13:54.806  深度学习训练最大问题：过拟合 过拟合：把图像中的噪声也学进去了 比如训练集中的小猫都很可爱，但是测试集的小猫不可爱，导致测试中无法准确识别 需要模型有比较好的泛化能力 训练集分成两份 开发集用于对训练集进行评估，防止过拟合 评估比较好好再把所有的训练集重新训练，之后丢给测试集 00:15:00.775  00:17:13.524  其实就是找到f(x) 线性模型是最基本的，可以最开始测试是否可用 预测出来的加上y heater 00:20:28.689  如何找到斜率为2...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%94%B5%E8%84%91%E8%B0%83%E8%AF%95/" title="电脑调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">电脑调试</div></div><div class="info-2"><div class="info-item-1">小电脑的选择 11代nuc 盘一盘NVIDIA Jetson家族的前浪和后浪！ 入门级nano 中级AGX Xavier 作为现在AI计算的扛把子 超高级Jetson TX2 高级Xavier NX 算力性能区别 英特尔的NUC迷你电脑有什么特点？NUC适合什么样的用户群（黑苹果）？ 由于nuc用的是英特尔的集显，所以没有办法使用cuda 各种机器性能参数比较 ssh远程连接 如何判断网线是否连上 1.直接看ui， 2.通过ifconfig 主要看网卡那一栏，如果没有具体的ipv4地址那一般就是没有连接上 这是一个网络接口的信息列表，通常用于诊断和配置网络连接。以下是每个接口的意思和说明：  enp57s0：  flags=4099：表示接口的状态标志。这个接口是启用的（UP），可以广播数据（BROADCAST），支持多播（MULTICAST）。 mtu 1500：表示最大传输单元，即可以在一次数据包中传输的最大字节数。 ether c8:7f:54:ca:bf:31：表示接口的物理地址（MAC地址）。 txqueuelen 1000...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E7%9B%B8%E6%9C%BA%E5%AD%A6%E4%B9%A0/" title="相机学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">相机学习</div></div><div class="info-2"><div class="info-item-1">后续学习使用视觉slam十四讲.pdf用了都说好 相机学习 相机基本工作原理 camera理论基础和工作原理_weixin_30316097的博客-CSDN博客 (干货) |机器视觉不可不知的相机内部工作原理_智能算法的博客-CSDN博客 【Camera基础（一）】Camera摄像头工作原理及整机架构_camera架构_邢仕冲的一亩三分地的博客-CSDN博客 结构 感光元件 也就是光线照射到，成像的位置。以前的胶片相机的感光原件是银盐，也就是胶片。 现在的数码相机是cmos或者ccd。这个感光元件把光线信息记录下来保存，数码相机这里涉及到模数转换。 模数转换的意思就是将模拟信号转换成数字信号。 模拟信号就是直接采集出来的信号，数字信号是用于给电子元器件进行处理的信号。 对于计算机来说，2进制，01便于计算机记录处理数据， 模拟信号和数字信号的区别和特点_数字信号与模拟信号的区别_高原低谷的博客-CSDN博客  cmos CMOS Image Sensor原理简述 Complementary Metal-Oxide Semiconductor 中...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/2022qt%E5%AD%A6%E4%B9%A0/" title="2022qt学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">2022qt学习</div></div><div class="info-2"><div class="info-item-1">QTmodel.zip QT GUI编程_子羽丿的博客-CSDN博客这篇博客相当好，强推 bilibili html5 player 学习视频 qt下载安装 下面这个文档写的很详细 Qt安装包下载（Windows平台）_Alex-L的博客-CSDN博客 QT的下载与安装（QT5.9.1）_Qi_1337的博客-CSDN博客_qt 5.9.1安装及配置 qt学习 小知识 知识点速记 argc时命令行变量的数量，argv时命令行变量的数组 QApplication是应用程序对象，有且仅有一个 Widget w;窗口对象默认不会显示，必须调用show方法显示从窗口 return a.exec();让应用程序对象进入消息循环，让代码阻塞到此行 1234567891011#include &quot;widget.h&quot;#include &lt;QApplication&gt;int main(int argc, char *argv[])&#123;    QApplication a(argc, argv);    Widget w;    w.s...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/anaconda%E4%BD%BF%E7%94%A8/" title="anaconda使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">anaconda使用</div></div><div class="info-2"><div class="info-item-1">conda环境配置 anaconda | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror PackagesNotFoundError: The following packages are not available from current channels的解决办法_正在学习的黄老师的博客-CSDN博客 Anaconda添加，删除镜像源_conda删除镜像源_有问号de小朋友的博客-CSDN博客 conda常用命令汇总_conda命令_Iareges的博客-CSDN博客 为conda配置国内镜像，加速conda下载安装Python包的速度_conda加速_凯旋.Lau的博客-CSDN博客 Opencv Python Headless :: Anaconda.org Anaconda的虚拟环境的包在哪里？（详细教程）_anaconda创建的虚拟环境存储在哪_仭的博客-CSDN博客 运行 Python 文件遇到问题 ModuleNotFoundError: No module named ‘yaml’  时，...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

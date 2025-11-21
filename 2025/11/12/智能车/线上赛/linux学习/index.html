@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux学习 | Xing</title><meta name="author" content="Xing"><meta name="copyright" content="Xing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux学习索引 【Linux】一步一步学Linux系列教程汇总（更新中……）_沧海一笑-dj的博客-CSDN博客_csdn dengjin Linux常见文件后缀以及重要的文件夹_linux下二进制文件后缀_lzfshub的博客-CSDN博客 Linux库概念，动态库和静态库的制作，如何移植第三方库_一口Linux的博客-CSDN博客 学习笔记 1) 重要快捷键 真正学习命令行之前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux学习">
+<meta property="og:url" content="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Xing">
+<meta property="og:description" content="linux学习索引 【Linux】一步一步学Linux系列教程汇总（更新中……）_沧海一笑-dj的博客-CSDN博客_csdn dengjin Linux常见文件后缀以及重要的文件夹_linux下二进制文件后缀_lzfshub的博客-CSDN博客 Linux库概念，动态库和静态库的制作，如何移植第三方库_一口Linux的博客-CSDN博客 学习笔记 1) 重要快捷键 真正学习命令行之前">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-11-12T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-11-12T15:07:01.921Z">
+<meta property="article:author" content="Xing">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="学习资源">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="理论基础">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="构建工具">
+<meta property="article:tag" content="CMake">
+<meta property="article:tag" content="线上赛">
+<meta property="article:tag" content="Bug">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux学习",
+  "url": "http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-11-12T14:01:36.000Z",
+  "dateModified": "2025-11-12T15:07:01.921Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Xing</span></a><a class="nav-page-title" href="/"><span class="site-name">linux学习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/xbot-intern-report/"><i class="fa-fw fas fa-file-alt"></i><span> 实习汇报</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">linux学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T15:07:01.921Z" title="更新于 2025-11-12 23:07:01">2025-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%99%BA%E8%83%BD%E8%BD%A6-%E7%BA%BF%E4%B8%8A%E8%B5%9B/">智能车-线上赛</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2><span id="linux学习索引">linux学习索引</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dengjin20104042056/article/details/94669639">【Linux】一步一步学Linux系列教程汇总（更新中……）_沧海一笑-dj的博客-CSDN博客_csdn dengjin</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40511249/article/details/109133496?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167871120716800215072714%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167871120716800215072714&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-109133496-null-null.142%5Ev73%5Epc_new_rank,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;utm_term=linux%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80&amp;spm=1018.2226.3001.4187">Linux常见文件后缀以及重要的文件夹_linux下二进制文件后缀_lzfshub的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/daocaokafei/article/details/109149314?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167871120716800215072714%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167871120716800215072714&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-109149314-null-null.142%5Ev73%5Epc_new_rank,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;utm_term=linux%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80&amp;spm=1018.2226.3001.4187">Linux库概念，动态库和静态库的制作，如何移植第三方库_一口Linux的博客-CSDN博客</a></p>
+<h2><span id="学习笔记">学习笔记</span></h2>
+<h4><span id="1-重要快捷键"><font style="color:rgb(36, 41, 46);">1) 重要快捷键</font></span></h4>
+<p><font style="color:rgb(36, 41, 46);">真正学习命令行之前，你先要掌握几个十分有用、必需掌握的小技巧：</font></p>
+<h5><span id="tab"><font style="color:rgb(36, 41, 46);">[Tab]</font></span></h5>
+<p><font style="color:rgb(36, 41, 46);">使用</font><font style="color:rgb(232, 62, 140);">Tab</font><font style="color:rgb(36, 41, 46);">键来进行命令补全，</font><font style="color:rgb(232, 62, 140);">Tab</font><font style="color:rgb(36, 41, 46);">键一般是在字母</font><font style="color:rgb(232, 62, 140);">Q</font><font style="color:rgb(36, 41, 46);">旁边，这个技巧给你带来的最大的好处就是当你忘记某个命令的全称时可以只输入它的开头的一部分，然后按下</font><font style="color:rgb(232, 62, 140);">Tab</font><font style="color:rgb(36, 41, 46);">键就可以得到提示或者帮助完成</font></p>
+<p><font style="color:rgb(36, 41, 46);"></font></p>
+<p>Ctrl+c 退出</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/27500914/1671674431097-7a66c813-d509-478f-adb5-74397a381412.png"></p>
+<p>改密码</p>
+<p><font style="color:rgb(36, 41, 46);"> </font><font style="color:rgb(232, 62, 140);">sudo passwd shiyanlou</font></p>
+<p><font style="color:rgb(36, 41, 46);">变更用户 </font></p>
+<p><font style="color:rgb(230, 219, 116);">cd</font><font style="color:rgb(248, 248, 242);background-color:rgb(35, 36, 31);"> /home/lilei </font></p>
+<p><font style="color:rgb(248, 248, 242);background-color:rgb(35, 36, 31);">ls iphone11</font></p>
+<p><font style="color:rgb(248, 248, 242);background-color:rgb(35, 36, 31);"> sudo chown shiyanlou iphone11</font></p>
+<p><font style="color:rgb(248, 248, 242);background-color:rgb(35, 36, 31);"></font></p>
+<h4><span id="adduser-和-useradd-的区别是什么"><font style="color:rgb(232, 62, 140);">adduser</font><font style="color:rgb(36, 41, 46);"> </font><font style="color:rgb(36, 41, 46);">和</font><font style="color:rgb(36, 41, 46);"> </font><font style="color:rgb(232, 62, 140);">useradd</font><font style="color:rgb(36, 41, 46);"> </font><font style="color:rgb(36, 41, 46);">的区别是什么</font></span></h4>
+<p><font style="color:rgb(36, 41, 46);">答：</font><font style="color:rgb(232, 62, 140);">useradd</font><font style="color:rgb(36, 41, 46);"> 只创建用户，不会创建用户密码和工作目录，创建完了需要使用 </font><font style="color:rgb(232, 62, 140);">passwd <username></username></font><font style="color:rgb(36, 41, 46);"> 去设置新用户的密码。</font><font style="color:rgb(232, 62, 140);">adduser</font><font style="color:rgb(36, 41, 46);"> 在创建用户的同时，会创建工作目录和密码（提示你设置），做这一系列的操作。其实 </font><font style="color:rgb(232, 62, 140);">useradd</font><font style="color:rgb(36, 41, 46);">、</font><font style="color:rgb(232, 62, 140);">userdel</font><font style="color:rgb(36, 41, 46);"> 这类操作更像是一种命令，执行完了就返回。而 </font><font style="color:rgb(232, 62, 140);">adduser</font><font style="color:rgb(36, 41, 46);"> 更像是一种程序，需要你输入、确定等一系列操作。</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/27500914/1671682458228-278f4fc4-1cb8-4c64-af33-abfdce731353.png"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">├── bin -&gt; usr/bin # 用于存放二进制命令</span><br><span class="line">├── boot # 内核及引导系统程序所在的目录</span><br><span class="line">├── dev # 所有设备文件的目录（如磁盘、光驱等）</span><br><span class="line">├── etc # 配置文件默认路径、服务启动命令存放目录</span><br><span class="line">├── home # 用户家目录，root用户为/root</span><br><span class="line">├── lib -&gt; usr/lib # <span class="number">32</span>位库文件存放目录</span><br><span class="line">├── lib64 -&gt; usr/lib64 # <span class="number">64</span>位库文件存放目录</span><br><span class="line">├── media # 媒体文件存放目录</span><br><span class="line">├── mnt # 临时挂载设备目录</span><br><span class="line">├── opt # 自定义软件安装存放目录</span><br><span class="line">├── proc # 进程及内核信息存放目录</span><br><span class="line">├── root # Root用户家目录</span><br><span class="line">├── run # 系统运行时产生临时文件，存放目录</span><br><span class="line">├── sbin -&gt; usr/sbin # 系统管理命令存放目录</span><br><span class="line">├── srv # 服务启动之后需要访问的数据目录</span><br><span class="line">├── sys # 系统使用目录</span><br><span class="line">├── tmp # 临时文件目录</span><br><span class="line">├── usr # 系统命令和帮助文件目录</span><br><span class="line">└── var # 存放内容易变的文件的目录</span><br></pre></td></tr></table></figure>
+<h2><span id="linux和window的区别">linux和window的区别</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45941099/article/details/122612110">linux概述</a></p>
+<p><font style="color:rgb(51, 51, 51);">Linux的本质：只是操作系统的核心，负责控制硬件、管理文件系统、程序进程等</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">ubuntu与linux的关系：ubuntu是封装的linux套件，由于linux是开放源代码的自由软件，所以不同的人，不同的社区或者公司都可以按照自己想法，用linux内核来“组装”出一个操作系统。Ubuntu就是一个linux发行版，也就是说ubuntu是以linux为内核的操作系统。</font></p>
+<p><font style="color:rgb(51, 51, 51);">所以其实ubuntu和linux根本不是同一个概念，如果Linux是指人类，那么Ubuntu只是一个名为乌班图的人。</font></p>
+<h4><span id="1-免费与收费"><font style="color:rgb(36, 41, 46);">1. 免费与收费</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">最新正版 Windows 10，需要付费购买；</font></li>
+<li><font style="color:rgb(36, 41, 46);">Linux 免费或少许费用。</font></li>
+</ul>
+<h4><span id="2-软件与支持"><font style="color:rgb(36, 41, 46);">2. 软件与支持</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">Windows 平台：数量和质量的优势，不过大部分为收费软件；由微软官方提供重要支持和服务；</font></li>
+<li><font style="color:rgb(36, 41, 46);">Linux 平台：大都为开源自由软件，用户可以修改定制和再发布，由于基本免费没有资金支持，部分软件质量和体验欠缺；由全球所有的 Linux 开发者和自由软件社区提供支持。</font></li>
+</ul>
+<h4><span id="3-安全性"><font style="color:rgb(36, 41, 46);">3. 安全性</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">Windows 平台：三天两头打补丁安装系统安全更新，还是会中病毒木马；</font></li>
+<li><font style="color:rgb(36, 41, 46);">Linux 平台：要说 Linux 没有安全问题，那当然是不可能的，这一点仁者见仁智者见智，相对来说肯定比 Windows 平台要更加安全，使用 Linux 你也不用装某杀毒、某毒霸。</font></li>
+</ul>
+<h4><span id="4-使用习惯"><font style="color:rgb(36, 41, 46);">4. 使用习惯</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">Windows：普通用户基本都是纯图形界面下操作使用，依靠鼠标和键盘完成一切操作，用户上手容易，入门简单；</font></li>
+<li><font style="color:rgb(36, 41, 46);">Linux：兼具图形界面操作（需要使用带有桌面环境的发行版）和完全的命令行操作，可以只用键盘完成一切操作，新手入门较困难，需要一些学习和指导（这正是我们要做的事情），一旦熟练之后效率极高。</font></li>
+</ul>
+<h4><span id="5-可定制性"><font style="color:rgb(36, 41, 46);">5. 可定制性</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">Windows：这些年之前算是全封闭的，系统可定制性很差；</font></li>
+<li><font style="color:rgb(36, 41, 46);">Linux：你想怎么做就怎么做，Windows 能做到得它都能，Windows 做不到的，它也能。</font></li>
+</ul>
+<h4><span id="6-应用范畴"><font style="color:rgb(36, 41, 46);">6. 应用范畴</font></span></h4>
+<p><font style="color:rgb(36, 41, 46);">或许你之前不知道 Linux ，要知道，你之前在 Windows 使用百度、谷歌，上淘宝，聊 QQ 时，支撑这些软件和服务的，是后台成千上万的 Linux 服务器主机，它们时时刻刻都在忙碌地进行着数据处理和运算，可以说世界上大部分软件和服务都是运行在 Linux 之上的。</font></p>
+<h4><span id="7-windows-没有的"><font style="color:rgb(36, 41, 46);">7. Windows 没有的</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">稳定的系统</font></li>
+<li><font style="color:rgb(36, 41, 46);">安全性和漏洞的快速修补</font></li>
+<li><font style="color:rgb(36, 41, 46);">多用户</font></li>
+<li><font style="color:rgb(36, 41, 46);">用户和用户组的规划</font></li>
+<li><font style="color:rgb(36, 41, 46);">相对较少的系统资源占用</font></li>
+<li><font style="color:rgb(36, 41, 46);">可定制裁剪，移植到嵌入式平台（如安卓设备）</font></li>
+<li><font style="color:rgb(36, 41, 46);">可选择的多种图形用户界面（如 GNOME，KDE）</font></li>
+</ul>
+<h4><span id="8-linux-没有的"><font style="color:rgb(36, 41, 46);">8. Linux 没有的</font></span></h4>
+<ul>
+<li><font style="color:rgb(36, 41, 46);">特定的支持厂商</font></li>
+<li><font style="color:rgb(36, 41, 46);">足够的游戏娱乐支持度</font></li>
+<li><font style="color:rgb(36, 41, 46);">足够的专业软件支持度</font></li>
+<li><font style="color:rgb(36, 41, 46);">特定的支持厂商</font></li>
+<li><font style="color:rgb(36, 41, 46);">足够的游戏娱乐支持度</font></li>
+<li><font style="color:rgb(36, 41, 46);">足够的专业软件支持度</font></li>
+</ul>
+<p><font style="color:rgb(36, 41, 46);"></font></p>
+<p><font style="color:rgb(36, 41, 46);"></font></p>
+<h2><span id="linux常用命令"></span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23329167/article/details/83856430?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167151856816800182166331%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167151856816800182166331&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-83856430-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4&amp;spm=1018.2226.3001.4187">常用命令</a></p>
+<h5><span id="source">source</span></h5>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/haluoluo211/article/details/54313919?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167938606116800197040158%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167938606116800197040158&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-54313919-null-null.142%5Ev74%5Einsert_down4,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;utm_term=ubuntu%E4%B8%ADsource%E7%9A%84%E4%BD%9C%E7%94%A8&amp;spm=1018.2226.3001.4187">ubuntu source 点命令的作用_source ubuntu_FishBear_move_on的博客-CSDN博客</a></p>
+<h2><span id="ubuntu-下软件安装的几种方式及-apt-dpkg-工具的使用">Ubuntu 下软件安装的几种方式，及 apt、dpkg 工具的使用</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39706491/article/details/110368256?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167168341416800182796576%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=167168341416800182796576&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-110368256-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=Ubuntu%20%E4%B8%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F&amp;spm=1018.2226.3001.4187">下载方式</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46278037/article/details/120232679?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=apt%E4%BD%BF%E7%94%A8&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-120232679.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;spm=1018.2226.3001.4187">apt使用</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/daocaokafei/article/details/112040451?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167168522616782429785356%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167168522616782429785356&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-112040451-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=apt%E5%92%8Capt-get%E7%9A%84%E5%8C%BA%E5%88%AB&amp;spm=1018.2226.3001.4187">apt和apt-get的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/slampai/article/details/128072043?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167168522616782429785356%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167168522616782429785356&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-128072043-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=apt%E5%92%8Capt-get%E7%9A%84%E5%8C%BA%E5%88%AB&amp;spm=1018.2226.3001.4187">apt和apt-get的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/slampai/article/details/128072043?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167168522616782429785356%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167168522616782429785356&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-128072043-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=apt%E5%92%8Capt-get%E7%9A%84%E5%8C%BA%E5%88%AB&amp;spm=1018.2226.3001.4187">dpkg使用</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dengjin20104042056/article/details/101513983?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167168572616782425135642%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167168572616782425135642&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-101513983-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=dpkg&amp;spm=1018.2226.3001.4187">dpkg的使用2</a></p>
+<h3><span id="linux安装中不同的包">linux安装中不同的包</span></h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_51899357/article/details/123627414?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167685641716800217017931%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167685641716800217017931&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-123627414-null-null.142%5Ev73%5Einsert_down3,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;utm_term=rpm%E5%92%8Cdeb&amp;spm=1018.2226.3001.4187">Linux下deb包和rpm包区别_deb rpm_好饿呀~～～的博客-CSDN博客</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1676856301998-186135ab-b498-414f-b82c-9f9b811b114f.png"></p>
+<p><font style="color:rgb(77, 77, 77);">rpm包主要用于</font><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=redhat&amp;spm=1001.2101.3001.7020">redhat</a><font style="color:rgb(77, 77, 77);">及分支如redhat，centos，Fedora等</font><br>
+<font style="color:rgb(77, 77, 77);">而deb包主要用于debian及分支如debian，ubuntu等。</font><br>
+<font style="color:rgb(77, 77, 77);">rpm包相对来说版本不是最新的，但是比较稳定；而deb包则相对来说版本比较新，一般某个新软件出来说可能有deb包，但是使用过程中容易引起bugs。</font></p>
+<p><font style="color:rgb(77, 77, 77);"></font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">rpm包和deb包是两种Linux系统下最常见的安装包格式，在安装一些软件或服务的时候免不了要和它们打交道。</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">rpm包主要应用在</font><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=RedHat">RedHat</a><font style="color:rgb(77, 77, 77);">系列包括 Fedora等发行版的Linux系统上，</font><br>
+<font style="color:rgb(77, 77, 77);">deb包主要应用于</font><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Debian">Debian</a><font style="color:rgb(77, 77, 77);">系列包括现在比较流行的Ubuntu等发行版上。</font></p>
+<p><font style="color:rgb(77, 77, 77);">我们知道如果要安装现成的这两种包的话，安装rpm包的命令是“rpm -参数”，安装deb包的命令是“</font><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=dpkg&amp;spm=1001.2101.3001.7020">dpkg</a><font style="color:rgb(77, 77, 77);"> -参数”。而Linux系统很方便和人性化的一点就是很多软件或服务根本就不用我们去下载，直接使用相应的命令就可以管理了，</font></p>
+<p>snap简介：</p>
+<pre><code>    snap是个新的包管理工具，他使用了容器的概念，他源自ubuntu母公司，但不止支持ubuntu，支持更多的Linux发行版。snap是Canonical公司发布的全新的软件包管理方式，它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立。所以使用snap包的好处就是它解决了应用程序之间的依赖问题，使应用程序之间更容易管理。但是由此带来的问题就是它占用更多的磁盘空。</code></pre>
+<p>支持snap的发行版本：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/27500914/1676857096967-fa7a49c6-9a86-4811-b6d8-bf37fa7b94b7.png"></p>
+<p>snap特点：</p>
+<p>易于打包软件和发行</p>
+<p>自动升级，你安装的软件永远都是最新的</p>
+<p>支持大量的Linux发行版</p>
+<p>易于版本回滚和改变.</p>
+<p>容易构建软件项目</p>
+<p>同时支持开源和闭源软件发行.</p>
+<p>Snaps更加安全</p>
+<p>最大的特点是：用了容器来管理软件，容器带来最大的好处就是：</p>
+<p>软件运行更加安全</p>
+<p>独立和更加易控的版本</p>
+<p>软件互不干预</p>
+<h2><span id="vim常用命令总结">vim常用命令总结</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44368437/article/details/126173588?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167169698216800217018605%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167169698216800217018605&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-126173588-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93&amp;spm=1018.2226.3001.4187">常用操作1</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/116352298?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167169698216800217018605%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167169698216800217018605&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-116352298-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93&amp;spm=1018.2226.3001.4187">常用操作2</a></p>
+<h2><span id="cmake">cmake</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/whahu1989/article/details/82078563?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167178957016800192271189%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167178957016800192271189&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82078563-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=cmake&amp;spm=1018.2226.3001.4187">cmake详解</a></p>
+<h2><span id="解压">解压</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56273432/article/details/120801349?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=linux%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-120801349.nonecase&amp;spm=1018.2226.3001.4187">Linux下解压命令、压缩命令大全，详细教程_linux解压_吃鸡腿不饿的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41862755/article/details/127322006?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=linux%E5%A6%82%E4%BD%95%E8%A7%A3%E5%8E%8Btar.gz%E6%96%87%E4%BB%B6&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-127322006.142%5Ev73%5Einsert_down3,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;spm=1018.2226.3001.4187">linux 如何解压缩 .tar.gz文件_linux tar.gz 解压_薰珞婷紫小亭子的博客-CSDN博客</a></p>
+<h2><span id="环境变量">环境变量</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41962968/article/details/122152904?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167179998916800184163263%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167179998916800184163263&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-122152904-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=linux%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&amp;spm=1018.2226.3001.4187">linux环境变量</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48896613/article/details/127170565?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=linux%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-127170565.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;spm=1018.2226.3001.4187">linux环境变量2</a></p>
+<h2><span id="linux磁盘管理">linux磁盘管理</span></h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/K_520_W/article/details/124132566?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%EF%BC%9Adf%E3%80%81du%E3%80%81mount%E5%91%BD%E4%BB%A4&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124132566.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;spm=1018.2226.3001.4187">linux磁盘管理</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wulimingde/article/details/109300508?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167180057716800184175179%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=167180057716800184175179&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-109300508-null-null.142%5Ev68%5Econtrol,201%5Ev4%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%EF%BC%9Adf%E3%80%81du%E3%80%81mount%E5%91%BD%E4%BB%A4&amp;spm=1018.2226.3001.4187">磁盘管理2</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/">http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Xing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B0%83%E8%AF%95/">调试</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/">学习资源</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/">理论基础</a><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/">构建工具</a><a class="post-meta__tags" href="/tags/CMake/">CMake</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E4%B8%8A%E8%B5%9B/">线上赛</a><a class="post-meta__tags" href="/tags/Bug/">Bug</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/ros%E5%AD%A6%E4%B9%A0/" title="ros学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">ros学习</div></div><div class="info-2"><div class="info-item-1">参考视频 阿杰的视频很通俗易懂，非常适合小白入门理解概念 APT源，ROS的软件包应用商店_哔哩哔哩_bilibili bilibili html5 player 学习文档 —ROS简介_SIGES的博客-CSDN博客 Introduction · Autolabor-ROS机器人入门课程《ROS理论与实践》零基础教程 前期准备工作 虚拟机系统安装 出现了登陆不进去的情况 解决办法：  关闭防火墙 关闭网络 以管理员身份运行  我在执行解决办法2后解决问题 虚拟机使用技巧 VirtualBox 实现VirtualBox、VMware和Windows之间的复制黏贴操作_windows和虚拟机可以复制粘贴_MarcyTheLibrarian的博客-CSDN博客 出现的问题 无网络，配置虚拟机的网络  这个很重要 太坑了 比如这样  提示大家一下，可能大家在VMware中安装ubuntu的时候会出现UI界面只显示上半部分、不显示下面的继续和安装键，方法是按住alt+f7之后鼠标拖动即可！方法源自：不死的老兵：终于解决了VMware安...</div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/" title="linux配置环境"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">linux配置环境</div></div><div class="info-2"><div class="info-item-1"> 重装解决99%问题。  1.第一个实际是Ubuntu版本不对导致的问题，原先安装的22.10 2.有的问题没拍照，描述记录： 填写用户名是突然跳出来一个框，显示error，表示硬盘损坏 解决办法 （我的疑惑，是否是启动盘只能单次使用） 重新制作启动盘，删除盘，重新开始，解决问题 3.手动分区： 结合csdn，分区，选择boot磁盘。  4.当Ubuntu开机看见一对代码之类的： 不要慌等待就好，不要乱按键盘 5.当删除Ubuntu之后，没改启动选项，会出现linux的界面，无法正常打开window。在界面输入exit按回车即可进入window系统   </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/linux%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/" title="linux配置环境"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">linux配置环境</div></div><div class="info-2"><div class="info-item-1"> 重装解决99%问题。  1.第一个实际是Ubuntu版本不对导致的问题，原先安装的22.10 2.有的问题没拍照，描述记录： 填写用户名是突然跳出来一个框，显示error，表示硬盘损坏 解决办法 （我的疑惑，是否是启动盘只能单次使用） 重新制作启动盘，删除盘，重新开始，解决问题 3.手动分区： 结合csdn，分区，选择boot磁盘。  4.当Ubuntu开机看见一对代码之类的： 不要慌等待就好，不要乱按键盘 5.当删除Ubuntu之后，没改启动选项，会出现linux的界面，无法正常打开window。在界面输入exit按回车即可进入window系统   </div></div></div></a><a class="pagination-related" href="/2025/11/12/%E6%99%BA%E8%83%BD%E8%BD%A6/%E7%BA%BF%E4%B8%8A%E8%B5%9B/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="实用小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">实用小技巧</div></div><div class="info-2"><div class="info-item-1">capslock 当你在打出括号之后，经常需要将光标移动到小括号的外边，如果使用方向键则比较麻烦，比较费劲，影响打字效率。这个时候可以使用CapsLock，将capslock按键进行映射，实现快速打字 CapsLock+（常用操作）_馋学习的身子的博客-CSDN博客 官网地址：https://cjkis.me/capslock+/ 编辑右键菜单栏 Typora如何添加到右键菜单中可以打开文件夹_typora添加到右键_勇踏前人未索之境的博客-CSDN博客 ubuntu中如何设置快捷方式 linux把程序放在桌面,如何在Ubuntu 20.04中将应用程序快捷方式添加到桌面_商业学的博客-CSDN博客 把图标放到桌面上 然后从/usr/share/applications 中直接拖拽 在Ubuntu中安装Pycharm并将图标放在桌面-CSDN博客 网络命令行操作 windows 常用的网络命令_沃和莱特的博客-CSDN博客 查看端口是否被监听    netstat -ano 5 查看端口使用情况，每隔5秒查询一次，CTRL+C结束查询。 ...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="小技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">小技巧</div></div><div class="info-2"><div class="info-item-1">修改ubuntu中右键菜单 Ubuntu20.04设置右键打开terminator_nautilus-actions in 20.04_圣彼得堡的钟的博客-CSDN博客 如何删除软件 Ubuntu卸载软件：3种卸载方式_ubuntu 卸载软件-CSDN博客 破解xmind http://www.hushowly.com/articles/1943我是没有尝试破解，因为我目前没有这个需求 我觉得基础功能也够用（主要是因为不怎么做思维导图） xmind使用指南 05-思维导图Xmind快速入门_xmindcsdn-CSDN博客 常用命令 有空可以常看看这个文档 上面的文档基本上只有基础的命令（但是经常容易忘 UID 表示用户ID PID 表示进程号 PPID 表示父进程号 TIME 表示执行时间 CMD 表示执行命令 cd的使用技巧： cd ./cd ../cd ~/cd -： cd表示切换目录，而cd后跟一个点表示切换到当前目录-_-|||，cd后跟两个点表示切换到上一级目录，而cd后跟一个波浪线则表示切换到用户目录，cd后跟 - 减号可以在最...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" title="虚拟技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">虚拟技术</div></div><div class="info-2"><div class="info-item-1">docker 参考教程：菜鸟教程 彻底卸载 彻底卸载docker_docker卸载-CSDN博客 之前安装过docker，但是无法执行helloworld程序 安装docker出现很多问题 晚上搜了很多都没有解决，最后选择直接重装  docker尝试直接使用官方教程止步在了docker代理配置 出现了 https://blog.csdn.net/Cai_deLong/article/details/115255735参考 我之前有修改过文件传输上限，但是这次还是出现了问题，文章中配置git最低速度和最低速度时间，这里是因为超过的git的最低速度和最低速度时间，所以直接退出来了 1 引言 docker的主要用于后端工程师还有运维工程师 用途：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。  简单来说就是将应用程序与本机架构隔离开，能够避免因为环境问题出现例如编译...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/grid_map/" title="grid_map"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">grid_map</div></div><div class="info-2"><div class="info-item-1">xing@asus:~/gridmap_dep$ colcon build –symlink-install –packages-up-to pcl_ros Package ‘pcl_ros’ specified with –packages-up-to was not found  pcl_ros找不到 Cannot locate rosdep definition for xing@asus:~/gridmap_dep$ rosdep install -y –ignore-src –from-paths src ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies: nav2_mppi_controller: Cannot locate rosdep definition for [xsimd] 这个问题是因为rosdep无法找到对应的键值对，也就是无法找到xsimd 初步猜测是因为xsimd没有添加到ros...</div></div></div></a><a class="pagination-related" href="/2025/11/12/rm/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/pcl/" title="pcl"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">pcl</div></div><div class="info-2"><div class="info-item-1">Introduction — Point Cloud Library 0.0 documentation PCL(Point Cloud Library)学习指南&amp;资料推荐（2023版） 网上一些PCL学习资料-CSDN博客 01-点云滤波Filtering * - 黑马机器人 | PCL-3D点云 PCL点云库学习笔记（文章链接汇总）_Robot_Yue的博客-CSDN博客 点云数据一般是由xyz还有强度信息组成 强度信息是指反射回来的光波的强度，表示物体表面粗糙度，反射率等 点云数据格式转换 从ros中的点云数据转换到pcl中的点云数据   pcl库 主要问题是找不到pcap这个包 所以想把他删掉，然后再重新下载 后面的一堆报错表示pcl貌似版本兼容有问题  提取关键字是 undefined reference to 这里是是找不到调用的函数 最后发现是链接动态链接库的时候链接了错的动态库应该链接pcl_ros而不是PCL yum yum 和 apt 是两种不同的包管理工具，它们分别用于不同的Linux发行版，具体区别如下：...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xing</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">91</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bill-xing"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">linux学习索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.0.1.</span> <span class="toc-text">1) 重要快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">[Tab]</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.0.2.</span> <span class="toc-text">adduser 和 useradd 的区别是什么</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">linux和window的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 免费与收费</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 软件与支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 安全性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 使用习惯</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. 可定制性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.6.</span> <span class="toc-text">6. 应用范畴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.7.</span> <span class="toc-text">7. Windows 没有的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.8.</span> <span class="toc-text">8. Linux 没有的</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">source</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Ubuntu 下软件安装的几种方式，及 apt、dpkg 工具的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">linux安装中不同的包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">vim常用命令总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">cmake</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">linux磁盘管理</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/latex%E4%B8%9B%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E9%97%A8/" title="latex丛入门到入门">latex丛入门到入门</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/md%E7%AC%94%E8%AE%B0%E5%88%B0%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="md笔记到网站部署">md笔记到网站部署</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E6%9D%82%E9%A1%B9/obsidian%E5%AD%A6%E4%B9%A0/" title="obsidian学习">obsidian学习</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/dogecion%20core%E5%90%8C%E6%AD%A5/" title="dogecion core同步">dogecion core同步</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%BC%80%E5%A7%8B%E6%8C%96%E7%9F%BF/" title="开始挖矿">开始挖矿</a><time datetime="2025-11-12T14:01:36.000Z" title="发表于 2025-11-12 22:01:36">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Xing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div><div class="footer_custom_text">Copyright Xing</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>
