@@ -19,4 +19,5 @@ Thumbs.db
 
 # updating Gemfile automatically using github actions
 vendor
-Gemfile
+jekyll.log
+.gitignore
