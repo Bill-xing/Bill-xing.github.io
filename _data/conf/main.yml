@@ -189,6 +189,8 @@ side_and_top_nav_buttons:
     icon: "fa fa-home"
   - post-list:
     icon: "fa fa-pencil-square-o"
+  - experience:
+    icon: "fa fa-archive"
   - archives:
     icon: "fa fa-archive"
   - projects:
@@ -197,6 +199,8 @@ side_and_top_nav_buttons:
     icon: "fa fa-link"
   - about:
     icon: "fa fa-user-o"
+  - certificate:
+    icon: "fa fa-link"
 
 # side nav toggle feature
 # when side nav is not visible and if you click top nav toggle button, side nav slides from left to right (disables top nav buttons)
@@ -324,7 +328,7 @@ google:
 # make sure google_analytics_id is set in _data/owner/[language].yml
 # make sure your environment does not match with google.analytics.ignore
 cookie_consent:
-  enable: true
+  enable: false
   # if this is true, the consent box will be hidden even if the user does not change the switch position.
   hide_consent_bar_with_save_button: true
   gtag_default_config:
