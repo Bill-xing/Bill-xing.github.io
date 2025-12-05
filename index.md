@@ -53,7 +53,7 @@ img: ":home-heading.jpg"
 <tr>
 <td colspan="2" style="border: none; padding-bottom: 5px; text-align: center; vertical-align: middle; ">
 
-<div style="align-items: center; background-color: #f2f2f2; padding: 10px; border-radius: 5px;width: 850px; height:45px" markdown="1">
+<div style="align-items: center; background-color: #f2f2f2; padding: 10px; border-radius: 5px;width: 100%; height:auto" markdown="1">
 
 ### 👋 Hello! Welcome to My Page!
 
@@ -66,7 +66,7 @@ img: ":home-heading.jpg"
 
 <td colspan="2" style="border: none; padding-bottom: 5px; vertical-align: top;">
 
-<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;width: 850px; height: 230px;" markdown="1">
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;width: 100%; height: auto;" markdown="1">
 
 ### 📝 About me:
 - **<font size=4>😉 Hi~I'm Jianming Xing.</font>**
@@ -82,7 +82,7 @@ img: ":home-heading.jpg"
 <tr>
 
 <td style="border: none; padding-right: 10px; vertical-align: top;" >
-<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; width: 410px; height: 180px; display: inline-block; margin-right: 10px;" markdown="1" >
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; width: 100%; height: auto; display: inline-block; margin-right: 10px;" markdown="1" >
 
 ### 💪 My Skills:
 
@@ -104,7 +104,7 @@ img: ":home-heading.jpg"
 </td>
 
 <td style="border: none; padding-left: 10px; vertical-align: top;" >
-<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; width: 410px; height: 180px; display: inline-block;" markdown="1">
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; width: 100%; height: auto; display: inline-block;" markdown="1">
 
 ### ⬇️ Know more about me?
 - <font size=4><a href="/tabs/blog/">My Projects</a>.</font>

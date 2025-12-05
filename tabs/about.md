@@ -38,7 +38,10 @@ img: ":about.jpg"
 
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
-{%- include util/auto-content-generator.liquid -%}
-{{ website_info_text_first }}
+## Curriculum Vitae
 
-{{ website_info_text_second }}
+<div style="font-size: 18px;">
+<a href="/assets/pdf/CV_邢鉴明.pdf" target="_blank">📄 Chinese Resume (中文简历)</a>
+<br>
+<a href="/assets/pdf/Xingjianming_s_CV.pdf" target="_blank">📄 English Resume (English CV)</a>
+</div>

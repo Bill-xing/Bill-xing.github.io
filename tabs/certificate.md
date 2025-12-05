@@ -39,95 +39,55 @@ img: ":about.jpg"
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
 
-<span style="font-weight: bold;color: black;font-size: 30px;">
-        Certificate
-</span>
 
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 1st Place, RoboMaster University Championship 2023 Robot Combat Award</span>
-<span> 08.2023 </span>
-</div>
-<img src="/assets/img/certificate/23-Standard.jpg" style="width:50%;">
 
 ---
 
 <div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 2nd Place, RoboMaster University Championship 2023 National Competition</span>
-<span> 08.2023 </span>
+<span>• National Scholarship</span>
+<span> </span>
 </div>
-<img src="/assets/img/certificate/RMUC2023-na.png" style="width:50%;">
+<img src="/assets/img/certificate/国奖.png" style="width:50%;">
 
 ---
 
 <div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 1st Place, RoboMaster University Championship 2023 Regional Competition</span>
-<span> 06.2023 </span>
+<span>• Provincial Scholarship</span>
+<span> </span>
 </div>
-<img src="/assets/img/certificate/RMUC2023-re.png" style="width:50%;">
+<img src="/assets/img/certificate/省奖.png" style="width:50%;">
+
+<!-- ---
+
+<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
+<span>• Second Class People's Scholarship</span>
+<span> </span>
+</div>
+<a href="/assets/img/certificate/二等人民奖学金证明.pdf" target="_blank">View Certificate (PDF)</a>
+
+--- -->
+
+<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
+<span>• TOEFL Score Report</span>
+<span> </span>
+</div>
+<a href="/assets/img/certificate/托福成绩单.pdf" target="_blank">View Score Report (PDF)</a>
 
 ---
 
 <div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 1st Place, RoboMaster University Technical Challenge 2022 National Competition</span>
-<span> 06.2022 </span>
+<span>• Other Certificate 1</span>
+<span> </span>
 </div>
-<img src="/assets/img/certificate/2022-RMUT-na-Per.JPG" style="width:50%;">
+<img src="/assets/img/certificate/922e465ee045cbd0895caad6e7ed18c3.jpg" style="width:50%;">
 
 ---
 
 <div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 1st Place, RoboMaster University Championship 2022 Regional Competition , East region</span>
-<span> 06.2022 </span>
+<span>• Other Certificate 2</span>
+<span> </span>
 </div>
-<img src="/assets/img/certificate/2022-RMUC-re-Per.JPG" style="width:50%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 2nd Place, RoboMaster University Championship 2022 National Competition </span>
-<span> 08.2022 </span>
-</div>
-<img src="/assets/img/certificate/2022-RMUC-na-Per.JPG" style="width:50%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 2nd Place, RoboMaster University Championship 2022 Robot Combat Award</span>
-<span> 08.2022 </span>
-</div>
-<img src="/assets/img/certificate/2022-sentry.JPG" style="width:50%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 3rd Place, National College Student Intelligent Car Competition North Zone Competition</span>
-<span> 07.2021 </span>
-</div>
-<img src="/assets/img/certificate/smartcar.JPG" style="width:50%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• 3rd Place, National College Student Electronic Design Competition Shandong Division</span>
-<span> 10.2021 </span>
-</div>
-<img src="/assets/img/certificate/electric.JPG" style="width:70%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• Certificate of Completion in NTU Bussiness AI Lab</span>
-<span> 3.2023 </span>
-</div>
-<img src="/assets/img/certificate/NTU-award.png" style="width:70%;">
-
----
-
-<div style="display: flex; justify-content: space-between;margin-top: 0px;font-size: 17px;font-weight: bold">
-<span>• Outstanding Volunteers in RoboMaster University League 2021</span>
-<span> 4.2021 </span>
-</div>
-<img src="/assets/img/certificate/21-volunteer.JPG" style="width:50%;">
+<img src="/assets/img/certificate/a5460791b8bd63fea61f8715e7c12828.jpg" style="width:50%;">
 
 <!-- {%- include util/auto-content-generator.liquid -%}
 {{ website_info_text_first }}
