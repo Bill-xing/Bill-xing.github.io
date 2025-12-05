@@ -111,9 +111,34 @@ post:
       copy_link: Copy link
 
 # for post-list layout
+# change tab config(mmz)
 post-list:
-  title: Blog
-  button_name: Blog
+  title: Projects
+  button_name: Projects
+  upside_down_tabs:
+    tab:
+      all: All
+      categories: Categories
+      tags: Tags
+      years: Years
+      clear: Clear
+      close: Close
+      tooltip:
+        clear: Clear
+        close: Close
+    msg:
+      property_list:
+        # keys need to match with /query/post-query.json
+        tags: Tag
+        category: Category
+        year: Year
+      # you can use these wildcards, {property} {value} {thumb}
+      resultFoundTitleFormat: "{property} : {thumb}"
+
+# for experience layout
+experience:
+  title: Experience
+  button_name: Experience
   upside_down_tabs:
     tab:
       all: All
@@ -149,8 +174,14 @@ archives:
 
 # for about layout
 about:
-  title: About
-  button_name: About
+  title: CV
+  button_name: CV
+  email_title: email
+
+# for certificate layout
+certificate:
+  title: Certificate
+  button_name: Certificate
   email_title: email
 
 # for links layout
@@ -162,8 +193,8 @@ links:
 
 # for projects layout
 projects:
-  title: Projects
-  button_name: Projects
+  title: Experience
+  button_name: Experience
   read_more_text: Read more
   read_less_text: Read less
 
