@@ -1,1 +1,1 @@
-Sitemap: http://localhost:4100/sitemap.xml
+Sitemap: https://bill-xing.github.io/sitemap.xml

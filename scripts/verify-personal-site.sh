@@ -67,6 +67,27 @@ assert_no_untranslated_chinese() {
   fi
 }
 
+assert_file_matches() {
+  local expected_file="$1"
+  local actual_file="$2"
+  if [[ ! -f "$expected_file" ]]; then
+    return 0
+  fi
+  if [[ ! -f "$actual_file" ]]; then
+    echo "Missing file to compare: $actual_file" >&2
+    exit 1
+  fi
+  local expected_hash actual_hash
+  expected_hash="$(shasum -a 256 "$expected_file" | awk '{print $1}')"
+  actual_hash="$(shasum -a 256 "$actual_file" | awk '{print $1}')"
+  if [[ "$expected_hash" != "$actual_hash" ]]; then
+    echo "Expected $actual_file to match $expected_file" >&2
+    echo "expected: $expected_hash" >&2
+    echo "actual:   $actual_hash" >&2
+    exit 1
+  fi
+}
+
 test -f "$home_file" || {
   echo "Missing built homepage: $home_file" >&2
   exit 1
@@ -95,6 +116,11 @@ test -f "$css_file" || {
   echo "Missing built stylesheet: $css_file" >&2
   exit 1
 }
+
+assert_file_matches "/Users/xingjianming/profile/English_cv/resume_EN.pdf" "$site_dir/assets/pdf/Xingjianming_s_CV.pdf"
+assert_file_matches "/Users/xingjianming/profile/chinese_cv/resume_CN.pdf" "$site_dir/assets/pdf/CV_邢鉴明.pdf"
+assert_file_matches "/Users/xingjianming/profile/English_cv/resume_EN.pdf" "$site_dir/assets/resume.pdf"
+assert_file_matches "/Users/xingjianming/profile/English_cv/resume_EN.pdf" "$site_dir/assets/resume_2026.pdf"
 
 assert_contains "$home_file" "Jianming Xing"
 assert_contains "$home_file" "Harbin Institute of Technology, Weihai"
