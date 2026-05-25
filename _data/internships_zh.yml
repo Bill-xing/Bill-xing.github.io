@@ -1,0 +1,23 @@
+- org: "Xbotics 具身智能社区实习"
+  location: ""
+  start: "2025.10"
+  end: "2026.01"
+  role: "MotrixLab，Isaac Lab，四足机器人，强化学习"
+  repo:
+    label: "Bill-xing/MotrixLab"
+    url: "https://github.com/Bill-xing/MotrixLab"
+  logos: []
+  bullets:
+    - "将 Isaac Lab 的 ANYmal-C 导航任务迁移为 MotrixLab NumPy 环境，重构 reset/step、命令采样、观测拼接、奖励计算和终止判定链路，保留 12 维关节控制、54 维策略观测和目标位置/朝向导航接口。"
+    - "针对 MuJoCo Heightfield 的坐标映射实现地形高度/坡度采样，处理 Y 轴翻转、目标点高差/坡度过滤、出生点 Z 高度对齐和边界终止；在奖励中加入垂直速度稳定、机身姿态和足端接触项，并补齐注册、RL 配置与单步仿真回归测试。"
+
+- org: "HERO Robomaster 战队"
+  location: "哈尔滨工业大学（威海）"
+  start: "2023.09"
+  end: "2024.02"
+  role: "视觉框架与 ROS2 迁移开发"
+  logos: []
+  bullets:
+    - "将 Robomaster 视觉框架迁移并模块化为 ROS2 节点，替代原生 C++ 多线程逻辑，提升实时图像采集、维护性与开发扩展性。"
+    - "负责 MCU 到 Linux 主机的数据接收、ROS2 节点消息交换与和 MCU 的时间同步。"
+    - "根据新赛季需求调整通信协议，为后续感知与自瞄模块开发打下基础。"

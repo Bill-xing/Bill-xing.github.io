@@ -1,0 +1,45 @@
+- id: cr5-vla-openpi
+  title: "VLA/OpenPI Real-Robot Data Collection and Inference Loop for CR5"
+  subtitle: "ROS2 Humble · Dobot CR5 · LeRobot v2.0 · OpenPI"
+  period: "2026.01 - 2026.03"
+  role: "Hand-eye calibration, teleoperation, synchronized data collection, safety validation, OpenPI adaptation, and real-robot inference deployment"
+  keywords: ["Embodied AI", "VLA", "ROS2", "OpenPI", "LeRobot", "Real Robot"]
+  one_liner: "Built a real-robot closed loop for Dobot CR5, Orbbec Astra2 RGB-D, and an electric gripper, covering calibration, teleoperation, synchronized data collection, dataset conversion, OpenPI fine-tuning, and WebSocket-based inference."
+  highlights:
+    - "Designed an HDF5 synchronization pipeline using RGB image timestamps as the master clock, aligning robot state, target action, and gripper feedback with binary search and linear interpolation."
+    - "Reduced early camera frame drops from 27.15% to 2.57%-4.74% by using Fast DDS shared memory and RGB-only capture."
+    - "Completed OpenPI adaptation with Dobot 7-D state/action mapping, training configuration, WebSocket policy serving, and a CR5 inference client using action chunks and blocking short-horizon execution."
+  outcome: "Established a safety-checked real-machine VLA pipeline from data recording to LeRobot v2.0 conversion and CR5 inference deployment."
+  page: "/projects/cr5-vla-openpi/"
+  links:
+    code: "https://github.com/Bill-xing/openpicr5"
+    video: ""
+    report: ""
+    repositories:
+      - label: "openpicr5"
+        url: "https://github.com/Bill-xing/openpicr5"
+      - label: "DOBOT ROS2"
+        url: "https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3"
+      - label: "ros2_ws_xing"
+        url: "https://github.com/Bill-xing/ros2_ws_xing"
+
+- id: robot-welding-system
+  title: "Robot Digital-Twin HMI for Weld-Seam Recognition"
+  subtitle: "C++/Qt upper computer · U-Net seam segmentation · OpenGL digital twin"
+  period: "2024.09 - 2025.06"
+  role: "Vision model, upper-computer control, and digital twin integration"
+  keywords: ["Robotics", "Computer Vision", "C++/Qt", "U-Net", "OpenGL"]
+  one_liner: "Built a robotics software stack for weld-seam recognition and LeArm digital-twin demos, combining semantic segmentation, Qt-based control, and real-time OpenGL visualization."
+  highlights:
+    - "Compared baseline U-Net, VGG-U-Net, and a VGG16-pretrained variant, improving weld-seam segmentation accuracy from 64% to 96.8% through transfer learning, data augmentation, and dataset expansion."
+    - "Integrated image selection, Python inference calls, and segmentation-result display into a C++/Qt HMI."
+    - "Implemented OpenGL-based digital twin rendering with STL link models, DH-parameter kinematics, slider control, and mouse interaction."
+  outcome: "Integrated weld-seam detection and robot visualization into one desktop workflow, with resume-backed segmentation accuracy reaching 96.8%."
+  page: "/projects/robot-welding-system/"
+  links:
+    code: "https://github.com/Bill-xing/HMI"
+    video: ""
+    report: ""
+    repositories:
+      - label: "HMI"
+        url: "https://github.com/Bill-xing/HMI"

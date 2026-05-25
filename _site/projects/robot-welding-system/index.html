@@ -1,0 +1,2195 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+
+  <title>Robot Digital-Twin HMI for Weld-Seam Recognition - Jianming Xing / 邢鉴明</title>
+
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Jianming Xing / 邢鉴明">
+<meta property="og:title" content="Robot Digital-Twin HMI for Weld-Seam Recognition">
+
+
+  <link rel="canonical" href="http://localhost:4100/projects/robot-welding-system/">
+  <meta property="og:url" content="http://localhost:4100/projects/robot-welding-system/">
+
+
+
+
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+<head>
+  <base target="_blank">
+</head>
+    <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.ico?v=20260525-black" sizes="any">
+<link rel="stylesheet" href="/assets/css/academicons.css" />
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a href="/#about-me">Homepage</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#about-me">About Me</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#-news">News</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#education">Education</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#projects">Projects</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#experience">Experience</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#-awards">Awards</a></li>
+          
+          
+            <li class="masthead__menu-item"><a href="/zh/projects/robot-welding-system/">中文</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main" role="main">
+      
+  <div class="sidebar sticky">
+  
+
+
+
+
+
+
+
+
+<div itemscope itemtype="http://schema.org/Person" class="profile_box">
+
+  <div class="author__avatar">
+    <img src="/images/jianming-profile.jpg" class="author__avatar" alt="Jianming Xing<br> 邢鉴明">
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Jianming Xing<br> 邢鉴明</h3>
+    <p class="author__bio">Second B.S. @ HIT Shenzhen</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">More Info & Contact</button> -->
+    <ul class="author__urls social-icons">
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Shenzhen, China</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> HIT</li>
+      
+      
+      
+        <li><a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+      <div class="author__urls_sm">
+      
+      
+        <a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i></a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+  
+  </div>
+
+
+      <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+        <meta itemprop="headline" content="Robot Digital-Twin HMI for Weld-Seam Recognition">
+        <div class="page__inner-wrap">
+          <section class="page__content" itemprop="text">
+            
+<div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin: 10px 0 18px 0;">
+  <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>
+      <div style="font-weight:600;">
+        Vision model, upper-computer control, and digital twin integration
+         · 2024.09 - 2025.06
+      </div>
+
+      
+      <div style="margin-top:8px;">
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            Robotics
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            Computer Vision
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            C++/Qt
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            U-Net
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            OpenGL
+          </span>
+        
+      </div>
+      
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      
+      
+      
+        <span>Code:</span>
+        
+          <a href="https://github.com/Bill-xing/HMI">HMI</a>
+        
+      
+    </div>
+  </div>
+
+  
+    <div style="margin-top:8px;">Built a robotics software stack for weld-seam recognition and LeArm digital-twin demos, combining semantic segmentation, Qt-based control, and real-time OpenGL visualization.</div>
+  
+
+  
+    <div style="margin-top:8px;"><b>Outcome:</b> Integrated weld-seam detection and robot visualization into one desktop workflow, with resume-backed segmentation accuracy reaching 96.8%.</div>
+  
+</div>
+
+<h2 id="tldr">TL;DR</h2>
+<ul>
+  <li><strong>Problem:</strong> Weld-seam recognition demos need more than a segmentation model. Operators also need a desktop HMI, robot-control interaction, and a 3D view that makes motion and recognition results inspectable.</li>
+  <li><strong>Method:</strong> Built an <strong>unofficial desktop HMI</strong> for the <strong>Hiwonder LeArm</strong> platform with <strong>Qt/C++</strong>, Python segmentation inference, and <strong>OpenGL</strong> digital-twin rendering.</li>
+  <li><strong>Result:</strong> Integrated image selection, <code class="language-plaintext highlighter-rouge">predict.py</code> inference, result display, slider-driven joint control, and STL-based robot visualization. Resume-backed model work improved weld-seam segmentation accuracy from <strong>64%</strong> to <strong>96.8%</strong>.</li>
+</ul>
+
+<h2 id="open-source-repository-and-asset-boundaries">Open-Source Repository and Asset Boundaries</h2>
+
+<p>Project repository: <a href="https://github.com/Bill-xing/HMI">https://github.com/Bill-xing/HMI</a></p>
+
+<p>The project code is open-source. The weld-seam dataset, trained model weights, and LeArm STL assets have separate distribution boundaries. This page keeps the engineering details from the README and the technical document, and all important figures have been moved into site static assets so the English page does not depend on local export paths.</p>
+
+<h2 id="project-overview">Project Overview</h2>
+
+<p>HMI is an unofficial desktop control application for the Hiwonder LeArm robotic arm platform. It is used for weld-seam recognition, UNet semantic segmentation inference, and slider-driven digital-twin joint-control demos. The Qt/OpenGL robot visualization work references <a href="https://github.com/eagleqq/Robot3D">eagleqq/Robot3D</a>, and the UNet training, prediction, and mIoU evaluation workflow references <a href="https://github.com/bubbliiiing/unet-pytorch">bubbliiiing/unet-pytorch</a>. This project adapts those ideas to LeArm, integrates the Qt HMI, launches Python inference from the desktop application, and validates the digital-twin control loop.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Key Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qt/C++ HMI</td>
+      <td><code class="language-plaintext highlighter-rouge">logon</code>, <code class="language-plaintext highlighter-rouge">secinterface</code>, <code class="language-plaintext highlighter-rouge">mainwindow</code>, and <code class="language-plaintext highlighter-rouge">seamtest</code> UI and business logic</td>
+    </tr>
+    <tr>
+      <td>Recognition inference</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code> is launched through <code class="language-plaintext highlighter-rouge">QProcess</code>; the default weight is <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+    </tr>
+    <tr>
+      <td>Dataset and training</td>
+      <td>Self-collected weld-seam dataset; <code class="language-plaintext highlighter-rouge">json_to_dataset.py</code> converts LabelMe JSON annotations into VOC masks</td>
+    </tr>
+    <tr>
+      <td>Digital twin</td>
+      <td><code class="language-plaintext highlighter-rouge">DDR6RobotWidget</code> loads <code class="language-plaintext highlighter-rouge">base_link.STL</code> through <code class="language-plaintext highlighter-rouge">link_5.STL</code> and renders them with modified DH parameters</td>
+    </tr>
+    <tr>
+      <td>Runtime paths</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code> centralizes project-root discovery, Python environment discovery, and output-path handling</td>
+    </tr>
+    <tr>
+      <td>Local configuration</td>
+      <td><code class="language-plaintext highlighter-rouge">scripts/hmi_local_env.example.sh</code> is only a machine-local path template; real local config is ignored</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="asset-boundaries">Asset Boundaries</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Repository code</td>
+      <td>Open-source at <a href="https://github.com/Bill-xing/HMI">Bill-xing/HMI</a></td>
+    </tr>
+    <tr>
+      <td>Weld-seam dataset</td>
+      <td>Self-collected and not committed to Git; documented as CC BY 4.0</td>
+    </tr>
+    <tr>
+      <td>Self-trained UNet weight</td>
+      <td>Default filename <code class="language-plaintext highlighter-rouge">seam_unet.pth</code>; excluded from Git history and documented as Apache License 2.0</td>
+    </tr>
+    <tr>
+      <td>LeArm STL model files</td>
+      <td>Not redistributed and no redistribution rights are granted; local demos require authorized STL files</td>
+    </tr>
+    <tr>
+      <td>Default login</td>
+      <td>Demo credentials are <code class="language-plaintext highlighter-rouge">username: admin</code> and <code class="language-plaintext highlighter-rouge">password: admin</code>; this is only for UI-flow demonstration</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="demo-videos">Demo Videos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weld-seam recognition</th>
+      <th>Independent joint slider control</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://youtu.be/_f371G87iBs?si=kt9yl1vsSmSuFXPl"><img src="/images/projects/robot-welding-system/hmi-welding-seam-recognition-demo.gif" alt="Weld-seam recognition demo" /></a></td>
+      <td><a href="https://youtu.be/tFxSIknCsfQ?si=BHSCSx6OC0wbLYiz"><img src="/images/projects/robot-welding-system/hmi-welding-joint-slider-control-demo.gif" alt="Independent joint slider control demo" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Original videos:</p>
+
+<ul>
+  <li><a href="https://youtu.be/_f371G87iBs?si=kt9yl1vsSmSuFXPl">Weld-seam recognition demo</a></li>
+  <li><a href="https://youtu.be/tFxSIknCsfQ?si=BHSCSx6OC0wbLYiz">Independent joint slider control demo</a></li>
+</ul>
+
+<h2 id="references-and-licensing-boundaries">References and Licensing Boundaries</h2>
+
+<p>Third-party sources and notices are documented in <code class="language-plaintext highlighter-rouge">THIRD_PARTY_NOTICES</code>.</p>
+
+<ul>
+  <li><a href="https://github.com/bubbliiiing/unet-pytorch">bubbliiiing/unet-pytorch</a>: main reference for UNet training, prediction, and mIoU evaluation. The upstream project uses the MIT License.</li>
+  <li><a href="https://github.com/eagleqq/Robot3D">eagleqq/Robot3D</a>: main reference for Qt/OpenGL robot visualization, STL loading, and joint control.</li>
+  <li>LeArm STL/structure model files: this repository only documents the adaptation and expected filenames; it does not provide STL files.</li>
+  <li>Model weight: <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> is trained for this project scenario and is not committed to Git by default.</li>
+</ul>
+
+<p>The repository does not declare one unified license for all content. Before public release, code, STL resources, and third-party dependency license conditions should still be checked. The dataset and model-weight licenses are documented separately.</p>
+
+<h2 id="detailed-technical-architecture-notes">Detailed Technical Architecture Notes</h2>
+
+<h1 id="robot-digital-twin-hmi-for-weld-seam-recognition-technical-document">Robot Digital-Twin HMI for Weld-Seam Recognition: Technical Document</h1>
+
+<h2 id="1-document-scope">1. Document Scope</h2>
+
+<p>This document is normalized from the thesis, the <code class="language-plaintext highlighter-rouge">HMI</code> source tree, and the supplementary implementation notes. It focuses on engineering implementation rather than restating the thesis text. The coverage includes weld-seam semantic segmentation, the Qt/C++ HMI, serial-port control, OpenGL digital-twin rendering, module coupling, runtime boundaries, and validation methods.</p>
+
+<h2 id="2-overall-architecture">2. Overall Architecture</h2>
+
+<h3 id="21-system-layers">2.1 System Layers</h3>
+
+<p>The system is organized into four main layers:</p>
+
+<pre><code class="language-mermaid">flowchart TB
+    User[Operator] --&gt; GUI[Qt/C++ HMI]
+    GUI --&gt; Login[Login and module selection]
+    GUI --&gt; SeamUI[Weld-seam recognition window: seamtest]
+    GUI --&gt; ControlUI[Robot-control window: MainWindow]
+    ControlUI --&gt; Serial[QSerialPort serial communication]
+    ControlUI --&gt; Twin[DDR6RobotWidget digital-twin view]
+    SeamUI --&gt; QProc[QProcess launches Python inference]
+    QProc --&gt; PyPredict[predict.py]
+    PyPredict --&gt; Model[UNet/VGG16 weight: seam_unet.pth]
+    PyPredict --&gt; Result[segmented_image.png]
+    SeamUI --&gt; EventBus[globaleventbus singleton]
+    EventBus --&gt; ControlUI
+    Twin --&gt; STL[res/binary/*.STL]
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Main Components</th>
+      <th>Responsibility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UI layer</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.ui</code>, <code class="language-plaintext highlighter-rouge">secinterface.ui</code>, <code class="language-plaintext highlighter-rouge">mainwindow.ui</code>, <code class="language-plaintext highlighter-rouge">seamtest.ui</code></td>
+      <td>Login, module entry, image display, serial configuration, slider control</td>
+    </tr>
+    <tr>
+      <td>Business layer</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.cpp</code>, <code class="language-plaintext highlighter-rouge">secinterface.cpp</code>, <code class="language-plaintext highlighter-rouge">mainwindow.cpp</code>, <code class="language-plaintext highlighter-rouge">seamtest.cpp</code></td>
+      <td>Flow scheduling, signal-slot wiring, serial command assembly, inference process management</td>
+    </tr>
+    <tr>
+      <td>Algorithm layer</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code>, <code class="language-plaintext highlighter-rouge">unet.py</code>, <code class="language-plaintext highlighter-rouge">nets/</code>, <code class="language-plaintext highlighter-rouge">utils/</code>, <code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>Model training, inference, mIoU evaluation, data augmentation</td>
+    </tr>
+    <tr>
+      <td>Rendering layer</td>
+      <td><code class="language-plaintext highlighter-rouge">rrglwidget.cpp</code>, <code class="language-plaintext highlighter-rouge">ddr6robotwidget.cpp</code>, <code class="language-plaintext highlighter-rouge">stlfileloader.cpp</code></td>
+      <td>OpenGL initialization, binary STL parsing, robot joint transforms, interactive rendering</td>
+    </tr>
+    <tr>
+      <td>Runtime support</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code>, <code class="language-plaintext highlighter-rouge">scripts/</code>, <code class="language-plaintext highlighter-rouge">docs/reproduction/</code></td>
+      <td>Project-root discovery, Python environment lookup, output directory handling, packaging support</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="22-source-tree">2.2 Source Tree</h3>
+
+<p>Key files in <code class="language-plaintext highlighter-rouge">HMI</code>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HMI/
+├── HMI.pro                         # Qt qmake project file
+├── main.cpp                        # Application entry and --self-test entry
+├── logon.*                         # Login window
+├── secinterface.*                  # Secondary module-selection window
+├── mainwindow.*                    # Robot control and serial communication window
+├── seamtest.*                      # Weld-seam recognition window
+├── globaleventbus.*                # Recognition-success event bus
+├── runtime_paths.*                 # Runtime path, Python environment, and output path lookup
+├── rrglwidget.*                    # Base OpenGL rendering widget
+├── ddr6robotwidget.*               # LeArm digital-twin rendering widget
+├── stlfileloader.*                 # STL file parsing and drawing
+├── predict.py                      # Single-image inference entry
+├── unet.py                         # Inference wrapper
+├── train.py                        # Training script
+├── get_miou.py                     # mIoU evaluation entry
+├── json_to_dataset.py              # LabelMe JSON to segmentation dataset conversion
+├── nets/                           # UNet/VGG16 network definitions
+├── utils/                          # Dataloader, loss, training, and metric utilities
+├── model_data/                     # Model-weight directory, default: seam_unet.pth
+├── res/binary/                     # LeArm STL directory, not publicly redistributed
+├── docs/                           # Dataset, weight, reproduction, and packaging notes
+└── scripts/                        # Local environment and packaging scripts
+</code></pre></div></div>
+
+<h3 id="23-build-and-dependency-model">2.3 Build and Dependency Model</h3>
+
+<p>The Qt project is managed by <code class="language-plaintext highlighter-rouge">HMI.pro</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qt modules</td>
+      <td><code class="language-plaintext highlighter-rouge">core</code>, <code class="language-plaintext highlighter-rouge">gui</code>, <code class="language-plaintext highlighter-rouge">widgets</code>, <code class="language-plaintext highlighter-rouge">serialport</code>, <code class="language-plaintext highlighter-rouge">opengl</code></td>
+    </tr>
+    <tr>
+      <td>C++ standard</td>
+      <td>C++17</td>
+    </tr>
+    <tr>
+      <td>Python integration</td>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_HOME</code> and <code class="language-plaintext highlighter-rouge">PYTHON_VERSION</code> provide Python headers and library paths</td>
+    </tr>
+    <tr>
+      <td>macOS rpath</td>
+      <td>Points to <code class="language-plaintext highlighter-rouge">PYTHON_HOME/lib</code> and the bundled <code class="language-plaintext highlighter-rouge">Resources/python/lib</code> directory</td>
+    </tr>
+    <tr>
+      <td>Qt resources</td>
+      <td><code class="language-plaintext highlighter-rouge">res.qrc</code>, including UI image resources</td>
+    </tr>
+    <tr>
+      <td>Source files</td>
+      <td>Control, recognition, event bus, runtime-path, OpenGL, and STL-loading files</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Python dependencies are recorded in <code class="language-plaintext highlighter-rouge">requirements.txt</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dependency</th>
+      <th>Version</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">torch</code></td>
+      <td>1.10.2</td>
+      <td>Model training and inference</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">torchvision</code></td>
+      <td>0.11.3</td>
+      <td>Vision model and preprocessing ecosystem</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">opencv-python</code></td>
+      <td>4.1.2.30</td>
+      <td>Resize, color conversion, post-processing</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Pillow</code></td>
+      <td>8.3.1</td>
+      <td>Image loading, saving, and blending</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">numpy</code></td>
+      <td>1.19.2</td>
+      <td>Array computation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">labelme</code></td>
+      <td>3.16.7</td>
+      <td>Annotation data processing</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">matplotlib</code></td>
+      <td>3.3.4</td>
+      <td>Training curves and evaluation visualization</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tqdm</code></td>
+      <td>4.60.0</td>
+      <td>Training progress bars</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-weld-seam-semantic-segmentation">3. Weld-Seam Semantic Segmentation</h2>
+
+<h3 id="31-technical-flow">3.1 Technical Flow</h3>
+
+<p>The recognition module uses a U-Net style semantic segmentation pipeline. The complete process is: collect weld-seam images under multiple viewpoints and lighting conditions, annotate the seam region with LabelMe, convert JSON annotations into a VOC-style segmentation dataset, train a VGG-UNet model, evaluate mIoU, and call <code class="language-plaintext highlighter-rouge">predict.py</code> from the HMI for single-image inference.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-unet-flow.jpeg" alt="U-Net semantic segmentation workflow" /></p>
+
+<p>Figure 2-1. U-Net semantic segmentation workflow.</p>
+
+<h3 id="32-data-collection-and-annotation">3.2 Data Collection and Annotation</h3>
+
+<p>The weld-seam task uses pixel-level labels. Unlike object detection, which annotates rectangular boxes, semantic segmentation assigns a category to every pixel. The thesis workflow uses LabelMe polygons to outline weld-seam boundaries.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-labelme-annotation.png" alt="LabelMe weld-seam polygon annotation" /></p>
+
+<p>Figure 2-2. LabelMe annotation example.</p>
+
+<p>The dataset is binary:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Class Index</th>
+      <th>Class Name</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td><code class="language-plaintext highlighter-rouge">_background_</code></td>
+      <td>Background</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><code class="language-plaintext highlighter-rouge">seam</code></td>
+      <td>Weld seam</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The public dataset notes record the following split:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Split</th>
+      <th style="text-align: right">Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>train</td>
+      <td style="text-align: right">845</td>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td style="text-align: right">94</td>
+    </tr>
+    <tr>
+      <td>trainval</td>
+      <td style="text-align: right">939</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>VOC-style layout:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VOC2007/
+├── JPEGImages/                 # Original images
+├── SegmentationClass/          # Segmentation masks
+└── ImageSets/
+    └── Segmentation/
+        ├── train.txt
+        ├── val.txt
+        └── trainval.txt
+</code></pre></div></div>
+
+<h3 id="33-labelme-json-to-voc-masks">3.3 LabelMe JSON to VOC Masks</h3>
+
+<p>The conversion script is <code class="language-plaintext highlighter-rouge">json_to_dataset.py</code>. Its core logic:</p>
+
+<ol>
+  <li>Scan LabelMe JSON files under <code class="language-plaintext highlighter-rouge">datasets/before/</code>.</li>
+  <li>Read the source image from either the JSON <code class="language-plaintext highlighter-rouge">imageData</code> field or the <code class="language-plaintext highlighter-rouge">imagePath</code> field.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">labelme.utils.shapes_to_label</code> to rasterize polygon annotations into a pixel label matrix.</li>
+  <li>Build the class mapping: <code class="language-plaintext highlighter-rouge">_background_ -&gt; 0</code>, <code class="language-plaintext highlighter-rouge">seam -&gt; 1</code>.</li>
+  <li>Save the source image to <code class="language-plaintext highlighter-rouge">datasets/JPEGImages</code> and the mask to <code class="language-plaintext highlighter-rouge">datasets/SegmentationClass</code>.</li>
+</ol>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-mask.png" alt="Generated weld-seam mask" /></p>
+
+<p>Figure 2-3. Generated mask image.</p>
+
+<p>Two implementation constraints matter:</p>
+
+<ul>
+  <li>Masks must store class indices, not RGB colors. During training, <code class="language-plaintext highlighter-rouge">utils/dataloader.py</code> converts them into one-hot labels.</li>
+  <li>Label resizing must use nearest-neighbor interpolation so continuous interpolation does not corrupt class indices.</li>
+</ul>
+
+<h3 id="34-network-structure">3.4 Network Structure</h3>
+
+<h4 id="341-base-u-net">3.4.1 Base U-Net</h4>
+
+<p>U-Net consists of an encoder, a decoder, and skip connections. The encoder progressively downsamples features from local details to global semantics. The decoder upsamples them to recover spatial resolution. Skip connections concatenate encoder-side detail features with decoder-side semantic features, which improves edge recovery.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-unet-architecture.png" alt="U-Net encoder-decoder architecture" /></p>
+
+<p>Figure 2-8. U-Net architecture.</p>
+
+<h4 id="342-vgg-unet">3.4.2 VGG-UNet</h4>
+
+<p>The final model uses <code class="language-plaintext highlighter-rouge">backbone = "vgg"</code>. Its encoder uses VGG16 to extract multi-scale features. The decoder uses <code class="language-plaintext highlighter-rouge">unetUp</code> modules to recover spatial resolution and concatenate same-scale encoder features. This structure works better than the initial U-Net variant for the small-sample weld-seam segmentation scenario.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-vgg16.jpeg" alt="VGG16 backbone structure" /></p>
+
+<p>Figure 2-10. VGG16 network structure.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-vgg-unet.jpeg" alt="VGG-UNet structure" /></p>
+
+<p>Figure 2-11. VGG-UNet structure.</p>
+
+<p>Implementation notes in <code class="language-plaintext highlighter-rouge">nets/unet.py</code>:</p>
+
+<ol>
+  <li>The <code class="language-plaintext highlighter-rouge">Unet</code> class switches between a VGG16 encoder and the original U-Net encoder through the <code class="language-plaintext highlighter-rouge">backbone</code> argument.</li>
+  <li>In VGG mode, the encoder outputs five feature levels: <code class="language-plaintext highlighter-rouge">feat1</code> through <code class="language-plaintext highlighter-rouge">feat5</code>.</li>
+  <li>The decoder executes <code class="language-plaintext highlighter-rouge">up_concat4</code>, <code class="language-plaintext highlighter-rouge">up_concat3</code>, <code class="language-plaintext highlighter-rouge">up_concat2</code>, and <code class="language-plaintext highlighter-rouge">up_concat1</code>.</li>
+  <li>The final layer generates two-class pixel logits: background and weld seam.</li>
+</ol>
+
+<p>Execution order:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>up4 = up_concat4(feat4, feat5)
+up3 = up_concat3(feat3, up4)
+up2 = up_concat2(feat2, up3)
+up1 = up_concat1(feat1, up2)
+final = output_layer(up1)
+</code></pre></div></div>
+
+<p>The structure fits weld-seam boundary segmentation because pretrained VGG16 features improve convergence and generalization on a small dataset, U-Net skip connections preserve edge and texture detail, and binary output keeps the task focused on seam versus background.</p>
+
+<h3 id="35-training-configuration">3.5 Training Configuration</h3>
+
+<p>The training entry is <code class="language-plaintext highlighter-rouge">train.py</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Current Value</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Cuda</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>Prefer GPU</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_classes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>Background + weld seam</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backbone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"vgg"</code></td>
+      <td>VGG16 encoder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pretrained</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>Initialize from pretrained weights</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">model_path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+      <td>Load or fine-tune an existing weight</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">input_shape</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[512, 512]</code></td>
+      <td>Network input size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_Epoch</code></td>
+      <td><code class="language-plaintext highlighter-rouge">50</code></td>
+      <td>Freeze-stage training target</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_batch_size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>Freeze-stage batch size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_lr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">1e-4</code></td>
+      <td>Freeze-stage learning rate</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnFreeze_Epoch</code></td>
+      <td><code class="language-plaintext highlighter-rouge">100</code></td>
+      <td>Unfreeze-stage training target</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Unfreeze_batch_size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>Unfreeze-stage batch size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Unfreeze_lr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">1e-5</code></td>
+      <td>Unfreeze-stage learning rate</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dice_loss</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>Use Dice Loss for small-object segmentation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">focal_loss</code></td>
+      <td><code class="language-plaintext highlighter-rouge">False</code></td>
+      <td>Not enabled in the current configuration</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">optimizer</code></td>
+      <td>Adam</td>
+      <td>Adaptive optimizer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lr_scheduler</code></td>
+      <td>StepLR, gamma=0.96</td>
+      <td>Learning-rate decay per epoch</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_workers</code></td>
+      <td><code class="language-plaintext highlighter-rouge">4</code></td>
+      <td>Dataloader worker count</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Training flow:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+    ReadList[Read train.txt / val.txt] --&gt; Dataset[UnetDataset]
+    Dataset --&gt; Aug[Augmentation and preprocessing]
+    Aug --&gt; Loader[DataLoader]
+    Loader --&gt; Forward[Forward pass]
+    Forward --&gt; Loss[CE Loss + Dice Loss]
+    Loss --&gt; Backward[Backpropagation]
+    Backward --&gt; Adam[Adam update]
+    Adam --&gt; Save[Save logs/ep*-loss*.pth]
+</code></pre>
+
+<h3 id="36-augmentation-and-preprocessing">3.6 Augmentation and Preprocessing</h3>
+
+<p><code class="language-plaintext highlighter-rouge">utils/dataloader.py</code> implements training augmentation in <code class="language-plaintext highlighter-rouge">get_random_data()</code>. Validation only performs aspect-ratio preserving resize and center padding.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Augmentation</th>
+      <th>Implementation</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aspect-ratio jitter</td>
+      <td><code class="language-plaintext highlighter-rouge">jitter=.3</code> with random target aspect ratio</td>
+      <td>Improve robustness to viewpoints and seam shapes</td>
+    </tr>
+    <tr>
+      <td>Random scale</td>
+      <td><code class="language-plaintext highlighter-rouge">scale</code> from 0.25 to 2</td>
+      <td>Improve scale robustness</td>
+    </tr>
+    <tr>
+      <td>Horizontal flip</td>
+      <td>50% probability</td>
+      <td>Improve direction invariance</td>
+    </tr>
+    <tr>
+      <td>Random placement</td>
+      <td>Paste the resized image onto a 512x512 gray canvas</td>
+      <td>Simulate target position variation</td>
+    </tr>
+    <tr>
+      <td>HSV jitter</td>
+      <td>Random hue, saturation, and value shifts</td>
+      <td>Improve robustness under lighting variation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Image preprocessing:</p>
+
+<ol>
+  <li>Use <code class="language-plaintext highlighter-rouge">cvtColor()</code> to ensure RGB input.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">resize_image()</code> to fit 512x512 while preserving aspect ratio; pad the rest with gray.</li>
+  <li>Apply <code class="language-plaintext highlighter-rouge">preprocess_input()</code> normalization.</li>
+  <li>Convert <code class="language-plaintext highlighter-rouge">HWC</code> to <code class="language-plaintext highlighter-rouge">CHW</code>, then add the batch dimension.</li>
+</ol>
+
+<p>Label processing:</p>
+
+<ol>
+  <li>Resize masks with nearest-neighbor interpolation.</li>
+  <li>Map out-of-range pixels to <code class="language-plaintext highlighter-rouge">num_classes</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">np.eye(num_classes + 1)</code> for one-hot labels used by Dice/F-score metrics.</li>
+</ol>
+
+<h3 id="37-losses-and-metrics">3.7 Losses and Metrics</h3>
+
+<p>The default training loss is cross-entropy plus Dice Loss. Dice Loss is useful for small-object segmentation because the weld seam occupies a small image area.</p>
+
+<pre><code class="language-math">DiceLoss = 1 - \frac{2|X \cap Y|}{|X| + |Y|}
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">X</code> is the predicted region and <code class="language-plaintext highlighter-rouge">Y</code> is the ground-truth annotation.</p>
+
+<p>The evaluation metrics are pixel-level IoU, PA Recall, and Precision:</p>
+
+<pre><code class="language-math">PA\_Recall = \frac{TP}{TP + FN}
+</code></pre>
+
+<pre><code class="language-math">Precision = \frac{TP}{TP + FP}
+</code></pre>
+
+<pre><code class="language-math">IoU = \frac{TP}{TP + FP + FN}
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TP</td>
+      <td>Weld-seam pixels correctly recognized</td>
+    </tr>
+    <tr>
+      <td>FP</td>
+      <td>Background pixels wrongly predicted as weld seam</td>
+    </tr>
+    <tr>
+      <td>FN</td>
+      <td>Actual weld-seam pixels missed by the model</td>
+    </tr>
+    <tr>
+      <td>TN</td>
+      <td>Background pixels correctly excluded</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-iou-diagram.png" alt="Intersection-over-Union metric diagram" /></p>
+
+<p>Figure 2-9. IoU diagram.</p>
+
+<h3 id="38-optimization-results">3.8 Optimization Results</h3>
+
+<p>The recorded optimization path has three main stages:</p>
+
+<ol>
+  <li>Switching from the original U-Net to VGG-UNet improved segmentation accuracy from about 64% to about 87%.</li>
+  <li>Adding VGG16 pretrained weights improved it from about 87% to about 89%.</li>
+  <li>Expanding the dataset from 30 images to 939 images reached about <strong>96.8%</strong> accuracy.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>VGG-UNet mIoU</th>
+      <th>Original U-Net mIoU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-vgg-unet.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-unet.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Figures 2-12 and 2-13. Model-structure comparison.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Without Pretraining</th>
+      <th>With Pretraining</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-no-pretrain.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-pretrain.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Figures 2-14 and 2-15. Pretraining comparison.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>30-Image Dataset</th>
+      <th>939-Image Dataset</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-30-samples.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-939-samples.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Figures 2-16 and 2-17. Dataset expansion comparison.</p>
+
+<p>Before-and-after segmentation comparison:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-recognition-comparison.jpeg" alt="Weld-seam segmentation comparison" /></p>
+
+<p>Figure 2-18. Semantic segmentation comparison.</p>
+
+<h3 id="39-inference-flow">3.9 Inference Flow</h3>
+
+<p>The inference entry is <code class="language-plaintext highlighter-rouge">predict.py</code>, and the wrapper class is <code class="language-plaintext highlighter-rouge">Unet</code> in <code class="language-plaintext highlighter-rouge">unet.py</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">model_path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_classes</code></td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backbone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vgg</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">input_shape</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[512, 512]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mix_type</code></td>
+      <td>1, blend original image and segmentation result</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cuda</code></td>
+      <td>automatically determined</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The HMI calls the Python script through <code class="language-plaintext highlighter-rouge">QProcess</code>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seamtest::processImage(imagePath)
+  -&gt; QProcess starts predict.py
+  -&gt; predict.py loads Unet
+  -&gt; detect_image(image)
+  -&gt; save segmented_image.png
+  -&gt; seamtest reads and displays the result
+</code></pre></div></div>
+
+<p>The result displayed in the HMI:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-hmi-recognition.png" alt="HMI weld-seam recognition result" /></p>
+
+<p>Figure 2-19. HMI recognition result.</p>
+
+<h2 id="4-qtc-hmi-control-module">4. Qt/C++ HMI Control Module</h2>
+
+<h3 id="41-from-pyqt-prototype-to-c-qt">4.1 From PyQt Prototype to C++ Qt</h3>
+
+<p>The project initially explored a PyQt-based prototype, but the final HMI was refactored into C++ Qt. The refactor has practical reasons:</p>
+
+<ol>
+  <li>Qt Designer UI files, C++ signal-slot wiring, and OpenGL widgets can be integrated directly.</li>
+  <li><code class="language-plaintext highlighter-rouge">QSerialPort</code> provides convenient serial-port scanning and byte-array sending.</li>
+  <li><code class="language-plaintext highlighter-rouge">QGLWidget</code> and legacy OpenGL immediate mode are easier to integrate with the Robot3D reference code.</li>
+  <li>qmake plus platform deployment tools can produce desktop application bundles.</li>
+</ol>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-qt-designer.png" alt="Qt Designer interface layout" /></p>
+
+<p>Figure 3-2. Qt Designer interface layout.</p>
+
+<h3 id="42-application-flow-and-windows">4.2 Application Flow and Windows</h3>
+
+<p><code class="language-plaintext highlighter-rouge">main.cpp</code> starts the <code class="language-plaintext highlighter-rouge">Secinterface</code> window in normal mode. The <code class="language-plaintext highlighter-rouge">--self-test</code> argument enters an automated smoke-test mode.</p>
+
+<p>Main UI classes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>UI File</th>
+      <th>Responsibility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Logon</code></td>
+      <td><code class="language-plaintext highlighter-rouge">logon.ui</code></td>
+      <td>Login and remember-password checkbox</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Secinterface</code></td>
+      <td><code class="language-plaintext highlighter-rouge">secinterface.ui</code></td>
+      <td>Secondary module selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MainWindow</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mainwindow.ui</code></td>
+      <td>Serial communication, robot control, digital twin</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seamtest</code></td>
+      <td><code class="language-plaintext highlighter-rouge">seamtest.ui</code></td>
+      <td>Image selection, inference process, result display</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Login logic:</p>
+
+<ul>
+  <li>Default credentials: <code class="language-plaintext highlighter-rouge">username: admin</code>, <code class="language-plaintext highlighter-rouge">password: admin</code>.</li>
+  <li>The remember-password checkbox is saved into <code class="language-plaintext highlighter-rouge">config.json</code>.</li>
+  <li>A successful login emits the <code class="language-plaintext highlighter-rouge">login()</code> signal.</li>
+  <li><code class="language-plaintext highlighter-rouge">Secinterface</code> receives the signal and switches to the function-selection window.</li>
+</ul>
+
+<p>Login and module-selection windows:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-login-window.png" alt="Login window" /></p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-module-menu.png" alt="Secondary module selection window" /></p>
+
+<p>UI design drafts:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Login UI Design</th>
+      <th>Module Selection UI Design</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-login-ui-design.jpeg" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-menu-ui-design.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="43-serial-port-control-logic">4.3 Serial-Port Control Logic</h3>
+
+<p><code class="language-plaintext highlighter-rouge">MainWindow</code> provides serial-port scanning, parameter configuration, opening/closing the port, manual HEX sending, slider control, and robot-digital-twin synchronization.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-control-flow.jpeg" alt="HMI control logic flow" /></p>
+
+<p>Control-window sections:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Overview</th>
+      <th>Serial Settings</th>
+      <th>Joint Slider Area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-overview.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-serial.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-slider.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Serial-port detection:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-serial-detection.png" alt="Serial-port detection panel" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">MainWindow::detectPort()</code> refreshes available serial ports through <code class="language-plaintext highlighter-rouge">QSerialPortInfo::availablePorts()</code>. When a port is selected, baud rate, data bits, parity, stop bits, and flow control are configured before opening the port.</p>
+
+<h3 id="44-servo-control-protocol">4.4 Servo Control Protocol</h3>
+
+<p>The LeArm servo-control area uses six sliders and six text boxes. Each slider updates the corresponding joint value, sends a serial command when the port is open, and updates the OpenGL digital-twin pose.</p>
+
+<p>The command packet follows this pattern:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>55 55 len cmd servo_id low_byte high_byte time_low time_high
+</code></pre></div></div>
+
+<p>The implementation assembles a <code class="language-plaintext highlighter-rouge">QByteArray</code>, converts slider values into low/high bytes, and writes it through <code class="language-plaintext highlighter-rouge">serial-&gt;write(data)</code>.</p>
+
+<h3 id="45-slider-to-digital-twin-joint-mapping">4.5 Slider to Digital-Twin Joint Mapping</h3>
+
+<p>Slider values are not used as joint angles directly. They are first mapped into model-space joint variables.</p>
+
+<p>Important observations from the implementation:</p>
+
+<ul>
+  <li>Sliders use Hiwonder-style servo pulse values.</li>
+  <li><code class="language-plaintext highlighter-rouge">DDR6RobotWidget::setJ1()</code> through <code class="language-plaintext highlighter-rouge">setJ6()</code> update the six model joint variables.</li>
+  <li>After each update, <code class="language-plaintext highlighter-rouge">updateGL()</code> refreshes the OpenGL view.</li>
+  <li>The model offsets are tuned to match the STL coordinate frames and the robot’s visual pose.</li>
+</ul>
+
+<p>Signal-slot and slider-control diagrams:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-signal-slot.jpeg" alt="Qt signal-slot flow for joint control" /></p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-slider-control.png" alt="Slider-based independent joint control" /></p>
+
+<h3 id="46-weld-seam-window-and-python-inference-integration">4.6 Weld-Seam Window and Python Inference Integration</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">seamtest</code> window manages image selection and recognition.</p>
+
+<p>Main flow:</p>
+
+<ol>
+  <li>The user selects an image.</li>
+  <li>The HMI displays the source image.</li>
+  <li><code class="language-plaintext highlighter-rouge">QProcess</code> starts the Python inference script.</li>
+  <li>The HMI waits for process completion.</li>
+  <li>The HMI reads <code class="language-plaintext highlighter-rouge">segmented_image.png</code>.</li>
+  <li>The result is displayed in the right-side preview area.</li>
+  <li>If recognition succeeds, <code class="language-plaintext highlighter-rouge">seam_detect_success()</code> is emitted.</li>
+</ol>
+
+<p>Using <code class="language-plaintext highlighter-rouge">QProcess</code> keeps Python inference isolated from the C++ UI. It also avoids embedding Python model code inside the Qt process, which would make packaging and dependency handling more fragile.</p>
+
+<h3 id="47-runtime-path-management">4.7 Runtime Path Management</h3>
+
+<p><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code> prevents the application from relying on a fixed working directory. It resolves:</p>
+
+<ul>
+  <li>Project root.</li>
+  <li>Python executable.</li>
+  <li>Python environment path.</li>
+  <li>Inference output path.</li>
+  <li><code class="language-plaintext highlighter-rouge">segmented_image.png</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">config.json</code>.</li>
+  <li>STL resource directory.</li>
+</ul>
+
+<p>The lookup order is:</p>
+
+<ol>
+  <li>Use <code class="language-plaintext highlighter-rouge">HMI_PROJECT_ROOT</code> if it is set.</li>
+  <li>Otherwise infer the project root from the application path and known project files.</li>
+  <li>For Python, prefer <code class="language-plaintext highlighter-rouge">PYTHON_EXECUTABLE</code>, then derive from <code class="language-plaintext highlighter-rouge">PYTHON_HOME</code>, then fall back to <code class="language-plaintext highlighter-rouge">python</code>.</li>
+  <li>For outputs, prefer <code class="language-plaintext highlighter-rouge">HMI_OUTPUT_DIR</code>, then fall back to a writable runtime directory.</li>
+</ol>
+
+<p>This design is important because Qt applications behave differently when run from the build directory, from a <code class="language-plaintext highlighter-rouge">.app</code> bundle, or from a packaged directory.</p>
+
+<h2 id="5-digital-twin-module">5. Digital-Twin Module</h2>
+
+<h3 id="51-robot-object-and-modeling-goal">5.1 Robot Object and Modeling Goal</h3>
+
+<p>The digital-twin module aims to show the LeArm robot pose in the HMI and to let the user observe the effect of each slider-controlled joint. The model is not a physics simulator; it is a visual and kinematic representation for HMI feedback.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Robot Model</th>
+      <th>DH Coordinate Frame</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-robot-dh-model.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-robot-dh-frame.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="52-modified-dh-parameters">5.2 Modified DH Parameters</h3>
+
+<p>The coordinate system uses a modified DH convention.</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-modified-dh-frame.jpeg" alt="Modified DH coordinate frame" /></p>
+
+<p>Figure 4-3. Modified DH coordinate frame.</p>
+
+<p>Recorded dimensions:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d1 = 95 mm
+d2 = 9.5 mm
+d3 = 104 mm
+d4 = 88.47 mm
+d5 = 59.28 mm
+</code></pre></div></div>
+
+<p>Modified DH table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>i</th>
+      <th style="text-align: right">a(i-1)</th>
+      <th style="text-align: right">alpha(i-1)</th>
+      <th style="text-align: right">d(i)</th>
+      <th style="text-align: right">theta(i)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">d1</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">d2</td>
+      <td style="text-align: right">-pi/2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">d3</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">d4</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+      <td style="text-align: right">d5</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">pi/2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">DDR6RobotWidget::configureModelParams()</code> uses rendering parameters:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mRobotConfig</span><span class="p">.</span><span class="n">d</span>     <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">59.28</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">JVars</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">a</span>     <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.8</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mf">88.47</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>The leading element is a placeholder, and actual joints start at index 1. <code class="language-plaintext highlighter-rouge">a[2] = -9.8</code> corresponds to the small structural offset near the documented <code class="language-plaintext highlighter-rouge">d2 = 9.5 mm</code>, with sign and magnitude adjusted to align the STL coordinate frames.</p>
+
+<h3 id="53-forward-kinematics">5.3 Forward Kinematics</h3>
+
+<p>The single-step modified DH transform:</p>
+
+<pre><code class="language-math">^{i-1}T_i =
+R_X(\alpha_{i-1})
+D_X(a_{i-1})
+R_Z(\theta_i)
+D_Z(d_i)
+</code></pre>
+
+<p>Matrix form:</p>
+
+<pre><code class="language-math">^{i-1}T_i =
+\begin{bmatrix}
+\cos\theta_i &amp; -\sin\theta_i &amp; 0 &amp; a_{i-1} \\
+\sin\theta_i\cos\alpha_{i-1} &amp; \cos\theta_i\cos\alpha_{i-1} &amp; -\sin\alpha_{i-1} &amp; -\sin\alpha_{i-1}d_i \\
+\sin\theta_i\sin\alpha_{i-1} &amp; \cos\theta_i\sin\alpha_{i-1} &amp; \cos\alpha_{i-1} &amp; \cos\alpha_{i-1}d_i \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+</code></pre>
+
+<p>The full end-effector pose:</p>
+
+<pre><code class="language-math">^0T_i = ^0T_1 \cdot ^1T_2 \cdot \ldots \cdot ^{i-1}T_i
+</code></pre>
+
+<p>In OpenGL rendering, the code does not build an explicit matrix object. It applies the transforms in order:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glTranslatef</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotatef</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glTranslatef</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+<span class="n">glRotatef</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>OpenGL’s matrix stack performs the accumulated transforms implicitly, so each link is drawn relative to the previous link.</p>
+
+<h3 id="54-inverse-kinematics-and-verification">5.4 Inverse Kinematics and Verification</h3>
+
+<p>The thesis derives analytic expressions for <code class="language-plaintext highlighter-rouge">theta1</code> through <code class="language-plaintext highlighter-rouge">theta6</code> from the homogeneous transform matrix. The core idea:</p>
+
+<ol>
+  <li>Use the position terms to solve <code class="language-plaintext highlighter-rouge">theta1</code>.</li>
+  <li>Use orientation-matrix elements to eliminate variables and solve <code class="language-plaintext highlighter-rouge">theta5</code> and <code class="language-plaintext highlighter-rouge">theta6</code>.</li>
+  <li>Use the combined angle <code class="language-plaintext highlighter-rouge">theta234</code> for wrist orientation.</li>
+  <li>Use geometry to solve <code class="language-plaintext highlighter-rouge">theta2</code> and <code class="language-plaintext highlighter-rouge">theta3</code>.</li>
+  <li>Compute <code class="language-plaintext highlighter-rouge">theta4 = theta234 - theta2 - theta3</code>.</li>
+</ol>
+
+<p>Because serial robot inverse kinematics can have multiple solutions, singularities, and unreachable poses, the notes record eight candidate solutions and some <code class="language-plaintext highlighter-rouge">NaN</code> entries. This is consistent with analytic IK for a six-axis serial arm.</p>
+
+<p>Robotics Toolbox was used to cross-check forward and inverse kinematics:</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-robotics-toolbox.png" alt="Robotics Toolbox verification" /></p>
+
+<p>Figure 4-4. Robotics Toolbox simulation.</p>
+
+<p>Forward-kinematics test data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Input Joint Angles</th>
+      <th>End-Effector Pose Matrix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[pi/4, -2*pi/3, -2*pi/3, 0, 2*pi/3, 0]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[[0.7891, -0.6124, 0.0474, -9.6593], [-0.4356, -0.6124, -0.6597, -9.6593], [0.4330, 0.5000, -0.7500, 15.0000], [0, 0, 0, 1.0000]]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The inverse-kinematics test shows that <code class="language-plaintext highlighter-rouge">T2</code> matches the preset <code class="language-plaintext highlighter-rouge">T0</code>, so the analytic inverse solution and the forward solution are consistent at the tested point.</p>
+
+<h3 id="55-stl-loading">5.5 STL Loading</h3>
+
+<p>Each robot link uses a binary STL file:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>res/binary/
+├── base_link.STL
+├── link_1.STL
+├── link_2.STL
+├── link_3.STL
+├── link_4.STL
+└── link_5.STL
+</code></pre></div></div>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-joint-parts.png" alt="LeArm joint part" /></p>
+
+<p>Figure 4-5. Joint part.</p>
+
+<p><code class="language-plaintext highlighter-rouge">STLFileLoader::loadBinaryStl()</code> parses binary STL files:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Byte Range</th>
+      <th>Content</th>
+      <th style="text-align: right">Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0-79</td>
+      <td>File header</td>
+      <td style="text-align: right">80 bytes</td>
+    </tr>
+    <tr>
+      <td>80-83</td>
+      <td>Triangle count <code class="language-plaintext highlighter-rouge">triangle_num</code></td>
+      <td style="text-align: right">4 bytes</td>
+    </tr>
+    <tr>
+      <td>Each triangle</td>
+      <td>Normal vector + three vertices + attribute field</td>
+      <td style="text-align: right">50 bytes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Single-triangle layout:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Content</th>
+      <th style="text-align: right">Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>normal</td>
+      <td>3 floats</td>
+      <td style="text-align: right">12 bytes</td>
+    </tr>
+    <tr>
+      <td>vertex 1</td>
+      <td>3 floats</td>
+      <td style="text-align: right">12 bytes</td>
+    </tr>
+    <tr>
+      <td>vertex 2</td>
+      <td>3 floats</td>
+      <td style="text-align: right">12 bytes</td>
+    </tr>
+    <tr>
+      <td>vertex 3</td>
+      <td>3 floats</td>
+      <td style="text-align: right">12 bytes</td>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>Attribute byte count</td>
+      <td style="text-align: right">2 bytes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The theoretical file size is:</p>
+
+<pre><code class="language-math">FileSize = 84 + 50 \times N_{facet}
+</code></pre>
+
+<p>The code reads the file into memory and parses it with pointer offsets. This keeps the logic simple and fast for small LeArm demo models, although larger models would benefit from streaming or buffered parsing.</p>
+
+<h3 id="56-opengl-rendering-pipeline">5.6 OpenGL Rendering Pipeline</h3>
+
+<p><code class="language-plaintext highlighter-rouge">RRGLWidget</code> inherits from <code class="language-plaintext highlighter-rouge">QGLWidget</code>. Its responsibilities:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">initializeGL()</code></td>
+      <td>Configure lighting, depth testing, normal normalization, background color</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">resizeGL()</code></td>
+      <td>Set viewport and perspective projection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">paintGL()</code></td>
+      <td>Overridden by subclasses for each-frame rendering</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawGrid()</code></td>
+      <td>Draw ground grid</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawCoordinates()</code></td>
+      <td>Draw world coordinate frame</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawSTLCoordinates()</code></td>
+      <td>Draw local STL coordinate frame</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">setupColor()</code></td>
+      <td>Configure material color</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mouseMoveEvent()</code></td>
+      <td>Handle rotation, zoom, and pan</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">STLFileLoader::draw()</code> uses immediate-mode OpenGL:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glBegin</span><span class="p">(</span><span class="n">GL_TRIANGLES</span><span class="p">);</span>
+<span class="k">for</span> <span class="n">each</span> <span class="n">triangle</span><span class="o">:</span>
+    <span class="n">glNormal3f</span><span class="p">(</span><span class="n">normal</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">normal</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">normal</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex0</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex0</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex0</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="n">glEnd</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>This is appropriate for learning and verification, but a larger or higher-frame-rate model should move to VBO/VAO rendering to reduce CPU-to-GPU submissions.</p>
+
+<h3 id="57-joint-level-rendering">5.7 Joint-Level Rendering</h3>
+
+<p><code class="language-plaintext highlighter-rouge">DDR6RobotWidget</code> inherits <code class="language-plaintext highlighter-rouge">RRGLWidget</code>. It loads every link STL and applies matrix transforms in joint order.</p>
+
+<p>Initial view parameters:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">z_zoom</span> <span class="o">=</span> <span class="o">-</span><span class="mi">500</span><span class="p">;</span>
+<span class="n">xRot</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+<span class="n">yRot</span> <span class="o">=</span> <span class="mi">45</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+<span class="n">xTran</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">yTran</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">paintGL()</code> clears color/depth buffers and applies the view transform:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glTranslated</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_zoom</span><span class="p">);</span>
+<span class="n">glTranslated</span><span class="p">(</span><span class="n">xTran</span><span class="p">,</span> <span class="n">yTran</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">xRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">yRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">zRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="o">+</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">drawGL</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">drawGL()</code> draws base, link1, link2, link3, link4, and link5 in order. Before each link is drawn, the corresponding DH translation and rotation are applied; later links inherit the transforms from earlier joints.</p>
+
+<p>Digital-twin and physical states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>HMI State 1</th>
+      <th>Physical State 1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-digital-twin-state-1.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-physical-state-1.jpeg" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>HMI State 2</th>
+      <th>Physical State 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-digital-twin-state-2.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-physical-state-2.jpeg" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Figure 4-6. Digital-twin state compared with physical robot state.</p>
+
+<h3 id="58-mouse-interaction">5.8 Mouse Interaction</h3>
+
+<p><code class="language-plaintext highlighter-rouge">RRGLWidget::mouseMoveEvent()</code> supports three interactions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mouse Operation</th>
+      <th>Variable</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Left drag</td>
+      <td><code class="language-plaintext highlighter-rouge">xRot</code>, <code class="language-plaintext highlighter-rouge">yRot</code></td>
+      <td>Rotate view</td>
+    </tr>
+    <tr>
+      <td>Right drag</td>
+      <td><code class="language-plaintext highlighter-rouge">z_zoom</code></td>
+      <td>Zoom view</td>
+    </tr>
+    <tr>
+      <td>Middle drag</td>
+      <td><code class="language-plaintext highlighter-rouge">xTran</code>, <code class="language-plaintext highlighter-rouge">yTran</code></td>
+      <td>Pan view</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Qt stores rotation values as <code class="language-plaintext highlighter-rouge">angle * 16</code>, so rendering divides by 16.0 to recover degrees.</p>
+
+<h2 id="6-module-coupling">6. Module Coupling</h2>
+
+<h3 id="61-from-recognition-success-to-robot-motion">6.1 From Recognition Success to Robot Motion</h3>
+
+<p>The recognition module and robot-control module are decoupled through <code class="language-plaintext highlighter-rouge">globaleventbus</code>.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Seam as seamtest
+    participant Proc as QProcess/predict.py
+    participant Bus as globaleventbus
+    participant Main as MainWindow
+    participant Twin as DDR6RobotWidget
+    participant Serial as QSerialPort
+
+    Seam-&gt;&gt;Proc: processImage(imagePath)
+    Proc--&gt;&gt;Seam: exitCode == 0
+    Seam-&gt;&gt;Seam: Check segmented_image.png
+    Seam-&gt;&gt;Bus: emit seam_detect_success()
+    Bus-&gt;&gt;Bus: onSeamDetectionSuccess()
+    Bus--&gt;&gt;Main: emit seamDetectionSuccess()
+    Main-&gt;&gt;Main: move_Learm()
+    Main-&gt;&gt;Twin: Update six sliders and JVars
+    Main-&gt;&gt;Serial: Send servo command if port is open
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">globaleventbus</code> is a QObject singleton:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">globaleventbus</span><span class="o">*</span> <span class="nf">getInstance</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">globaleventbus</span> <span class="n">instance</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">seamtest</code> connects recognition success to the event bus:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connect</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">seam_detect_success</span><span class="p">()),</span>
+        <span class="n">globaleventbus</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(),</span>
+        <span class="n">SLOT</span><span class="p">(</span><span class="n">onSeamDetectionSuccess</span><span class="p">()));</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MainWindow::initSerialPort()</code> listens to the global signal:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connect</span><span class="p">(</span><span class="n">globaleventbus</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(),</span>
+        <span class="n">SIGNAL</span><span class="p">(</span><span class="n">seamDetectionSuccess</span><span class="p">()),</span>
+        <span class="k">this</span><span class="p">,</span>
+        <span class="n">SLOT</span><span class="p">(</span><span class="n">move_Learm</span><span class="p">()));</span>
+</code></pre></div></div>
+
+<p>This publisher-subscriber design avoids making <code class="language-plaintext highlighter-rouge">seamtest</code> hold a direct <code class="language-plaintext highlighter-rouge">MainWindow</code> pointer. The recognition window and control window can remain independent in lifecycle and display logic.</p>
+
+<h3 id="62-preset-motion-pose">6.2 Preset Motion Pose</h3>
+
+<p>After successful recognition, <code class="language-plaintext highlighter-rouge">MainWindow::move_Learm()</code> sets six sliders to fixed values:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Servo</th>
+      <th style="text-align: right">Target Slider Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">1015</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">1162</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">1757</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">1647</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">1412</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">1640</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Changing the sliders triggers the existing <code class="language-plaintext highlighter-rouge">valueChanged</code> chain, so the text boxes, digital-twin joint angles, and serial packets are all updated through the same path. <code class="language-plaintext highlighter-rouge">move_Learm()</code> does not need to call OpenGL refresh or serial sending directly.</p>
+
+<h2 id="7-runtime-resource-boundaries">7. Runtime Resource Boundaries</h2>
+
+<p>The page intentionally keeps resource and path boundaries instead of a command-style runbook. Local reproduction depends on Qt 5, a C++17 toolchain, a Python environment compatible with <code class="language-plaintext highlighter-rouge">requirements.txt</code>, the trained <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> weight, a test weld-seam image, and authorized LeArm STL files. Machine-specific paths should be derived from <code class="language-plaintext highlighter-rouge">scripts/hmi_local_env.example.sh</code> and kept out of Git.</p>
+
+<p>Key environment variables:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_PROJECT_ROOT</code></td>
+      <td>Explicit HMI project root</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_EXECUTABLE</code></td>
+      <td>Python executable used by inference</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_HOME</code></td>
+      <td>Python/Conda environment root for Python C API and linker paths</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_VERSION</code></td>
+      <td>Python version, such as <code class="language-plaintext highlighter-rouge">3.9</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_OUTPUT_DIR</code></td>
+      <td>Output directory for <code class="language-plaintext highlighter-rouge">segmented_image.png</code> and <code class="language-plaintext highlighter-rouge">config.json</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_TEST_IMAGE</code></td>
+      <td>Input image for self-test mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_INCLUDE_LOCAL_STL_ASSETS</code></td>
+      <td>Whether private packages include local STL files</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">main.cpp</code> provides a <code class="language-plaintext highlighter-rouge">--self-test</code> mode. It checks:</p>
+
+<ol>
+  <li>Whether <code class="language-plaintext highlighter-rouge">predict.py</code> exists.</li>
+  <li>Whether <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> exists.</li>
+  <li>Whether <code class="language-plaintext highlighter-rouge">HMI_TEST_IMAGE</code> is set and points to a file.</li>
+  <li>Whether the default <code class="language-plaintext highlighter-rouge">admin/admin</code> login emits the <code class="language-plaintext highlighter-rouge">login</code> signal.</li>
+  <li>Whether <code class="language-plaintext highlighter-rouge">MainWindow</code> can initialize.</li>
+  <li>Whether <code class="language-plaintext highlighter-rouge">seamtest::processImage()</code> can generate <code class="language-plaintext highlighter-rouge">segmented_image.png</code>.</li>
+  <li>Whether <code class="language-plaintext highlighter-rouge">seam_detect_success</code> is emitted.</li>
+</ol>
+
+<p>Offscreen mode can limit OpenGL context behavior, so the self-test mainly verifies recognition and UI initialization, not full 3D rendering acceptance.</p>
+
+<h2 id="8-validation-and-quality-control">8. Validation and Quality Control</h2>
+
+<h3 id="81-algorithm-validation">8.1 Algorithm Validation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validation Item</th>
+      <th>Method</th>
+      <th>Passing Standard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dataset completeness</td>
+      <td>Check <code class="language-plaintext highlighter-rouge">JPEGImages</code>, <code class="language-plaintext highlighter-rouge">SegmentationClass</code>, <code class="language-plaintext highlighter-rouge">ImageSets/Segmentation</code></td>
+      <td>Every sample has an image and mask</td>
+    </tr>
+    <tr>
+      <td>Mask legality</td>
+      <td>Count mask pixel values</td>
+      <td>Only 0, 1, or ignored classes appear</td>
+    </tr>
+    <tr>
+      <td>Training runs</td>
+      <td>Run <code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>Training loop starts and saves weights</td>
+    </tr>
+    <tr>
+      <td>Inference runs</td>
+      <td>Run <code class="language-plaintext highlighter-rouge">predict.py image.jpg</code></td>
+      <td>Non-empty <code class="language-plaintext highlighter-rouge">segmented_image.png</code> is generated</td>
+    </tr>
+    <tr>
+      <td>mIoU evaluation</td>
+      <td>Run <code class="language-plaintext highlighter-rouge">get_miou.py</code></td>
+      <td>IoU, Recall, and Precision are reported</td>
+    </tr>
+    <tr>
+      <td>Robustness</td>
+      <td>Test bright, dark, and different-angle images</td>
+      <td>Main seam remains continuous and false positives are controlled</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="82-hmi-validation">8.2 HMI Validation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validation Item</th>
+      <th>Method</th>
+      <th>Passing Standard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Login</td>
+      <td>Enter <code class="language-plaintext highlighter-rouge">admin/admin</code></td>
+      <td>Secondary interface appears</td>
+    </tr>
+    <tr>
+      <td>Remember password</td>
+      <td>Enable checkbox and restart</td>
+      <td><code class="language-plaintext highlighter-rouge">config.json</code> takes effect</td>
+    </tr>
+    <tr>
+      <td>Serial detection</td>
+      <td>Plug/unplug device and scan</td>
+      <td>Dropdown refreshes correctly</td>
+    </tr>
+    <tr>
+      <td>Open/close serial port</td>
+      <td>Select port and toggle</td>
+      <td>State changes correctly</td>
+    </tr>
+    <tr>
+      <td>HEX sending</td>
+      <td>Enter valid/invalid HEX</td>
+      <td>Valid packets send; invalid input prompts</td>
+    </tr>
+    <tr>
+      <td>Slider control</td>
+      <td>Drag six sliders</td>
+      <td>Text boxes, serial packets, and 3D model update together</td>
+    </tr>
+    <tr>
+      <td>Image recognition</td>
+      <td>Select weld-seam image</td>
+      <td>Source and result images display correctly</td>
+    </tr>
+    <tr>
+      <td>Recognition-to-motion link</td>
+      <td>Inference succeeds</td>
+      <td>Robot enters preset pose</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="83-digital-twin-validation">8.3 Digital-Twin Validation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validation Item</th>
+      <th>Method</th>
+      <th>Passing Standard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>STL loading</td>
+      <td>Open control window</td>
+      <td>All link models exist</td>
+    </tr>
+    <tr>
+      <td>Initial pose</td>
+      <td>Compare with physical robot or thesis figure</td>
+      <td>Visual pose is roughly consistent</td>
+    </tr>
+    <tr>
+      <td>Single-joint motion</td>
+      <td>Drag each slider separately</td>
+      <td>Corresponding joint moves in the expected direction</td>
+    </tr>
+    <tr>
+      <td>View rotation</td>
+      <td>Left drag</td>
+      <td>Model rotates</td>
+    </tr>
+    <tr>
+      <td>Zoom</td>
+      <td>Right drag</td>
+      <td>View distance changes</td>
+    </tr>
+    <tr>
+      <td>Pan</td>
+      <td>Middle drag</td>
+      <td>View center moves</td>
+    </tr>
+    <tr>
+      <td>Depth ordering</td>
+      <td>Observe from multiple angles</td>
+      <td>Front/back relationships are correct without severe mesh crossing</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="9-known-limits-and-improvements">9. Known Limits and Improvements</h2>
+
+<h3 id="91-current-limits">9.1 Current Limits</h3>
+
+<ol>
+  <li>Weld-seam recognition remains a 2D pixel-level segmentation result and is not yet converted into real 3D coordinates.</li>
+  <li>After segmentation success, the robot moves to a fixed preset pose rather than planning a trajectory from seam geometry.</li>
+  <li>OpenGL rendering uses immediate mode (<code class="language-plaintext highlighter-rouge">glBegin/glEnd</code>), which is suitable for demonstration but not high-performance rendering.</li>
+  <li>Login is a demo-level local check, not a production authentication system.</li>
+  <li>The serial protocol mainly supports single-servo slider control; synchronized multi-servo control and checksums can be extended.</li>
+  <li>STL files are not publicly redistributed because of asset rights, so 3D reproduction requires authorized model files.</li>
+  <li>Python dependencies are old; migration to newer Python/PyTorch needs revalidation of training and inference.</li>
+</ol>
+
+<h3 id="92-future-work">9.2 Future Work</h3>
+
+<ol>
+  <li>Add camera calibration and hand-eye calibration to map 2D segmentation into the robot coordinate frame.</li>
+  <li>Add seam centerline extraction, edge fitting, and grinding trajectory generation to the HMI.</li>
+  <li>Replace fixed-pose triggering with dynamic target points or trajectory sequences derived from recognition results.</li>
+  <li>Migrate STL rendering to VBO/VAO or a modern Qt OpenGL pipeline.</li>
+  <li>Add serial checksum, timeout retry, lower-controller state feedback, and error-state display.</li>
+  <li>Try lighter inference deployment through TorchScript, ONNX Runtime, or a C++ inference engine.</li>
+  <li>Add dataset versioning and experiment logs so model metrics remain traceable.</li>
+</ol>
+
+<h2 id="10-source-file-index">10. Source File Index</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Technical Point</th>
+      <th>Main Files</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application entry and self-test</td>
+      <td><code class="language-plaintext highlighter-rouge">main.cpp</code></td>
+      <td>Normal startup uses <code class="language-plaintext highlighter-rouge">Secinterface</code>; self-test validates login, inference, and output</td>
+    </tr>
+    <tr>
+      <td>Login window</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.cpp</code>, <code class="language-plaintext highlighter-rouge">logon.h</code>, <code class="language-plaintext highlighter-rouge">logon.ui</code></td>
+      <td>Default credentials and checkbox state persistence</td>
+    </tr>
+    <tr>
+      <td>Secondary interface</td>
+      <td><code class="language-plaintext highlighter-rouge">secinterface.cpp</code>, <code class="language-plaintext highlighter-rouge">secinterface.h</code>, <code class="language-plaintext highlighter-rouge">secinterface.ui</code></td>
+      <td>Entry points for control and recognition windows</td>
+    </tr>
+    <tr>
+      <td>Control window</td>
+      <td><code class="language-plaintext highlighter-rouge">mainwindow.cpp</code>, <code class="language-plaintext highlighter-rouge">mainwindow.h</code>, <code class="language-plaintext highlighter-rouge">mainwindow.ui</code></td>
+      <td>Serial detection, slider control, servo protocol, digital-twin coupling</td>
+    </tr>
+    <tr>
+      <td>Recognition window</td>
+      <td><code class="language-plaintext highlighter-rouge">seamtest.cpp</code>, <code class="language-plaintext highlighter-rouge">seamtest.h</code>, <code class="language-plaintext highlighter-rouge">seamtest.ui</code></td>
+      <td>Image selection, <code class="language-plaintext highlighter-rouge">QProcess</code> inference, result display</td>
+    </tr>
+    <tr>
+      <td>Event bus</td>
+      <td><code class="language-plaintext highlighter-rouge">globaleventbus.h</code></td>
+      <td>Recognition-success event relay</td>
+    </tr>
+    <tr>
+      <td>Path management</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code>, <code class="language-plaintext highlighter-rouge">runtime_paths.h</code></td>
+      <td>Project root, Python environment, and output directory lookup</td>
+    </tr>
+    <tr>
+      <td>OpenGL base widget</td>
+      <td><code class="language-plaintext highlighter-rouge">rrglwidget.cpp</code>, <code class="language-plaintext highlighter-rouge">rrglwidget.h</code></td>
+      <td>Lighting, projection, mouse interaction, base drawing</td>
+    </tr>
+    <tr>
+      <td>Robot digital twin</td>
+      <td><code class="language-plaintext highlighter-rouge">ddr6robotwidget.cpp</code>, <code class="language-plaintext highlighter-rouge">ddr6robotwidget.h</code></td>
+      <td>STL loading, DH parameters, joint-level rendering</td>
+    </tr>
+    <tr>
+      <td>STL parsing</td>
+      <td><code class="language-plaintext highlighter-rouge">stlfileloader.cpp</code>, <code class="language-plaintext highlighter-rouge">stlfileloader.h</code></td>
+      <td>Binary STL reading and triangle drawing</td>
+    </tr>
+    <tr>
+      <td>Inference entry</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code></td>
+      <td>Receives image path and saves <code class="language-plaintext highlighter-rouge">segmented_image.png</code></td>
+    </tr>
+    <tr>
+      <td>Inference wrapper</td>
+      <td><code class="language-plaintext highlighter-rouge">unet.py</code></td>
+      <td>Loads <code class="language-plaintext highlighter-rouge">seam_unet.pth</code>, preprocesses, infers, and blends output</td>
+    </tr>
+    <tr>
+      <td>Network structure</td>
+      <td><code class="language-plaintext highlighter-rouge">nets/unet.py</code>, <code class="language-plaintext highlighter-rouge">nets/vgg.py</code></td>
+      <td>VGG-UNet and original U-Net structures</td>
+    </tr>
+    <tr>
+      <td>Training script</td>
+      <td><code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>Freeze/unfreeze training, Adam, StepLR, weight saving</td>
+    </tr>
+    <tr>
+      <td>Dataloader</td>
+      <td><code class="language-plaintext highlighter-rouge">utils/dataloader.py</code></td>
+      <td>VOC reading, augmentation, one-hot labels</td>
+    </tr>
+    <tr>
+      <td>Training loop</td>
+      <td><code class="language-plaintext highlighter-rouge">utils/utils_fit.py</code></td>
+      <td>Training, validation, loss calculation, weight saving</td>
+    </tr>
+    <tr>
+      <td>Metrics</td>
+      <td><code class="language-plaintext highlighter-rouge">get_miou.py</code>, <code class="language-plaintext highlighter-rouge">utils/utils_metrics.py</code></td>
+      <td>mIoU, Recall, Precision</td>
+    </tr>
+    <tr>
+      <td>Annotation conversion</td>
+      <td><code class="language-plaintext highlighter-rouge">json_to_dataset.py</code></td>
+      <td>LabelMe JSON to VOC-style images and masks</td>
+    </tr>
+    <tr>
+      <td>Build configuration</td>
+      <td><code class="language-plaintext highlighter-rouge">HMI.pro</code></td>
+      <td>Qt modules, Python linking, sources, resources</td>
+    </tr>
+  </tbody>
+</table>
+
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="page__footer">
+      <footer>
+        <div class="page__footer-copyright">
+          <p>&copy; 2026 Jianming Xing<br> 邢鉴明. All rights reserved.</p>
+          <p><a href="https://beian.miit.gov.cn" target="_blank">津ICP备2023005601号-1</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="/assets/js/mermaid-init.js"></script>
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "");
+</script>
+
+
+<script>
+    
+</script>
+
+
+
+  </body>
+</html>

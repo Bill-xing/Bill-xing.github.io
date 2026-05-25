@@ -1,0 +1,2041 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+
+  <title>VLA/OpenPI Real-Robot Data Collection and Inference Loop for CR5 - Jianming Xing / 邢鉴明</title>
+
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Jianming Xing / 邢鉴明">
+<meta property="og:title" content="VLA/OpenPI Real-Robot Data Collection and Inference Loop for CR5">
+
+
+  <link rel="canonical" href="http://localhost:4100/projects/cr5-vla-openpi/">
+  <meta property="og:url" content="http://localhost:4100/projects/cr5-vla-openpi/">
+
+
+
+
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+<head>
+  <base target="_blank">
+</head>
+    <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.ico?v=20260525-black" sizes="any">
+<link rel="stylesheet" href="/assets/css/academicons.css" />
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a href="/#about-me">Homepage</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#about-me">About Me</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#-news">News</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#education">Education</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#projects">Projects</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#experience">Experience</a></li>
+          
+            <li class="masthead__menu-item"><a href="/#-awards">Awards</a></li>
+          
+          
+            <li class="masthead__menu-item"><a href="/zh/projects/cr5-vla-openpi/">中文</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main" role="main">
+      
+  <div class="sidebar sticky">
+  
+
+
+
+
+
+
+
+
+<div itemscope itemtype="http://schema.org/Person" class="profile_box">
+
+  <div class="author__avatar">
+    <img src="/images/jianming-profile.jpg" class="author__avatar" alt="Jianming Xing<br> 邢鉴明">
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Jianming Xing<br> 邢鉴明</h3>
+    <p class="author__bio">Second B.S. @ HIT Shenzhen</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">More Info & Contact</button> -->
+    <ul class="author__urls social-icons">
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Shenzhen, China</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> HIT</li>
+      
+      
+      
+        <li><a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+      <div class="author__urls_sm">
+      
+      
+        <a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i></a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+  
+  </div>
+
+
+      <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+        <meta itemprop="headline" content="VLA/OpenPI Real-Robot Data Collection and Inference Loop for CR5">
+        <div class="page__inner-wrap">
+          <section class="page__content" itemprop="text">
+            
+<div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin: 10px 0 18px 0;">
+  <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>
+      <div style="font-weight:600;">
+        Hand-eye calibration, teleoperation, synchronized data collection, safety validation, OpenPI adaptation, and real-robot inference deployment
+         · 2026.01 - 2026.03
+      </div>
+
+      
+      <div style="margin-top:8px;">
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            Embodied AI
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            VLA
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            ROS2
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            OpenPI
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            LeRobot
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            Real Robot
+          </span>
+        
+      </div>
+      
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      
+      
+      
+        <span>Code:</span>
+        
+          <a href="https://github.com/Bill-xing/openpicr5">openpicr5</a>
+        
+          <a href="https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3">DOBOT ROS2</a>
+        
+          <a href="https://github.com/Bill-xing/ros2_ws_xing">ros2_ws_xing</a>
+        
+      
+    </div>
+  </div>
+
+  
+    <div style="margin-top:8px;">Built a real-robot closed loop for Dobot CR5, Orbbec Astra2 RGB-D, and an electric gripper, covering calibration, teleoperation, synchronized data collection, dataset conversion, OpenPI fine-tuning, and WebSocket-based inference.</div>
+  
+
+  
+    <div style="margin-top:8px;"><b>Outcome:</b> Established a safety-checked real-machine VLA pipeline from data recording to LeRobot v2.0 conversion and CR5 inference deployment.</div>
+  
+</div>
+
+<h2 id="tldr">TL;DR</h2>
+<ul>
+  <li><strong>Problem:</strong> A VLA policy cannot be moved onto a real robot by training code alone. It needs calibrated sensing, stable robot control, synchronized data, dataset validation, model-serving infrastructure, and safety boundaries.</li>
+  <li><strong>Method:</strong> Built a ROS2 Humble real-robot loop for <strong>Dobot CR5</strong>, <strong>Orbbec Astra2 RGB-D</strong>, and an <strong>electric gripper</strong>, then connected HDF5 recording, LeRobot v2.0 conversion, OpenPI fine-tuning, WebSocket serving, and a CR5 inference client.</li>
+  <li><strong>Result:</strong> Established a safety-checked real-machine pipeline from teleoperation recording to inference. Camera frame drops were reduced from <strong>27.15%</strong> to <strong>2.57%-4.74%</strong>, and the final inference path favored action chunks plus <strong>blocking ServoP</strong> execution for stability.</li>
+</ul>
+
+<h2 id="real-robot-effect-demos">Real-Robot Effect Demos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Towel Folding Task</th>
+      <th>Grasping Task</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/cr5-vla-openpi/cr5-vla-fold-towel-demo.gif" alt="CR5 towel folding real-robot demo" /></td>
+      <td><img src="/images/projects/cr5-vla-openpi/cr5-vla-grasp-demo.gif" alt="CR5 grasping real-robot demo" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="open-source-repositories">Open-Source Repositories</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Repository</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/openpicr5">openpicr5</a></td>
+      <td>OpenPI-derived VLA adaptation, Dobot policy mapping, training configuration, WebSocket policy server, and CR5 inference client.</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3">DOBOT_6Axis_ROS2_V3</a></td>
+      <td>Dobot CR-series ROS2 driver base plus real-robot data collection, playback, conversion, and safety tooling work.</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/ros2_ws_xing">ros2_ws_xing</a></td>
+      <td>Optimized camera/recorder launch scripts, Fast DDS shared memory configuration, and high-throughput recording workflow.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="detailed-technical-report">Detailed Technical Report</h2>
+
+<h1 id="cr5-real-robot-adaptation-report-for-vlaopenpi">CR5 Real-Robot Adaptation Report for VLA/OpenPI</h1>
+
+<h2 id="0-executive-summary">0. Executive Summary</h2>
+
+<p>This project builds a real-robot VLA/OpenPI loop around a Dobot CR5, an Orbbec Astra2 RGB-D camera, and an electric gripper. The implemented loop covers:</p>
+
+<ul>
+  <li>CR5 driver startup under ROS2 Humble, ServoP servo control, and Modbus gripper control.</li>
+  <li>Orbbec camera startup, RGB image capture, camera-intrinsics inspection, and camera-throughput optimization.</li>
+  <li>Eye-to-hand calibration, with the final static TF published as <code class="language-plaintext highlighter-rouge">base_link -&gt; camera_color_optical_frame</code>.</li>
+  <li>Keyboard and mouse teleoperation, including robot target commands, gripper target commands, and recording control commands.</li>
+  <li>HDF5 data recording. The camera frame is used as the master clock, and robot/gripper states are interpolated to image timestamps.</li>
+  <li>HDF5 to LeRobot v2.0 conversion, producing Parquet files, MP4 videos, <code class="language-plaintext highlighter-rouge">info.json</code>, <code class="language-plaintext highlighter-rouge">stats.json</code>, <code class="language-plaintext highlighter-rouge">episodes.jsonl</code>, and <code class="language-plaintext highlighter-rouge">tasks.jsonl</code>.</li>
+  <li>Dataset playback, safety checks, playback-error evaluation, and dataset-quality inspection.</li>
+  <li>OpenPI/openpicr5 Dobot data adaptation, the <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code> training configuration, a WebSocket policy server, and a CR5 inference client.</li>
+</ul>
+
+<p>Important factual notes:</p>
+
+<ol>
+  <li>Many names still use <code class="language-plaintext highlighter-rouge">cr3</code>, while the notes and the target hardware are CR5. This is a historical naming artifact. The OpenPI configuration <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code>, policy file <code class="language-plaintext highlighter-rouge">dobot_cr3_policy.py</code>, and conversion default <code class="language-plaintext highlighter-rouge">robot_type='dobot_cr3'</code> do not mean the hardware is CR3. The real robot in the notes and inference client is CR5.</li>
+  <li>The checked-out <code class="language-plaintext highlighter-rouge">main</code> branch of <code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3</code> is mainly the official/base code. Much of the real-robot recording, playback, evaluation, and conversion work lives on the remote <code class="language-plaintext highlighter-rouge">origin/server</code> branch.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">main</code> branch of <code class="language-plaintext highlighter-rouge">openpicr5</code> keeps the CR5 inference client and training configuration. The <code class="language-plaintext highlighter-rouge">origin/read</code> branch contains more aggressive experiments: parallel execution, independent ServoP processes, inference-latency analysis, ServoP-latency analysis, and server warmup. The <code class="language-plaintext highlighter-rouge">origin/single</code> branch records a fallback toward a single-process or more serial execution route.</li>
+  <li>Parallel inference and independent ServoP execution did not become the final path. Non-blocking execution can increase apparent frequency, but it lets the model infer from intermediate robot states before the previous action chunk has finished. This causes back-and-forth trajectory corrections. Independent processes reduce part of the ServoP call latency, but queue synchronization and DDS/controller bottlenecks absorb much of the benefit.</li>
+  <li>The most stable current real-robot inference strategy is not maximum frequency. It is action chunks plus blocking ServoP, interpretable latency statistics, and explicit safety boundaries.</li>
+</ol>
+
+<p>The overall loop:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  subgraph Robot["CR5 real-robot side"]
+    Arm["Dobot CR5 ROS2 driver"]
+    Gripper["Modbus gripper"]
+    Camera["Orbbec Astra2 RGB-D"]
+    Teleop["Keyboard/mouse teleoperation"]
+    Recorder["recorder_optimized.py"]
+    Player["dataset_player.py"]
+    Client["CR5 inference client"]
+  end
+
+  subgraph Data["Data assets"]
+    HDF5["HDF5 episode"]
+    Check["check_dataset / analyze_playback"]
+    LeRobot["LeRobot v2.0 dataset"]
+  end
+
+  subgraph OpenPI["OpenPI / openpicr5"]
+    Config["pi0_dobot_cr3 configuration"]
+    Train["Model fine-tuning"]
+    Server["WebSocket policy server"]
+  end
+
+  Camera --&gt; Recorder
+  Arm --&gt; Recorder
+  Gripper --&gt; Recorder
+  Teleop --&gt; Arm
+  Teleop --&gt; Gripper
+  Teleop --&gt; Recorder
+  Recorder --&gt; HDF5 --&gt; Check --&gt; LeRobot --&gt; Config --&gt; Train --&gt; Server --&gt; Client
+  Camera --&gt; Client
+  Arm --&gt; Client
+  Client --&gt; Arm
+  Client --&gt; Gripper
+  HDF5 --&gt; Player --&gt; Arm
+  Player --&gt; Gripper
+</code></pre>
+
+<h2 id="1-hardware-system-and-ros2-base">1. Hardware, System, and ROS2 Base</h2>
+
+<h3 id="11-hardware">1.1 Hardware</h3>
+
+<p>The real-robot platform:</p>
+
+<ul>
+  <li>Robot arm: Dobot CR5.</li>
+  <li>Camera: Orbbec Astra2 RGB-D camera.</li>
+  <li>Gripper: controlled through the Dobot controller’s Modbus RTU interface. The notes also reference AG-series and DH electric-gripper materials.</li>
+  <li>Host: Ubuntu 22.04 + ROS2 Humble.</li>
+  <li>Training/inference server: OpenPI environment, either local or on a remote GPU server.</li>
+</ul>
+
+<h3 id="12-ros2-packages">1.2 ROS2 Packages</h3>
+
+<p>Robot-side packages:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_bringup_v3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_msgs_v3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/cr5_moveit</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_demo</code></li>
+</ul>
+
+<p>Camera-side packages:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_camera</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_camera_msgs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_description</code></li>
+</ul>
+
+<p>Camera, RViz, and MoveIt deployment screenshots:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-camera-rviz-01.png" alt="Camera and point-cloud deployment record 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-camera-rviz-02.png" alt="Camera and point-cloud deployment record 2" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-moveit-rviz-01.png" alt="MoveIt and RViz real-robot deployment record 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-moveit-rviz-02.png" alt="MoveIt and RViz real-robot deployment record 2" /></p>
+
+<h3 id="13-ros-topics">1.3 ROS Topics</h3>
+
+<p>Camera topics recorded in the notes:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/camera/color/image_raw
+/camera/color/camera_info
+/camera/depth/image_raw
+/camera/depth/camera_info
+/camera/depth/points
+/camera/ir/image_raw
+/camera/ir/camera_info
+/camera/gyro_accel/sample
+/tf
+/tf_static
+</code></pre></div></div>
+
+<p>Additional topics used by the VLA recording and inference loop:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/dobot_msgs_v3/msg/ToolVectorActual   # current robot end-effector pose
+/robot/target_pose                    # target end-effector pose from teleop/playback/inference
+/gripper/command_update               # target gripper command
+/gripper/state_feedback               # actual gripper feedback
+/recorder/command                     # recording control: start, save, discard
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ToolVectorActual</code> was later changed to include a header timestamp. This is critical for aligning camera frames with real robot states.</p>
+
+<p>ROS2 data-plane and control-plane relationships:</p>
+
+<pre><code class="language-mermaid">flowchart TB
+  CameraNode["orbbec_camera / astra2.launch.py"]
+  DobotDriver["dobot_bringup_v3"]
+  TeleopNode["data_collector4.py"]
+  RecorderNode["recorder_optimized.py"]
+  PlayerNode["dataset_player.py"]
+  InferClient["examples/dobot_cr5/main.py"]
+  EvalNode["playback_evaluator.py"]
+
+  CameraNode --&gt;|"/camera/color/image_raw"| RecorderNode
+  CameraNode --&gt;|"/camera/color/camera_info"| RecorderNode
+  DobotDriver --&gt;|"ToolVectorActual"| RecorderNode
+  TeleopNode --&gt;|"/robot/target_pose"| RecorderNode
+  TeleopNode --&gt;|"/gripper/command_update"| RecorderNode
+  TeleopNode --&gt;|"/recorder/command"| RecorderNode
+  TeleopNode --&gt;|"ServoP / Modbus"| DobotDriver
+  RecorderNode --&gt;|"HDF5 episode"| PlayerNode
+  PlayerNode --&gt;|"ServoP / Modbus"| DobotDriver
+  PlayerNode --&gt;|"/robot/target_pose"| EvalNode
+  DobotDriver --&gt;|"ToolVectorActual"| EvalNode
+  CameraNode --&gt; InferClient
+  DobotDriver --&gt; InferClient
+  InferClient --&gt;|"ServoP / Modbus"| DobotDriver
+</code></pre>
+
+<h2 id="2-camera-configuration-and-hand-eye-calibration">2. Camera Configuration and Hand-Eye Calibration</h2>
+
+<h3 id="21-camera-model-and-intrinsics">2.1 Camera Model and Intrinsics</h3>
+
+<p>The notes identify the camera as Orbbec Astra2. The camera SDK/ROS2 node publishes <code class="language-plaintext highlighter-rouge">CameraInfo</code>; intrinsics come from camera firmware rather than from a hand-written local parameter file.</p>
+
+<p>Recorded RGB camera information:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Image size</td>
+      <td>640 x 480</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fx</code></td>
+      <td>503.705078125</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fy</code></td>
+      <td>503.6905517578125</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cx</code></td>
+      <td>320.5251159667969</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cy</code></td>
+      <td>243.20379638671875</td>
+    </tr>
+    <tr>
+      <td>Distortion model</td>
+      <td><code class="language-plaintext highlighter-rouge">plumb_bob</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>During hand-eye calibration, three parameter groups mattered:</p>
+
+<ul>
+  <li>RGB camera intrinsic matrix.</li>
+  <li>IR camera intrinsic matrix.</li>
+  <li>Transform between RGB and IR/depth.</li>
+</ul>
+
+<p>Astra2 RGB and IR streams each use their own coordinate frame. The RGB-IR/depth relationship can be obtained through <code class="language-plaintext highlighter-rouge">/tf</code>. Depth-to-color alignment can be performed in hardware or software. Hardware D2C has lower latency and lower CPU load, but is constrained by firmware parameters and resolution. Software D2C is more flexible, but has higher real-time compute cost.</p>
+
+<h3 id="22-camerainfo-distortion-parameter-format">2.2 <code class="language-plaintext highlighter-rouge">CameraInfo</code> Distortion Parameter Format</h3>
+
+<p>MoveIt calibration and other ROS vision tools often assume the <code class="language-plaintext highlighter-rouge">plumb_bob</code> model has five distortion parameters. Orbbec <code class="language-plaintext highlighter-rouge">CameraInfo.d</code> may publish eight parameters. The notes explicitly record that early coordinate computation did not actually load camera intrinsics because the expected camera-info format differed from the Orbbec camera-info format.</p>
+
+<p>The helper <code class="language-plaintext highlighter-rouge">fix_camera_info.py</code> was added. Core behavior:</p>
+
+<ol>
+  <li>Subscribe to <code class="language-plaintext highlighter-rouge">CameraInfo</code>.</li>
+  <li>Preserve only the first five distortion parameters.</li>
+  <li>Republish a <code class="language-plaintext highlighter-rouge">plumb_bob</code>-compatible message.</li>
+</ol>
+
+<p>Engineering caveat: using the same topic name for input and output in ROS2 should be handled carefully. A safer design is to publish the camera driver output to a raw topic and publish the normalized message on a standard topic. The actual notes used same-name replacement, so the report records it as-is rather than rewriting history.</p>
+
+<h3 id="23-intrinsic-calibration-and-accuracy">2.3 Intrinsic Calibration and Accuracy</h3>
+
+<p>The notes tried:</p>
+
+<ul>
+  <li>ROS camera calibration tools.</li>
+  <li>MATLAB calibration tools.</li>
+  <li>Calibration-board images.</li>
+  <li>Disabling the IR projector before image capture because the infrared pattern created many bright points and interfered with corner extraction.</li>
+</ul>
+
+<p>Reprojection error was used as the accuracy criterion:</p>
+
+<ul>
+  <li>0.1 to 0.5 pixel: strong for industrial usage.</li>
+  <li>Greater than 1.0 pixel: not trustworthy, and the board, blur, reflection, or capture conditions should be checked.</li>
+</ul>
+
+<p>MATLAB calibration can remove samples with high reprojection error and recalibrate. The practical bottleneck was not MATLAB itself, but board quality and image capture conditions.</p>
+
+<h3 id="24-eye-to-hand-calibration">2.4 Eye-to-Hand Calibration</h3>
+
+<p>The CR5 setup uses an eye-to-hand camera. The target transform is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>base_link -&gt; camera_color_optical_frame
+</code></pre></div></div>
+
+<p>Two methods appear in the notes:</p>
+
+<ol>
+  <li>Early approximate method: no calibration board, two nearby points, and a least-squares estimate of the relationship between robot base and camera frame. The conclusion was that it is acceptable only when the end-effector stays fixed, but it is not strict calibration.</li>
+  <li>MoveIt calibration: RViz plugin with multiple hand-eye algorithms. It does not require manually obtaining the transform from calibration board to link6.</li>
+</ol>
+
+<p>The saved static transform in <code class="language-plaintext highlighter-rouge">camera_base.launch.py</code> publishes translation in meters and orientation as a quaternion. This transform converts points from camera coordinates to the robot base frame, and it is the spatial basis for vision-based grasping, point-cloud understanding, and image/action consistency in VLA data.</p>
+
+<p>Hand-eye calibration chain:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  World["Physical table / calibration board"]
+  CameraFrame["camera_color_optical_frame"]
+  Base["base_link"]
+  Tool["tool / link6"]
+  Gripper["gripper tip"]
+
+  World --&gt;|"RGB / depth / point-cloud observation"| CameraFrame
+  CameraFrame --&gt;|"static TF from MoveIt calibration"| Base
+  Base --&gt;|"Dobot FK and feedback"| Tool
+  Tool --&gt;|"tool offset"| Gripper
+  Base --&gt;|"ServoP target pose"| Tool
+</code></pre>
+
+<p>Calibration screenshots:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-handeye-matlab.png" alt="MATLAB camera calibration and reprojection-error record" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-handeye-moveit.png" alt="MoveIt hand-eye calibration interface" /></p>
+
+<h3 id="25-current-calibration-conclusion">2.5 Current Calibration Conclusion</h3>
+
+<p>The final notes are pragmatic: the MoveIt calibration route is currently acceptable, but there are still bugs and reprojection error is too large. To improve accuracy, the next calibration iteration should enlarge the calibration pattern, use more accurate measurement tools, choose better calibration poses, and disable or control infrared projection.</p>
+
+<p>The right conclusion is not “high-precision calibration is complete.” A usable static TF exists for fixed-view RGB-based VLA data collection and inference. If the project later relies on depth point clouds for precise 3D grasp-point computation, high-quality recalibration and error evaluation are required.</p>
+
+<h2 id="3-teleoperation-and-data-collection-control">3. Teleoperation and Data Collection Control</h2>
+
+<h3 id="31-teleoperation-sources">3.1 Teleoperation Sources</h3>
+
+<p>The notes reference XLeRobot keyboard teleoperation and OpenTeleVision/Meta Quest3 VR teleoperation. The implemented mainline path is keyboard and mouse teleoperation; VR remains a reference or exploration route.</p>
+
+<p>Files on <code class="language-plaintext highlighter-rouge">origin/server</code> include:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DOBOT_6Axis_ROS2_V3/dobot_demo/dobot_demo/data_collector4.py
+DOBOT_6Axis_ROS2_V3/dobot_demo/dobot_demo/gripper_comm.py
+DOBOT_6Axis_ROS2_V3/dobot_demo/dobot_demo/gripper_config.py
+</code></pre></div></div>
+
+<h3 id="32-data_collector4py-architecture">3.2 <code class="language-plaintext highlighter-rouge">data_collector4.py</code> Architecture</h3>
+
+<p><code class="language-plaintext highlighter-rouge">data_collector4.py</code> is a core script for teleoperation and recording control. It does more than keyboard motion. It handles:</p>
+
+<ul>
+  <li>Robot ServoP control.</li>
+  <li>Gripper Modbus control.</li>
+  <li>Publishing robot target state.</li>
+  <li>Publishing gripper target and feedback state.</li>
+  <li>Publishing recording start/save/discard commands.</li>
+</ul>
+
+<p>The ROS node is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>teleop_node
+</code></pre></div></div>
+
+<p>Service-client categories:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Service Interfaces</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Robot enable and state</td>
+      <td><code class="language-plaintext highlighter-rouge">EnableRobot</code>, <code class="language-plaintext highlighter-rouge">ClearError</code>, <code class="language-plaintext highlighter-rouge">SpeedFactor</code></td>
+    </tr>
+    <tr>
+      <td>Motion control</td>
+      <td><code class="language-plaintext highlighter-rouge">MovJ</code>, <code class="language-plaintext highlighter-rouge">MovL</code>, <code class="language-plaintext highlighter-rouge">ServoJ</code>, <code class="language-plaintext highlighter-rouge">ServoP</code>, <code class="language-plaintext highlighter-rouge">Sync</code></td>
+    </tr>
+    <tr>
+      <td>State reading</td>
+      <td><code class="language-plaintext highlighter-rouge">GetPose</code>, <code class="language-plaintext highlighter-rouge">GetAngle</code></td>
+    </tr>
+    <tr>
+      <td>Gripper Modbus</td>
+      <td><code class="language-plaintext highlighter-rouge">ModbusCreate</code>, <code class="language-plaintext highlighter-rouge">ModbusClose</code>, <code class="language-plaintext highlighter-rouge">SetHoldRegs</code>, <code class="language-plaintext highlighter-rouge">GetHoldRegs</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Published topics:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/robot/target_pose
+/gripper/command_update
+/gripper/state_feedback
+/recorder/command
+</code></pre></div></div>
+
+<h3 id="33-gripper-control">3.3 Gripper Control</h3>
+
+<p>The gripper is controlled through the Dobot controller’s Modbus interface:</p>
+
+<ul>
+  <li>IP: <code class="language-plaintext highlighter-rouge">192.168.5.1</code></li>
+  <li>Port: <code class="language-plaintext highlighter-rouge">60000</code></li>
+  <li>Slave ID: <code class="language-plaintext highlighter-rouge">1</code></li>
+  <li>RTU mode: <code class="language-plaintext highlighter-rouge">is_rtu = 1</code></li>
+</ul>
+
+<p>Common registers:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>256: enable register
+257: force/speed
+259: target position
+514: current position feedback
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">GripperComm</code> performs low-level register reads/writes. <code class="language-plaintext highlighter-rouge">GripperManager</code> runs as an independent thread and manages incremental mouse control, non-blocking Modbus writes, real-position reads after button release, and automatic target-position updates.</p>
+
+<p>A practical problem appears in the notes: actual gripper readback is slow. The target may be 50Hz or 100Hz, but real Modbus readback often stays around 10Hz. Playback and recording therefore use linear interpolation so low-frequency gripper feedback can be published at a smoother higher rate.</p>
+
+<h3 id="34-recording-control-shortcuts">3.4 Recording Control Shortcuts</h3>
+
+<p><code class="language-plaintext highlighter-rouge">data_collector4.py</code> publishes <code class="language-plaintext highlighter-rouge">Int32</code> commands on <code class="language-plaintext highlighter-rouge">/recorder/command</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1</code>: start recording.</li>
+  <li><code class="language-plaintext highlighter-rouge">2</code>: stop and save.</li>
+  <li><code class="language-plaintext highlighter-rouge">0</code>: stop and discard.</li>
+</ul>
+
+<p>An important safety and consistency change is that the robot returns to the initial pose at recording start and end, then the recording command is issued. This reduces episode start/end inconsistency and lowers the risk of sudden jumps during playback.</p>
+
+<h2 id="4-data-recording-pipeline">4. Data Recording Pipeline</h2>
+
+<h3 id="41-recording-targets">4.1 Recording Targets</h3>
+
+<p>For VLA/OpenPI, recording is not just video capture. The dataset must contain:</p>
+
+<ul>
+  <li>Image: camera RGB frames.</li>
+  <li>State: actual robot 6D end-effector pose.</li>
+  <li>Action: target robot 6D end-effector pose sent by the teleoperator/controller.</li>
+  <li>Gripper state: actual gripper opening.</li>
+  <li>Gripper action: target gripper opening.</li>
+  <li>Timestamp: for aligning each frame.</li>
+  <li>Camera intrinsics: for later geometry checks or vision tasks.</li>
+</ul>
+
+<p>Final HDF5 structure:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>observations/images/color      [N, H, W, 3], uint8
+observations/images/depth      optional, [N, H, W]
+observations/robot_current     [N, 6]
+observations/gripper_current   [N, 1]
+actions/robot_target           [N, 6]
+actions/gripper_target         [N, 1]
+timestamps                     [N]
+camera_info/intrinsics         [3, 3]
+camera_info/distortion         [5]
+metadata/*
+</code></pre></div></div>
+
+<p>HDF5 tree record:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-hdf5-tree.png" alt="HDF5 episode tree" /></p>
+
+<h3 id="42-data-sources">4.2 Data Sources</h3>
+
+<p>The recorder subscribes to:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/camera/color/image_raw
+/camera/color/camera_info
+/camera/depth/image_raw         # optional
+/dobot_msgs_v3/msg/ToolVectorActual
+/robot/target_pose
+/gripper/command_update
+/gripper/state_feedback
+/recorder/command
+</code></pre></div></div>
+
+<p>Actual robot state is published by the Dobot feedback node. Target state is mirrored by teleoperation, playback, or the inference client. This lets the dataset save both actual state and action command, instead of losing supervised-action information.</p>
+
+<h3 id="43-recorder_optimizedpy">4.3 <code class="language-plaintext highlighter-rouge">recorder_optimized.py</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">ros2_ws_xing/recorder_optimized.py</code> was designed to reduce frame drops and CPU load in the original recording flow.</p>
+
+<p>Optimizations:</p>
+
+<ul>
+  <li>ROS callbacks only enqueue lightweight data; they do not perform image conversion or HDF5 writes.</li>
+  <li>A processing thread handles pending frames.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque(maxlen=...)</code> keeps short ordered windows for messages.</li>
+  <li>Binary search aligns timestamps instead of linear scanning.</li>
+  <li>Robot and gripper states are linearly interpolated.</li>
+  <li>Depth recording is disabled by default because depth conversion and compression are expensive.</li>
+  <li>HDF5 saving uses gzip compression and chunks.</li>
+</ul>
+
+<p>Key buffer settings:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image_queue_size = 10
+state_queue_size = 2000
+processing_queue_size = 200
+compression = gzip
+chunks = True
+</code></pre></div></div>
+
+<p>The camera frame timestamp is the reference time. For each RGB frame, the recorder finds the robot-state samples before and after that timestamp, interpolates the 6D pose, and performs the same process for gripper feedback and target commands. Therefore, the dataset frame rate equals the retained camera-frame rate.</p>
+
+<p>Recording timeline:</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Cam as Camera RGB
+  participant Arm as CR5 state feedback
+  participant Grip as Gripper feedback
+  participant Teleop as Teleop target
+  participant Rec as recorder_optimized
+  participant H5 as HDF5 file
+
+  Cam-&gt;&gt;Rec: image + timestamp
+  Arm-&gt;&gt;Rec: actual pose samples
+  Grip-&gt;&gt;Rec: actual gripper samples
+  Teleop-&gt;&gt;Rec: target pose / gripper / command
+  Rec-&gt;&gt;Rec: use image time as reference_time
+  Rec-&gt;&gt;Rec: binary search neighboring samples
+  Rec-&gt;&gt;Rec: linearly interpolate robot / gripper
+  Rec-&gt;&gt;H5: write image, state, action, timestamp
+</code></pre>
+
+<p>Recorder code and runtime logs:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recorder-code.png" alt="Optimized recorder code record" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recording-log.png" alt="Optimized recorder runtime log" /></p>
+
+<h3 id="44-camera-frame-rate-and-fast-dds-shared-memory">4.4 Camera Frame Rate and Fast DDS Shared Memory</h3>
+
+<p>The notes record a typical throughput problem:</p>
+
+<ul>
+  <li>Target camera frame rate: 30Hz.</li>
+  <li>After starting control and recording nodes, actual camera rate dropped to around 20Hz.</li>
+  <li>Early datasets had a frame-drop rate of <strong>27.15%</strong>, maximum interval <strong>899.75ms</strong>, and poor quality.</li>
+</ul>
+
+<p>Initial frame-drop analysis:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actual frames: 660
+recording duration: 30.21 s
+expected frames: 906
+frame-drop rate: 27.15%
+average interval: 45.84 ms
+maximum interval: 899.75 ms
+standard deviation: 73.11 ms
+VLA training suitability: poor, not recommended
+</code></pre></div></div>
+
+<p>The optimization was Fast DDS shared memory. The camera launch kept only RGB enabled and disabled depth, IR, and point cloud. The optimized launch path is <code class="language-plaintext highlighter-rouge">start_recording_optimized.sh</code> with <code class="language-plaintext highlighter-rouge">camera_recorder_optimized.launch.py</code>.</p>
+
+<p>After shared-memory optimization:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actual frames: 796
+recording duration: 27.26 s
+expected frames: 817
+dropped frames: 21
+frame-drop rate: 2.57%
+average interval: 34.29 ms
+maximum interval: 99.98 ms
+standard deviation: 6.29 ms
+VLA training suitability: good, use carefully
+</code></pre></div></div>
+
+<p>Another episode:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total frames: 1125
+total duration: 39.39 s
+average frame rate: 28.6 Hz
+frame-drop rate: 4.74%
+maximum interval: 199.97 ms
+position jumps: normal
+rotation jumps: normal
+gripper changes: normal
+3 high-speed motion points found
+dataset mostly usable, recommended careful playback
+</code></pre></div></div>
+
+<p>Conclusion: Fast DDS shared memory removed the main throughput bottleneck, but it does not guarantee zero drops. Current data quality can support selected training and validation, but high-quality VLA fine-tuning still requires per-episode screening.</p>
+
+<p>Frame-rate record:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recording-fps.png" alt="Recording frame-rate and drop-rate record" /></p>
+
+<h2 id="5-time-alignment-between-camera-and-robot-data">5. Time Alignment Between Camera and Robot Data</h2>
+
+<h3 id="51-why-hard-synchronization-was-not-used">5.1 Why Hard Synchronization Was Not Used</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ApproximateTimeSynchronizer</code> appears in the notes. It can align messages, but it has problems in this setting:</p>
+
+<ul>
+  <li>The camera is around 30Hz.</li>
+  <li>Robot state can be much faster.</li>
+  <li>Gripper feedback can be much slower, often around 10Hz.</li>
+  <li>Strict synchronization drops frames when one source is late.</li>
+  <li>For VLA, every RGB frame is valuable, so dropping camera frames just to satisfy strict sync is undesirable.</li>
+</ul>
+
+<h3 id="52-current-alignment-strategy">5.2 Current Alignment Strategy</h3>
+
+<p>The current strategy is camera-time-dominant interpolation:</p>
+
+<ol>
+  <li>Keep all incoming robot-state and gripper-state samples in timestamped queues.</li>
+  <li>When an RGB frame arrives, use its timestamp as <code class="language-plaintext highlighter-rouge">reference_time</code>.</li>
+  <li>Find the previous and next robot samples around that time.</li>
+  <li>Linearly interpolate position and Euler-angle state.</li>
+  <li>Do the same for gripper feedback and command state.</li>
+  <li>Save one aligned row to HDF5.</li>
+</ol>
+
+<p>Interpolation logic:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ratio = (t_ref - t0) / (t1 - t0)
+value_ref = value0 + ratio * (value1 - value0)
+</code></pre></div></div>
+
+<p>Advantages:</p>
+
+<ul>
+  <li>Keeps the camera frame as the dataset main clock.</li>
+  <li>Avoids dropping image frames because of slow gripper feedback.</li>
+  <li>Produces state/action arrays with the same length as the image sequence.</li>
+  <li>Matches LeRobot/OpenPI assumptions more naturally.</li>
+</ul>
+
+<p>Limitations:</p>
+
+<ul>
+  <li>If the robot moves rapidly, linear interpolation can introduce error.</li>
+  <li>If a state sample is too far away from the image timestamp, the frame should be marked lower quality.</li>
+  <li>Euler-angle interpolation can be discontinuous near wrap-around, so quaternion or rotation-vector interpolation would be better for future work.</li>
+</ul>
+
+<h3 id="53-ros-time-choice">5.3 ROS Time Choice</h3>
+
+<p>The notes record a bug where <code class="language-plaintext highlighter-rouge">time.time()</code> was mixed with ROS message timestamps. The final direction is to use ROS time consistently, especially for:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Image.header.stamp</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">ToolVectorActual.header.stamp</code>.</li>
+  <li>Gripper target and feedback message headers.</li>
+  <li>Recorder reference timestamps.</li>
+</ul>
+
+<h3 id="54-inference-time-alignment">5.4 Inference-Time Alignment</h3>
+
+<p>During inference, strict synchronization is less important than freshness:</p>
+
+<ul>
+  <li>The image should be recent.</li>
+  <li>Robot state should be recent.</li>
+  <li>Gripper state should be recent.</li>
+  <li>Old observations should be discarded or rejected.</li>
+</ul>
+
+<p>The inference client should log <code class="language-plaintext highlighter-rouge">image_age_ms</code> and <code class="language-plaintext highlighter-rouge">state_age_ms</code>, so operators can judge whether the policy is acting on stale observations.</p>
+
+<h2 id="6-dataset-quality-and-safety-checks">6. Dataset Quality and Safety Checks</h2>
+
+<h3 id="61-check_datasetpy">6.1 <code class="language-plaintext highlighter-rouge">check_dataset.py</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">check_dataset.py</code> checks whether an HDF5 episode is suitable for training or playback.</p>
+
+<p>Checks include:</p>
+
+<ul>
+  <li>File structure completeness.</li>
+  <li>Image count, state count, and action count consistency.</li>
+  <li>Average frame rate.</li>
+  <li>Frame-drop rate.</li>
+  <li>Maximum frame interval.</li>
+  <li>Robot-position jumps.</li>
+  <li>Robot-rotation jumps.</li>
+  <li>Gripper changes.</li>
+  <li>High-speed motion points.</li>
+  <li>Whether the first and last positions are reasonable.</li>
+</ul>
+
+<p>Quality grades:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Good</td>
+      <td>Frame-drop rate is low, intervals are stable, no major jumps</td>
+    </tr>
+    <tr>
+      <td>Caution</td>
+      <td>Usable but requires slow playback verification</td>
+    </tr>
+    <tr>
+      <td>Poor</td>
+      <td>High drop rate or major discontinuities, not recommended for training</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For early data with 27.15% drops, the script correctly marked it as poor. For optimized data with 2.57%-4.74% drops, the conclusion was usable but still requiring careful playback.</p>
+
+<h3 id="62-playback-safety-check">6.2 Playback Safety Check</h3>
+
+<p>Before playback, <code class="language-plaintext highlighter-rouge">dataset_player.py</code> performs safety checks:</p>
+
+<ul>
+  <li>Compare current robot pose with the episode start pose.</li>
+  <li>Reject playback if the distance is too large.</li>
+  <li>Check whether target positions exceed workspace bounds.</li>
+  <li>Check whether each-step motion is too large.</li>
+  <li>Support slow playback for verification.</li>
+</ul>
+
+<p>This is essential because HDF5 playback can directly command a physical robot. If the start pose is inconsistent or the recorded data has jumps, playback can create a dangerous command.</p>
+
+<h3 id="63-playback-quality-evaluation">6.3 Playback Quality Evaluation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">playback_evaluator.py</code> and <code class="language-plaintext highlighter-rouge">analyze_playback.py</code> compare target commands with actual robot feedback:</p>
+
+<ul>
+  <li>Position error.</li>
+  <li>Rotation error.</li>
+  <li>Time offset.</li>
+  <li>Tracking lag.</li>
+  <li>Mean/max error.</li>
+  <li>Error curves.</li>
+</ul>
+
+<p>Recorded observations include:</p>
+
+<ul>
+  <li>Target and actual trajectories have a time delay.</li>
+  <li>Some parts of playback show clear lag.</li>
+  <li>ServoP/controller response is not equivalent to instantaneous execution.</li>
+  <li>Therefore, using target action as the learning label is not identical to using the actual future state.</li>
+</ul>
+
+<p>This directly affects model semantics: if <code class="language-plaintext highlighter-rouge">action</code> is a command pose and <code class="language-plaintext highlighter-rouge">state</code> is actual feedback, the model learns the controller command space, not the true next-state transition.</p>
+
+<h2 id="7-hdf5-to-lerobot-v20-conversion">7. HDF5 to LeRobot v2.0 Conversion</h2>
+
+<h3 id="71-conversion-target">7.1 Conversion Target</h3>
+
+<p><code class="language-plaintext highlighter-rouge">convert_to_lerobot.py</code> converts HDF5 episodes into LeRobot v2.0 format:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data/chunk-000/episode_000000.parquet
+videos/chunk-000/observation.images.top/episode_000000.mp4
+meta/info.json
+meta/stats.json
+meta/episodes.jsonl
+meta/tasks.jsonl
+</code></pre></div></div>
+
+<p>LeRobot conversion artifacts:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-lerobot-files.png" alt="LeRobot converted file structure" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-lerobot-viewer.png" alt="LeRobot dataset viewer" /></p>
+
+<h3 id="72-field-mapping">7.2 Field Mapping</h3>
+
+<p>Field mapping:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>HDF5 Field</th>
+      <th>LeRobot Field</th>
+      <th>Shape</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observations/images/color</code></td>
+      <td><code class="language-plaintext highlighter-rouge">observation.images.top</code></td>
+      <td>MP4 frames</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observations/robot_current</code> + <code class="language-plaintext highlighter-rouge">observations/gripper_current</code></td>
+      <td><code class="language-plaintext highlighter-rouge">observation.state</code></td>
+      <td>7D</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">actions/robot_target</code> + <code class="language-plaintext highlighter-rouge">actions/gripper_target</code></td>
+      <td><code class="language-plaintext highlighter-rouge">action</code></td>
+      <td>7D</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">timestamps</code></td>
+      <td><code class="language-plaintext highlighter-rouge">timestamp</code></td>
+      <td>scalar</td>
+    </tr>
+    <tr>
+      <td>episode id</td>
+      <td><code class="language-plaintext highlighter-rouge">episode_index</code></td>
+      <td>scalar</td>
+    </tr>
+    <tr>
+      <td>frame id</td>
+      <td><code class="language-plaintext highlighter-rouge">frame_index</code></td>
+      <td>scalar</td>
+    </tr>
+    <tr>
+      <td>task id</td>
+      <td><code class="language-plaintext highlighter-rouge">task_index</code></td>
+      <td>scalar</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The seven-dimensional state/action order:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[x, y, z, rx, ry, rz, gripper]
+</code></pre></div></div>
+
+<h3 id="73-infojson">7.3 <code class="language-plaintext highlighter-rouge">info.json</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">info.json</code> records:</p>
+
+<ul>
+  <li>Dataset codebase version.</li>
+  <li>FPS.</li>
+  <li>Feature schema.</li>
+  <li>Camera key name.</li>
+  <li>Robot type.</li>
+  <li>Number of episodes.</li>
+  <li>Number of frames.</li>
+  <li>Task count.</li>
+</ul>
+
+<p>Important compatibility issue:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>robot_type = "dobot_cr3"
+</code></pre></div></div>
+
+<p>This is a legacy name. The real hardware is CR5, but the dataset/config still uses <code class="language-plaintext highlighter-rouge">dobot_cr3</code> in several places. The English documentation should make this clear so future maintainers do not misinterpret the hardware.</p>
+
+<h3 id="74-statsjson">7.4 <code class="language-plaintext highlighter-rouge">stats.json</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">stats.json</code> contains mean/std/min/max for:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">observation.state</code></li>
+  <li><code class="language-plaintext highlighter-rouge">action</code></li>
+  <li>image channels</li>
+</ul>
+
+<p>These statistics are used by policy normalization. If the HDF5 unit convention is wrong, for example millimeters versus meters, the model input distribution will be wrong. Unit consistency must therefore be checked before training.</p>
+
+<h3 id="75-lerobot-version-issue">7.5 LeRobot Version Issue</h3>
+
+<p>The notes mention LeRobot v2.0 conversion and a possible migration toward LeRobot v3. At the time of the report, v2.0 was the working conversion target. For reproducibility, the toolchain version should be fixed instead of mixing generated datasets across incompatible schemas.</p>
+
+<h2 id="8-openpi--openpicr5-adaptation">8. OpenPI / openpicr5 Adaptation</h2>
+
+<h3 id="81-openpi-policy-service">8.1 OpenPI Policy Service</h3>
+
+<p>The basic OpenPI flow:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client sends observation over WebSocket
+server runs policy inference
+server returns action chunk
+client executes first N actions
+client sends next observation
+</code></pre></div></div>
+
+<p>The openpicr5 fork adapts this flow to Dobot/CR5.</p>
+
+<h3 id="82-dobot-data-input-mapping">8.2 Dobot Data Input Mapping</h3>
+
+<p><code class="language-plaintext highlighter-rouge">dobot_inputs.py</code> defines transforms for Dobot data. The practical input mapping is:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model Input</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/image</code></td>
+      <td>top RGB camera image</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/wrist_image</code></td>
+      <td>currently zero image or reused top image, depending on branch/client</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">state</code></td>
+      <td>7D robot pose + gripper</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">prompt</code></td>
+      <td>task text</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The notes identify a mismatch:</p>
+
+<ul>
+  <li>Training transform may use a zero wrist image and mask it out.</li>
+  <li>The inference client may reuse the top image as wrist image.</li>
+</ul>
+
+<p>This should be unified. If there is no wrist camera, both training and inference should use a zero image and a false mask, or both should explicitly reuse the top image.</p>
+
+<h3 id="83-lerobotdobotcr3dataconfig">8.3 <code class="language-plaintext highlighter-rouge">LeRobotDobotCR3DataConfig</code></h3>
+
+<p>The data config maps a LeRobot dataset into the OpenPI expected fields:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">observation.images.top</code> -&gt; base camera image.</li>
+  <li><code class="language-plaintext highlighter-rouge">observation.state</code> -&gt; 7D state.</li>
+  <li><code class="language-plaintext highlighter-rouge">action</code> -&gt; 7D action.</li>
+  <li><code class="language-plaintext highlighter-rouge">task</code> -&gt; prompt text.</li>
+</ul>
+
+<p>The config name contains CR3 for historical reasons, but the data can come from CR5 when the state/action convention is the same.</p>
+
+<h3 id="84-training-configuration-pi0_dobot_cr3">8.4 Training Configuration <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code> training configuration sets:</p>
+
+<ul>
+  <li>Base model family: PI0/OpenPI.</li>
+  <li>Dataset transform: Dobot/LeRobot mapping.</li>
+  <li>Action dimension: 7.</li>
+  <li>State dimension: 7.</li>
+  <li>Image input: top camera.</li>
+  <li>Task prompt: text instruction.</li>
+</ul>
+
+<p>Current risk: the prompt in the converted dataset may be too generic, such as <code class="language-plaintext highlighter-rouge">robot_teleoperation</code>, while inference prompts are task-specific. Training prompts should be closer to actual task language.</p>
+
+<h3 id="85-prompt-and-task-description">8.5 Prompt and Task Description</h3>
+
+<p>For VLA fine-tuning, the prompt is part of the input distribution. If all collected episodes use a generic prompt but inference uses a specific prompt, the model sees a distribution shift. The recommended direction is:</p>
+
+<ul>
+  <li>Store actual task descriptions in <code class="language-plaintext highlighter-rouge">tasks.jsonl</code>.</li>
+  <li>Keep prompt wording consistent between data conversion and inference.</li>
+  <li>Use multiple task prompts only when the dataset actually contains multiple tasks.</li>
+</ul>
+
+<h2 id="9-model-inference-server">9. Model Inference Server</h2>
+
+<h3 id="91-current-mainline-server">9.1 Current Mainline Server</h3>
+
+<p>The mainline server is based on <code class="language-plaintext highlighter-rouge">serve_policy.py</code>. It:</p>
+
+<ul>
+  <li>Loads the OpenPI checkpoint.</li>
+  <li>Opens a WebSocket endpoint.</li>
+  <li>Receives JSON or msgpack-style observations.</li>
+  <li>Runs model inference.</li>
+  <li>Returns an action chunk.</li>
+</ul>
+
+<p>For real-robot use, server logs should include:</p>
+
+<ul>
+  <li>Observation receive time.</li>
+  <li>Model inference time.</li>
+  <li>Serialization/deserialization time.</li>
+  <li>Action-send time.</li>
+  <li>Whether the first inference includes compilation or warmup overhead.</li>
+</ul>
+
+<h3 id="92-server-warmup-on-originread">9.2 Server Warmup on <code class="language-plaintext highlighter-rouge">origin/read</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">origin/read</code> branch adds server warmup and timing instrumentation. The reason is that the first inference can be much slower because of model loading, JIT/XLA compilation, GPU memory allocation, or cache initialization.</p>
+
+<p>Useful warmup behavior:</p>
+
+<ol>
+  <li>Build a dummy observation with the same shape as the real one.</li>
+  <li>Run several inference passes before accepting a real robot client.</li>
+  <li>Log warmup time separately from online inference time.</li>
+  <li>Expose <code class="language-plaintext highlighter-rouge">server_timing</code> so the client can distinguish policy inference time from network and control time.</li>
+</ol>
+
+<p>The recommendation is to merge warmup and timing as optional mainline parameters, rather than leaving them only in an experiment branch.</p>
+
+<h2 id="10-model-inference-client">10. Model Inference Client</h2>
+
+<h3 id="101-current-examplesdobot_cr5mainpy">10.1 Current <code class="language-plaintext highlighter-rouge">examples/dobot_cr5/main.py</code></h3>
+
+<p>The CR5 inference client:</p>
+
+<ul>
+  <li>Subscribes to the RGB image.</li>
+  <li>Subscribes to actual robot state.</li>
+  <li>Reads gripper state.</li>
+  <li>Builds the OpenPI observation.</li>
+  <li>Sends the observation to the WebSocket policy server.</li>
+  <li>Receives a chunk of actions.</li>
+  <li>Executes robot actions with ServoP.</li>
+  <li>Executes gripper actions with Modbus.</li>
+  <li>Logs timing statistics.</li>
+</ul>
+
+<h3 id="102-client-parameters">10.2 Client Parameters</h3>
+
+<p>Important parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--host</code>, <code class="language-plaintext highlighter-rouge">--port</code></td>
+      <td>WebSocket policy server address</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--prompt</code></td>
+      <td>Task text</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--replan_steps</code></td>
+      <td>Number of actions executed before requesting new inference</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--action_horizon</code></td>
+      <td>Number of actions returned by the model</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--control_hz</code></td>
+      <td>Target control frequency</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--max_delta</code></td>
+      <td>Per-step safety limit</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--workspace_bounds</code></td>
+      <td>Workspace safety boundary</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="103-observation-construction">10.3 Observation Construction</h3>
+
+<p>Observation fields:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>base_0_rgb: RGB image
+wrist_0_rgb: wrist image or placeholder
+state: [x, y, z, rx, ry, rz, gripper]
+prompt: task text
+</code></pre></div></div>
+
+<p>Image preprocessing:</p>
+
+<ul>
+  <li>Convert ROS <code class="language-plaintext highlighter-rouge">Image</code> to OpenCV/PIL format.</li>
+  <li>Convert BGR/RGB consistently.</li>
+  <li>Resize to the OpenPI expected input shape.</li>
+  <li>Add batch dimension.</li>
+</ul>
+
+<p>State preprocessing:</p>
+
+<ul>
+  <li>Use the latest actual robot pose.</li>
+  <li>Use the latest gripper feedback.</li>
+  <li>Ensure units match the training dataset.</li>
+  <li>Reject stale state if the timestamp is too old.</li>
+</ul>
+
+<h3 id="104-action-execution">10.4 Action Execution</h3>
+
+<p>The model returns an action chunk:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actions: [T, 7]
+</code></pre></div></div>
+
+<p>Each action:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[x, y, z, rx, ry, rz, gripper]
+</code></pre></div></div>
+
+<p>Execution:</p>
+
+<ol>
+  <li>Split robot target and gripper target.</li>
+  <li>Check per-step delta and workspace bounds.</li>
+  <li>Send robot target through ServoP.</li>
+  <li>Send gripper target through Modbus.</li>
+  <li>Log action time and error state.</li>
+</ol>
+
+<p>The final stable path uses blocking ServoP execution. This lowers apparent control frequency, but keeps observation/action causality more consistent.</p>
+
+<h3 id="105-action-queue-and-replanning">10.5 Action Queue and Replanning</h3>
+
+<p>The client does not necessarily infer at every control step. It uses an action queue:</p>
+
+<ul>
+  <li>The model returns 10 actions.</li>
+  <li>Only the first <code class="language-plaintext highlighter-rouge">replan_steps</code> actions are enqueued.</li>
+  <li>Each loop pops one action and executes it.</li>
+  <li>When the queue is empty, the client requests another inference.</li>
+</ul>
+
+<p>This reduces per-frame inference latency and avoids running a very long action chunk without feedback.</p>
+
+<h3 id="106-inference-log-facts">10.6 Inference Log Facts</h3>
+
+<p>Recorded inference observations:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subsequent inference is mostly 58-68ms
+ServoP can be 3-6ms, but sometimes 50-66ms
+Step 30 action frequency: 25.2Hz, after removing inference: 38.4Hz
+Step 60 action frequency: 25.9Hz, after removing inference: 39.1Hz
+Step 150 action frequency: 20.8Hz, after removing inference: 28.3Hz
+</code></pre></div></div>
+
+<p>Conclusions:</p>
+
+<ul>
+  <li>Model inference itself is around 60ms.</li>
+  <li>ServoP timing is unstable.</li>
+  <li>Even with a 30Hz target, real action frequency is affected by inference, ServoP, and queue blocking.</li>
+  <li>Forcing a sleep to exactly 1/30 second did not improve results; the notes record that adding sleep reduced the frequency to around 26Hz.</li>
+</ul>
+
+<p>Inference logs and timing records:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-inference-log.png" alt="CR5 inference client runtime log" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-inference-timing.png" alt="CR5 inference client timing fields" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-061-d3a08361.png" alt="Inference trajectory visualization 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-062-23d9a233.png" alt="Inference trajectory visualization 2" /></p>
+
+<h2 id="11-parallel-inference-and-independent-servop-attempts">11. Parallel Inference and Independent ServoP Attempts</h2>
+
+<h3 id="111-problem-background">11.1 Problem Background</h3>
+
+<p>During data collection and playback, ServoP can be low-latency:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ServoP in data_collector4.py:
+around 11ms in favorable conditions
+</code></pre></div></div>
+
+<p>But inside the VLA inference client, the same ServoP call can reach:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>90-100ms
+</code></pre></div></div>
+
+<p>This pushes the effective control rate down to about 10Hz or 20Hz, below the target 30Hz.</p>
+
+<h3 id="112-attempt-1-multithreadedexecutor-and-callback-groups">11.2 Attempt 1: <code class="language-plaintext highlighter-rouge">MultiThreadedExecutor</code> and Callback Groups</h3>
+
+<p>Idea:</p>
+
+<ul>
+  <li>Put ServoP service calls, image subscription, and state subscription in separate callback groups.</li>
+  <li>Use a multi-threaded executor.</li>
+</ul>
+
+<p>Result:</p>
+
+<ul>
+  <li>No obvious improvement.</li>
+  <li>ServoP still stayed around 100ms.</li>
+</ul>
+
+<p>Reasoning: callback groups only affect Python callback scheduling. The latency likely came from DDS, controller response, image data-flow interference, or service-call frequency rather than Python callback mutual exclusion alone.</p>
+
+<h3 id="113-attempt-2-independent-servonode">11.3 Attempt 2: Independent <code class="language-plaintext highlighter-rouge">ServoNode</code></h3>
+
+<p>Idea:</p>
+
+<ul>
+  <li>Create a separate ROS node containing only the ServoP client.</li>
+  <li>Avoid image/state subscriptions affecting the ServoP client.</li>
+</ul>
+
+<p>Result:</p>
+
+<ul>
+  <li>Still around 90-100ms.</li>
+</ul>
+
+<p>Reasoning: the node was independent, but it still shared the same Python process, <code class="language-plaintext highlighter-rouge">rclpy</code> context, network stack, and DDS environment.</p>
+
+<h3 id="114-attempt-3-different-future-wait-methods">11.4 Attempt 3: Different Future-Wait Methods</h3>
+
+<p>Two waiting styles were compared:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rclpy</span><span class="p">.</span><span class="n">spin_until_future_complete</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">future</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>and manual polling:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="ow">not</span> <span class="n">future</span><span class="p">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">spin_once</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Result:</p>
+
+<ul>
+  <li>Latency was similar.</li>
+</ul>
+
+<p>So the main issue was not the future-wait API.</p>
+
+<h3 id="115-attempt-4-high-frequency-servopthread">11.5 Attempt 4: High-Frequency <code class="language-plaintext highlighter-rouge">ServoPThread</code></h3>
+
+<p>Idea:</p>
+
+<ul>
+  <li>Use a separate thread to continuously send ServoP at high frequency.</li>
+  <li>The main inference loop only updates the target pose and does not wait for ServoP.</li>
+</ul>
+
+<p>Result:</p>
+
+<ul>
+  <li>Apparent frequency can improve.</li>
+  <li>Trajectories show severe sawtooth motion, peaks/valleys, and back-and-forth shaking.</li>
+</ul>
+
+<p>Key reason:</p>
+
+<ul>
+  <li>VLA inference is closed-loop.</li>
+  <li>The previous inference returns a multi-step action chunk, but before it finishes, the next inference reads an intermediate in-motion robot state.</li>
+  <li>The model then predicts the next action from that intermediate state and may correct backward, causing oscillation.</li>
+</ul>
+
+<p>The notes explicitly compare this with <code class="language-plaintext highlighter-rouge">dataset_player.py</code>: non-blocking playback can work because it does not re-infer; it executes a fixed trajectory in order. VLA non-blocking inference can shake because action execution and the next observation are coupled.</p>
+
+<h3 id="116-attempt-5-independent-process-with-multiprocessing">11.6 Attempt 5: Independent Process with <code class="language-plaintext highlighter-rouge">multiprocessing</code></h3>
+
+<p>Idea:</p>
+
+<ul>
+  <li>Move ServoP into a completely independent Python process.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">rclpy.init()</code> independently.</li>
+  <li>Use a multiprocessing queue to pass target poses.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">origin/read</code> includes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">servo_process_worker</span><span class="p">(</span><span class="n">cmd_queue</span><span class="p">,</span> <span class="n">result_queue</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">rclpy</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="s">"servo_process_node"</span><span class="p">)</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>Result:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>independent-process ServoP latency: about 48ms
+main-process wait time: about 85ms
+control frequency still around 10Hz
+</code></pre></div></div>
+
+<p>The improvement was limited:</p>
+
+<ul>
+  <li>ServoP inside the separate process became faster.</li>
+  <li>Queue synchronization, waiting for results, and controller response still remained.</li>
+  <li>Large image subscriptions and DDS resource contention may still affect the full system.</li>
+</ul>
+
+<h3 id="117-attempt-6-independent-process-with-continuous-high-frequency-sending">11.7 Attempt 6: Independent Process with Continuous High-Frequency Sending</h3>
+
+<p>Idea:</p>
+
+<ul>
+  <li>Even without new commands, continuously send the current pose.</li>
+  <li>Keep the Dobot controller in a continuous servo mode.</li>
+</ul>
+
+<p>Observation:</p>
+
+<ul>
+  <li>Latency stayed around 48ms and did not reach the 11ms seen in <code class="language-plaintext highlighter-rouge">data_collector4.py</code>.</li>
+  <li>Trajectory quality was less stable than the blocking approach.</li>
+</ul>
+
+<h3 id="118-engineering-conclusion">11.8 Engineering Conclusion</h3>
+
+<p><code class="language-plaintext highlighter-rouge">SERVO_LATENCY_INVESTIGATION.md</code> can be summarized as:</p>
+
+<ol>
+  <li>The VLA inference client could not stably reproduce the 11ms ServoP latency of <code class="language-plaintext highlighter-rouge">data_collector4.py</code>.</li>
+  <li>Dobot controller behavior may depend on command-sending frequency; continuous high-frequency ServoP can be faster.</li>
+  <li>Image subscription and model inference change system resource conditions.</li>
+  <li>Non-blocking execution has higher frequency but worse trajectory quality.</li>
+  <li>An independent process reduces part of the ServoP call latency, but total closed-loop benefit is not enough.</li>
+  <li>The most usable current approach is blocking or relatively serial action-chunk execution, accepting lower frequency to preserve trajectory quality and task completion.</li>
+</ol>
+
+<p>The failure mode:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  Obs0["Observation S0"]
+  Infer0["Infer action chunk A0..A9"]
+  AsyncExec["Non-blocking / high-frequency ServoP executing"]
+  MidState["Robot has not reached target; it is at intermediate state S_mid"]
+  Obs1["Next observation reads S_mid"]
+  Infer1["Policy re-infers from S_mid"]
+  Correction["New action tries to correct unfinished previous action"]
+  Oscillation["Sawtooth / back-and-forth trajectory"]
+  Blocking["Blocking action-chunk execution"]
+  Stable["State-action causality is more consistent; lower frequency but more stable"]
+
+  Obs0 --&gt; Infer0 --&gt; AsyncExec --&gt; MidState --&gt; Obs1 --&gt; Infer1 --&gt; Correction --&gt; Oscillation
+  Infer0 --&gt; Blocking --&gt; Stable
+</code></pre>
+
+<h2 id="12-dataset-playback">12. Dataset Playback</h2>
+
+<h3 id="121-dataset_playerpy">12.1 <code class="language-plaintext highlighter-rouge">dataset_player.py</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">dataset_player.py</code> replays HDF5 trajectories. Core features:</p>
+
+<ul>
+  <li>Load <code class="language-plaintext highlighter-rouge">actions/robot_target</code>.</li>
+  <li>Load <code class="language-plaintext highlighter-rouge">actions/gripper_target</code>.</li>
+  <li>Play with the actual interval recorded in <code class="language-plaintext highlighter-rouge">timestamp</code>.</li>
+  <li>Control the robot with ServoP.</li>
+  <li>Control the gripper with Modbus.</li>
+  <li>Publish target-state topics for the evaluator.</li>
+  <li>Run safety checks before playback.</li>
+</ul>
+
+<p>Playback loop:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>load episode
+check start pose
+for each frame:
+    wait according to timestamp delta
+    send ServoP target
+    send gripper target
+    publish target state
+</code></pre></div></div>
+
+<h3 id="122-playback-frequency">12.2 Playback Frequency</h3>
+
+<p>Playback does not force a fixed 100Hz loop. It uses the recorded <code class="language-plaintext highlighter-rouge">timestamp</code>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sleep_time = (timestamp[i] - timestamp[i-1]) / speed_factor
+</code></pre></div></div>
+
+<p>This preserves the rhythm of the original recording better than fixed sleeping and also supports slow playback.</p>
+
+<h3 id="123-gripper-state-interpolation">12.3 Gripper-State Interpolation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">dataset_player.py</code> includes a <code class="language-plaintext highlighter-rouge">GripperStateFeedback</code> thread:</p>
+
+<ul>
+  <li>Read actual Modbus position at around 10Hz.</li>
+  <li>Publish interpolated actual and target gripper states at a higher rate.</li>
+</ul>
+
+<p>The reason is that Modbus readback is slow, while evaluation and recording benefit from smoother high-frequency state streams.</p>
+
+<h2 id="13-model-fine-tuning-flow">13. Model Fine-Tuning Flow</h2>
+
+<h3 id="131-data-preparation">13.1 Data Preparation</h3>
+
+<p>The full preparation flow:</p>
+
+<ol>
+  <li>Start the Dobot driver.</li>
+  <li>Start the camera, preferably with Fast DDS shared memory and only RGB 640x480@30 enabled.</li>
+  <li>Start <code class="language-plaintext highlighter-rouge">recorder_optimized.py</code>.</li>
+  <li>Start <code class="language-plaintext highlighter-rouge">data_collector4.py</code> for teleoperation.</li>
+  <li>Use the teleoperation key to publish <code class="language-plaintext highlighter-rouge">/recorder/command=1</code> and start recording.</li>
+  <li>Finish the task and publish <code class="language-plaintext highlighter-rouge">/recorder/command=2</code> to save.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">check_dataset.py</code>.</li>
+  <li>Run slow <code class="language-plaintext highlighter-rouge">dataset_player.py</code> playback for safety validation.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">playback_evaluator.py</code> plus <code class="language-plaintext highlighter-rouge">analyze_playback.py</code> for replay-error analysis.</li>
+  <li>Convert with <code class="language-plaintext highlighter-rouge">convert_to_lerobot.py</code>.</li>
+  <li>Inspect videos, states, and actions with LeRobot visualization tools.</li>
+</ol>
+
+<p>Fine-tuning preparation:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  Deploy["Start CR5, camera, and recorder"]
+  Teleop["Teleoperate and collect episodes"]
+  Quality["check_dataset quality check"]
+  Playback["Slow dataset_player playback"]
+  Eval["playback_evaluator + analyze_playback"]
+  Convert["convert_to_lerobot.py"]
+  Visualize["LeRobot visualization"]
+  Train["OpenPI pi0_dobot_cr3 fine-tuning"]
+  Serve["serve_policy.py loads checkpoint"]
+  Client["CR5 inference client"]
+
+  Deploy --&gt; Teleop --&gt; Quality --&gt; Playback --&gt; Eval --&gt; Convert --&gt; Visualize --&gt; Train --&gt; Serve --&gt; Client
+</code></pre>
+
+<h3 id="132-training-field-consistency">13.2 Training-Field Consistency</h3>
+
+<p>The most important consistency checks:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Collected Field</th>
+      <th>Converted Field</th>
+      <th>OpenPI Input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Image</td>
+      <td><code class="language-plaintext highlighter-rouge">observations/images/color</code> BGR/RGB storage</td>
+      <td><code class="language-plaintext highlighter-rouge">observation.images.top</code> MP4</td>
+      <td><code class="language-plaintext highlighter-rouge">observation/image</code> -&gt; <code class="language-plaintext highlighter-rouge">base_0_rgb</code></td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td>robot_current + gripper_current</td>
+      <td><code class="language-plaintext highlighter-rouge">observation.state</code> 7D</td>
+      <td><code class="language-plaintext highlighter-rouge">state</code> 7D</td>
+    </tr>
+    <tr>
+      <td>Action</td>
+      <td>robot_target + gripper_target</td>
+      <td><code class="language-plaintext highlighter-rouge">action</code> 7D</td>
+      <td><code class="language-plaintext highlighter-rouge">actions</code> 7D</td>
+    </tr>
+    <tr>
+      <td>Text</td>
+      <td>task description</td>
+      <td><code class="language-plaintext highlighter-rouge">tasks.jsonl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">prompt</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="133-current-fine-tuning-risks">13.3 Current Fine-Tuning Risks</h3>
+
+<p>Risks that must be kept visible:</p>
+
+<ol>
+  <li><strong>Naming mismatch:</strong> CR5 data still uses <code class="language-plaintext highlighter-rouge">cr3</code> names, which can mislead future maintainers.</li>
+  <li><strong>Over-generic prompt:</strong> the conversion default task may be <code class="language-plaintext highlighter-rouge">robot_teleoperation</code>, while inference uses a specific task prompt. Training prompts should match real tasks.</li>
+  <li><strong>Wrist-image mismatch:</strong> training may use a zero wrist image with mask false, while the inference client may reuse the top image as wrist image.</li>
+  <li><strong>Action/state gap:</strong> action labels are target commands, while state is actual feedback. The model learns command space; whether the command is reached depends on ServoP and controller response.</li>
+  <li><strong>Dataset-quality variation:</strong> later episodes with 2.57%-4.74% drops are usable with caution; the early 27.15% drop-rate data is not recommended.</li>
+  <li><strong>Low-rate gripper feedback:</strong> interpolated gripper feedback should not be interpreted as true high-frequency measurement.</li>
+</ol>
+
+<h2 id="14-main-current-issues">14. Main Current Issues</h2>
+
+<h3 id="141-dataset-quality">14.1 Dataset Quality</h3>
+
+<p>Before shared memory, frame drop rate was too high for training. After shared memory, quality improved significantly, but every episode still needs checking:</p>
+
+<ul>
+  <li>Frame-drop rate.</li>
+  <li>Maximum time interval.</li>
+  <li>Start/end position.</li>
+  <li>Sudden jumps.</li>
+  <li>High-speed motion points.</li>
+</ul>
+
+<h3 id="142-hand-eye-calibration-accuracy">14.2 Hand-Eye Calibration Accuracy</h3>
+
+<p>The current static TF is usable, but the notes still acknowledge reprojection error and calibration-board issues. If future tasks only use RGB images and an end-to-end policy, the impact is limited. If depth point clouds are used for action priors or grasp-point computation, recalibration is required.</p>
+
+<h3 id="143-inference-closed-loop-frequency">14.3 Inference Closed-Loop Frequency</h3>
+
+<p>The hard part is not merely calling the model:</p>
+
+<ul>
+  <li>Model inference is around 60ms.</li>
+  <li>ServoP latency is unstable.</li>
+  <li>Non-blocking execution causes trajectory shaking.</li>
+  <li>Parallel processes provide limited improvement.</li>
+</ul>
+
+<p>The short-term strategy is to accept lower control frequency and preserve observation/action consistency.</p>
+
+<h3 id="144-action-label-semantics">14.4 Action-Label Semantics</h3>
+
+<p>Dataset <code class="language-plaintext highlighter-rouge">action</code> is the target pose, not the actually reached pose. The model learns what command should be sent to the controller, not the next actual state. ServoP latency and controller tracking error therefore affect inference results.</p>
+
+<p>Possible directions:</p>
+
+<ul>
+  <li>Keep the current command-space learning setup.</li>
+  <li>Change action labels to delay-compensated reachable actual states.</li>
+  <li>Add action/state gap compensation during training.</li>
+  <li>Use playback-evaluation time offsets to correct labels.</li>
+</ul>
+
+<p>The current code has not completed systematic compensation.</p>
+
+<h3 id="145-wrist-image-field">14.5 Wrist Image Field</h3>
+
+<p>Training and inference handle the wrist image differently. They should be unified.</p>
+
+<h3 id="146-naming-confusion">14.6 Naming Confusion</h3>
+
+<p>The CR5 adaptation still contains legacy <code class="language-plaintext highlighter-rouge">cr3</code> names. This does not necessarily break the current code, but it hurts collaboration, reporting, and reproducibility.</p>
+
+<h2 id="15-recommended-next-steps">15. Recommended Next Steps</h2>
+
+<h3 id="151-short-term">15.1 Short Term</h3>
+
+<ol>
+  <li>Freeze the current stable path:
+    <ul>
+      <li>Fast DDS shared memory.</li>
+      <li><code class="language-plaintext highlighter-rouge">recorder_optimized.py</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">check_dataset.py</code>.</li>
+      <li>slow <code class="language-plaintext highlighter-rouge">dataset_player.py</code> playback.</li>
+      <li>LeRobot v2.0 conversion.</li>
+      <li>blocking or serial inference client.</li>
+    </ul>
+  </li>
+  <li>Clean up naming:
+    <ul>
+      <li>Keep <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code> temporarily if needed, but explicitly document that it is used for CR5 and <code class="language-plaintext highlighter-rouge">cr3</code> is historical.</li>
+      <li>Add a <code class="language-plaintext highlighter-rouge">pi0_dobot_cr5</code> alias or formal configuration.</li>
+    </ul>
+  </li>
+  <li>Unify wrist-image handling:
+    <ul>
+      <li>If there is no wrist camera, inference should also use a zero image and mask false.</li>
+      <li>Or training should explicitly reuse the top image.</li>
+    </ul>
+  </li>
+  <li>Every episode should be checked before it enters training.</li>
+</ol>
+
+<h3 id="152-medium-term">15.2 Medium Term</h3>
+
+<ol>
+  <li>Redo hand-eye calibration:
+    <ul>
+      <li>Fix the calibration board.</li>
+      <li>Use accurate dimensions.</li>
+      <li>Disable or control IR projection.</li>
+      <li>Record reprojection error.</li>
+      <li>Save each calibration session and final TF.</li>
+    </ul>
+  </li>
+  <li>Compensate labels:
+    <ul>
+      <li>Align action with future actual state using playback-evaluated time offset.</li>
+      <li>Compare command-space action versus reachable-state action during training.</li>
+    </ul>
+  </li>
+  <li>Merge server warmup:
+    <ul>
+      <li>Bring <code class="language-plaintext highlighter-rouge">origin/read</code> warmup and <code class="language-plaintext highlighter-rouge">server_timing</code> into mainline as optional parameters.</li>
+    </ul>
+  </li>
+  <li>Standardize inference-client logging:
+    <ul>
+      <li>Save <code class="language-plaintext highlighter-rouge">infer_ms</code>, <code class="language-plaintext highlighter-rouge">servo_ms</code>, <code class="language-plaintext highlighter-rouge">gripper_ms</code>, <code class="language-plaintext highlighter-rouge">image_age_ms</code>, and <code class="language-plaintext highlighter-rouge">state_age_ms</code>.</li>
+      <li>Generate HDF5/CSV logs for each run.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="153-long-term">15.3 Long Term</h3>
+
+<ol>
+  <li>Consider a C++ ServoP execution node:
+    <ul>
+      <li>Python/rclpy is not ideal for high-frequency control.</li>
+      <li>The execution layer can move to C++, while Python handles model inference and target publication.</li>
+    </ul>
+  </li>
+  <li>Clarify the real-time control interface:
+    <ul>
+      <li>Investigate whether the Dobot controller has an interface or parameter set better suited to continuous servoing.</li>
+      <li>If ServoP service calls are unstable, model-side optimization alone has limited value.</li>
+    </ul>
+  </li>
+  <li>Fix data-format versioning:
+    <ul>
+      <li>Move to LeRobot v3, or pin LeRobot v2.0 dependencies exactly.</li>
+    </ul>
+  </li>
+  <li>Add multi-task data:
+    <ul>
+      <li>Current data appears heavily centered on simple pick/block-style tasks.</li>
+      <li>VLA fine-tuning needs richer actions, objects, scenes, and language.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="16-file-index">16. File Index</h2>
+
+<h3 id="real-machine-notes">Real-Machine Notes</h3>
+
+<p>The original notes cover deployment, hand-eye calibration, data recording/playback, code changes, HDF5-to-LeRobot conversion, OpenPI environment setup, inference-client deployment, and debugging records. The public English page keeps the normalized engineering facts rather than local note filenames.</p>
+
+<h3 id="openpicr5"><code class="language-plaintext highlighter-rouge">openpicr5</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/openpi/policies/dobot_cr3_policy.py
+src/openpi/transforms/dobot_inputs.py
+src/openpi/transforms/dobot_outputs.py
+src/openpi/training/config.py
+src/openpi/servers/serve_policy.py
+examples/dobot_cr5/main.py
+examples/dobot_cr5/README.md
+SERVO_LATENCY_INVESTIGATION.md
+</code></pre></div></div>
+
+<p>The experiment branch <code class="language-plaintext highlighter-rouge">origin/read</code> additionally contains warmup, timing, independent-process ServoP, and latency-investigation changes.</p>
+
+<h3 id="dobot_6axis_ros2_v3-originserver"><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3 origin/server</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dobot_demo/dobot_demo/data_collector4.py
+dobot_demo/dobot_demo/dataset_player.py
+dobot_demo/dobot_demo/check_dataset.py
+dobot_demo/dobot_demo/playback_evaluator.py
+dobot_demo/dobot_demo/analyze_playback.py
+dobot_demo/dobot_demo/convert_to_lerobot.py
+dobot_demo/dobot_demo/gripper_comm.py
+dobot_demo/dobot_demo/gripper_config.py
+</code></pre></div></div>
+
+<h3 id="ros2_ws_xing"><code class="language-plaintext highlighter-rouge">ros2_ws_xing</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>recorder_optimized.py
+camera_recorder_optimized.launch.py
+start_recording_optimized.sh
+</code></pre></div></div>
+
+<h2 id="17-final-evaluation">17. Final Evaluation</h2>
+
+<p>This project has moved from “the robot can be controlled” to “the system can collect VLA data, convert it to LeRobot, train OpenPI, and control CR5 on real hardware through WebSocket inference.” The actual difficulty is concentrated in three areas:</p>
+
+<ol>
+  <li><strong>Data timing:</strong> image, robot, and gripper frequencies differ. Strict synchronization drops frames, so interpolation is currently the practical solution.</li>
+  <li><strong>Control latency:</strong> ServoP is unstable inside the inference client. Non-blocking and parallel execution did not produce usable closed-loop trajectory quality.</li>
+  <li><strong>Data semantics:</strong> action is a target command, state is actual feedback, and the gap can be learned or amplified by the model.</li>
+</ol>
+
+<p>The currently recommended stable route:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shared-memory camera + asynchronous recording + image-time-dominant interpolation
+-&gt; dataset quality checks and slow safety playback
+-&gt; LeRobot v2.0 conversion
+-&gt; OpenPI pi0_dobot_cr3 / pi0_dobot_cr5 fine-tuning
+-&gt; WebSocket policy server
+-&gt; CR5 serial/blocking action-chunk inference client
+</code></pre></div></div>
+
+<p>The parallel inference and independent ServoP-process attempts should remain in the report and branches as engineering evidence. They show that simply chasing higher frequency is not the core of VLA real-robot inference. Closed-loop state consistency and trajectory quality matter more.</p>
+
+<p>Additional visual record from the real-robot adaptation:</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-019-e65dad98.png" alt="CR5 adaptation visual record" /></p>
+
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="page__footer">
+      <footer>
+        <div class="page__footer-copyright">
+          <p>&copy; 2026 Jianming Xing<br> 邢鉴明. All rights reserved.</p>
+          <p><a href="https://beian.miit.gov.cn" target="_blank">津ICP备2023005601号-1</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="/assets/js/mermaid-init.js"></script>
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "");
+</script>
+
+
+<script>
+    
+</script>
+
+
+
+  </body>
+</html>

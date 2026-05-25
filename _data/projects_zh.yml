@@ -1,0 +1,45 @@
+- id: cr5-vla-openpi
+  title: "CR5 面向 VLA/OpenPI 的真机数据采集与推理闭环适配"
+  subtitle: "ROS2 Humble · Dobot CR5 · LeRobot v2.0 · OpenPI"
+  period: "2026.01 - 2026.03"
+  role: "负责手眼标定、遥操作、同步数据采集、安全校验、OpenPI 适配与真机推理部署"
+  keywords: ["具身智能", "VLA", "ROS2", "OpenPI", "LeRobot", "真机部署"]
+  one_liner: "围绕越疆 Dobot CR5、奥比中光 Astra2 RGB-D 相机和电动夹爪搭建 ROS2 真机闭环，覆盖标定、遥操作、同步数据采集、数据集转换、OpenPI 微调和 WebSocket 推理。"
+  highlights:
+    - "设计 HDF5 数据采集与同步方案，以 RGB 图像时间戳为主时钟，通过二分查找和线性插值对齐机械臂状态、目标动作和夹爪反馈。"
+    - "通过 Fast DDS 共享内存与只启用 RGB 采集，将早期相机丢帧率从 27.15% 优化到 2.57%-4.74%。"
+    - "完成 OpenPI 适配，打通 Dobot 7 维 state/action 映射、训练配置、WebSocket 策略服务和 CR5 推理客户端，并采用动作块与阻塞式短动作执行提高稳定性。"
+  outcome: "建立了从真机录制、LeRobot v2.0 转换到 CR5 推理部署的安全校验闭环。"
+  page: "/zh/projects/cr5-vla-openpi/"
+  links:
+    code: "https://github.com/Bill-xing/openpicr5"
+    video: ""
+    report: ""
+    repositories:
+      - label: "openpicr5"
+        url: "https://github.com/Bill-xing/openpicr5"
+      - label: "DOBOT ROS2"
+        url: "https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3"
+      - label: "ros2_ws_xing"
+        url: "https://github.com/Bill-xing/ros2_ws_xing"
+
+- id: robot-welding-system
+  title: "面向焊缝识别的机器人孪生上位机系统"
+  subtitle: "C++/Qt 上位机 · U-Net 焊缝分割 · OpenGL 数字孪生"
+  period: "2024.09 - 2025.06"
+  role: "负责视觉模型、上位机控制与数字孪生集成"
+  keywords: ["机器人", "计算机视觉", "C++/Qt", "U-Net", "OpenGL"]
+  one_liner: "面向焊缝识别与 LeArm 数字孪生演示，构建了结合语义分割、Qt 控制和 OpenGL 实时可视化的软件系统。"
+  highlights:
+    - "对比原始 U-Net、VGG-U-Net 与 VGG16 预训练权重方案，通过迁移学习、数据增强和数据集扩充将焊缝分割准确率由 64% 提升至 96.8%。"
+    - "在 C++/Qt 上位机中集成图片选择、Python 推理调用和分割结果回显。"
+    - "基于 OpenGL、STL 连杆模型与 DH 参数运动学实现数字孪生渲染，支持滑块控制和鼠标旋转、缩放、平移。"
+  outcome: "将焊缝检测与机器人可视化集成到统一桌面流程中，简历记录的焊缝分割准确率达到 96.8%。"
+  page: "/zh/projects/robot-welding-system/"
+  links:
+    code: "https://github.com/Bill-xing/HMI"
+    video: ""
+    report: ""
+    repositories:
+      - label: "HMI"
+        url: "https://github.com/Bill-xing/HMI"

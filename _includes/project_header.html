@@ -1,0 +1,61 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign pid = page.project_id %}
+{% assign p = nil %}
+{% if current_lang == "zh" %}
+  {% assign project_items = site.data.projects_zh %}
+  {% assign outcome_label = "成果" %}
+{% else %}
+  {% assign project_items = site.data.projects %}
+  {% assign outcome_label = "Outcome" %}
+{% endif %}
+
+{% for item in project_items %}
+  {% if item.id == pid %}
+    {% assign p = item %}
+  {% endif %}
+{% endfor %}
+
+{% if p %}
+<div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin: 10px 0 18px 0;">
+  <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>
+      <div style="font-weight:600;">
+        {% if p.role and p.role != "" %}{{ p.role }}{% endif %}
+        {% if p.period and p.period != "" %}{% if p.role and p.role != "" %} · {% endif %}{{ p.period }}{% endif %}
+      </div>
+
+      {% if p.keywords and p.keywords.size > 0 %}
+      <div style="margin-top:8px;">
+        {% for k in p.keywords %}
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            {{ k }}
+          </span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      {% if p.links.video and p.links.video != "" %}<a href="{{ p.links.video }}">Video</a>{% endif %}
+      {% if p.links.report and p.links.report != "" %}<a href="{{ p.links.report }}">Report</a>{% endif %}
+      {% if p.links.repositories and p.links.repositories.size > 0 %}
+        <span>Code:</span>
+        {% for repo in p.links.repositories %}
+          <a href="{{ repo.url }}">{{ repo.label }}</a>
+        {% endfor %}
+      {% elsif p.links.code and p.links.code != "" %}
+        <span>Code:</span>
+        <a href="{{ p.links.code }}">{{ p.title }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if p.one_liner and p.one_liner != "" %}
+    <div style="margin-top:8px;">{{ p.one_liner }}</div>
+  {% endif %}
+
+  {% if p.outcome and p.outcome != "" %}
+    <div style="margin-top:8px;"><b>{{ outcome_label }}:</b> {{ p.outcome }}</div>
+  {% endif %}
+</div>
+{% endif %}

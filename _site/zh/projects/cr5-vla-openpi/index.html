@@ -1,0 +1,2392 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+
+  <title>CR5 面向 VLA/OpenPI 的真机数据采集与推理闭环适配 - Jianming Xing / 邢鉴明</title>
+
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Jianming Xing / 邢鉴明">
+<meta property="og:title" content="CR5 面向 VLA/OpenPI 的真机数据采集与推理闭环适配">
+
+
+  <link rel="canonical" href="http://localhost:4100/zh/projects/cr5-vla-openpi/">
+  <meta property="og:url" content="http://localhost:4100/zh/projects/cr5-vla-openpi/">
+
+
+
+
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+<head>
+  <base target="_blank">
+</head>
+    <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.ico?v=20260525-black" sizes="any">
+<link rel="stylesheet" href="/assets/css/academicons.css" />
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a href="/zh/#about-me">首页</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#about-me">关于我</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#-news">动态</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#education">教育经历</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#projects">项目</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#experience">经历</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#-awards">荣誉奖项</a></li>
+          
+          
+            <li class="masthead__menu-item"><a href="/projects/cr5-vla-openpi/">EN</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main" role="main">
+      
+  <div class="sidebar sticky">
+  
+
+
+
+
+
+
+
+
+<div itemscope itemtype="http://schema.org/Person" class="profile_box">
+
+  <div class="author__avatar">
+    <img src="/images/jianming-profile.jpg" class="author__avatar" alt="Jianming Xing<br> 邢鉴明">
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Jianming Xing<br> 邢鉴明</h3>
+    <p class="author__bio">哈尔滨工业大学（深圳）计算机科学与技术第二学士学位在读</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">More Info & Contact</button> -->
+    <ul class="author__urls social-icons">
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> 中国深圳</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> 哈尔滨工业大学</li>
+      
+      
+      
+        <li><a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> 邮箱</a></li>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+      <div class="author__urls_sm">
+      
+      
+        <a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i></a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+  
+  </div>
+
+
+      <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+        <meta itemprop="headline" content="CR5 面向 VLA/OpenPI 的真机数据采集与推理闭环适配">
+        <div class="page__inner-wrap">
+          <section class="page__content" itemprop="text">
+            
+<div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin: 10px 0 18px 0;">
+  <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>
+      <div style="font-weight:600;">
+        负责手眼标定、遥操作、同步数据采集、安全校验、OpenPI 适配与真机推理部署
+         · 2026.01 - 2026.03
+      </div>
+
+      
+      <div style="margin-top:8px;">
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            具身智能
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            VLA
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            ROS2
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            OpenPI
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            LeRobot
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            真机部署
+          </span>
+        
+      </div>
+      
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      
+      
+      
+        <span>Code:</span>
+        
+          <a href="https://github.com/Bill-xing/openpicr5">openpicr5</a>
+        
+          <a href="https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3">DOBOT ROS2</a>
+        
+          <a href="https://github.com/Bill-xing/ros2_ws_xing">ros2_ws_xing</a>
+        
+      
+    </div>
+  </div>
+
+  
+    <div style="margin-top:8px;">围绕越疆 Dobot CR5、奥比中光 Astra2 RGB-D 相机和电动夹爪搭建 ROS2 真机闭环，覆盖标定、遥操作、同步数据采集、数据集转换、OpenPI 微调和 WebSocket 推理。</div>
+  
+
+  
+    <div style="margin-top:8px;"><b>成果:</b> 建立了从真机录制、LeRobot v2.0 转换到 CR5 推理部署的安全校验闭环。</div>
+  
+</div>
+
+<h2 id="真机效果展示">真机效果展示</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>叠毛巾任务</th>
+      <th>抓取任务</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/cr5-vla-openpi/cr5-vla-fold-towel-demo.gif" alt="CR5 叠毛巾任务效果演示" /></td>
+      <td><img src="/images/projects/cr5-vla-openpi/cr5-vla-grasp-demo.gif" alt="CR5 抓取任务效果演示" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="开源仓库">开源仓库</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>仓库</th>
+      <th>职责</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/openpicr5">openpicr5</a></td>
+      <td>OpenPI / VLA 适配、Dobot 策略映射、训练配置、WebSocket 策略服务和 CR5 推理客户端。</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/DOBOT_6Axis_ROS2_V3">DOBOT_6Axis_ROS2_V3</a></td>
+      <td>Dobot CR 系列 ROS2 驱动基础，以及真机数据采集、播放、转换和安全工具相关工作。</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Bill-xing/ros2_ws_xing">ros2_ws_xing</a></td>
+      <td>优化版相机和录制启动脚本、Fast DDS 共享内存配置、高吞吐录制流程。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="规范化技术报告">规范化技术报告</h2>
+
+<p>以下内容保留 CR5 真机适配报告的主体细节，包含分支事实、脚本职责、数据结构、安全检查、延迟分析、原始图片和工程结论。</p>
+
+<h1 id="cr5-面向-vla-的真机适配报告">CR5 面向 VLA 的真机适配报告</h1>
+
+<h2 id="0-结论摘要">0. 结论摘要</h2>
+
+<p>本项目围绕“越疆 Dobot CR5 + 奥比中光 Astra2 RGB-D 相机 + 电动夹爪”搭建了一个面向 VLA / OpenPI 的真机闭环。整体链路已经覆盖：</p>
+
+<ul>
+  <li>ROS2 Humble 下的 CR5 驱动启动、ServoP 伺服控制、Modbus 夹爪控制。</li>
+  <li>奥比中光相机启动、RGB 图像获取、相机内参检查、相机数据吞吐优化。</li>
+  <li>Eye-to-hand 手眼标定，最终以 <code class="language-plaintext highlighter-rouge">base_link -&gt; camera_color_optical_frame</code> 静态 TF 发布。</li>
+  <li>键盘/鼠标遥操作与录制控制，遥操作侧发布机械臂目标、夹爪目标和录制指令。</li>
+  <li>HDF5 数据采集，按相机帧为主时钟，将机械臂状态、夹爪状态插值到图像时间点。</li>
+  <li>HDF5 到 LeRobot v2.0 数据集转换，输出 Parquet、MP4、<code class="language-plaintext highlighter-rouge">info.json</code>、<code class="language-plaintext highlighter-rouge">stats.json</code>、<code class="language-plaintext highlighter-rouge">episodes.jsonl</code>、<code class="language-plaintext highlighter-rouge">tasks.jsonl</code>。</li>
+  <li>数据播放、安全检查、播放误差评估、数据集质量检查。</li>
+  <li>OpenPI / openpicr5 中的 Dobot 数据适配、<code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code> 训练配置、WebSocket 推理服务端、CR5 推理客户端。</li>
+</ul>
+
+<p>需要实事求是说明的是：</p>
+
+<ol>
+  <li>代码命名中大量使用 <code class="language-plaintext highlighter-rouge">cr3</code>，但笔记和任务目标是 CR5。这里应理解为历史命名遗留：OpenPI 配置名 <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code>、策略文件 <code class="language-plaintext highlighter-rouge">dobot_cr3_policy.py</code>、转换脚本默认 <code class="language-plaintext highlighter-rouge">robot_type='dobot_cr3'</code> 并不等于硬件一定是 CR3。真机对象在笔记和推理客户端中明确为 CR5。</li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3</code> 当前 checkout 的 <code class="language-plaintext highlighter-rouge">main</code> 分支主要是官方/基础代码；大量真机数据采集、播放、评估、转换代码位于远端 <code class="language-plaintext highlighter-rouge">origin/server</code> 分支。</li>
+  <li><code class="language-plaintext highlighter-rouge">openpicr5</code> 当前 <code class="language-plaintext highlighter-rouge">main</code> 分支已经保留 CR5 推理客户端和训练配置；<code class="language-plaintext highlighter-rouge">origin/read</code> 分支包含更激进的并行/独立进程、推理延迟分析、ServoP 延迟分析、预热等尝试；<code class="language-plaintext highlighter-rouge">origin/single</code> 分支体现了回退到单进程/串行执行路线的尝试。</li>
+  <li>并行推理/独立 ServoP 进程的探索没有成为最终方案。实际结果显示，非阻塞或并行执行虽然能提高表面频率，但会让模型基于机器人尚未完成动作的中间状态继续推理，轨迹出现来回抖动；独立进程能部分降低 ServoP 调用时延，但队列同步和 DDS/控制器层面的瓶颈抵消了收益。</li>
+  <li>当前最稳妥的真机推理方案不是“最高频率”，而是“动作块 + 阻塞 ServoP + 可解释的延迟统计 + 安全边界”。这是工程上更可靠的选择。</li>
+</ol>
+
+<p>总体链路可以概括为：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  subgraph Robot["CR5 真机侧"]
+    Arm["Dobot CR5 ROS2 驱动"]
+    Gripper["Modbus 夹爪"]
+    Camera["Orbbec Astra2 RGB-D"]
+    Teleop["键盘/鼠标遥操作"]
+    Recorder["recorder_optimized.py"]
+    Player["dataset_player.py"]
+    Client["CR5 推理客户端"]
+  end
+
+  subgraph Data["数据资产"]
+    HDF5["HDF5 episode"]
+    Check["check_dataset / analyze_playback"]
+    LeRobot["LeRobot v2.0 数据集"]
+  end
+
+  subgraph OpenPI["OpenPI / openpicr5"]
+    Config["pi0_dobot_cr3 配置"]
+    Train["模型微调"]
+    Server["WebSocket 策略服务端"]
+  end
+
+  Camera --&gt; Recorder
+  Arm --&gt; Recorder
+  Gripper --&gt; Recorder
+  Teleop --&gt; Arm
+  Teleop --&gt; Gripper
+  Teleop --&gt; Recorder
+  Recorder --&gt; HDF5 --&gt; Check --&gt; LeRobot --&gt; Config --&gt; Train --&gt; Server --&gt; Client
+  Camera --&gt; Client
+  Arm --&gt; Client
+  Client --&gt; Arm
+  Client --&gt; Gripper
+  HDF5 --&gt; Player --&gt; Arm
+  Player --&gt; Gripper
+</code></pre>
+
+<h2 id="2-硬件系统与基础-ros2-环境">2. 硬件、系统与基础 ROS2 环境</h2>
+
+<h3 id="21-硬件组成">2.1 硬件组成</h3>
+
+<p>根据笔记，真机平台为：</p>
+
+<ul>
+  <li>机械臂：越疆 Dobot CR5。</li>
+  <li>相机：奥比中光 Astra2 RGB-D 相机。</li>
+  <li>夹爪：通过 Dobot 控制器的 Modbus RTU 接口控制，笔记中同时参考了 AG 系列和 DH 电爪资料。</li>
+  <li>主机：Ubuntu 22.04 + ROS2 Humble。</li>
+  <li>训练/推理服务器：OpenPI 环境，可本机或远端 GPU 服务器运行。</li>
+</ul>
+
+<h3 id="22-ros2-基础包">2.2 ROS2 基础包</h3>
+
+<p>机械臂侧主要依赖：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_bringup_v3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_msgs_v3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/cr5_moveit</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3/dobot_demo</code></li>
+</ul>
+
+<p>相机侧依赖：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_camera</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_camera_msgs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OrbbecSDK_ROS2/orbbec_description</code></li>
+</ul>
+
+<p>基础启动命令在 <code class="language-plaintext highlighter-rouge">examples/dobot_cr5/README.md</code> 中写为：</p>
+
+<p>或手动设置 Fast DDS：</p>
+
+<h3 id="23-ros-话题">2.3 ROS 话题</h3>
+
+<p>笔记记录的相机 topic 包括：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/camera/color/image_raw
+/camera/color/camera_info
+/camera/depth/image_raw
+/camera/depth/camera_info
+/camera/depth/points
+/camera/ir/image_raw
+/camera/ir/camera_info
+/camera/gyro_accel/sample
+/tf
+/tf_static
+</code></pre></div></div>
+
+<p>VLA 采集和推理链路额外使用：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/dobot_msgs_v3/msg/ToolVectorActual   # 机械臂当前末端位姿
+/robot/target_pose                    # 遥操作/播放/推理发布的目标末端位姿
+/gripper/command_update               # 夹爪目标
+/gripper/state_feedback               # 夹爪实际反馈
+/recorder/command                     # 录制控制：开始、保存、丢弃
+</code></pre></div></div>
+
+<p>其中 <code class="language-plaintext highlighter-rouge">ToolVectorActual</code> 后续被改造成带 header 时间戳的消息，这一点对相机与真机状态对齐非常关键。</p>
+
+<p>ROS2 数据面和控制面的关系如下：</p>
+
+<pre><code class="language-mermaid">flowchart TB
+  CameraNode["orbbec_camera / astra2.launch.py"]
+  DobotDriver["dobot_bringup_v3"]
+  TeleopNode["data_collector4.py"]
+  RecorderNode["recorder_optimized.py"]
+  PlayerNode["dataset_player.py"]
+  InferClient["examples/dobot_cr5/main.py"]
+  EvalNode["playback_evaluator.py"]
+
+  CameraNode --&gt;|"/camera/color/image_raw"| RecorderNode
+  CameraNode --&gt;|"/camera/color/camera_info"| RecorderNode
+  CameraNode --&gt;|"/camera/color/image_raw"| InferClient
+  DobotDriver --&gt;|"/dobot_msgs_v3/msg/ToolVectorActual"| RecorderNode
+  DobotDriver --&gt;|"/dobot_msgs_v3/msg/ToolVectorActual"| InferClient
+  DobotDriver --&gt;|"/dobot_msgs_v3/msg/ToolVectorActual"| EvalNode
+  TeleopNode --&gt;|"/robot/target_pose"| RecorderNode
+  TeleopNode --&gt;|"/gripper/command_update"| RecorderNode
+  TeleopNode --&gt;|"/recorder/command"| RecorderNode
+  PlayerNode --&gt;|"/robot/target_pose"| EvalNode
+  PlayerNode --&gt;|"/gripper/command_update"| EvalNode
+  InferClient --&gt;|"/robot/target_pose"| EvalNode
+  InferClient --&gt;|"/gripper/command_update"| EvalNode
+</code></pre>
+
+<p>相机、RViz 与 MoveIt 部署记录：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-camera-rviz-01.png" alt="相机与点云部署记录 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-camera-rviz-02.png" alt="相机与点云部署记录 2" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-moveit-rviz-01.png" alt="MoveIt / RViz 真机部署记录 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-moveit-rviz-02.png" alt="MoveIt / RViz 真机部署记录 2" /></p>
+
+<h2 id="3-相机配置与手眼标定">3. 相机配置与手眼标定</h2>
+
+<h3 id="31-相机型号和内参来源">3.1 相机型号和内参来源</h3>
+
+<p>笔记明确相机为奥比中光 Astra2。相机 SDK / ROS2 节点发布 <code class="language-plaintext highlighter-rouge">CameraInfo</code>，内参来自相机固件，而不是项目中手写的本地参数文件。</p>
+
+<p>笔记中记录的 RGB 相机信息：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frame_id: camera_color_optical_frame
+height: 720
+width: 1280
+distortion_model: plumb_bob
+D:
+  0.11510352790355682
+ -0.3182823061943054
+ -0.0006209378479979932
+  0.00015325525600928813
+  0.24108868837356567
+K:
+  836.1256713867188, 0.0, 648.8511962890625
+  0.0, 836.093505859375, 359.4328308105469
+  0.0, 0.0, 1.0
+</code></pre></div></div>
+
+<p>在手眼标定阶段，项目关注三个参数：</p>
+
+<ul>
+  <li>RGB 相机内参矩阵。</li>
+  <li>IR 相机内参矩阵。</li>
+  <li>RGB 与 IR / 深度之间的变换关系。</li>
+</ul>
+
+<p>笔记中说明：Astra2 的 RGB 和 IR 都基于自己的坐标系，两个相机之间的关系可通过 <code class="language-plaintext highlighter-rouge">/tf</code> 获取；D2C 可以由硬件或软件完成。硬件 D2C 延迟低、CPU 负担小，但受固件参数和分辨率限制；软件 D2C 更灵活，但实时负载更高。</p>
+
+<h3 id="32-camerainfo-畸变参数格式问题">3.2 CameraInfo 畸变参数格式问题</h3>
+
+<p>MoveIt calibration 或其他 ROS 视觉工具常假设 <code class="language-plaintext highlighter-rouge">plumb_bob</code> 模型对应 5 个畸变参数，而奥比中光 <code class="language-plaintext highlighter-rouge">CameraInfo.d</code> 有时发布 8 个参数。笔记明确提到：</p>
+
+<blockquote>
+  <p>之前的坐标结算根本没有导入相机内参，原因是因为相机内参的格式和奥比中光发布的 camera_info 格式不一致。</p>
+</blockquote>
+
+<p>为此写了 <code class="language-plaintext highlighter-rouge">fix_camera_info.py</code>。核心逻辑是：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">msg</span><span class="p">.</span><span class="n">distortion_model</span> <span class="o">==</span> <span class="s">'plumb_bob'</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">d</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="n">msg</span><span class="p">.</span><span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">d</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>这里有一个工程风险：输入和输出使用同名 topic 在 ROS2 中通常需要谨慎处理，避免同名订阅/发布造成混乱。更稳妥方式是让相机驱动发布到 raw topic，再由 fixer 发布标准 topic，例如：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/camera/color/camera_info_raw -&gt; /camera/color/camera_info
+</code></pre></div></div>
+
+<p>但笔记中实际命令是同名覆盖，报告中只能如实记录。</p>
+
+<h3 id="33-内参标定方法与精度判断">3.3 内参标定方法与精度判断</h3>
+
+<p>笔记中尝试过：</p>
+
+<ul>
+  <li>ROS <code class="language-plaintext highlighter-rouge">camera_calibration</code>。</li>
+  <li>MATLAB 标定工具。</li>
+  <li>使用标定板图片。</li>
+  <li>关闭 IR projector 后再拍摄，因为红外投射会在图像上造成很多光点，影响角点提取。</li>
+</ul>
+
+<p>准确性评估标准使用重投影误差：</p>
+
+<ul>
+  <li>0.1 到 0.5 pixel：工业应用中比较优秀。</li>
+  <li>大于 1.0 pixel：不可信，建议重拍或检查模糊、反光、标定板质量。</li>
+</ul>
+
+<p>笔记中对 MATLAB 标定的结论比较务实：MATLAB 可以剔除重投影误差高的数据后重新标定，但当前的主要瓶颈是标定板和拍摄条件。</p>
+
+<h3 id="34-eye-to-hand-手眼标定">3.4 Eye-to-hand 手眼标定</h3>
+
+<p>CR5 当前采用眼在手外（Eye-to-hand）配置。目标是得到：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>base_link -&gt; camera_color_optical_frame
+</code></pre></div></div>
+
+<p>笔记中提到两类方法：</p>
+
+<ol>
+  <li>早期近似方法：不用标定板，使用两个离得很近的点，通过最小二乘估计基座与相机坐标系关系。结论是“末端固定状态下问题不大”，但不是严格标定。</li>
+  <li>MoveIt calibration：RViz 插件，支持切换不同手眼算法，不需要手动获取标定板到 link6 的转换关系。</li>
+</ol>
+
+<p>最终保存的 <code class="language-plaintext highlighter-rouge">camera_base.launch.py</code> 内容为：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">""" Static transform publisher acquired via MoveIt 2 hand-eye calibration """</span>
+<span class="s">""" EYE-TO-HAND: base_link -&gt; camera_color_optical_frame """</span>
+
+<span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s">"tf2_ros"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s">"static_transform_publisher"</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s">"log"</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="s">"--frame-id"</span><span class="p">,</span> <span class="s">"base_link"</span><span class="p">,</span>
+        <span class="s">"--child-frame-id"</span><span class="p">,</span> <span class="s">"camera_color_optical_frame"</span><span class="p">,</span>
+        <span class="s">"--x"</span><span class="p">,</span> <span class="s">"-0.777506"</span><span class="p">,</span>
+        <span class="s">"--y"</span><span class="p">,</span> <span class="s">"-0.330606"</span><span class="p">,</span>
+        <span class="s">"--z"</span><span class="p">,</span> <span class="s">"0.455513"</span><span class="p">,</span>
+        <span class="s">"--qx"</span><span class="p">,</span> <span class="s">"-0.489589"</span><span class="p">,</span>
+        <span class="s">"--qy"</span><span class="p">,</span> <span class="s">"0.703917"</span><span class="p">,</span>
+        <span class="s">"--qz"</span><span class="p">,</span> <span class="s">"-0.421769"</span><span class="p">,</span>
+        <span class="s">"--qw"</span><span class="p">,</span> <span class="s">"0.294811"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>这里单位是 ROS TF 的米制平移，四元数表示姿态。该静态变换用于将相机坐标系下的点转换到机械臂基座坐标系，是后续视觉抓取、点云理解、VLA 图像/动作一致性的空间基础。</p>
+
+<p>手眼标定的坐标链路如下：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  World["真实桌面 / 标定板"]
+  CameraFrame["camera_color_optical_frame"]
+  Base["base_link"]
+  Tool["link6 / tool"]
+  Gripper["夹爪末端"]
+
+  World --&gt;|"RGB 图像 / 深度 / 点云观测"| CameraFrame
+  CameraFrame --&gt;|"MoveIt calibration 得到静态 TF"| Base
+  Base --&gt;|"Dobot 正运动学与反馈"| Tool
+  Tool --&gt;|"工具坐标偏置"| Gripper
+  Base --&gt;|"ServoP 目标位姿"| Tool
+</code></pre>
+
+<p>手眼标定过程截图：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-handeye-matlab.png" alt="MATLAB 相机标定与重投影误差记录" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-handeye-moveit.png" alt="MoveIt hand-eye calibration 标定界面" /></p>
+
+<h3 id="35-手眼标定当前结论">3.5 手眼标定当前结论</h3>
+
+<p>笔记中的最终表述是：</p>
+
+<ul>
+  <li>MoveIt calibration 方法目前“感觉可以接受”。</li>
+  <li>但“目前还是有 bug，重投影误差太大”。</li>
+  <li>要提高精度，应从标定板和拍摄流程入手：
+    <ul>
+      <li>放大标定图案。</li>
+      <li>使用更高精度测量工具。</li>
+      <li>选择更合适的标定位置。</li>
+      <li>关闭 IR projector 或改善红外照明条件。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>因此，报告不能把当前手眼标定写成“高精度完成”。更准确的结论是：当前有可用的静态 TF，可以支撑固定相机视角下的 VLA 数据采集和推理，但若要做基于深度点云的精确三维抓取，还需要重新做高质量标定和误差评估。</p>
+
+<h2 id="4-遥操作与摇操代码">4. 遥操作与摇操代码</h2>
+
+<h3 id="41-遥操作方案来源">4.1 遥操作方案来源</h3>
+
+<p>笔记中参考了：</p>
+
+<ul>
+  <li>Hugging Face LeRobot hardware integration。</li>
+  <li>XLeRobot 的键盘遥操作示例。</li>
+  <li>OpenTeleVision / Meta Quest3 的 VR 方案。</li>
+</ul>
+
+<p>当前真正落地的主线是键盘/鼠标遥操作，VR 仍属于参考或探索方向。</p>
+
+<p><code class="language-plaintext highlighter-rouge">origin/server</code> 分支中相关文件包括：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dobot_demo/dobot_demo/data_collector4.py</code></li>
+  <li><code class="language-plaintext highlighter-rouge">example/4_xlerobot_teleop_keyboard.py</code></li>
+  <li><code class="language-plaintext highlighter-rouge">example/8_vr_teleop_with_dataset_recording.py</code></li>
+  <li><code class="language-plaintext highlighter-rouge">example/dobot_teleop_refined.py</code></li>
+</ul>
+
+<h3 id="42-data_collector4py-架构">4.2 <code class="language-plaintext highlighter-rouge">data_collector4.py</code> 架构</h3>
+
+<p><code class="language-plaintext highlighter-rouge">data_collector4.py</code> 是遥操作和数据采集控制的核心脚本之一。它不是单纯的“键盘控制”，而是同时承担：</p>
+
+<ul>
+  <li>机械臂 ServoP 控制。</li>
+  <li>夹爪 Modbus 控制。</li>
+  <li>机械臂目标状态发布。</li>
+  <li>夹爪目标和反馈状态发布。</li>
+  <li>数据录制开始/保存/丢弃指令发布。</li>
+</ul>
+
+<p>脚本中的 ROS 节点为：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DobotRosWrapper</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>它创建的服务客户端包括：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类别</th>
+      <th>服务接口</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>机器人使能与状态</td>
+      <td><code class="language-plaintext highlighter-rouge">EnableRobot</code>、<code class="language-plaintext highlighter-rouge">ClearError</code>、<code class="language-plaintext highlighter-rouge">SpeedFactor</code>、<code class="language-plaintext highlighter-rouge">Sync</code></td>
+    </tr>
+    <tr>
+      <td>运动控制</td>
+      <td><code class="language-plaintext highlighter-rouge">MovJ</code>、<code class="language-plaintext highlighter-rouge">MovL</code>、<code class="language-plaintext highlighter-rouge">ServoJ</code>、<code class="language-plaintext highlighter-rouge">ServoP</code></td>
+    </tr>
+    <tr>
+      <td>状态读取</td>
+      <td><code class="language-plaintext highlighter-rouge">GetPose</code>、<code class="language-plaintext highlighter-rouge">GetAngle</code></td>
+    </tr>
+    <tr>
+      <td>夹爪 Modbus</td>
+      <td><code class="language-plaintext highlighter-rouge">ModbusCreate</code>、<code class="language-plaintext highlighter-rouge">ModbusClose</code>、<code class="language-plaintext highlighter-rouge">SetHoldRegs</code>、<code class="language-plaintext highlighter-rouge">GetHoldRegs</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>它发布：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/robot/target_pose
+/gripper/command_update
+/gripper/state_feedback
+/recorder/command
+</code></pre></div></div>
+
+<h3 id="43-夹爪控制">4.3 夹爪控制</h3>
+
+<p>夹爪通过 Dobot 控制器的 Modbus 接口控制：</p>
+
+<ul>
+  <li>IP：<code class="language-plaintext highlighter-rouge">127.0.0.1</code></li>
+  <li>端口：<code class="language-plaintext highlighter-rouge">60000</code></li>
+  <li>slave_id：<code class="language-plaintext highlighter-rouge">1</code></li>
+  <li>RTU 模式：<code class="language-plaintext highlighter-rouge">is_rtu = 1</code></li>
+</ul>
+
+<p>常用寄存器：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>256: Enable，使能寄存器
+257: Force/Speed，力度/速度
+259: Target position，目标位置
+514: Current position，当前位置反馈
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">GripperComm</code> 负责底层寄存器读写，<code class="language-plaintext highlighter-rouge">GripperManager</code> 作为独立线程负责：</p>
+
+<ul>
+  <li>鼠标按下期间按增量改变虚拟夹爪位置。</li>
+  <li>非阻塞写 Modbus 指令。</li>
+  <li>松开后读取实际位置，更新当前状态。</li>
+  <li>自动模式下由程序设置目标位置。</li>
+</ul>
+
+<p>笔记中记录的一个实际问题是：夹爪真实读取频率较低，目标是 50Hz 或 100Hz，但实际 Modbus 回读常在 10Hz 左右。因此后续播放和采集代码中加入了线性插补，让低频夹爪反馈能以更高频率发布。</p>
+
+<h3 id="44-录制控制快捷键">4.4 录制控制快捷键</h3>
+
+<p><code class="language-plaintext highlighter-rouge">data_collector4.py</code> 中录制控制通过 <code class="language-plaintext highlighter-rouge">/recorder/command</code> 发布 <code class="language-plaintext highlighter-rouge">Int32</code>：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1</code>：开始录制。</li>
+  <li><code class="language-plaintext highlighter-rouge">2</code>：停止并保存。</li>
+  <li><code class="language-plaintext highlighter-rouge">0</code>：停止并丢弃。</li>
+</ul>
+
+<p>笔记和代码中还体现了一个重要的安全/一致性改动：开始和结束录制时，机械臂先回到初始位置，再发布录制开始或保存指令。这能减少 episode 起止状态不一致，也减少播放时起点突变的风险。</p>
+
+<h2 id="5-数据采集链路">5. 数据采集链路</h2>
+
+<h3 id="51-采集目标">5.1 采集目标</h3>
+
+<p>面向 VLA / OpenPI 的数据采集目标不是简单录视频，而是同步记录：</p>
+
+<ul>
+  <li>图像：相机 RGB 帧。</li>
+  <li>状态：机械臂实际末端 6D 位姿。</li>
+  <li>动作：遥操作/控制器发出的目标末端 6D 位姿。</li>
+  <li>夹爪状态：实际夹爪开度。</li>
+  <li>夹爪动作：目标夹爪开度。</li>
+  <li>时间戳：用于对齐每一帧。</li>
+  <li>相机内参：用于后续视觉几何或检查。</li>
+</ul>
+
+<p>最终 HDF5 结构如下：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>observations/images/color      uint8, [N, H, W, 3]
+observations/images/depth      可选, [N, H, W]
+observations/robot_current     float32, [N, 6]
+actions/robot_target           float32, [N, 6]
+observations/gripper_current   float32, [N, 1]
+actions/gripper_target         float32, [N, 1]
+timestamp                      float64, [N]
+camera/intrinsics              float32, [3, 3]
+attrs:
+  sim = False
+  total_frames = N
+  sync_method = FastBinarySearchInterpolation
+  sync_strategy = async_processing_minimal_locking
+  camera_frequency_hz = 30
+  robot_frequency_hz = 100
+  optimized = True
+</code></pre></div></div>
+
+<h3 id="52-采集数据来源">5.2 采集数据来源</h3>
+
+<p>录制器订阅：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/recorder/command
+/camera/color/camera_info
+/camera/color/image_raw
+/camera/depth/image_raw         # 可选
+/dobot_msgs_v3/msg/ToolVectorActual
+/robot/target_pose
+/gripper/state_feedback
+/gripper/command_update
+</code></pre></div></div>
+
+<p>机械臂状态一般由 Dobot 驱动反馈节点发布，目标状态由遥操作/播放/推理客户端主动镜像发布。这样数据集中可以同时保存“实际状态”和“动作命令”，避免只记录执行后的状态而丢掉监督学习的目标。</p>
+
+<h3 id="53-recorder_optimizedpy-架构">5.3 <code class="language-plaintext highlighter-rouge">recorder_optimized.py</code> 架构</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ros2_ws_xing/recorder_optimized.py</code> 的设计目标是解决原始采集中的丢帧和 CPU 负载问题。</p>
+
+<p>优化点：</p>
+
+<ol>
+  <li>回调函数只做轻量入队，不在 ROS 回调里做图像转换和 HDF5 写入。</li>
+  <li>独立 processing thread 处理待录制帧。</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">deque(maxlen=...)</code> 保存短时间窗口内的有序消息。</li>
+  <li>用二分查找对齐时间戳，避免线性扫描。</li>
+  <li>对机械臂和夹爪状态做线性插值。</li>
+  <li>默认不录深度图，因为深度图转换和压缩成本较高。</li>
+  <li>保存 HDF5 时启用 gzip 压缩和 chunk。</li>
+</ol>
+
+<p>关键缓冲配置：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">self</span><span class="p">.</span><span class="n">msg_buffer</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'color'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+    <span class="s">'depth'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="k">if</span> <span class="n">enable_depth</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'robot_current'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">200</span><span class="p">),</span>
+    <span class="s">'robot_target'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">200</span><span class="p">),</span>
+    <span class="s">'gripper_current'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">200</span><span class="p">),</span>
+    <span class="s">'gripper_target'</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">200</span><span class="p">),</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>以相机帧时间为 reference time：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reference_time</span> <span class="o">=</span> <span class="n">color_msg</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">stamp</span>
+<span class="n">robot_current</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">robot_current_buffer</span><span class="p">,</span> <span class="n">reference_time</span><span class="p">)</span>
+<span class="n">robot_target</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">robot_target_buffer</span><span class="p">,</span> <span class="n">reference_time</span><span class="p">)</span>
+<span class="n">gripper_current</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">gripper_current_buffer</span><span class="p">,</span> <span class="n">reference_time</span><span class="p">)</span>
+<span class="n">gripper_target</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">gripper_target_buffer</span><span class="p">,</span> <span class="n">reference_time</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>因此，数据集帧率等于实际保留下来的相机帧率。</p>
+
+<p>采集时序可以理解为：</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Cam as 相机 RGB
+  participant Arm as CR5 状态反馈
+  participant Grip as 夹爪反馈
+  participant Teleop as 遥操作目标
+  participant Rec as recorder_optimized.py
+  participant H5 as HDF5 episode
+
+  Cam-&gt;&gt;Rec: color image + header.stamp
+  Arm-&gt;&gt;Rec: ToolVectorActual + header.stamp
+  Grip-&gt;&gt;Rec: gripper state + time
+  Teleop-&gt;&gt;Rec: robot target / gripper target
+  Rec-&gt;&gt;Rec: 以图像时间为 reference_time
+  Rec-&gt;&gt;Rec: 二分查找前后样本
+  Rec-&gt;&gt;Rec: 线性插值 robot / gripper
+  Rec-&gt;&gt;H5: 写入 image, state, action, timestamp
+</code></pre>
+
+<h3 id="54-相机帧率与共享内存优化">5.4 相机帧率与共享内存优化</h3>
+
+<p>笔记中记录了非常典型的问题：</p>
+
+<ul>
+  <li>目标相机帧率：30Hz。</li>
+  <li>启动控制和录制节点后，实际相机帧率掉到约 20Hz。</li>
+  <li>初始数据集丢帧率可达 27.15%，最大间隔可达 899.75ms，质量等级为差。</li>
+</ul>
+
+<p>原始丢帧分析：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>实际帧数: 660
+录制时长: 30.21 秒
+期望帧数: 906
+丢帧率: 27.15%
+平均间隔: 45.84 ms
+最大间隔: 899.75 ms
+标准差: 73.11 ms
+VLA训练适用性: 差，不建议使用
+</code></pre></div></div>
+
+<p>优化方式是 Fast DDS 共享内存：</p>
+
+<p>相机启动时只开 RGB，关闭深度、IR、点云：</p>
+
+<p><code class="language-plaintext highlighter-rouge">camera_recorder_optimized.launch.py</code> 中对应参数：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">color_width</span> <span class="o">=</span> <span class="mi">640</span>
+<span class="n">color_height</span> <span class="o">=</span> <span class="mi">480</span>
+<span class="n">color_fps</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">enable_depth</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">enable_ir</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">enable_point_cloud</span> <span class="o">=</span> <span class="n">false</span>
+</code></pre></div></div>
+
+<p>共享内存优化后的笔记结果：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>实际帧数: 796
+录制时长: 27.26 秒
+期望帧数: 817
+丢帧数量: 21
+丢帧率: 2.57%
+平均间隔: 34.29 ms
+最大间隔: 99.98 ms
+标准差: 6.29 ms
+VLA训练适用性: 良好，可谨慎使用
+</code></pre></div></div>
+
+<p>另一个 episode：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总帧数: 1125
+总时长: 39.39 秒
+平均帧率: 28.6 Hz
+丢帧率: 4.74%
+最大间隔: 199.97 ms
+位置突变正常
+旋转突变正常
+夹爪变化正常
+发现 3 个高速运动点
+数据集基本可用，建议谨慎播放
+</code></pre></div></div>
+
+<p>结论：共享内存解决了主要的数据吞吐瓶颈，但并不能保证完全 0 丢帧。当前数据质量可以支持部分训练/验证，但高质量 VLA 训练仍建议进一步筛选 episode。</p>
+
+<p>数据录制与播放总览图：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-019-e65dad98.png" alt="数据录制与播放总览" /></p>
+
+<p>录制性能、同步代码与日志记录：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recording-fps.png" alt="共享内存优化后的相机帧率统计" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recording-log.png" alt="录制过程日志与丢帧检查" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-recorder-code.png" alt="录制器同步逻辑代码记录" /></p>
+
+<h2 id="6-相机与真机数据对时">6. 相机与真机数据对时</h2>
+
+<h3 id="61-为什么不能直接用同步器硬对齐">6.1 为什么不能直接用同步器硬对齐</h3>
+
+<p>笔记中尝试过直接时间同步，但结论是：</p>
+
+<blockquote>
+  <p>直接使用时间对齐会丢很多图片，导致视频只有 20Hz，所以考虑采用线性拟合中间不满时间要求的点，实现不丢帧。</p>
+</blockquote>
+
+<p>原因是各数据源频率不同：</p>
+
+<ul>
+  <li>相机：目标 30Hz，实际 25 到 30Hz 波动。</li>
+  <li>机械臂反馈：约 100Hz。</li>
+  <li>机械臂目标：由控制循环发布，可接近 100Hz。</li>
+  <li>夹爪目标：可较高频发布。</li>
+  <li>夹爪实际：Modbus 读取常约 10Hz。</li>
+</ul>
+
+<p>如果使用严格 ApproximateTimeSynchronizer，任何一个低频源或抖动源没落在时间窗内，整帧图像都会被丢掉。这对 VLA 训练更糟，因为图像是核心观测。</p>
+
+<h3 id="62-当前对时策略">6.2 当前对时策略</h3>
+
+<p>当前策略是：</p>
+
+<ol>
+  <li>以相机 RGB 图像帧为基准。</li>
+  <li>相机帧到达时记录其 <code class="language-plaintext highlighter-rouge">header.stamp</code>。</li>
+  <li>对机器人状态和目标状态用二分查找找到前后两个样本。</li>
+  <li>做线性插值。</li>
+  <li>对夹爪状态也做线性插值。</li>
+  <li>若必要数据缺失，则跳过该帧。</li>
+</ol>
+
+<p>这样做的优点：</p>
+
+<ul>
+  <li>尽量保留图像帧。</li>
+  <li>让每个训练样本都拥有同一时间点的图像、状态、动作。</li>
+  <li>对高频机械臂数据来说插值误差较小。</li>
+</ul>
+
+<p>缺点：</p>
+
+<ul>
+  <li>对夹爪真实反馈这类低频、非线性、带机械滞后的信号，线性插值只是近似。</li>
+  <li>如果相机时间戳本身不稳定，插值不能消除相机侧抖动。</li>
+  <li>对动作和状态之间的执行延迟没有自动建模，训练时仍可能学到“命令-到达”之间的 gap。</li>
+</ul>
+
+<p>对齐策略的关键不是让所有消息同一时刻到达，而是以图像帧时间重采样其他信号：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  ImageTime["图像帧 t_img"]
+  RobotBefore["robot t0"]
+  RobotAfter["robot t1"]
+  GripBefore["gripper t0"]
+  GripAfter["gripper t1"]
+  RobotInterp["robot(t_img)"]
+  GripInterp["gripper(t_img)"]
+  Sample["训练样本: image(t_img), state(t_img), action(t_img)"]
+
+  RobotBefore --&gt; RobotInterp
+  RobotAfter --&gt; RobotInterp
+  GripBefore --&gt; GripInterp
+  GripAfter --&gt; GripInterp
+  ImageTime --&gt; RobotInterp
+  ImageTime --&gt; GripInterp
+  ImageTime --&gt; Sample
+  RobotInterp --&gt; Sample
+  GripInterp --&gt; Sample
+</code></pre>
+
+<h3 id="63-ros-时间选择">6.3 ROS 时间选择</h3>
+
+<p>笔记特别强调 ROS2 时间：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RCL_SYSTEM_TIME</code>：墙上时间，可被 NTP 或手动改时影响。</li>
+  <li><code class="language-plaintext highlighter-rouge">RCL_STEADY_TIME</code>：单调时间，适合测耗时。</li>
+  <li><code class="language-plaintext highlighter-rouge">RCL_ROS_TIME</code>：ROS 时间，<code class="language-plaintext highlighter-rouge">use_sim_time=false</code> 时等同系统时间，仿真时跟随 <code class="language-plaintext highlighter-rouge">/clock</code>。</li>
+</ul>
+
+<p>当前采集以 ROS 消息 header 时间戳为主，因此所有发布目标状态的节点必须使用同一套 ROS 时间来源。若一个节点使用系统时间、另一个节点使用仿真时间，数据会直接不可对齐。</p>
+
+<h3 id="64-推理时的对时尝试">6.4 推理时的对时尝试</h3>
+
+<p><code class="language-plaintext highlighter-rouge">openpicr5 origin/read</code> 分支有“增加对时功能，获取同一时刻的动作与图像”的提交。后续又有“取消对时”的提交，说明严格对时在推理客户端中并未稳定保留。</p>
+
+<p>这与数据采集结论一致：真机闭环中严格等待同一时刻数据会降低吞吐、放大延迟。最终更实用的策略是：</p>
+
+<ul>
+  <li>采集阶段以图像为主时钟，对状态插值。</li>
+  <li>推理阶段使用最新可用图像和最新可用 robot state 构建 observation。</li>
+  <li>对延迟做日志统计，而不是让控制链路阻塞等待完美同步。</li>
+</ul>
+
+<h2 id="7-数据集质量与安全性校验">7. 数据集质量与安全性校验</h2>
+
+<h3 id="71-check_datasetpy">7.1 <code class="language-plaintext highlighter-rouge">check_dataset.py</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">origin/server</code> 中的 <code class="language-plaintext highlighter-rouge">check_dataset.py</code> 是综合检查工具，覆盖：</p>
+
+<ul>
+  <li>数据完整性。</li>
+  <li>丢帧率。</li>
+  <li>时间间隔统计。</li>
+  <li>工作空间限制。</li>
+  <li>位置/旋转/夹爪突变。</li>
+  <li>速度阈值。</li>
+  <li>VLA 训练适用性评级。</li>
+</ul>
+
+<p>默认安全阈值：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MAX_POSITION_JUMP</span> <span class="o">=</span> <span class="mf">50.0</span>    <span class="c1"># mm
+</span><span class="n">MAX_ROTATION_JUMP</span> <span class="o">=</span> <span class="mf">10.0</span>    <span class="c1"># deg
+</span><span class="n">MAX_GRIPPER_JUMP</span> <span class="o">=</span> <span class="mf">200.0</span>
+<span class="n">MAX_VELOCITY</span> <span class="o">=</span> <span class="mf">100.0</span>        <span class="c1"># mm/s
+</span>
+<span class="n">WORKSPACE_X_MIN</span> <span class="o">=</span> <span class="o">-</span><span class="mf">600.0</span>
+<span class="n">WORKSPACE_X_MAX</span> <span class="o">=</span> <span class="mf">600.0</span>
+<span class="n">WORKSPACE_Y_MIN</span> <span class="o">=</span> <span class="o">-</span><span class="mf">600.0</span>
+<span class="n">WORKSPACE_Y_MAX</span> <span class="o">=</span> <span class="mf">600.0</span>
+<span class="n">WORKSPACE_Z_MIN</span> <span class="o">=</span> <span class="o">-</span><span class="mf">100.0</span>
+<span class="n">WORKSPACE_Z_MAX</span> <span class="o">=</span> <span class="mf">600.0</span>
+</code></pre></div></div>
+
+<p>丢帧评级：</p>
+
+<ul>
+  <li>丢帧率 &lt; 1%：优秀，可直接用于 VLA 训练。</li>
+  <li>1% 到 5%：良好，建议检查分布，可谨慎使用。</li>
+  <li>5% 到 10%：一般，建议过滤严重片段或重新录制。</li>
+  <li>
+    <blockquote>
+      <p>10%：差，不建议使用。</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>质量与安全检查的决策链如下：</p>
+
+<pre><code class="language-mermaid">flowchart TD
+  Load["加载 HDF5 episode"]
+  Integrity["完整性检查: 字段、帧数、shape"]
+  Timing["时间检查: fps、丢帧率、最大间隔"]
+  Bounds["空间与速度检查: 工作空间、跳变、速度"]
+  Rating{"VLA 训练适用性"}
+  Good["优秀/良好: 可进入转换和训练候选集"]
+  Warn["一般: 标记问题片段或慢速播放复核"]
+  Bad["较差: 不建议训练，优先重录"]
+  Playback["播放前起点安全检查"]
+  MoveJ["MovJ 自动移动到起点"]
+  Servo["ServoP 播放 / 评估"]
+
+  Load --&gt; Integrity --&gt; Timing --&gt; Bounds --&gt; Rating
+  Rating --&gt;|"&lt; 5% 丢帧且无严重越界"| Good
+  Rating --&gt;|"5%-10% 或局部异常"| Warn
+  Rating --&gt;|"&gt; 10% 丢帧或严重突变"| Bad
+  Good --&gt; Playback
+  Warn --&gt; Playback
+  Playback --&gt;|"起点差异超阈值"| MoveJ --&gt; Servo
+  Playback --&gt;|"起点接近"| Servo
+</code></pre>
+
+<h3 id="72-播放前安全检查">7.2 播放前安全检查</h3>
+
+<p><code class="language-plaintext highlighter-rouge">dataset_player.py</code> 中新增了播放前安全检查。问题场景是：机械臂当前位置和数据集第一帧差距很大，如果直接 ServoP 到第一帧，机械臂可能突然大幅移动。</p>
+
+<p>检查逻辑：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">position_threshold</span> <span class="o">=</span> <span class="mf">50.0</span>  <span class="c1"># mm
+</span><span class="n">rotation_threshold</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># deg
+</span><span class="n">pos_diff</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">current_pose</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pose</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">rot_diff</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">current_pose</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">-</span> <span class="n">target_pose</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<p>如果超阈值，交互提供三个选项：</p>
+
+<ol>
+  <li>自动移动到起始位置。</li>
+  <li>取消播放，手动调整。</li>
+  <li>忽略警告，强制播放。</li>
+</ol>
+
+<p>自动移动使用 <code class="language-plaintext highlighter-rouge">MovJ</code>，不是 ServoP：</p>
+
+<ul>
+  <li>关节空间运动更适合起始位置迁移。</li>
+  <li>默认速度 50%。</li>
+  <li>30 秒超时。</li>
+</ul>
+
+<p>其中 <code class="language-plaintext highlighter-rouge">--no-safety-check</code> 仅应在确认当前位置与起点非常接近时用于调试。</p>
+
+<h3 id="73-播放质量评估">7.3 播放质量评估</h3>
+
+<p>播放质量评估由两个脚本构成：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">playback_evaluator.py</code>：播放时录制目标状态和实际状态。</li>
+  <li><code class="language-plaintext highlighter-rouge">analyze_playback.py</code>：离线计算误差统计。</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">playback_evaluator.py</code> 订阅：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/robot/target_pose
+/dobot_msgs_v3/msg/ToolVectorActual
+/gripper/command_update
+/gripper/state_feedback
+</code></pre></div></div>
+
+<p>输出：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>playback_eval/evaluation_X.hdf5
+</code></pre></div></div>
+
+<p>评估器支持时间偏移补偿：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>time_offset &gt; 0 时：
+目标位置查找 reference_time - time_offset
+实际位置使用 reference_time
+</code></pre></div></div>
+
+<p>笔记中记录过 737ms 的时间偏移补偿，也记录了 <code class="language-plaintext highlighter-rouge">--time-offset 700</code> 的建议。这说明机械臂执行 ServoP 命令存在可观响应延迟，若不补偿，动态误差会混入稳态跟踪误差。</p>
+
+<h3 id="74-已观察到的播放误差">7.4 已观察到的播放误差</h3>
+
+<p>笔记中有两组代表性播放评估。</p>
+
+<p>较短数据：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总帧数: 160
+总时长: 2.84 秒
+平均频率: 56.3 Hz
+时间偏移补偿: 737 ms
+
+机械臂位置误差:
+  平均值: 6.846 mm
+  中位数: 0.053 mm
+  最大值: 70.185 mm
+  95%分位: 39.739 mm
+
+旋转误差:
+  平均值: 0.006 deg
+  最大值: 0.021 deg
+
+夹爪位置误差:
+  平均值: 5.175
+  最大值: 80.000
+
+总体评级: 较差
+</code></pre></div></div>
+
+<p>较长数据：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总帧数: 2037
+总时长: 39.51 秒
+平均频率: 51.6 Hz
+
+机械臂位置误差:
+  平均值: 10.161 mm
+  中位数: 9.097 mm
+  最大值: 100.087 mm
+  95%分位: 21.467 mm
+
+旋转误差:
+  平均值: 0.012 deg
+  最大值: 0.308 deg
+
+夹爪位置误差:
+  平均值: 13.531
+  最大值: 160.000
+
+总体评级: 较差
+</code></pre></div></div>
+
+<p>这说明当前播放链路可以完成重放，但位置跟踪误差仍不可忽略。旋转跟踪很好，位置误差主要集中在大跳变、起始阶段或 ServoP/控制器响应延迟上。</p>
+
+<p>播放评估链路如下：</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Player as dataset_player.py
+  participant Arm as CR5 ServoP
+  participant Eval as playback_evaluator.py
+  participant Analyzer as analyze_playback.py
+
+  Player-&gt;&gt;Arm: 逐帧发送 target pose / gripper target
+  Player-&gt;&gt;Eval: 发布 /robot/target_pose
+  Arm-&gt;&gt;Eval: 发布 ToolVectorActual
+  Eval-&gt;&gt;Eval: 记录 target 与 actual
+  Eval-&gt;&gt;Analyzer: 输出 evaluation_X.hdf5
+  Analyzer-&gt;&gt;Analyzer: time_offset 补偿
+  Analyzer-&gt;&gt;Analyzer: 计算位置、旋转、夹爪误差
+</code></pre>
+
+<h2 id="8-hdf5-到-lerobot-v20-格式转换">8. HDF5 到 LeRobot v2.0 格式转换</h2>
+
+<h3 id="81-转换目标">8.1 转换目标</h3>
+
+<p>OpenPI / LeRobot 训练不直接吃项目 HDF5，而是使用 LeRobot 数据集。<code class="language-plaintext highlighter-rouge">convert_to_lerobot.py</code> 参考 any4lerobot 格式，将 HDF5 转为 LeRobot v2.0：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dataset/
+├── data/
+│   └── chunk-000/
+│       ├── episode_000000.parquet
+│       └── ...
+├── videos/
+│   └── observation.images.top/
+│       └── chunk-000/
+│           ├── episode_000000.mp4
+│           └── ...
+└── meta/
+    ├── info.json
+    ├── stats.json
+    ├── episodes.jsonl
+    └── tasks.jsonl
+</code></pre></div></div>
+
+<p>笔记中最终数据集发布地址：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://huggingface.co/datasets/leng234/cr5pickblock
+</code></pre></div></div>
+
+<h3 id="82-字段映射">8.2 字段映射</h3>
+
+<p>HDF5：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>observations/robot_current     [N, 6]
+observations/gripper_current   [N, 1]
+actions/robot_target           [N, 6]
+actions/gripper_target         [N, 1]
+observations/images/color      [N, H, W, 3]
+timestamp                      [N]
+</code></pre></div></div>
+
+<p>LeRobot：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>observation.state = concat(robot_current, gripper_current)  # [N, 7]
+action = concat(robot_target, gripper_target)               # [N, 7]
+observation.images.top = MP4 video
+timestamp = 原始时间戳
+episode_index = episode 编号
+frame_index = episode 内帧编号
+index = 全局帧编号
+task_index = 0
+next.done = 只有最后一帧为 True
+</code></pre></div></div>
+
+<p>7 维状态/动作含义：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0: x, mm
+1: y, mm
+2: z, mm
+3: rx, deg
+4: ry, deg
+5: rz, deg
+6: gripper, 0-1000 编码器/目标值
+</code></pre></div></div>
+
+<h3 id="83-infojson">8.3 <code class="language-plaintext highlighter-rouge">info.json</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">info.json</code> 关键字段：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"codebase_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"robot_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dobot_cr3"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fps"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data/chunk-{episode_chunk:03d}/episode_{episode_index:06d}.parquet"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"video_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"videos/{video_key}/chunk-{episode_chunk:03d}/episode_{episode_index:06d}.mp4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"observation.state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float32"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"shape"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="s2">"z"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rx"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ry"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rz"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gripper"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"observation.images.top"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"shape"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w"> </span><span class="mi">640</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float32"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"shape"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="s2">"z"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rx"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ry"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rz"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gripper"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>这里仍有 <code class="language-plaintext highlighter-rouge">dobot_cr3</code> 命名遗留。若要对外发布更规范，应改为 <code class="language-plaintext highlighter-rouge">dobot_cr5</code>，同时同步修改 OpenPI 数据配置名或至少在 README 中解释。</p>
+
+<h3 id="84-statsjson">8.4 <code class="language-plaintext highlighter-rouge">stats.json</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">stats.json</code> 保存：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>observation.state:
+  min/max/mean/std
+action:
+  min/max/mean/std
+</code></pre></div></div>
+
+<p>这些统计值用于：</p>
+
+<ul>
+  <li>模型训练归一化。</li>
+  <li>推理输出反归一化。</li>
+  <li>辅助安全检查，比如动作是否超出采集分布。</li>
+</ul>
+
+<p>需要注意：<code class="language-plaintext highlighter-rouge">stats.json</code> 不能代替机械臂硬件限位。它只是数据分布统计；真正真机执行时仍应有工作空间限制、跳变限制、速度限制和急停机制。</p>
+
+<h3 id="85-lerobot-版本问题">8.5 LeRobot 版本问题</h3>
+
+<p>笔记中明确记录：</p>
+
+<ul>
+  <li>最新 LeRobot 对旧 v2.0 数据集兼容性不好。</li>
+  <li><code class="language-plaintext highlighter-rouge">lerobot-dataset-viz</code> 最新版本会出现 backward compatibility error。</li>
+  <li>最终使用 <code class="language-plaintext highlighter-rouge">lerobot==0.3.3</code> 的方式可视化 v2.0 数据。</li>
+</ul>
+
+<p>这说明当前数据集格式与工具链版本绑定较强。长期维护建议之一是：固定转换工具的 LeRobot 版本，或升级到 LeRobot v3 同时同步修改 OpenPI 数据加载配置。</p>
+
+<p>格式转换关系如下：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  HDF5["HDF5 episode"]
+  Parquet["episode_xxxxxx.parquet"]
+  Video["observation.images.top MP4"]
+  Meta["meta/*.json / *.jsonl"]
+  HF["Hugging Face Dataset"]
+  OpenPI["OpenPI DataConfig"]
+
+  HDF5 --&gt;|"robot_current + gripper_current"| Parquet
+  HDF5 --&gt;|"robot_target + gripper_target"| Parquet
+  HDF5 --&gt;|"RGB frames"| Video
+  HDF5 --&gt;|"fps, stats, task, episode index"| Meta
+  Parquet --&gt; HF
+  Video --&gt; HF
+  Meta --&gt; HF
+  HF --&gt; OpenPI
+</code></pre>
+
+<p>HDF5 转换为 LeRobot 数据集的检查截图：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-hdf5-tree.png" alt="HDF5 episode 数据结构记录" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-lerobot-viewer.png" alt="LeRobot 数据集可视化检查" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-lerobot-files.png" alt="LeRobot v2.0 输出文件结构" /></p>
+
+<h2 id="9-openpi--openpicr5-适配">9. OpenPI / openpicr5 适配</h2>
+
+<h3 id="91-openpi-基本推理服务">9.1 OpenPI 基本推理服务</h3>
+
+<p>OpenPI 原始支持通过 WebSocket 做远程推理：</p>
+
+<p>服务端：</p>
+
+<p>客户端通过 <code class="language-plaintext highlighter-rouge">openpi-client</code> 的：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">openpi_client</span> <span class="kn">import</span> <span class="n">websocket_client_policy</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">websocket_client_policy</span><span class="p">.</span><span class="n">WebsocketClientPolicy</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">infer</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"actions"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>这种架构把机器人的 ROS2 环境和模型的 GPU 环境分开，避免依赖冲突。</p>
+
+<h3 id="92-dobot-数据输入适配">9.2 Dobot 数据输入适配</h3>
+
+<p><code class="language-plaintext highlighter-rouge">openpicr5/src/openpi/policies/dobot_cr3_policy.py</code> 定义了输入/输出变换。</p>
+
+<p>输入变换 <code class="language-plaintext highlighter-rouge">DobotCR3Inputs</code>：</p>
+
+<ul>
+  <li>读取 <code class="language-plaintext highlighter-rouge">observation/image</code>。</li>
+  <li>读取 <code class="language-plaintext highlighter-rouge">observation/state</code>。</li>
+  <li>将单相机图像映射到模型的 <code class="language-plaintext highlighter-rouge">base_0_rgb</code>。</li>
+  <li>左右腕部相机用零数组占位，并用 mask 置为 False。</li>
+  <li>透传 prompt。</li>
+</ul>
+
+<p>核心结构：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"state"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s">"observation/state"</span><span class="p">],</span>
+    <span class="s">"image"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"base_0_rgb"</span><span class="p">:</span> <span class="n">base_image</span><span class="p">,</span>
+        <span class="s">"left_wrist_0_rgb"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">base_image</span><span class="p">),</span>
+        <span class="s">"right_wrist_0_rgb"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">base_image</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="s">"image_mask"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"base_0_rgb"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">True_</span><span class="p">,</span>
+        <span class="s">"left_wrist_0_rgb"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">False_</span><span class="p">,</span>
+        <span class="s">"right_wrist_0_rgb"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">False_</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>输出变换 <code class="language-plaintext highlighter-rouge">DobotCR3Outputs</code>：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="p">{</span><span class="s">"actions"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">"actions"</span><span class="p">][:,</span> <span class="p">:</span><span class="mi">7</span><span class="p">])}</span>
+</code></pre></div></div>
+
+<p>即模型动作被裁剪回 7D：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x, y, z, rx, ry, rz, gripper
+</code></pre></div></div>
+
+<h3 id="93-数据配置-lerobotdobotcr3dataconfig">9.3 数据配置 <code class="language-plaintext highlighter-rouge">LeRobotDobotCR3DataConfig</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">openpicr5/src/openpi/training/config.py</code> 中定义了 Dobot 数据配置：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LeRobotDobotCR3DataConfig</span><span class="p">(</span><span class="n">DataConfigFactory</span><span class="p">):</span>
+    <span class="n">action_sequence_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s">"action"</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<p>repack 映射：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">"observation/image"</span><span class="p">:</span> <span class="s">"observation.images.top"</span><span class="p">,</span>
+    <span class="s">"observation/state"</span><span class="p">:</span> <span class="s">"observation.state"</span><span class="p">,</span>
+    <span class="s">"actions"</span><span class="p">:</span> <span class="s">"action"</span><span class="p">,</span>
+    <span class="s">"prompt"</span><span class="p">:</span> <span class="s">"prompt"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>注意点：</p>
+
+<ul>
+  <li>LeRobot 数据集动作字段是 <code class="language-plaintext highlighter-rouge">action</code>，OpenPI 内部通用键常用 <code class="language-plaintext highlighter-rouge">actions</code>，因此这里显式重命名。</li>
+  <li><code class="language-plaintext highlighter-rouge">prompt_from_task=True</code>，让模型从 <code class="language-plaintext highlighter-rouge">tasks.jsonl</code> 读取任务 prompt。</li>
+  <li>如果 <code class="language-plaintext highlighter-rouge">norm_stats</code> 缺失，代码默认设置为空字典以避免训练时报错。但训练严肃使用时应提供正确 norm stats。</li>
+</ul>
+
+<h3 id="94-训练配置-pi0_dobot_cr3">9.4 训练配置 <code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code></h3>
+
+<p>当前配置：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TrainConfig</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"pi0_dobot_cr3"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">pi0_config</span><span class="p">.</span><span class="n">Pi0Config</span><span class="p">(</span>
+        <span class="n">pi05</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">action_horizon</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">discrete_state_input</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">LeRobotDobotCR3DataConfig</span><span class="p">(</span>
+        <span class="n">repo_id</span><span class="o">=</span><span class="s">"/home/hit/openpi/my_data/my_data"</span><span class="p">,</span>
+        <span class="n">base_config</span><span class="o">=</span><span class="n">DataConfig</span><span class="p">(</span><span class="n">prompt_from_task</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">video_backend</span><span class="o">=</span><span class="s">"pyav"</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">lr_schedule</span><span class="o">=</span><span class="n">CosineDecaySchedule</span><span class="p">(</span>
+        <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+        <span class="n">peak_lr</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span>
+        <span class="n">decay_steps</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">,</span>
+        <span class="n">decay_lr</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">AdamW</span><span class="p">(</span><span class="n">clip_gradient_norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">ema_decay</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span>
+    <span class="n">weight_loader</span><span class="o">=</span><span class="n">CheckpointWeightLoader</span><span class="p">(</span><span class="s">"gs://openpi-assets/checkpoints/pi05_base/params"</span><span class="p">),</span>
+    <span class="n">pytorch_weight_path</span><span class="o">=</span><span class="s">"/home/hit/openpi/checkpoints/pi05_base_pytorch"</span><span class="p">,</span>
+    <span class="n">num_train_steps</span><span class="o">=</span><span class="mi">30_000</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>以及模型权重拷贝：</p>
+
+<h3 id="95-prompt-与任务描述">9.5 Prompt 与任务描述</h3>
+
+<p>训练/推理中使用自然语言 prompt，例如：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pick up the red block and place it on the plate
+pick up the red block
+</code></pre></div></div>
+
+<p>当前转换脚本中 <code class="language-plaintext highlighter-rouge">tasks.jsonl</code> 默认任务为：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"task_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"robot_teleoperation"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"task_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teleoperation of Dobot CR3 robotic arm with gripper"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>这与推理时具体 prompt 不完全一致。若训练数据实际任务都是“pick red block”等，应把 <code class="language-plaintext highlighter-rouge">tasks.jsonl</code> 改成真实任务描述，否则训练时语言条件和推理 prompt 有偏差。</p>
+
+<h2 id="10-模型推理服务端">10. 模型推理服务端</h2>
+
+<h3 id="101-当前主线服务端">10.1 当前主线服务端</h3>
+
+<p><code class="language-plaintext highlighter-rouge">scripts/serve_policy.py</code> 创建 policy 并启动：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> <span class="o">=</span> <span class="n">websocket_policy_server</span><span class="p">.</span><span class="n">WebsocketPolicyServer</span><span class="p">(</span>
+    <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">server</span><span class="p">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>服务端默认监听 <code class="language-plaintext highlighter-rouge">0.0.0.0:8000</code>，客户端通过 WebSocket 发送 observation dict，服务端返回 action chunk。</p>
+
+<h3 id="102-originread-的服务端预热">10.2 <code class="language-plaintext highlighter-rouge">origin/read</code> 的服务端预热</h3>
+
+<p><code class="language-plaintext highlighter-rouge">origin/read</code> 修改了 <code class="language-plaintext highlighter-rouge">src/openpi/serving/websocket_policy_server.py</code>，在 <code class="language-plaintext highlighter-rouge">serve_forever()</code> 前加入：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">self</span><span class="p">.</span><span class="n">warmup</span><span class="p">()</span>
+<span class="n">asyncio</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">run</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>预热输入：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dummy_obs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"observation/image"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">),</span>
+    <span class="s">"observation/wrist_image"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">),</span>
+    <span class="s">"observation/state"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">),</span>
+    <span class="s">"prompt"</span><span class="p">:</span> <span class="s">"warmup"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>目的：</p>
+
+<ul>
+  <li>触发模型第一次编译/缓存。</li>
+  <li>完成 PyTorch/Triton autotune。</li>
+  <li>避免真机第一步推理阻塞过长。</li>
+</ul>
+
+<p>同一分支还在返回结果中增加：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">action</span><span class="p">[</span><span class="s">"server_timing"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"infer_ms"</span><span class="p">:</span> <span class="n">infer_time</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这对定位“客户端阻塞来自网络还是模型推理”很有价值。</p>
+
+<p>当前 <code class="language-plaintext highlighter-rouge">main</code> 是否保留 warmup 需要以分支代码为准。已观察到 <code class="language-plaintext highlighter-rouge">main</code> 里 <code class="language-plaintext highlighter-rouge">websocket_policy_server.py</code> 没有这些调试增强，说明 warmup 属于 <code class="language-plaintext highlighter-rouge">origin/read</code> 尝试分支，不是稳定主线。</p>
+
+<p>推理服务端与客户端的数据交换如下：</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Cam as Orbbec RGB
+  participant Arm as CR5 反馈
+  participant Client as CR5InferenceNode
+  participant Server as WebSocketPolicyServer
+  participant Policy as OpenPI Policy
+  participant Control as ServoP / Modbus
+
+  Cam-&gt;&gt;Client: /camera/color/image_raw
+  Arm-&gt;&gt;Client: ToolVectorActual
+  Client-&gt;&gt;Client: resize_with_pad + state 拼接 + prompt
+  Client-&gt;&gt;Server: observation dict
+  Server-&gt;&gt;Policy: infer(observation)
+  Policy--&gt;&gt;Server: actions[action_horizon, 7]
+  Server--&gt;&gt;Client: action chunk
+  loop 执行前 replan_steps 个动作
+    Client-&gt;&gt;Control: ServoP(x,y,z,rx,ry,rz)
+    Client-&gt;&gt;Control: SetHoldRegs(gripper)
+    Client-&gt;&gt;Client: 发布 target_pose / gripper_target 供评估
+  end
+</code></pre>
+
+<h2 id="11-模型推理客户端">11. 模型推理客户端</h2>
+
+<h3 id="111-当前-examplesdobot_cr5mainpy">11.1 当前 <code class="language-plaintext highlighter-rouge">examples/dobot_cr5/main.py</code></h3>
+
+<p>当前主线的 CR5 推理客户端文件：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openpicr5/examples/dobot_cr5/main.py
+</code></pre></div></div>
+
+<p>功能：</p>
+
+<ul>
+  <li>连接 WebSocket 策略服务器。</li>
+  <li>订阅 RGB 图像 <code class="language-plaintext highlighter-rouge">/camera/color/image_raw</code>。</li>
+  <li>订阅机械臂当前位姿 <code class="language-plaintext highlighter-rouge">/dobot_msgs_v3/msg/ToolVectorActual</code>。</li>
+  <li>构建 OpenPI observation。</li>
+  <li>以 action chunk + replan 的方式获取动作。</li>
+  <li>使用 ServoP 控制机械臂。</li>
+  <li>使用 Modbus 控制夹爪。</li>
+  <li>发布 <code class="language-plaintext highlighter-rouge">/robot/target_pose</code>、<code class="language-plaintext highlighter-rouge">/gripper/command_update</code>、<code class="language-plaintext highlighter-rouge">/gripper/state_feedback</code>，保持与采集/评估链路兼容。</li>
+</ul>
+
+<p>或 tyro 风格：</p>
+
+<h3 id="112-客户端参数">11.2 客户端参数</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">host</span><span class="p">:</span> <span class="n">localhost</span>
+<span class="n">port</span><span class="p">:</span> <span class="mi">8000</span>
+<span class="n">resize_size</span><span class="p">:</span> <span class="mi">224</span>
+<span class="n">replan_steps</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">prompt</span><span class="p">:</span> <span class="s">"pick up the object"</span>
+<span class="n">max_steps</span><span class="p">:</span> <span class="mi">3000</span>
+<span class="n">dry_run</span><span class="p">:</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<p>其中：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">resize_size=224</code> 与 OpenPI 模型输入一致。</li>
+  <li><code class="language-plaintext highlighter-rouge">replan_steps=5</code> 表示每次模型返回 10 步动作，但只执行前 5 步后重新推理。</li>
+  <li><code class="language-plaintext highlighter-rouge">dry_run=True</code> 可用于不控制机械臂，只验证流程。</li>
+</ul>
+
+<h3 id="113-observation-构建">11.3 Observation 构建</h3>
+
+<p>当前客户端构建：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">image_tools</span><span class="p">.</span><span class="n">resize_with_pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">image_tools</span><span class="p">.</span><span class="n">convert_to_uint8</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">gripper_normalized</span> <span class="o">=</span> <span class="n">current_pos</span> <span class="o">/</span> <span class="mf">1000.0</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="n">ry</span><span class="p">,</span> <span class="n">rz</span><span class="p">,</span> <span class="n">gripper_normalized</span><span class="p">]</span>
+
+<span class="n">obs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"observation/image"</span><span class="p">:</span> <span class="n">img</span><span class="p">,</span>
+    <span class="s">"observation/wrist_image"</span><span class="p">:</span> <span class="n">img</span><span class="p">,</span>
+    <span class="s">"observation/state"</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span>
+    <span class="s">"prompt"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>注意：当前没有腕部相机，<code class="language-plaintext highlighter-rouge">observation/wrist_image</code> 复用主相机。训练侧 <code class="language-plaintext highlighter-rouge">DobotCR3Inputs</code> 对腕部图像使用 mask=False 的零图占位，而当前推理客户端传的是主相机复用图。这个差异需要关注：</p>
+
+<ul>
+  <li>如果服务端 data transform 会把 <code class="language-plaintext highlighter-rouge">observation/wrist_image</code> 忽略，则影响不大。</li>
+  <li>如果模型实际读取了该字段，训练/推理分布会不一致。</li>
+</ul>
+
+<p>更稳妥做法是：推理客户端也与训练 transform 一致，将腕部图像置零并显式 mask 掉，或者训练时也复用主相机。当前报告只能指出此处存在潜在不一致。</p>
+
+<h3 id="114-action-执行">11.4 Action 执行</h3>
+
+<p>模型输出：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actions: [action_horizon, 7]
+action = [x, y, z, rx, ry, rz, gripper]
+</code></pre></div></div>
+
+<p>当前代码假设模型输出已经反归一化：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">target_pose</span> <span class="o">=</span> <span class="n">action</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">gripper_raw</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">gripper_target</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">gripper_raw</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>机械臂控制：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ServoP</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="n">ry</span><span class="p">,</span> <span class="n">rz</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>夹爪控制：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SetHoldRegs</span><span class="p">(</span><span class="n">addr</span><span class="o">=</span><span class="mi">259</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">gripper_target</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="115-动作队列与重规划">11.5 动作队列与重规划</h3>
+
+<p>客户端不会每一帧都调用模型。逻辑是：</p>
+
+<ol>
+  <li>队列为空时调用 <code class="language-plaintext highlighter-rouge">policy_client.infer(obs)</code>。</li>
+  <li>模型返回 10 个动作。</li>
+  <li>只把前 <code class="language-plaintext highlighter-rouge">replan_steps</code> 个动作加入队列。</li>
+  <li>每次循环弹出一个动作执行。</li>
+  <li>队列空了再推理。</li>
+</ol>
+
+<p>这避免了每帧推理造成的延迟，也避免长动作 chunk 执行过久导致闭环不及时。</p>
+
+<h3 id="116-推理日志事实">11.6 推理日志事实</h3>
+
+<p>笔记中记录的一段实际推理日志：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>First inference elapsed=81.8ms
+后续 inference 多在 58-68ms
+ServoP 有时 3-6ms，有时 50-66ms
+Step 30 动作频率 25.2Hz，去推理后 38.4Hz
+Step 60 动作频率 25.9Hz，去推理后 39.1Hz
+Step 150 动作频率 20.8Hz，去推理后 28.3Hz
+</code></pre></div></div>
+
+<p>结论：</p>
+
+<ul>
+  <li>模型推理本身约 60ms。</li>
+  <li>ServoP 耗时不稳定。</li>
+  <li>即使目标是 30Hz，实际动作频率会受推理、ServoP 和队列阻塞影响。</li>
+  <li>强行 sleep 到 1/30 秒不一定提升效果，笔记中写明加 sleep 后频率反而降到约 26Hz。</li>
+</ul>
+
+<p>推理客户端日志与 timing 记录：</p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-inference-log.png" alt="推理客户端运行日志" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-inference-timing.png" alt="推理客户端 timing 字段记录" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-061-d3a08361.png" alt="推理轨迹可视化 1" /></p>
+
+<p><img src="/images/projects/cr5-vla-openpi/cr5-vla-openpi-062-23d9a233.png" alt="推理轨迹可视化 2" /></p>
+
+<h2 id="12-并行推理与独立进程尝试为什么失败或未采用">12. 并行推理与独立进程尝试：为什么失败或未采用</h2>
+
+<h3 id="121-问题背景">12.1 问题背景</h3>
+
+<p>数据采集/播放中的 ServoP 调用可以达到较低延迟：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_collector4.py 中 ServoP:
+Avg: 11.86ms
+Min: 2.36ms
+Max: 58.40ms
+</code></pre></div></div>
+
+<p>但 VLA 推理客户端中，同样的 ServoP 有时达到：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>90-100ms
+</code></pre></div></div>
+
+<p>这导致实际控制频率只能到约 10Hz 或 20Hz，低于目标 30Hz。</p>
+
+<h3 id="122-尝试-1multithreadedexecutor--回调组分离">12.2 尝试 1：MultiThreadedExecutor + 回调组分离</h3>
+
+<p>思路：</p>
+
+<ul>
+  <li>将 ServoP 服务、图像订阅、状态订阅放入不同 callback group。</li>
+  <li>使用多线程 executor。</li>
+</ul>
+
+<p>结果：</p>
+
+<ul>
+  <li>无明显改善。</li>
+  <li>ServoP 仍约 100ms。</li>
+</ul>
+
+<p>原因判断：</p>
+
+<ul>
+  <li>callback group 只影响 Python 回调调度。</li>
+  <li>ServoP 延迟主要不是 Python 回调互斥导致，而可能来自 DDS、Dobot 控制器响应、图像数据流干扰、服务调用频率等。</li>
+</ul>
+
+<h3 id="123-尝试-2servonode-独立节点">12.3 尝试 2：ServoNode 独立节点</h3>
+
+<p>思路：</p>
+
+<ul>
+  <li>单独创建一个只包含 ServoP client 的 ROS 节点。</li>
+  <li>避免图像订阅和状态订阅影响 ServoP client。</li>
+</ul>
+
+<p>结果：</p>
+
+<ul>
+  <li>仍约 90-100ms。</li>
+</ul>
+
+<p>原因判断：</p>
+
+<ul>
+  <li>虽然节点独立，但还在同一 Python 进程、同一 rclpy 上下文和同一网络/DDS环境中。</li>
+</ul>
+
+<h3 id="124-尝试-3不同服务等待方式">12.4 尝试 3：不同服务等待方式</h3>
+
+<p>尝试：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rclpy.spin_until_future_complete</code></li>
+  <li>手动轮询：</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="ow">not</span> <span class="n">future</span><span class="p">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>结果：</p>
+
+<ul>
+  <li>两种方式延迟相似。</li>
+</ul>
+
+<p>说明问题不主要在 future 等待 API。</p>
+
+<h3 id="125-尝试-4servopthread-高频发送线程">12.5 尝试 4：ServoPThread 高频发送线程</h3>
+
+<p>思路：</p>
+
+<ul>
+  <li>独立线程持续高频发送 ServoP。</li>
+  <li>主推理循环只更新目标位姿，不等待 ServoP。</li>
+</ul>
+
+<p>结果：</p>
+
+<ul>
+  <li>表面频率可提升。</li>
+  <li>但轨迹出现严重锯齿、波峰波谷和来回晃动。</li>
+</ul>
+
+<p>关键原因：</p>
+
+<ul>
+  <li>VLA 推理是闭环的。</li>
+  <li>上一次推理返回的 5 步动作还没执行完，下一次推理已经读到了“运动中的中间状态”。</li>
+  <li>模型基于中间状态预测下一段动作，可能需要往回修正，导致轨迹来回抖。</li>
+</ul>
+
+<p>笔记中明确对比：</p>
+
+<ul>
+  <li>dataset_player 非阻塞能跑，是因为它不重新推理，只顺序执行固定轨迹。</li>
+  <li>VLA 推理非阻塞会抖，是因为动作执行和下一次 observation 之间存在闭环耦合。</li>
+</ul>
+
+<h3 id="126-尝试-5独立进程-multiprocessing">12.6 尝试 5：独立进程 multiprocessing</h3>
+
+<p>思路：</p>
+
+<ul>
+  <li>将 ServoP 放到完全独立 Python 进程。</li>
+  <li>独立 <code class="language-plaintext highlighter-rouge">rclpy.init()</code>。</li>
+  <li>通过 multiprocessing queue 传目标位姿。</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">origin/read</code> 中有：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">servo_process_worker</span><span class="p">(</span><span class="n">cmd_queue</span><span class="p">,</span> <span class="n">result_queue</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">rclpy</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="s">"servo_process_node"</span><span class="p">)</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>结果：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>独立进程 ServoP 延迟: 约 48ms
+主进程等待时间: 约 85ms
+控制频率仍约 10Hz
+</code></pre></div></div>
+
+<p>改善有限，原因：</p>
+
+<ul>
+  <li>进程内 ServoP 降低了部分延迟。</li>
+  <li>但主进程到 servo 进程的队列同步开销、等待结果开销、以及控制器响应延迟仍在。</li>
+  <li>图像订阅的大数据流和 DDS 层资源竞争可能仍影响整体系统。</li>
+</ul>
+
+<h3 id="127-尝试-6独立进程--高频持续发送">12.7 尝试 6：独立进程 + 高频持续发送</h3>
+
+<p>思路：</p>
+
+<ul>
+  <li>即使没有新命令，也持续发送当前 pose。</li>
+  <li>让 Dobot 控制器保持“连续伺服模式”。</li>
+</ul>
+
+<p>观察：</p>
+
+<ul>
+  <li>延迟约 48ms，仍未达到 data_collector 的 11ms。</li>
+  <li>轨迹质量不如阻塞方式稳定。</li>
+</ul>
+
+<h3 id="128-最终工程结论">12.8 最终工程结论</h3>
+
+<p><code class="language-plaintext highlighter-rouge">SERVO_LATENCY_INVESTIGATION.md</code> 的结论可以概括为：</p>
+
+<ol>
+  <li>无法在 VLA 推理客户端稳定复现 <code class="language-plaintext highlighter-rouge">data_collector4.py</code> 的 11ms ServoP 延迟。</li>
+  <li>Dobot 控制器可能和指令发送频率有关，高频持续 ServoP 更快。</li>
+  <li>图像订阅和推理会改变系统资源状态。</li>
+  <li>非阻塞虽然频率高，但轨迹质量差。</li>
+  <li>独立进程能部分降低 ServoP 调用时延，但总闭环收益不足。</li>
+  <li>当前最可用方案是阻塞执行或较串行的动作块执行，接受较低控制频率，优先保证轨迹质量和任务完成。</li>
+</ol>
+
+<p>这就是“并行推理尝试失败”的真实原因：失败不是代码完全跑不起来，而是并行化破坏了 VLA 闭环控制中的状态-动作一致性，且系统瓶颈不只在 Python 线程。</p>
+
+<p>并行尝试的失败模式可以画成：</p>
+
+<pre><code class="language-mermaid">flowchart TD
+  Obs0["观测 S0"]
+  Infer0["推理得到动作块 A0..A9"]
+  AsyncExec["非阻塞 / 高频 ServoP 执行中"]
+  MidState["机器人尚未到达目标，处于中间状态 S_mid"]
+  Obs1["下一次观测读到 S_mid"]
+  Infer1["模型基于 S_mid 重新推理"]
+  Correction["新动作试图修正上一段未完成动作"]
+  Oscillation["轨迹锯齿 / 来回抖动"]
+  Blocking["阻塞动作块执行"]
+  Stable["状态-动作因果更一致，频率较低但更稳"]
+
+  Obs0 --&gt; Infer0 --&gt; AsyncExec --&gt; MidState --&gt; Obs1 --&gt; Infer1 --&gt; Correction --&gt; Oscillation
+  Infer0 --&gt; Blocking --&gt; Stable
+</code></pre>
+
+<h2 id="13-数据播放">13. 数据播放</h2>
+
+<h3 id="131-dataset_playerpy">13.1 <code class="language-plaintext highlighter-rouge">dataset_player.py</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">dataset_player.py</code> 用于重放 HDF5 轨迹，核心功能：</p>
+
+<ul>
+  <li>加载 <code class="language-plaintext highlighter-rouge">actions/robot_target</code>。</li>
+  <li>加载 <code class="language-plaintext highlighter-rouge">actions/gripper_target</code>。</li>
+  <li>按 <code class="language-plaintext highlighter-rouge">timestamp</code> 的实际间隔播放。</li>
+  <li>使用 ServoP 控制机械臂。</li>
+  <li>用 Modbus 控制夹爪。</li>
+  <li>发布目标状态话题给评估器。</li>
+  <li>播放前做安全检查。</li>
+</ul>
+
+<p>播放循环：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for each frame:
+  robot_pose = robot_target[i]
+  gripper_pos = gripper_target[i]
+  ServoP(robot_pose)
+  set_gripper(gripper_pos)
+  publish_robot_target(robot_pose)
+  sleep(next_timestamp - current_timestamp - elapsed_loop)
+</code></pre></div></div>
+
+<h3 id="132-播放频率">13.2 播放频率</h3>
+
+<p>播放不强行固定 100Hz，而是读取原始 <code class="language-plaintext highlighter-rouge">timestamp</code>：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">time_diffs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">timestamps</span><span class="p">)</span>
+<span class="n">target_dt</span> <span class="o">=</span> <span class="n">time_diffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">playback_rate</span>
+</code></pre></div></div>
+
+<p>这比固定 sleep 更能保留录制时的节奏，也能用于慢放：</p>
+
+<h3 id="133-夹爪状态插补">13.3 夹爪状态插补</h3>
+
+<p><code class="language-plaintext highlighter-rouge">dataset_player.py</code> 中有 <code class="language-plaintext highlighter-rouge">GripperStateFeedback</code> 线程：</p>
+
+<ul>
+  <li>以约 10Hz 读取 Modbus 实际位置。</li>
+  <li>以更高频率发布插补后的夹爪实际状态和目标状态。</li>
+</ul>
+
+<p>原因是夹爪 Modbus 回读慢，而评估和录制希望有更平滑的高频状态。</p>
+
+<h2 id="14-模型微调流程">14. 模型微调流程</h2>
+
+<h3 id="141-数据准备">14.1 数据准备</h3>
+
+<p>完整数据准备流程：</p>
+
+<ol>
+  <li>启动 Dobot 驱动。</li>
+  <li>启动相机，建议启用 Fast DDS 共享内存，只开 RGB 640x480@30。</li>
+  <li>启动 <code class="language-plaintext highlighter-rouge">recorder_optimized.py</code>。</li>
+  <li>启动 <code class="language-plaintext highlighter-rouge">data_collector4.py</code> 做遥操作。</li>
+  <li>通过遥操作按键发布 <code class="language-plaintext highlighter-rouge">/recorder/command=1</code> 开始录制。</li>
+  <li>完成任务后发布 <code class="language-plaintext highlighter-rouge">/recorder/command=2</code> 保存。</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">check_dataset.py</code> 检查质量。</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">dataset_player.py</code> 慢速播放验证安全性。</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">playback_evaluator.py</code> + <code class="language-plaintext highlighter-rouge">analyze_playback.py</code> 检查重放误差。</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">convert_to_lerobot.py</code> 转为 LeRobot v2.0。</li>
+  <li>用 LeRobot 可视化工具检查视频、状态、动作是否匹配。</li>
+</ol>
+
+<p>微调准备流程如下：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  Deploy["启动 CR5 + 相机 + 录制器"]
+  Teleop["遥操作采集 episode"]
+  Quality["check_dataset 质量检查"]
+  Playback["dataset_player 慢速播放"]
+  Eval["playback_evaluator + analyze_playback"]
+  Convert["convert_to_lerobot.py"]
+  Visualize["LeRobot 可视化"]
+  Train["OpenPI pi0_dobot_cr3 微调"]
+  Serve["serve_policy.py 加载 checkpoint"]
+  Client["CR5 推理客户端"]
+
+  Deploy --&gt; Teleop --&gt; Quality --&gt; Playback --&gt; Eval --&gt; Convert --&gt; Visualize --&gt; Train --&gt; Serve --&gt; Client
+</code></pre>
+
+<h3 id="142-训练数据字段一致性">14.2 训练数据字段一致性</h3>
+
+<p>训练中最重要的是确保以下一致：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>采集</th>
+      <th>转换后</th>
+      <th>OpenPI 输入</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>图像</td>
+      <td><code class="language-plaintext highlighter-rouge">observations/images/color</code> BGR/RGB 存储</td>
+      <td><code class="language-plaintext highlighter-rouge">observation.images.top</code> MP4</td>
+      <td><code class="language-plaintext highlighter-rouge">observation/image</code> -&gt; <code class="language-plaintext highlighter-rouge">base_0_rgb</code></td>
+    </tr>
+    <tr>
+      <td>状态</td>
+      <td>robot_current + gripper_current</td>
+      <td><code class="language-plaintext highlighter-rouge">observation.state</code> 7D</td>
+      <td><code class="language-plaintext highlighter-rouge">state</code> 7D</td>
+    </tr>
+    <tr>
+      <td>动作</td>
+      <td>robot_target + gripper_target</td>
+      <td><code class="language-plaintext highlighter-rouge">action</code> 7D</td>
+      <td><code class="language-plaintext highlighter-rouge">actions</code> 7D</td>
+    </tr>
+    <tr>
+      <td>文字</td>
+      <td>任务描述</td>
+      <td><code class="language-plaintext highlighter-rouge">tasks.jsonl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">prompt</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="144-当前微调风险">14.4 当前微调风险</h3>
+
+<p>当前微调存在几个必须注意的问题：</p>
+
+<ol>
+  <li><strong>命名不一致</strong>：CR5 数据使用 <code class="language-plaintext highlighter-rouge">cr3</code> 名称，容易误导后续维护者。</li>
+  <li><strong>prompt 过泛化</strong>：转换脚本默认任务是 <code class="language-plaintext highlighter-rouge">robot_teleoperation</code>，而推理 prompt 是具体任务。训练数据 prompt 应更接近真实任务。</li>
+  <li><strong>腕部图像不一致</strong>：训练 transform 使用零腕部图像 + mask false；推理客户端复用主图像到 wrist image。</li>
+  <li><strong>action/state gap</strong>：笔记中提到“控制信号 action 和实际可达 state 存在 gap”。若动作标签是 target 而状态是 actual，模型学到的是命令空间；推理时输出命令是否能到达取决于 ServoP 和控制器响应。</li>
+  <li><strong>数据质量波动</strong>：部分 episode 丢帧率 2.57%-4.74% 尚可，早期 27.15% 不建议训练。</li>
+  <li><strong>夹爪信号低频</strong>：夹爪真实反馈经插补，不能过度解释为真实高频测量。</li>
+</ol>
+
+<h2 id="16-当前系统主要问题">16. 当前系统主要问题</h2>
+
+<h3 id="161-数据质量">16.1 数据质量</h3>
+
+<p>共享内存前的数据丢帧率太高，不建议用于训练。共享内存后数据明显改善，但仍需逐 episode 检查：</p>
+
+<ul>
+  <li>丢帧率。</li>
+  <li>最大时间间隔。</li>
+  <li>起止位置。</li>
+  <li>是否存在突变。</li>
+  <li>是否有高速运动点。</li>
+</ul>
+
+<h3 id="162-手眼标定精度">16.2 手眼标定精度</h3>
+
+<p>当前静态 TF 可用，但笔记中仍承认重投影误差和标定板条件问题。若后续任务只依赖 RGB 图像和端到端策略，影响有限；若要用深度点云做动作先验或抓取点计算，则必须重新标定。</p>
+
+<h3 id="163-推理闭环频率">16.3 推理闭环频率</h3>
+
+<p>当前难点不是“能不能调用模型”，而是：</p>
+
+<ul>
+  <li>模型推理约 60ms。</li>
+  <li>ServoP 时延不稳定。</li>
+  <li>非阻塞会造成轨迹抖动。</li>
+  <li>并行进程改善有限。</li>
+</ul>
+
+<p>因此短期策略是接受较低控制频率，保证闭环 observation/action 的一致性。</p>
+
+<h3 id="164-动作标签语义">16.4 动作标签语义</h3>
+
+<p>数据集中 <code class="language-plaintext highlighter-rouge">action</code> 是目标位姿，不是实际到达位姿。模型学到的是“应发送给控制器的命令”，不是“下一时刻实际状态”。这在 ServoP 延迟和控制器跟踪误差存在时，会影响推理效果。</p>
+
+<p>可选方向：</p>
+
+<ul>
+  <li>保持现状，让模型学习命令空间。</li>
+  <li>把 action 改为延迟补偿后的实际可达状态。</li>
+  <li>训练时加入 action/state gap 的补偿。</li>
+  <li>用播放评估中估计的时间偏移修正标签。</li>
+</ul>
+
+<p>当前代码没有系统性完成该补偿。</p>
+
+<h3 id="165-腕部图像字段">16.5 腕部图像字段</h3>
+
+<p>训练和推理对腕部图像处理不完全一致，建议统一。</p>
+
+<h3 id="166-命名混乱">16.6 命名混乱</h3>
+
+<p>CR5 真机适配中存在 <code class="language-plaintext highlighter-rouge">cr3</code> 命名遗留。短期不影响运行，长期会影响协作、报告和复现实验。</p>
+
+<h2 id="17-建议的下一步">17. 建议的下一步</h2>
+
+<h3 id="171-短期">17.1 短期</h3>
+
+<ol>
+  <li>固定当前稳定链路：
+    <ul>
+      <li>Fast DDS 共享内存。</li>
+      <li>RGB 640x480@30。</li>
+      <li><code class="language-plaintext highlighter-rouge">recorder_optimized.py</code>。</li>
+      <li><code class="language-plaintext highlighter-rouge">check_dataset.py</code>。</li>
+      <li><code class="language-plaintext highlighter-rouge">convert_to_lerobot.py</code>。</li>
+      <li>阻塞/串行推理客户端。</li>
+    </ul>
+  </li>
+  <li>清理命名：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pi0_dobot_cr3</code> 可暂时保留，但在 README 明确“该配置用于 CR5，cr3 是历史命名”。</li>
+      <li>新增 <code class="language-plaintext highlighter-rouge">pi0_dobot_cr5</code> alias 或正式配置。</li>
+    </ul>
+  </li>
+  <li>统一腕部图像：
+    <ul>
+      <li>若没有腕部相机，推理也用零图 + mask false。</li>
+      <li>或训练时明确复用 top image。</li>
+    </ul>
+  </li>
+  <li>每个 episode 入库前必须跑：</li>
+</ol>
+
+<h3 id="172-中期">17.2 中期</h3>
+
+<ol>
+  <li>重新做手眼标定：
+    <ul>
+      <li>标定板固定、尺寸准确。</li>
+      <li>关闭 IR projector 或控制红外照明。</li>
+      <li>输出重投影误差。</li>
+      <li>保存每次标定的 session 和最终 TF。</li>
+    </ul>
+  </li>
+  <li>数据标签补偿：
+    <ul>
+      <li>根据播放评估得到的时间偏移，把 action 与未来 actual state 对齐。</li>
+      <li>比较“命令空间 action”和“可达状态 action”的训练效果。</li>
+    </ul>
+  </li>
+  <li>服务端 warmup 合入主线：
+    <ul>
+      <li>将 <code class="language-plaintext highlighter-rouge">origin/read</code> 的 warmup 和 <code class="language-plaintext highlighter-rouge">server_timing</code> 以可选参数方式合入，而不是只留在实验分支。</li>
+    </ul>
+  </li>
+  <li>推理客户端日志标准化：
+    <ul>
+      <li>保存 infer_ms、servo_ms、gripper_ms、image_age_ms、state_age_ms。</li>
+      <li>每次运行生成 hdf5/csv 日志，便于对比。</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="173-长期">17.3 长期</h3>
+
+<ol>
+  <li>考虑 C++ ServoP 控制节点：
+    <ul>
+      <li>Python/rclpy 对高频控制不是最理想。</li>
+      <li>可把控制执行层移到 C++，Python 只负责模型推理和目标下发。</li>
+    </ul>
+  </li>
+  <li>明确实时控制接口：
+    <ul>
+      <li>研究 Dobot 控制器是否存在更适合连续伺服的接口或参数。</li>
+      <li>若 ServoP 服务调用本身不稳定，模型侧优化意义有限。</li>
+    </ul>
+  </li>
+  <li>引入更可靠的数据格式版本：
+    <ul>
+      <li>迁移 LeRobot v3。</li>
+      <li>或固定 v2.0 工具链，写清依赖版本。</li>
+    </ul>
+  </li>
+  <li>增加多任务数据：
+    <ul>
+      <li>当前看起来主要是 pick block。</li>
+      <li>VLA 微调需要更丰富动作、物体、场景和语言。</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="18-文件索引">18. 文件索引</h2>
+
+<h3 id="真机笔记">真机笔记</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>真机笔记/二、真机部署 ...md
+真机笔记/二、真机部署/手眼标定 ...md
+真机笔记/二、真机部署/数据录制与播放 ...md
+真机笔记/二、真机部署/数据录制与播放/代码修改 ...md
+真机笔记/二、真机部署/hdf5到lerobot v2 0格式转换 ...md
+真机笔记/二、真机部署/openpi环境部署 ...md
+真机笔记/二、真机部署/推理客户端部署 ...md
+真机笔记/二、真机部署/bug维修记录 ...md
+</code></pre></div></div>
+
+<h3 id="openpicr5"><code class="language-plaintext highlighter-rouge">openpicr5</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>examples/dobot_cr5/main.py
+examples/dobot_cr5/README.md
+examples/dobot_cr5/DESIGN.md
+src/openpi/policies/dobot_cr3_policy.py
+src/openpi/training/config.py
+scripts/serve_policy.py
+src/openpi/serving/websocket_policy_server.py
+packages/openpi-client/src/openpi_client/websocket_client_policy.py
+</code></pre></div></div>
+
+<p>实验分支 <code class="language-plaintext highlighter-rouge">origin/read</code> 额外包括：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>examples/dobot_cr5/SERVO_LATENCY_INVESTIGATION.md
+examples/dobot_cr5/analyze_inference_log.py
+examples/dobot_cr5/run_and_analyze.py
+</code></pre></div></div>
+
+<h3 id="dobot_6axis_ros2_v3-originserver"><code class="language-plaintext highlighter-rouge">DOBOT_6Axis_ROS2_V3 origin/server</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dobot_demo/dobot_demo/data_collector4.py
+dobot_demo/dobot_demo/recorder_optimized.py
+dobot_demo/dobot_demo/dataset_player.py
+dobot_demo/dobot_demo/playback_evaluator.py
+dobot_demo/dobot_demo/analyze_playback.py
+dobot_demo/dobot_demo/check_dataset.py
+dobot_demo/dobot_demo/fix_camera_info.py
+dobot_demo/dobot_demo/convert/convert_to_lerobot.py
+dobot_demo/dobot_demo/PLAYER_SAFETY_GUIDE.md
+dobot_demo/dobot_demo/PLAYBACK_EVALUATION_GUIDE.md
+</code></pre></div></div>
+
+<h3 id="ros2_ws_xing"><code class="language-plaintext highlighter-rouge">ros2_ws_xing</code></h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>recorder_optimized.py
+fastdds_shm_config.xml
+start_recording_optimized.sh
+start_camera_shm.sh
+start_recorder_shm.sh
+camera_recorder_optimized.launch.py
+verify_config.sh
+test_performance.sh
+OPTIMIZATION_README.md
+</code></pre></div></div>
+
+<h2 id="20-最终评价">20. 最终评价</h2>
+
+<p>这个项目已经从“能控制机械臂”推进到了“能采集 VLA 数据、能转换成 LeRobot、能训练 OpenPI、能在真机上通过 WebSocket 推理控制 CR5”的阶段。真正难点集中在三个方面：</p>
+
+<ol>
+  <li><strong>数据时序</strong>：图像、机械臂、夹爪频率不同，严格同步会丢帧，插值是当前最实际方案。</li>
+  <li><strong>控制延迟</strong>：ServoP 在推理客户端中时延不稳定，非阻塞和并行化并没有带来可用的闭环质量。</li>
+  <li><strong>数据语义</strong>：action 是目标命令，state 是实际反馈，二者之间的 gap 会被模型学习或放大。</li>
+</ol>
+
+<p>当前最推荐的稳定路线是：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>共享内存相机 + 异步录制 + 图像时间主导插值
+→ HDF5
+→ 数据质量检查和慢速安全播放
+→ LeRobot v2.0 转换
+→ OpenPI pi0_dobot_cr3/pi0_dobot_cr5 微调
+→ WebSocket 服务端
+→ CR5 串行/阻塞动作块推理客户端
+</code></pre></div></div>
+
+<p>并行推理和独立 ServoP 进程的尝试应作为工程经验保留在报告和分支中：它证明了单纯追求高频不是 VLA 真机推理的核心，闭环状态一致性和轨迹质量更重要。</p>
+
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="page__footer">
+      <footer>
+        <div class="page__footer-copyright">
+          <p>&copy; 2026 Jianming Xing<br> 邢鉴明. 版权所有。</p>
+          <p><a href="https://beian.miit.gov.cn" target="_blank">津ICP备2023005601号-1</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="/assets/js/mermaid-init.js"></script>
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "");
+</script>
+
+
+<script>
+    
+</script>
+
+
+
+  </body>
+</html>

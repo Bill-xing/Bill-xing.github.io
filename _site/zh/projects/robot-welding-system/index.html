@@ -1,0 +1,2483 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+
+  <title>面向焊缝识别的机器人孪生上位机系统 - Jianming Xing / 邢鉴明</title>
+
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Jianming Xing / 邢鉴明">
+<meta property="og:title" content="面向焊缝识别的机器人孪生上位机系统">
+
+
+  <link rel="canonical" href="http://localhost:4100/zh/projects/robot-welding-system/">
+  <meta property="og:url" content="http://localhost:4100/zh/projects/robot-welding-system/">
+
+
+
+
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+<head>
+  <base target="_blank">
+</head>
+    <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.ico?v=20260525-black" sizes="any">
+<link rel="stylesheet" href="/assets/css/academicons.css" />
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a href="/zh/#about-me">首页</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#about-me">关于我</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#-news">动态</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#education">教育经历</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#projects">项目</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#experience">经历</a></li>
+          
+            <li class="masthead__menu-item"><a href="/zh/#-awards">荣誉奖项</a></li>
+          
+          
+            <li class="masthead__menu-item"><a href="/projects/robot-welding-system/">EN</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main" role="main">
+      
+  <div class="sidebar sticky">
+  
+
+
+
+
+
+
+
+
+<div itemscope itemtype="http://schema.org/Person" class="profile_box">
+
+  <div class="author__avatar">
+    <img src="/images/jianming-profile.jpg" class="author__avatar" alt="Jianming Xing<br> 邢鉴明">
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Jianming Xing<br> 邢鉴明</h3>
+    <p class="author__bio">哈尔滨工业大学（深圳）计算机科学与技术第二学士学位在读</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">More Info & Contact</button> -->
+    <ul class="author__urls social-icons">
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> 中国深圳</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> 哈尔滨工业大学</li>
+      
+      
+      
+        <li><a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> 邮箱</a></li>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+      <div class="author__urls_sm">
+      
+      
+        <a href="mailto:bill.xjm@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a>
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <a href="https://github.com/Bill-xing"><i class="fab fa-fw fa-github" aria-hidden="true"></i></a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+  
+  </div>
+
+
+      <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+        <meta itemprop="headline" content="面向焊缝识别的机器人孪生上位机系统">
+        <div class="page__inner-wrap">
+          <section class="page__content" itemprop="text">
+            
+<div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin: 10px 0 18px 0;">
+  <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>
+      <div style="font-weight:600;">
+        负责视觉模型、上位机控制与数字孪生集成
+         · 2024.09 - 2025.06
+      </div>
+
+      
+      <div style="margin-top:8px;">
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            机器人
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            计算机视觉
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            C++/Qt
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            U-Net
+          </span>
+        
+          <span style="display:inline-block; padding:2px 10px; margin: 0 6px 6px 0; border-radius:999px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+            OpenGL
+          </span>
+        
+      </div>
+      
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      
+      
+      
+        <span>Code:</span>
+        
+          <a href="https://github.com/Bill-xing/HMI">HMI</a>
+        
+      
+    </div>
+  </div>
+
+  
+    <div style="margin-top:8px;">面向焊缝识别与 LeArm 数字孪生演示，构建了结合语义分割、Qt 控制和 OpenGL 实时可视化的软件系统。</div>
+  
+
+  
+    <div style="margin-top:8px;"><b>成果:</b> 将焊缝检测与机器人可视化集成到统一桌面流程中，简历记录的焊缝分割准确率达到 96.8%。</div>
+  
+</div>
+
+<h2 id="开源仓库与资源边界">开源仓库与资源边界</h2>
+
+<p>项目开源仓库：<a href="https://github.com/Bill-xing/HMI">https://github.com/Bill-xing/HMI</a></p>
+
+<p>代码已开源；数据集、模型权重和 LeArm STL 结构资源按照 README 与技术文档中的边界单独说明。本文保留工程实现、算法训练、Qt/OpenGL 集成和数字孪生细节，并把原始技术文档中的关键图片转存到网站静态目录，避免本地导出路径导致坏链。</p>
+
+<h2 id="项目概览">项目概览</h2>
+
+<p>HMI 是面向幻尔科技 Hiwonder LeArm 机械臂平台的非官方二次开发上位机，主要用于焊缝识别、UNet 图像分割推理和机械臂数字孪生滑块控制演示。Qt/OpenGL 机械臂三维显示参考 <a href="https://github.com/eagleqq/Robot3D">eagleqq/Robot3D</a>，UNet 训练、推理与 mIoU 评估流程参考 <a href="https://github.com/bubbliiiing/unet-pytorch">bubbliiiing/unet-pytorch</a>。本项目在此基础上完成 LeArm 模型适配、Qt 上位机界面整合、焊缝识别推理调用、滑块式关节仿真控制和桌面应用打包验证。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>模块</th>
+      <th>关键内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qt/C++ 上位机</td>
+      <td><code class="language-plaintext highlighter-rouge">logon</code>、<code class="language-plaintext highlighter-rouge">secinterface</code>、<code class="language-plaintext highlighter-rouge">mainwindow</code>、<code class="language-plaintext highlighter-rouge">seamtest</code> 界面与业务逻辑</td>
+    </tr>
+    <tr>
+      <td>识别推理</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code> 通过 <code class="language-plaintext highlighter-rouge">QProcess</code> 调用，默认使用 <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+    </tr>
+    <tr>
+      <td>数据与训练</td>
+      <td>自采焊缝数据集，<code class="language-plaintext highlighter-rouge">json_to_dataset.py</code> 将 LabelMe JSON 转 VOC mask</td>
+    </tr>
+    <tr>
+      <td>数字孪生</td>
+      <td><code class="language-plaintext highlighter-rouge">DDR6RobotWidget</code> 加载 <code class="language-plaintext highlighter-rouge">base_link.STL</code> 到 <code class="language-plaintext highlighter-rouge">link_5.STL</code> 并按 DH 参数渲染</td>
+    </tr>
+    <tr>
+      <td>路径管理</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code> 统一处理工程根目录、Python 环境和输出路径</td>
+    </tr>
+    <tr>
+      <td>本地配置</td>
+      <td><code class="language-plaintext highlighter-rouge">scripts/hmi_local_env.example.sh</code> 仅作为本机路径配置样例，真实配置不提交</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="资源边界">资源边界</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>内容</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>仓库代码</td>
+      <td>已开源，仓库地址为 <a href="https://github.com/Bill-xing/HMI">Bill-xing/HMI</a></td>
+    </tr>
+    <tr>
+      <td>焊缝分割数据集</td>
+      <td>作者自采，不直接提交到 Git，说明采用 CC BY 4.0</td>
+    </tr>
+    <tr>
+      <td>自训练 UNet 权重</td>
+      <td>默认文件名 <code class="language-plaintext highlighter-rouge">seam_unet.pth</code>，不写入 Git 历史，说明采用 Apache License 2.0</td>
+    </tr>
+    <tr>
+      <td>LeArm STL/结构模型</td>
+      <td>仓库不提供，不授权二次分发；本地演示需自行准备有权使用的 STL</td>
+    </tr>
+    <tr>
+      <td>默认登录</td>
+      <td>演示账号为 <code class="language-plaintext highlighter-rouge">username: admin</code>、<code class="language-plaintext highlighter-rouge">password: admin</code>，只用于界面流程演示</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="演示效果">演示效果</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>机械臂识别到焊缝</th>
+      <th>滑块控制独立关节</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://youtu.be/_f371G87iBs?si=kt9yl1vsSmSuFXPl"><img src="/images/projects/robot-welding-system/hmi-welding-seam-recognition-demo.gif" alt="机械臂识别到焊缝的效果视频" /></a></td>
+      <td><a href="https://youtu.be/tFxSIknCsfQ?si=BHSCSx6OC0wbLYiz"><img src="/images/projects/robot-welding-system/hmi-welding-joint-slider-control-demo.gif" alt="通过滑块控制机械臂各个独立关节的场景" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>原视频链接：</p>
+
+<ul>
+  <li><a href="https://youtu.be/_f371G87iBs?si=kt9yl1vsSmSuFXPl">机械臂识别到焊缝的效果视频</a></li>
+  <li><a href="https://youtu.be/tFxSIknCsfQ?si=BHSCSx6OC0wbLYiz">通过滑块控制机械臂各个独立关节的场景</a></li>
+</ul>
+
+<h2 id="参考项目与授权边界">参考项目与授权边界</h2>
+
+<p>第三方来源与许可证说明见 <a href="THIRD_PARTY_NOTICES.zh-CN.md">THIRD_PARTY_NOTICES.zh-CN.md</a>。</p>
+
+<ul>
+  <li><a href="https://github.com/bubbliiiing/unet-pytorch">bubbliiiing/unet-pytorch</a>：UNet 训练、推理和 mIoU 评估流程的主要参考项目，原项目采用 MIT License。</li>
+  <li><a href="https://github.com/eagleqq/Robot3D">eagleqq/Robot3D</a>：Qt/OpenGL 机械臂三维显示、STL 加载和关节控制部分的主要参考项目。</li>
+  <li>LeArm 机械臂 STL/结构模型：本仓库只说明适配方式和期望文件名，不提供 STL 文件。</li>
+  <li>模型权重：<code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> 为本项目任务场景下训练得到的权重文件，默认不提交到 Git 仓库。</li>
+</ul>
+
+<p>本仓库当前不声明一个覆盖全部内容的统一开源许可证。公开发布前仍应确认代码、STL 资源和第三方依赖的许可条件；数据集与权重的许可证以上述说明为准。</p>
+
+<h2 id="详细技术文档">详细技术文档</h2>
+
+<h1 id="面向焊缝识别的机器人孪生上位机技术文档">面向焊缝识别的机器人孪生上位机技术文档</h1>
+
+<h2 id="1-文档说明">1. 文档说明</h2>
+
+<p>本文档依据以下材料整理：</p>
+
+<ul>
+  <li>毕业论文：<code class="language-plaintext highlighter-rouge">要交给老师的电子版文件/02_邢鉴明_2021212307_ZX_LW.pdf</code></li>
+  <li>源码工程：<code class="language-plaintext highlighter-rouge">HMI</code></li>
+  <li>补充参考：<code class="language-plaintext highlighter-rouge">要交给老师的电子版文件/02_邢鉴明_2021212307_ZX_LW.docx</code></li>
+</ul>
+
+<p>文档重点说明系统的工程实现，而不是简单复述论文。内容覆盖焊缝语义分割、Qt/C++ 上位机、串口控制、OpenGL 数字孪生、模块联动、复现部署和验证方法。论文中的关键图片已经转存为网站静态资源，并在对应技术章节中引用。</p>
+
+<h2 id="3-总体架构">3. 总体架构</h2>
+
+<h3 id="31-架构分层">3.1 架构分层</h3>
+
+<p>系统由四个主要层次组成：</p>
+
+<pre><code class="language-mermaid">flowchart TB
+    User[操作人员] --&gt; GUI[Qt/C++ 上位机界面]
+    GUI --&gt; Login[登录与二级功能选择]
+    GUI --&gt; SeamUI[焊缝识别界面 seamtest]
+    GUI --&gt; ControlUI[机械臂控制界面 MainWindow]
+    ControlUI --&gt; Serial[QSerialPort 串口通信]
+    ControlUI --&gt; Twin[DDR6RobotWidget 数字孪生视图]
+    SeamUI --&gt; QProc[QProcess 启动 Python 推理]
+    QProc --&gt; PyPredict[predict.py]
+    PyPredict --&gt; Model[UNet/VGG16 权重 seam_unet.pth]
+    PyPredict --&gt; Result[segmented_image.png]
+    SeamUI --&gt; EventBus[globaleventbus 单例事件总线]
+    EventBus --&gt; ControlUI
+    Twin --&gt; STL[res/binary/*.STL]
+</code></pre>
+
+<p>各层职责如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>层级</th>
+      <th>主要组件</th>
+      <th>职责</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>界面层</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.ui</code>、<code class="language-plaintext highlighter-rouge">secinterface.ui</code>、<code class="language-plaintext highlighter-rouge">mainwindow.ui</code>、<code class="language-plaintext highlighter-rouge">seamtest.ui</code></td>
+      <td>登录、功能入口、图像显示、串口参数配置、滑块控制</td>
+    </tr>
+    <tr>
+      <td>业务层</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.cpp</code>、<code class="language-plaintext highlighter-rouge">secinterface.cpp</code>、<code class="language-plaintext highlighter-rouge">mainwindow.cpp</code>、<code class="language-plaintext highlighter-rouge">seamtest.cpp</code></td>
+      <td>流程调度、信号槽连接、串口指令组包、图像处理进程管理</td>
+    </tr>
+    <tr>
+      <td>算法层</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code>、<code class="language-plaintext highlighter-rouge">unet.py</code>、<code class="language-plaintext highlighter-rouge">nets/</code>、<code class="language-plaintext highlighter-rouge">utils/</code>、<code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>模型训练、推理、mIoU 评估、数据增强</td>
+    </tr>
+    <tr>
+      <td>渲染层</td>
+      <td><code class="language-plaintext highlighter-rouge">rrglwidget.cpp</code>、<code class="language-plaintext highlighter-rouge">ddr6robotwidget.cpp</code>、<code class="language-plaintext highlighter-rouge">stlfileloader.cpp</code></td>
+      <td>OpenGL 初始化、STL 二进制解析、机械臂关节变换和交互渲染</td>
+    </tr>
+    <tr>
+      <td>运行时支撑</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code>、<code class="language-plaintext highlighter-rouge">scripts/</code>、<code class="language-plaintext highlighter-rouge">docs/reproduction/</code></td>
+      <td>项目根目录发现、Python 环境定位、输出目录管理、打包复现</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="32-工程目录">3.2 工程目录</h3>
+
+<p><code class="language-plaintext highlighter-rouge">HMI</code> 的关键目录和文件如下：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HMI/
+├── HMI.pro                         # Qt qmake 工程文件
+├── main.cpp                        # 应用入口与 --self-test 自测入口
+├── logon.*                         # 登录窗口
+├── secinterface.*                  # 二级功能选择窗口
+├── mainwindow.*                    # 机械臂控制与串口通信窗口
+├── seamtest.*                      # 焊缝识别窗口
+├── globaleventbus.*                # 识别成功事件总线
+├── runtime_paths.*                 # 运行路径、Python 环境、输出路径定位
+├── rrglwidget.*                    # OpenGL 基础渲染窗口
+├── ddr6robotwidget.*               # LeArm 机械臂数字孪生渲染
+├── stlfileloader.*                 # STL 文件解析与绘制
+├── predict.py                      # 单张图片推理入口
+├── unet.py                         # 推理封装类
+├── train.py                        # 训练脚本
+├── get_miou.py                     # mIoU 评估入口
+├── json_to_dataset.py              # LabelMe JSON 到分割数据集转换
+├── nets/                           # UNet/VGG16 网络结构
+├── utils/                          # 数据加载、损失、训练、指标工具
+├── model_data/                     # 模型权重目录，默认使用 seam_unet.pth
+├── res/binary/                     # LeArm STL 文件目录，本仓库不公开分发 STL
+├── docs/                           # 数据集、权重、复现、打包说明
+└── scripts/                        # 本地环境与打包脚本
+</code></pre></div></div>
+
+<h3 id="33-构建与依赖">3.3 构建与依赖</h3>
+
+<p>Qt 工程使用 <code class="language-plaintext highlighter-rouge">HMI.pro</code> 管理，关键配置如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>配置项</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qt 模块</td>
+      <td><code class="language-plaintext highlighter-rouge">core</code>、<code class="language-plaintext highlighter-rouge">gui</code>、<code class="language-plaintext highlighter-rouge">widgets</code>、<code class="language-plaintext highlighter-rouge">serialport</code>、<code class="language-plaintext highlighter-rouge">opengl</code></td>
+    </tr>
+    <tr>
+      <td>C++ 标准</td>
+      <td>C++17</td>
+    </tr>
+    <tr>
+      <td>Python 集成</td>
+      <td>通过 <code class="language-plaintext highlighter-rouge">PYTHON_HOME</code>、<code class="language-plaintext highlighter-rouge">PYTHON_VERSION</code> 设置 Python 头文件与动态库路径</td>
+    </tr>
+    <tr>
+      <td>macOS rpath</td>
+      <td>指向 <code class="language-plaintext highlighter-rouge">PYTHON_HOME/lib</code> 和应用包内 <code class="language-plaintext highlighter-rouge">Resources/python/lib</code></td>
+    </tr>
+    <tr>
+      <td>资源</td>
+      <td><code class="language-plaintext highlighter-rouge">res.qrc</code>，包含界面图片资源</td>
+    </tr>
+    <tr>
+      <td>源文件</td>
+      <td>控制、识别、事件总线、运行路径、OpenGL、STL 加载等 C++ 文件</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Python 依赖记录在 <code class="language-plaintext highlighter-rouge">requirements.txt</code> 中，主要包括：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>依赖</th>
+      <th>版本</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">torch</code></td>
+      <td>1.10.2</td>
+      <td>模型训练与推理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">torchvision</code></td>
+      <td>0.11.3</td>
+      <td>视觉模型和预处理生态</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">opencv-python</code></td>
+      <td>4.1.2.30</td>
+      <td>图像 resize、颜色空间转换、后处理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Pillow</code></td>
+      <td>8.3.1</td>
+      <td>图像读写与融合</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">numpy</code></td>
+      <td>1.19.2</td>
+      <td>数组计算</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">labelme</code></td>
+      <td>3.16.7</td>
+      <td>标注数据处理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">matplotlib</code></td>
+      <td>3.3.4</td>
+      <td>训练曲线与评估可视化</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tqdm</code></td>
+      <td>4.60.0</td>
+      <td>训练进度条</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-焊缝语义分割模块">4. 焊缝语义分割模块</h2>
+
+<h3 id="41-技术流程">4.1 技术流程</h3>
+
+<p>焊缝识别模块使用 U-Net 系列语义分割网络。完整流程为：采集多角度、多光照焊缝图像，使用 LabelMe 标注焊缝区域，将 JSON 标注转换为 VOC 风格数据集，训练 VGG-UNet 模型，评估 mIoU，最后通过 <code class="language-plaintext highlighter-rouge">predict.py</code> 在上位机中执行单张图片推理。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-unet-flow.jpeg" alt="U-Net semantic segmentation workflow" /></p>
+
+<p>图 2-1 U-Net 语义分割流程</p>
+
+<h3 id="42-数据采集与标注">4.2 数据采集与标注</h3>
+
+<p>焊缝分割任务采用像素级标注。与目标检测只标注矩形框不同，语义分割需要为每个像素分配类别，因此必须生成与原始图像同尺寸的 mask。论文中使用 LabelMe 对焊缝边缘进行多边形勾画。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-labelme-annotation.png" alt="LabelMe weld-seam polygon annotation" /></p>
+
+<p>图 2-2 LabelMe 语义分割标签数据集制作示例</p>
+
+<p>数据集类别定义为二分类：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类别索引</th>
+      <th>类别名</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td><code class="language-plaintext highlighter-rouge">_background_</code></td>
+      <td>背景</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><code class="language-plaintext highlighter-rouge">seam</code></td>
+      <td>焊缝</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>公开数据集说明中记录的划分为：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>划分</th>
+      <th style="text-align: right">数量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>train</td>
+      <td style="text-align: right">845</td>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td style="text-align: right">94</td>
+    </tr>
+    <tr>
+      <td>trainval</td>
+      <td style="text-align: right">939</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>VOC 风格目录结构如下：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VOC2007/
+├── JPEGImages/                 # 原始图像
+├── SegmentationClass/          # 分割标签 mask
+└── ImageSets/
+    └── Segmentation/
+        ├── train.txt
+        ├── val.txt
+        └── trainval.txt
+</code></pre></div></div>
+
+<h3 id="43-labelme-json-到-voc-mask-的转换">4.3 LabelMe JSON 到 VOC mask 的转换</h3>
+
+<p>转换脚本为 <code class="language-plaintext highlighter-rouge">json_to_dataset.py</code>。核心逻辑如下：</p>
+
+<ol>
+  <li>扫描 <code class="language-plaintext highlighter-rouge">datasets/before/</code> 下的 LabelMe JSON 文件。</li>
+  <li>从 JSON 的 <code class="language-plaintext highlighter-rouge">imageData</code> 字段或 <code class="language-plaintext highlighter-rouge">imagePath</code> 字段读取原图。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">labelme.utils.shapes_to_label</code> 将多边形标注转为像素标签矩阵。</li>
+  <li>构造类别映射：<code class="language-plaintext highlighter-rouge">_background_ -&gt; 0</code>，<code class="language-plaintext highlighter-rouge">seam -&gt; 1</code>。</li>
+  <li>原图保存到 <code class="language-plaintext highlighter-rouge">datasets/JPEGImages</code>，mask 保存到 <code class="language-plaintext highlighter-rouge">datasets/SegmentationClass</code>。</li>
+</ol>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-mask.png" alt="Generated weld-seam mask" /></p>
+
+<p>图 2-3 蒙版图像</p>
+
+<p>工程实现中需要注意两个约束：</p>
+
+<ul>
+  <li>mask 必须使用类别索引，而不是 RGB 彩色值。训练时 <code class="language-plaintext highlighter-rouge">utils/dataloader.py</code> 会将 mask 转为 one-hot 标签。</li>
+  <li>标签图 resize 必须使用最近邻方式，避免连续插值破坏类别索引。</li>
+</ul>
+
+<h3 id="44-网络结构">4.4 网络结构</h3>
+
+<h4 id="441-u-net-基础结构">4.4.1 U-Net 基础结构</h4>
+
+<p>U-Net 由编码器、解码器和跳跃连接组成。编码器逐级下采样提取局部到全局特征，解码器逐级上采样恢复空间分辨率，跳跃连接将编码阶段的细节特征与解码阶段的语义特征拼接，提升边缘恢复能力。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-unet-architecture.png" alt="U-Net encoder-decoder architecture" /></p>
+
+<p>图 2-8 U-Net 网络结构</p>
+
+<h4 id="442-vgg-unet-优化结构">4.4.2 VGG-UNet 优化结构</h4>
+
+<p>项目最终采用 <code class="language-plaintext highlighter-rouge">backbone = "vgg"</code> 的 VGG-UNet。其编码器使用 VGG16 提取多尺度特征，解码阶段通过 <code class="language-plaintext highlighter-rouge">unetUp</code> 模块逐级恢复空间分辨率，并与编码阶段的同尺度特征进行拼接。该结构比最初的 U-Net 方案更适合本项目的小样本焊缝分割场景。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-vgg16.jpeg" alt="VGG16 backbone structure" /></p>
+
+<p>图 2-10 VGG16 网络结构</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-vgg-unet.jpeg" alt="VGG-UNet structure" /></p>
+
+<p>图 2-11 VGG-UNet 网络示意图</p>
+
+<p><code class="language-plaintext highlighter-rouge">nets/unet.py</code> 中的实现要点如下：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Unet</code> 类通过 <code class="language-plaintext highlighter-rouge">backbone</code> 参数在 VGG16 编码器和原始 U-Net 编码器之间切换。</li>
+  <li>VGG 模式下，编码器输出五级特征 <code class="language-plaintext highlighter-rouge">feat1</code> 到 <code class="language-plaintext highlighter-rouge">feat5</code>。</li>
+  <li>解码阶段依次执行 <code class="language-plaintext highlighter-rouge">up_concat4</code>、<code class="language-plaintext highlighter-rouge">up_concat3</code>、<code class="language-plaintext highlighter-rouge">up_concat2</code>、<code class="language-plaintext highlighter-rouge">up_concat1</code>。</li>
+  <li>输出层生成 2 类像素 logits，对应背景与焊缝。</li>
+</ol>
+
+<p>执行顺序可概括为：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>up4 = up_concat4(feat4, feat5)
+up3 = up_concat3(feat3, up4)
+up2 = up_concat2(feat2, up3)
+up1 = up_concat1(feat1, up2)
+final = output_layer(up1)
+</code></pre></div></div>
+
+<p>这种结构适合焊缝边缘分割的原因包括：</p>
+
+<ol>
+  <li>VGG16 预训练特征能够改善小数据集训练时的收敛速度和泛化能力。</li>
+  <li>U-Net 跳跃连接保留浅层边缘和纹理信息，有利于恢复细长焊缝边界。</li>
+  <li>二分类输出减少类别竞争，任务目标集中于“焊缝/背景”。</li>
+</ol>
+
+<h3 id="45-训练配置">4.5 训练配置</h3>
+
+<p>训练入口为 <code class="language-plaintext highlighter-rouge">train.py</code>。主要超参数如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>当前值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Cuda</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>优先使用 GPU</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_classes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>背景 + 焊缝</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backbone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"vgg"</code></td>
+      <td>使用 VGG16 编码器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pretrained</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>使用预训练权重初始化</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">model_path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+      <td>继续加载或微调已有权重</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">input_shape</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[512, 512]</code></td>
+      <td>网络输入尺寸</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_Epoch</code></td>
+      <td><code class="language-plaintext highlighter-rouge">50</code></td>
+      <td>冻结阶段训练到第 50 轮</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_batch_size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>冻结阶段 batch size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Freeze_lr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">1e-4</code></td>
+      <td>冻结阶段学习率</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnFreeze_Epoch</code></td>
+      <td><code class="language-plaintext highlighter-rouge">100</code></td>
+      <td>解冻阶段训练到第 100 轮</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Unfreeze_batch_size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+      <td>解冻阶段 batch size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Unfreeze_lr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">1e-5</code></td>
+      <td>解冻阶段学习率</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dice_loss</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code></td>
+      <td>使用 Dice Loss 辅助小目标分割</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">focal_loss</code></td>
+      <td><code class="language-plaintext highlighter-rouge">False</code></td>
+      <td>当前未启用 Focal Loss</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">optimizer</code></td>
+      <td>Adam</td>
+      <td>自适应优化器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lr_scheduler</code></td>
+      <td>StepLR, gamma=0.96</td>
+      <td>每轮衰减学习率</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_workers</code></td>
+      <td><code class="language-plaintext highlighter-rouge">4</code></td>
+      <td>数据加载线程数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>训练流程为：</p>
+
+<pre><code class="language-mermaid">flowchart LR
+    ReadList[读取 train.txt / val.txt] --&gt; Dataset[UnetDataset]
+    Dataset --&gt; Aug[数据增强与预处理]
+    Aug --&gt; Loader[DataLoader]
+    Loader --&gt; Forward[模型前向传播]
+    Forward --&gt; Loss[CE Loss + Dice Loss]
+    Loss --&gt; Backward[反向传播]
+    Backward --&gt; Adam[Adam 更新参数]
+    Adam --&gt; Save[保存 logs/ep*-loss*.pth]
+</code></pre>
+
+<h3 id="46-数据增强与预处理">4.6 数据增强与预处理</h3>
+
+<p><code class="language-plaintext highlighter-rouge">utils/dataloader.py</code> 中 <code class="language-plaintext highlighter-rouge">get_random_data()</code> 实现训练增强，验证阶段则只执行等比例缩放和居中填充。</p>
+
+<p>训练阶段增强包括：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>增强方式</th>
+      <th>实现细节</th>
+      <th>目的</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>随机宽高比扰动</td>
+      <td><code class="language-plaintext highlighter-rouge">jitter=.3</code>，随机生成新宽高比</td>
+      <td>提升对不同拍摄角度和焊缝形态的适应能力</td>
+    </tr>
+    <tr>
+      <td>随机缩放</td>
+      <td><code class="language-plaintext highlighter-rouge">scale</code> 在 0.25 到 2 之间</td>
+      <td>提升尺度鲁棒性</td>
+    </tr>
+    <tr>
+      <td>水平翻转</td>
+      <td>50% 概率</td>
+      <td>增强方向不变性</td>
+    </tr>
+    <tr>
+      <td>随机位置粘贴</td>
+      <td>将缩放图像粘贴到 512x512 灰色背景</td>
+      <td>模拟目标位置变化</td>
+    </tr>
+    <tr>
+      <td>HSV 颜色扰动</td>
+      <td>色调、饱和度、亮度随机变化</td>
+      <td>提升复杂光照下的识别稳定性</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>输入图像预处理流程：</p>
+
+<ol>
+  <li>使用 <code class="language-plaintext highlighter-rouge">cvtColor()</code> 确保输入为 RGB。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">resize_image()</code> 等比例缩放到 <code class="language-plaintext highlighter-rouge">512x512</code>，不足部分填充灰色背景。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">preprocess_input()</code> 做归一化。</li>
+  <li>将维度从 <code class="language-plaintext highlighter-rouge">HWC</code> 转换为 <code class="language-plaintext highlighter-rouge">CHW</code>，再增加 batch 维度。</li>
+</ol>
+
+<p>标签处理流程：</p>
+
+<ol>
+  <li>mask 使用最近邻插值缩放，防止类别编号被破坏。</li>
+  <li>将超出类别范围的像素设置为 <code class="language-plaintext highlighter-rouge">num_classes</code>。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">np.eye(num_classes + 1)</code> 转为 one-hot 标签，供 Dice/F-score 等计算使用。</li>
+</ol>
+
+<h3 id="47-损失函数与评价指标">4.7 损失函数与评价指标</h3>
+
+<p>训练中默认损失为交叉熵损失加 Dice Loss。Dice Loss 对小目标分割更友好，可缓解焊缝区域占图像比例较小导致的类别不平衡。</p>
+
+<pre><code class="language-math">DiceLoss = 1 - \frac{2|X \cap Y|}{|X| + |Y|}
+</code></pre>
+
+<p>其中 <code class="language-plaintext highlighter-rouge">X</code> 为预测区域，<code class="language-plaintext highlighter-rouge">Y</code> 为真实标注区域。</p>
+
+<p>评价指标采用像素级 IoU、PA Recall 和 Precision：</p>
+
+<pre><code class="language-math">PA\_Recall = \frac{TP}{TP + FN}
+</code></pre>
+
+<pre><code class="language-math">Precision = \frac{TP}{TP + FP}
+</code></pre>
+
+<pre><code class="language-math">IoU = \frac{TP}{TP + FP + FN}
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>符号</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TP</td>
+      <td>焊缝区域被正确识别的像素数量</td>
+    </tr>
+    <tr>
+      <td>FP</td>
+      <td>背景区域被误判为焊缝的像素数量</td>
+    </tr>
+    <tr>
+      <td>FN</td>
+      <td>实际焊缝区域未被识别的像素数量</td>
+    </tr>
+    <tr>
+      <td>TN</td>
+      <td>背景区域被正确排除的像素数量</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-iou-diagram.png" alt="Intersection-over-Union metric diagram" /></p>
+
+<p>图 2-9 交并比示意图</p>
+
+<h3 id="48-模型优化结果">4.8 模型优化结果</h3>
+
+<p>论文记录的优化过程包括三步：</p>
+
+<ol>
+  <li>从原始 U-Net 切换到 VGG-UNet，分割准确率从约 64% 提升到约 87%。</li>
+  <li>引入 VGG16 预训练权重，分割准确率从约 87% 提升到约 89%。</li>
+  <li>将数据集从 30 张扩展到 939 张，最终分割准确率达到约 96.8%。</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>VGG-UNet 的 mIoU</th>
+      <th>原始 U-Net 的 mIoU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-vgg-unet.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-unet.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 2-12 至图 2-13 模型结构优化对比</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>未使用预训练</th>
+      <th>使用预训练</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-no-pretrain.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-pretrain.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 2-14 至图 2-15 预训练权重对比</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>30 张数据集</th>
+      <th>939 张数据集</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-30-samples.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-miou-939-samples.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 2-16 至图 2-17 数据集扩充对比</p>
+
+<p>优化前后效果如下：</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-recognition-comparison.jpeg" alt="Weld-seam segmentation comparison" /></p>
+
+<p>图 2-18 语义分割效果对比图</p>
+
+<h3 id="49-推理流程">4.9 推理流程</h3>
+
+<p>推理入口为 <code class="language-plaintext highlighter-rouge">predict.py</code>，封装类为 <code class="language-plaintext highlighter-rouge">unet.py</code> 中的 <code class="language-plaintext highlighter-rouge">Unet</code>。默认配置：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>配置项</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">model_path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">num_classes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backbone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"vgg"</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">input_shape</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[512, 512]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mix_type</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cuda</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code>，但会自动降级为 <code class="language-plaintext highlighter-rouge">torch.cuda.is_available()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>单张图像推理步骤：</p>
+
+<pre><code class="language-mermaid">flowchart TB
+    Input[输入图像路径] --&gt; PIL[Image.open]
+    PIL --&gt; RGB[cvtColor 转 RGB]
+    RGB --&gt; Resize[resize_image 等比例缩放到 512x512]
+    Resize --&gt; Tensor[归一化并转为 NCHW Tensor]
+    Tensor --&gt; Net[UNet 前向推理]
+    Net --&gt; Softmax[softmax 获取类别概率]
+    Softmax --&gt; Crop[去除灰边区域]
+    Crop --&gt; Restore[resize 回原图尺寸]
+    Restore --&gt; Argmax[按像素 argmax 得到类别图]
+    Argmax --&gt; Blend[类别颜色图与原图融合]
+    Blend --&gt; Save[保存 segmented_image.png]
+</code></pre>
+
+<p>在 <code class="language-plaintext highlighter-rouge">mix_type == 0</code> 下，分割 mask 会映射为颜色图，再通过 <code class="language-plaintext highlighter-rouge">Image.blend(old_img, image, 0.7)</code> 与原图融合。融合权重含义是结果图像中分割颜色占比较高，便于在上位机中直观看到焊缝区域。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-hmi-recognition.png" alt="HMI weld-seam recognition result" /></p>
+
+<p>图 2-19 焊缝分割上位机效果演示</p>
+
+<h2 id="5-qtc-上位机控制模块">5. Qt/C++ 上位机控制模块</h2>
+
+<h3 id="51-从-pyqt-原型到-c-qt-重构">5.1 从 PyQt 原型到 C++ Qt 重构</h3>
+
+<p>论文中先使用 PyQt 快速搭建原型，再因数字孪生渲染实时性、OpenGL 交互和底层集成需要，将上位机重构为 C++ Qt。C++ Qt 的优势包括：</p>
+
+<ol>
+  <li>编译型语言运行效率高，适合高频界面刷新和 OpenGL 渲染。</li>
+  <li>直接使用 Qt SerialPort、OpenGL、信号槽等模块，减少 Python 解释器带来的开销。</li>
+  <li>更适合与 C++ STL 解析、底层硬件通信和桌面应用打包集成。</li>
+  <li>可以借助 qmake 和 macdeployqt/windeployqt 形成可分发应用包。</li>
+</ol>
+
+<p>原型阶段使用 Qt Designer 进行界面布局绘制，形成 <code class="language-plaintext highlighter-rouge">.ui</code> 文件，再由代码绑定具体业务逻辑。C++ Qt 重构后仍保留这种“界面描述文件 + C++ 槽函数”的组织方式，使界面调整和逻辑实现相对分离。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-qt-designer.png" alt="Qt Designer interface layout" /></p>
+
+<p>图 3-2 Qt Designer 设计界面</p>
+
+<h3 id="52-应用启动与窗口层级">5.2 应用启动与窗口层级</h3>
+
+<p>启动入口在 <code class="language-plaintext highlighter-rouge">main.cpp</code>。正常模式下创建 <code class="language-plaintext highlighter-rouge">Secinterface</code> 对象，但 <code class="language-plaintext highlighter-rouge">Secinterface</code> 构造函数首先显示登录窗口 <code class="language-plaintext highlighter-rouge">logon</code>，而不是直接显示主界面。</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant App as main.cpp
+    participant Sec as Secinterface
+    participant Log as logon
+    participant Ctrl as MainWindow
+    participant Seam as seamtest
+
+    App-&gt;&gt;Sec: 创建 Secinterface
+    Sec-&gt;&gt;Log: 创建并 show 登录窗口
+    Log-&gt;&gt;Log: 校验 admin/admin
+    Log--&gt;&gt;Sec: emit login()
+    Sec-&gt;&gt;Sec: show 二级界面
+    Sec-&gt;&gt;Ctrl: 点击控制按钮后 show()
+    Sec-&gt;&gt;Seam: 点击识别按钮后 show()
+</code></pre>
+
+<p>登录窗口使用默认账号：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username: admin
+password: admin
+</code></pre></div></div>
+
+<p>登录状态保存使用 <code class="language-plaintext highlighter-rouge">RuntimePaths::outputPath("config.json")</code>，而不是写在工程源码目录中。保存内容只记录“是否记住账号/密码”的 checkbox 状态。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-login-window.png" alt="Login window" /></p>
+
+<p>图 3-9 上位机登录界面</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-module-menu.png" alt="Secondary module selection window" /></p>
+
+<p>图 3-10 上位机二级界面</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>登录界面优化</th>
+      <th>二级界面优化</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-login-ui-design.jpeg" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-menu-ui-design.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 3-11 至图 3-12 登录界面与二级界面效果</p>
+
+<h3 id="53-串口控制逻辑">5.3 串口控制逻辑</h3>
+
+<p>机械臂控制窗口由 <code class="language-plaintext highlighter-rouge">MainWindow</code> 实现，串口对象为 <code class="language-plaintext highlighter-rouge">QSerialPort *serialPort</code>。初始化函数 <code class="language-plaintext highlighter-rouge">initSerialPort()</code> 完成按钮、滑块、下拉框和事件总线信号的连接。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-control-flow.jpeg" alt="HMI control logic flow" /></p>
+
+<p>图 3-1 上位机控制逻辑图</p>
+
+<p>串口控制流程如下：</p>
+
+<ol>
+  <li>点击“检测串口”按钮，调用 <code class="language-plaintext highlighter-rouge">portDetect()</code>。</li>
+  <li><code class="language-plaintext highlighter-rouge">QSerialPortInfo::availablePorts()</code> 返回当前系统所有串口。</li>
+  <li>将 <code class="language-plaintext highlighter-rouge">portName:description</code> 添加到串口下拉框。</li>
+  <li>点击“打开串口”按钮，调用 <code class="language-plaintext highlighter-rouge">portOpenClose()</code>。</li>
+  <li>设置串口名、波特率、数据位、校验位和停止位。</li>
+  <li>调用 <code class="language-plaintext highlighter-rouge">serialPort-&gt;open(QIODevice::ReadWrite)</code> 打开串口。</li>
+  <li>滑块变化或文本发送触发组包，调用 <code class="language-plaintext highlighter-rouge">sendData()</code> 写入串口。</li>
+</ol>
+
+<p>默认串口参数：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>波特率</td>
+      <td>9600</td>
+    </tr>
+    <tr>
+      <td>数据位</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>校验位</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>停止位</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>界面分区示意：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>文本交互</th>
+      <th>串口设置</th>
+      <th>舵机控制</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-overview.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-serial.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-control-ui-slider.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 3-3 至图 3-5 控制模块界面分区</p>
+
+<p>串口检测后的界面会将可用端口写入下拉框；如果没有检测到端口，则显示无可用串口提示。该流程在 PyQt 原型和 C++ Qt 重构中保持一致，只是底层从 <code class="language-plaintext highlighter-rouge">serial.tools.list_ports</code> 切换为 Qt 原生的 <code class="language-plaintext highlighter-rouge">QSerialPortInfo::availablePorts()</code>。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-serial-detection.png" alt="Serial-port detection panel" /></p>
+
+<p>图 3-6 串口检测模块显示效果</p>
+
+<h3 id="54-舵机控制协议">5.4 舵机控制协议</h3>
+
+<p><code class="language-plaintext highlighter-rouge">MainWindow::showSliderValue()</code> 在滑块变化时构建舵机控制命令。当前单舵机控制数据包格式如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>字节序号</th>
+      <th>字段</th>
+      <th>当前值或来源</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>帧头 1</td>
+      <td><code class="language-plaintext highlighter-rouge">0x55</code></td>
+      <td>固定帧头</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>帧头 2</td>
+      <td><code class="language-plaintext highlighter-rouge">0x55</code></td>
+      <td>固定帧头</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>长度</td>
+      <td><code class="language-plaintext highlighter-rouge">0x08</code></td>
+      <td>当前包长度字段</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>命令</td>
+      <td><code class="language-plaintext highlighter-rouge">0x03</code></td>
+      <td>舵机移动命令</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>舵机数量</td>
+      <td><code class="language-plaintext highlighter-rouge">0x01</code></td>
+      <td>单次控制一个舵机</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>时间低八位</td>
+      <td><code class="language-plaintext highlighter-rouge">0xC8</code></td>
+      <td>运动时间低位，十进制 200</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>时间高八位</td>
+      <td><code class="language-plaintext highlighter-rouge">0x00</code></td>
+      <td>运动时间高位</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>舵机 ID</td>
+      <td><code class="language-plaintext highlighter-rouge">sliderNumber</code></td>
+      <td>1 到 6</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>角度低八位</td>
+      <td><code class="language-plaintext highlighter-rouge">value &amp; 0xFF</code></td>
+      <td>滑块值低位</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>角度高八位</td>
+      <td><code class="language-plaintext highlighter-rouge">(value &gt;&gt; 8) &amp; 0xFF</code></td>
+      <td>滑块值高位</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>论文中给出的多舵机数据长度公式为：</p>
+
+<pre><code class="language-math">N = servo\_num \times 3 + 5
+</code></pre>
+
+<p>当前源码在滑块单舵机控制中使用固定 <code class="language-plaintext highlighter-rouge">servo_num = 1</code> 的等价格式。文本发送路径 <code class="language-plaintext highlighter-rouge">sendMessage()</code> 还支持普通文本模式和 HEX 模式：若界面 checkbox 选中，则按空格拆分十六进制字符串并逐字节转换；否则按 UTF-8 文本发送。</p>
+
+<p><code class="language-plaintext highlighter-rouge">sendData()</code> 中包含以下鲁棒性处理：</p>
+
+<ol>
+  <li>串口未打开时不发送。</li>
+  <li>打印发送数据包大小和十六进制内容，便于调试。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">serialPort-&gt;write(data)</code> 写入。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">waitForBytesWritten(1000)</code> 等待最多 1 秒。</li>
+  <li>发送失败或超时时弹窗提示。</li>
+</ol>
+
+<h3 id="55-滑块到数字孪生关节角的映射">5.5 滑块到数字孪生关节角的映射</h3>
+
+<p>滑块范围设置为 <code class="language-plaintext highlighter-rouge">500</code> 到 <code class="language-plaintext highlighter-rouge">2500</code>，默认值如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>舵机</th>
+      <th style="text-align: right">默认滑块值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">1000</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">1500</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">1500</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">1500</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">1500</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">1500</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>基础映射函数为：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">MainWindow</span><span class="o">::</span><span class="n">mapRange</span><span class="p">(</span><span class="kt">double</span> <span class="n">value</span><span class="p">,</span>
+                            <span class="kt">double</span> <span class="n">inMin</span><span class="p">,</span> <span class="kt">double</span> <span class="n">inMax</span><span class="p">,</span>
+                            <span class="kt">double</span> <span class="n">outMin</span><span class="p">,</span> <span class="kt">double</span> <span class="n">outMax</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">inMin</span><span class="p">)</span> <span class="n">value</span> <span class="o">=</span> <span class="n">inMin</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">inMax</span><span class="p">)</span> <span class="n">value</span> <span class="o">=</span> <span class="n">inMax</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">inMin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">outMax</span> <span class="o">-</span> <span class="n">outMin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">inMax</span> <span class="o">-</span> <span class="n">inMin</span><span class="p">)</span> <span class="o">+</span> <span class="n">outMin</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>即将 <code class="language-plaintext highlighter-rouge">[500, 2500]</code> 映射到 <code class="language-plaintext highlighter-rouge">[-90, 90]</code>。随后 <code class="language-plaintext highlighter-rouge">slotJVarsValueChange()</code> 根据关节编号做额外修正：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>关节索引</th>
+      <th>修正逻辑</th>
+      <th>目的</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">index == 5</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mappedValue += 90</code></td>
+      <td>补偿第五关节模型初始姿态</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">index == 3</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mappedValue -= 90</code> 后再 <code class="language-plaintext highlighter-rouge">mappedValue = -180 - mappedValue</code></td>
+      <td>适配第三关节 STL 坐标方向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">index == 4</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mappedValue = -mappedValue</code></td>
+      <td>适配第四关节旋转方向</td>
+    </tr>
+    <tr>
+      <td>其他</td>
+      <td>仅线性映射</td>
+      <td>保持常规角度映射</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>由于 UI 滑块编号与 <code class="language-plaintext highlighter-rouge">mRobotConfig.JVars</code> 下标方向相反，源码使用 <code class="language-plaintext highlighter-rouge">mappedIndex = 7 - index</code> 写入数字孪生关节变量。</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-signal-slot.jpeg" alt="Qt signal-slot flow for joint control" /></p>
+
+<p>图 3-7 滑块数值与文本框数值双向交互</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-slider-control.png" alt="Slider-based independent joint control" /></p>
+
+<p>图 3-8 舵机控制模块效果显示</p>
+
+<h3 id="56-焊缝识别窗口与-python-推理集成">5.6 焊缝识别窗口与 Python 推理集成</h3>
+
+<p>识别窗口由 <code class="language-plaintext highlighter-rouge">seamtest</code> 类实现，核心函数包括：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">selectImage()</code></td>
+      <td>打开文件选择框，选择待识别图片</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">displayOriginalImage()</code></td>
+      <td>将原图显示到左侧 QLabel</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">processImage()</code></td>
+      <td>使用 QProcess 启动 Python 推理脚本</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">displayResult()</code></td>
+      <td>加载并显示 <code class="language-plaintext highlighter-rouge">segmented_image.png</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seam_detect_success</code></td>
+      <td>识别成功后发射的 Qt 信号</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">processImage()</code> 的关键实现：</p>
+
+<ol>
+  <li>创建 <code class="language-plaintext highlighter-rouge">QProcess</code>。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">RuntimePaths::projectRoot()</code> 定位 <code class="language-plaintext highlighter-rouge">predict.py</code>。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">RuntimePaths::pythonExecutable()</code> 定位 Python 解释器。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">RuntimePaths::outputDir()</code> 作为子进程工作目录，使输出结果写入稳定位置。</li>
+  <li>参数为：<code class="language-plaintext highlighter-rouge">predict.py &lt;image_path&gt;</code>。</li>
+  <li>连接 <code class="language-plaintext highlighter-rouge">readyReadStandardOutput</code> 和 <code class="language-plaintext highlighter-rouge">readyReadStandardError</code> 输出日志。</li>
+  <li>连接 <code class="language-plaintext highlighter-rouge">errorOccurred</code> 捕获启动失败、崩溃、超时、读写错误等异常。</li>
+  <li>进程退出码为 0 时，延迟 500 ms 检查结果文件。</li>
+  <li>若 <code class="language-plaintext highlighter-rouge">segmented_image.png</code> 存在，显示结果并发射 <code class="language-plaintext highlighter-rouge">seam_detect_success()</code>。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">deleteLater()</code> 安全释放进程对象。</li>
+</ol>
+
+<p>这种设计避免了 C++ 直接嵌入 PyTorch 推理代码的复杂性，也避免将模型推理阻塞在 UI 主流程中。</p>
+
+<h3 id="57-运行时路径管理">5.7 运行时路径管理</h3>
+
+<p><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code> 解决桌面应用在源码运行、构建目录运行、<code class="language-plaintext highlighter-rouge">.app</code> 包内运行等不同场景下的路径定位问题。核心函数如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">envValue()</code></td>
+      <td>读取环境变量</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">projectRoot()</code></td>
+      <td>查找包含 <code class="language-plaintext highlighter-rouge">predict.py</code> 的项目根目录</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">resourcePath()</code></td>
+      <td>根据项目根目录拼接资源路径</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pythonHome()</code></td>
+      <td>查找 Python 环境根目录</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pythonExecutable()</code></td>
+      <td>返回 Python 可执行文件路径</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pythonStringLiteral()</code></td>
+      <td>转义路径，供 Python C API 字符串使用</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">outputDir()</code></td>
+      <td>返回运行时输出目录</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">outputPath()</code></td>
+      <td>拼接输出文件路径</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>路径优先级：</p>
+
+<ol>
+  <li>若设置了 <code class="language-plaintext highlighter-rouge">HMI_PROJECT_ROOT</code>，优先使用该路径。</li>
+  <li>否则从当前目录、应用目录、<code class="language-plaintext highlighter-rouge">HMI</code>、<code class="language-plaintext highlighter-rouge">runtime/HMI</code>、<code class="language-plaintext highlighter-rouge">resources/HMI</code>、macOS <code class="language-plaintext highlighter-rouge">Resources/HMI</code> 等候选目录中寻找 <code class="language-plaintext highlighter-rouge">predict.py</code>。</li>
+  <li>Python 优先使用 <code class="language-plaintext highlighter-rouge">PYTHON_EXECUTABLE</code>，其次根据 <code class="language-plaintext highlighter-rouge">PYTHON_HOME</code> 推导，最后回退到 <code class="language-plaintext highlighter-rouge">python</code>。</li>
+  <li>输出目录优先使用 <code class="language-plaintext highlighter-rouge">HMI_OUTPUT_DIR</code>，否则使用 <code class="language-plaintext highlighter-rouge">QStandardPaths::AppDataLocation</code>，再回退到临时目录。</li>
+</ol>
+
+<h2 id="6-数字孪生模块">6. 数字孪生模块</h2>
+
+<h3 id="61-机械臂对象与建模目标">6.1 机械臂对象与建模目标</h3>
+
+<p>数字孪生模块基于 LeArm 六自由度机械臂。论文中通过改进 DH 参数推导正逆运动学，并在上位机中使用 STL 模型和 OpenGL 显示机械臂姿态。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>LeArm 机械臂</th>
+      <th>机械臂结构简图</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-robot-dh-model.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-robot-dh-frame.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 4-1 至图 4-2 LeArm 机械臂与结构简图</p>
+
+<h3 id="62-改进-dh-参数">6.2 改进 DH 参数</h3>
+
+<p>坐标系搭建采用改进 DH 方法：</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-modified-dh-frame.jpeg" alt="Modified DH coordinate frame" /></p>
+
+<p>图 4-3 改进 DH 坐标系示意图</p>
+
+<p>论文给出的尺寸为：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d1 = 95 mm
+d2 = 9.5 mm
+d3 = 104 mm
+d4 = 88.47 mm
+d5 = 59.28 mm
+</code></pre></div></div>
+
+<p>改进 DH 参数表如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>i</th>
+      <th style="text-align: right">a(i-1)</th>
+      <th style="text-align: right">alpha(i-1)</th>
+      <th style="text-align: right">d(i)</th>
+      <th style="text-align: right">theta(i)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">d1</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">d2</td>
+      <td style="text-align: right">-pi/2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">d3</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">d4</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-pi/2</td>
+      <td style="text-align: right">d5</td>
+      <td style="text-align: right">-pi/2</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">pi/2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>源码中 <code class="language-plaintext highlighter-rouge">DDR6RobotWidget::configureModelParams()</code> 使用的渲染参数为：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mRobotConfig</span><span class="p">.</span><span class="n">d</span>     <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">59.28</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">JVars</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">a</span>     <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.8</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mf">88.47</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="n">mRobotConfig</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>这里的数组首位为占位项，实际关节从下标 1 开始。<code class="language-plaintext highlighter-rouge">a[2] = -9.8</code> 对应论文中 <code class="language-plaintext highlighter-rouge">d2 = 9.5 mm</code> 附近的结构偏置，但源码中根据 STL 坐标实际对齐做了符号和数值微调。</p>
+
+<h3 id="63-正运动学">6.3 正运动学</h3>
+
+<p>改进 DH 的单级齐次变换可写为：</p>
+
+<pre><code class="language-math">^{i-1}T_i =
+R_X(\alpha_{i-1})
+D_X(a_{i-1})
+R_Z(\theta_i)
+D_Z(d_i)
+</code></pre>
+
+<p>矩阵形式为：</p>
+
+<pre><code class="language-math">^{i-1}T_i =
+\begin{bmatrix}
+\cos\theta_i &amp; -\sin\theta_i &amp; 0 &amp; a_{i-1} \\
+\sin\theta_i\cos\alpha_{i-1} &amp; \cos\theta_i\cos\alpha_{i-1} &amp; -\sin\alpha_{i-1} &amp; -\sin\alpha_{i-1}d_i \\
+\sin\theta_i\sin\alpha_{i-1} &amp; \cos\theta_i\sin\alpha_{i-1} &amp; \cos\alpha_{i-1} &amp; \cos\alpha_{i-1}d_i \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+</code></pre>
+
+<p>整机末端位姿为：</p>
+
+<pre><code class="language-math">^0T_i = ^0T_1 \cdot ^1T_2 \cdot \ldots \cdot ^{i-1}T_i
+</code></pre>
+
+<p>在 OpenGL 渲染中，源码不直接构造矩阵对象，而是按照 DH 变换顺序调用：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glTranslatef</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotatef</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glTranslatef</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+<span class="n">glRotatef</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>这种做法利用 OpenGL 矩阵栈隐式累乘，实现每个连杆相对于前一连杆的级联变换。</p>
+
+<h3 id="64-逆运动学与验证">6.4 逆运动学与验证</h3>
+
+<p>论文中通过矩阵对应关系求解 <code class="language-plaintext highlighter-rouge">theta1</code> 到 <code class="language-plaintext highlighter-rouge">theta6</code> 的解析表达式。逆解核心思想是：</p>
+
+<ol>
+  <li>利用末端齐次矩阵中的位置项先求 <code class="language-plaintext highlighter-rouge">theta1</code>。</li>
+  <li>使用姿态矩阵相关元素消去部分变量，求 <code class="language-plaintext highlighter-rouge">theta5</code> 和 <code class="language-plaintext highlighter-rouge">theta6</code>。</li>
+  <li>通过组合角 <code class="language-plaintext highlighter-rouge">theta234</code> 处理腕部姿态。</li>
+  <li>利用几何关系求 <code class="language-plaintext highlighter-rouge">theta2</code>、<code class="language-plaintext highlighter-rouge">theta3</code>。</li>
+  <li>最后由 <code class="language-plaintext highlighter-rouge">theta4 = theta234 - theta2 - theta3</code> 得到第四关节角。</li>
+</ol>
+
+<p>由于机械臂逆运动学通常存在多解、奇异位形和不可达位姿，论文中记录了八组候选解，其中部分解为 <code class="language-plaintext highlighter-rouge">NaN</code>。这符合六自由度串联机械臂解析逆解的一般现象。</p>
+
+<p>使用 Robotic Toolbox 对正逆解互相验证：</p>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-robotics-toolbox.png" alt="Robotics Toolbox verification" /></p>
+
+<p>图 4-4 Robotic Toolbox 仿真图</p>
+
+<p>正解测试数据：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>输入关节角</th>
+      <th>末端位姿矩阵</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[pi/4, -2*pi/3, -2*pi/3, 0, 2*pi/3, 0]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[[0.7891, -0.6124, 0.0474, -9.6593], [-0.4356, -0.6124, -0.6597, -9.6593], [0.4330, 0.5000, -0.7500, 15.0000], [0, 0, 0, 1.0000]]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>逆解测试中，<code class="language-plaintext highlighter-rouge">T2</code> 与预设 <code class="language-plaintext highlighter-rouge">T0</code> 一致，说明解析逆解和正解在该测试点上互为验证。</p>
+
+<h3 id="65-stl-模型加载">6.5 STL 模型加载</h3>
+
+<p>机械臂各连杆使用二进制 STL 文件，默认路径为：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>res/binary/
+├── base_link.STL
+├── link_1.STL
+├── link_2.STL
+├── link_3.STL
+├── link_4.STL
+└── link_5.STL
+</code></pre></div></div>
+
+<p><img src="/images/projects/robot-welding-system/hmi-welding-joint-parts.png" alt="LeArm joint part" /></p>
+
+<p>图 4-5 关节零件</p>
+
+<p><code class="language-plaintext highlighter-rouge">STLFileLoader::loadBinaryStl()</code> 按二进制 STL 规范解析文件：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>字节范围</th>
+      <th>内容</th>
+      <th style="text-align: right">大小</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0-79</td>
+      <td>文件头</td>
+      <td style="text-align: right">80 字节</td>
+    </tr>
+    <tr>
+      <td>80-83</td>
+      <td>三角面片数量 <code class="language-plaintext highlighter-rouge">triangle_num</code></td>
+      <td style="text-align: right">4 字节</td>
+    </tr>
+    <tr>
+      <td>每个面片</td>
+      <td>法向量 + 三个顶点 + 属性字段</td>
+      <td style="text-align: right">50 字节</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>单个三角面片结构：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>字段</th>
+      <th>内容</th>
+      <th style="text-align: right">大小</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>normal</td>
+      <td>3 个 float</td>
+      <td style="text-align: right">12 字节</td>
+    </tr>
+    <tr>
+      <td>vertex 1</td>
+      <td>3 个 float</td>
+      <td style="text-align: right">12 字节</td>
+    </tr>
+    <tr>
+      <td>vertex 2</td>
+      <td>3 个 float</td>
+      <td style="text-align: right">12 字节</td>
+    </tr>
+    <tr>
+      <td>vertex 3</td>
+      <td>3 个 float</td>
+      <td style="text-align: right">12 字节</td>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>属性字节计数</td>
+      <td style="text-align: right">2 字节</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>因此文件体积理论上为：</p>
+
+<pre><code class="language-math">FileSize = 84 + 50 \times N_{facet}
+</code></pre>
+
+<p>源码一次性将文件读入内存，然后通过指针偏移解析，优点是逻辑简单、读取速度快；代价是大模型会占用较多瞬时内存。当前 LeArm 演示模型规模较小，该方案是合理的。</p>
+
+<h3 id="66-opengl-渲染管线">6.6 OpenGL 渲染管线</h3>
+
+<p>渲染基础类为 <code class="language-plaintext highlighter-rouge">RRGLWidget</code>，继承自 <code class="language-plaintext highlighter-rouge">QGLWidget</code>。其职责包括：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">initializeGL()</code></td>
+      <td>设置光照、深度测试、法向量归一化、背景色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">resizeGL()</code></td>
+      <td>设置视口和透视投影矩阵</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">paintGL()</code></td>
+      <td>子类重写后执行每帧绘制</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawGrid()</code></td>
+      <td>绘制地面网格</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawCoordinates()</code></td>
+      <td>绘制世界坐标系</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drawSTLCoordinates()</code></td>
+      <td>绘制局部 STL 坐标系</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">setupColor()</code></td>
+      <td>设置材质颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mouseMoveEvent()</code></td>
+      <td>处理旋转、缩放、平移交互</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">STLFileLoader::draw()</code> 使用立即模式绘制：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glBegin</span><span class="p">(</span><span class="n">GL_TRIANGLES</span><span class="p">);</span>
+<span class="k">for</span> <span class="n">each</span> <span class="n">triangle</span><span class="o">:</span>
+    <span class="n">glNormal3f</span><span class="p">(</span><span class="n">normal</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">normal</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">normal</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex0</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex0</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex0</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="n">glVertex3f</span><span class="p">(</span><span class="n">vertex2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="n">glEnd</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>该方式便于学习和验证 STL 加载逻辑，但在大规模模型或高帧率场景下，可进一步升级为 VBO/VAO 缓冲对象渲染，以减少 CPU 到 GPU 的重复提交。</p>
+
+<h3 id="67-机械臂关节级渲染">6.7 机械臂关节级渲染</h3>
+
+<p><code class="language-plaintext highlighter-rouge">DDR6RobotWidget</code> 继承 <code class="language-plaintext highlighter-rouge">RRGLWidget</code>，负责加载各连杆 STL，并按关节顺序进行矩阵变换和绘制。</p>
+
+<p>初始化视角：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">z_zoom</span> <span class="o">=</span> <span class="o">-</span><span class="mi">500</span><span class="p">;</span>
+<span class="n">xRot</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+<span class="n">yRot</span> <span class="o">=</span> <span class="mi">45</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+<span class="n">xTran</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">yTran</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">paintGL()</code> 中先清除颜色和深度缓冲，再依次应用观察变换：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">glTranslated</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_zoom</span><span class="p">);</span>
+<span class="n">glTranslated</span><span class="p">(</span><span class="n">xTran</span><span class="p">,</span> <span class="n">yTran</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">xRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">yRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="n">zRot</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="o">+</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">glRotated</span><span class="p">(</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="n">drawGL</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">drawGL()</code> 中按照基座、link1、link2、link3、link4、link5 的顺序绘制。每绘制一个连杆前，先执行对应的 DH 平移和旋转，再调用该连杆的 <code class="language-plaintext highlighter-rouge">draw()</code>。因为使用 OpenGL 当前矩阵状态，后续连杆自然继承前序关节变换。</p>
+
+<p>机械臂模型状态与实物状态对比如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>上位机状态 1</th>
+      <th>实物状态 1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-digital-twin-state-1.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-physical-state-1.jpeg" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>上位机状态 2</th>
+      <th>实物状态 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-digital-twin-state-2.png" alt="" /></td>
+      <td><img src="/images/projects/robot-welding-system/hmi-welding-physical-state-2.jpeg" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>图 4-6 机械臂上位机模型状态与机械臂状态对比图</p>
+
+<h3 id="68-鼠标交互">6.8 鼠标交互</h3>
+
+<p><code class="language-plaintext highlighter-rouge">RRGLWidget::mouseMoveEvent()</code> 实现三种交互：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>鼠标操作</th>
+      <th>控制变量</th>
+      <th>效果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>左键拖动</td>
+      <td><code class="language-plaintext highlighter-rouge">xRot</code>、<code class="language-plaintext highlighter-rouge">yRot</code></td>
+      <td>旋转观察视角</td>
+    </tr>
+    <tr>
+      <td>右键拖动</td>
+      <td><code class="language-plaintext highlighter-rouge">z_zoom</code></td>
+      <td>缩放视图</td>
+    </tr>
+    <tr>
+      <td>中键拖动</td>
+      <td><code class="language-plaintext highlighter-rouge">xTran</code>、<code class="language-plaintext highlighter-rouge">yTran</code></td>
+      <td>平移视图</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Qt 角度变量采用 <code class="language-plaintext highlighter-rouge">角度 * 16</code> 的存储方式，因此 <code class="language-plaintext highlighter-rouge">paintGL()</code> 中渲染时使用 <code class="language-plaintext highlighter-rouge">xRot / 16.0</code> 还原为角度。</p>
+
+<h2 id="7-模块联动机制">7. 模块联动机制</h2>
+
+<h3 id="71-识别成功到机械臂运动的事件链">7.1 识别成功到机械臂运动的事件链</h3>
+
+<p>焊缝识别模块与机械臂控制模块之间通过 <code class="language-plaintext highlighter-rouge">globaleventbus</code> 解耦。事件链如下：</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Seam as seamtest
+    participant Proc as QProcess/predict.py
+    participant Bus as globaleventbus
+    participant Main as MainWindow
+    participant Twin as DDR6RobotWidget
+    participant Serial as QSerialPort
+
+    Seam-&gt;&gt;Proc: processImage(imagePath)
+    Proc--&gt;&gt;Seam: exitCode == 0
+    Seam-&gt;&gt;Seam: 检查 segmented_image.png
+    Seam-&gt;&gt;Bus: emit seam_detect_success()
+    Bus-&gt;&gt;Bus: onSeamDetectionSuccess()
+    Bus--&gt;&gt;Main: emit seamDetectionSuccess()
+    Main-&gt;&gt;Main: move_Learm()
+    Main-&gt;&gt;Twin: 更新 6 个滑块和 JVars
+    Main-&gt;&gt;Serial: 若串口打开则发送舵机指令
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">globaleventbus</code> 是一个 QObject 单例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">globaleventbus</span><span class="o">*</span> <span class="nf">getInstance</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">globaleventbus</span> <span class="n">instance</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">seamtest</code> 构造函数中连接：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connect</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">seam_detect_success</span><span class="p">()),</span>
+        <span class="n">globaleventbus</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(),</span>
+        <span class="n">SLOT</span><span class="p">(</span><span class="n">onSeamDetectionSuccess</span><span class="p">()));</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MainWindow::initSerialPort()</code> 中连接：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connect</span><span class="p">(</span><span class="n">globaleventbus</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(),</span>
+        <span class="n">SIGNAL</span><span class="p">(</span><span class="n">seamDetectionSuccess</span><span class="p">()),</span>
+        <span class="k">this</span><span class="p">,</span>
+        <span class="n">SLOT</span><span class="p">(</span><span class="n">move_Learm</span><span class="p">()));</span>
+</code></pre></div></div>
+
+<p>这种发布-订阅式设计的优点是 <code class="language-plaintext highlighter-rouge">seamtest</code> 不需要持有 <code class="language-plaintext highlighter-rouge">MainWindow</code> 指针，两个窗口的生命周期和显示逻辑可以保持独立。</p>
+
+<h3 id="72-预设运动姿态">7.2 预设运动姿态</h3>
+
+<p>识别成功后，<code class="language-plaintext highlighter-rouge">MainWindow::move_Learm()</code> 将六个滑块设置为固定值：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>舵机</th>
+      <th style="text-align: right">目标滑块值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">1015</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">1162</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">1757</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">1647</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">1412</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">1640</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>设置滑块会触发已有的 <code class="language-plaintext highlighter-rouge">valueChanged</code> 信号链，从而同时更新：</p>
+
+<ol>
+  <li>UI 文本框显示。</li>
+  <li>数字孪生模型关节角。</li>
+  <li>串口发送数据包。</li>
+</ol>
+
+<p>因此 <code class="language-plaintext highlighter-rouge">move_Learm()</code> 不需要直接调用 OpenGL 刷新或串口发送函数，复用了滑块控制链路。</p>
+
+<h2 id="8-运行资源边界">8. 运行资源边界</h2>
+
+<p>本节只保留复现时需要理解的资源和路径边界，不展开命令式运行流程。项目的本地复现依赖 Qt 5、C++17 工具链、与 <code class="language-plaintext highlighter-rouge">requirements.txt</code> 兼容的 Python 环境、训练好的 <code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> 权重、用于测试的焊缝图片，以及有授权的 LeArm STL 文件。真实机器路径通过 <code class="language-plaintext highlighter-rouge">scripts/hmi_local_env.example.sh</code> 派生的本地配置维护，避免把个人路径写入仓库。</p>
+
+<p>关键环境变量如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>环境变量</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_PROJECT_ROOT</code></td>
+      <td>显式指定 HMI 工程根目录</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_EXECUTABLE</code></td>
+      <td>指定推理使用的 Python 可执行文件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_HOME</code></td>
+      <td>指定 Python/Conda 环境根目录，供 Python C API 和链接器使用</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PYTHON_VERSION</code></td>
+      <td>指定 Python 版本，如 <code class="language-plaintext highlighter-rouge">3.9</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_OUTPUT_DIR</code></td>
+      <td>指定 <code class="language-plaintext highlighter-rouge">segmented_image.png</code> 和 <code class="language-plaintext highlighter-rouge">config.json</code> 的输出目录</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_TEST_IMAGE</code></td>
+      <td>自测模式下的输入图片</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HMI_INCLUDE_LOCAL_STL_ASSETS</code></td>
+      <td>私有打包时是否包含本地 STL 文件</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">main.cpp</code> 提供 <code class="language-plaintext highlighter-rouge">--self-test</code> 模式，用于检查核心流程。自测覆盖：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">predict.py</code> 是否存在。</li>
+  <li><code class="language-plaintext highlighter-rouge">model_data/seam_unet.pth</code> 是否存在。</li>
+  <li><code class="language-plaintext highlighter-rouge">HMI_TEST_IMAGE</code> 是否设置且文件存在。</li>
+  <li>默认 <code class="language-plaintext highlighter-rouge">admin/admin</code> 登录是否发出 <code class="language-plaintext highlighter-rouge">login</code> 信号。</li>
+  <li><code class="language-plaintext highlighter-rouge">MainWindow</code> 是否能初始化。</li>
+  <li><code class="language-plaintext highlighter-rouge">seamtest::processImage()</code> 是否能生成 <code class="language-plaintext highlighter-rouge">segmented_image.png</code>。</li>
+  <li>是否发出 <code class="language-plaintext highlighter-rouge">seam_detect_success</code> 信号。</li>
+</ol>
+
+<p>注意：离屏模式下 OpenGL 上下文可能受限，因此自测主要验证识别和界面初始化流程，不等同于完整 3D 渲染验收。</p>
+
+<h2 id="9-验证与质量控制">9. 验证与质量控制</h2>
+
+<h3 id="91-算法验证">9.1 算法验证</h3>
+
+<p>算法验证建议包含：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>验证项</th>
+      <th>方法</th>
+      <th>通过标准</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>数据集完整性</td>
+      <td>检查 <code class="language-plaintext highlighter-rouge">JPEGImages</code>、<code class="language-plaintext highlighter-rouge">SegmentationClass</code>、<code class="language-plaintext highlighter-rouge">ImageSets/Segmentation</code></td>
+      <td>每个样本均有原图和 mask</td>
+    </tr>
+    <tr>
+      <td>mask 类别合法性</td>
+      <td>统计 mask 像素值</td>
+      <td>只应包含 0、1 或忽略类别</td>
+    </tr>
+    <tr>
+      <td>训练可运行</td>
+      <td>执行 <code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>能进入训练循环并保存权重</td>
+    </tr>
+    <tr>
+      <td>推理可运行</td>
+      <td>执行 <code class="language-plaintext highlighter-rouge">predict.py image.jpg</code></td>
+      <td>生成非空 <code class="language-plaintext highlighter-rouge">segmented_image.png</code></td>
+    </tr>
+    <tr>
+      <td>mIoU 评估</td>
+      <td>执行 <code class="language-plaintext highlighter-rouge">get_miou.py</code></td>
+      <td>输出 IoU、Recall、Precision</td>
+    </tr>
+    <tr>
+      <td>鲁棒性</td>
+      <td>测试亮光、暗光、不同角度图片</td>
+      <td>焊缝主体连续，误检可控</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="92-上位机验证">9.2 上位机验证</h3>
+
+<p>上位机验证建议包含：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>验证项</th>
+      <th>方法</th>
+      <th>通过标准</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>登录流程</td>
+      <td>输入 <code class="language-plaintext highlighter-rouge">admin/admin</code></td>
+      <td>二级界面显示</td>
+    </tr>
+    <tr>
+      <td>记住账号密码</td>
+      <td>勾选 checkbox 后重启</td>
+      <td><code class="language-plaintext highlighter-rouge">config.json</code> 生效</td>
+    </tr>
+    <tr>
+      <td>串口检测</td>
+      <td>插入/拔出设备后点击检测</td>
+      <td>下拉框正确刷新</td>
+    </tr>
+    <tr>
+      <td>串口打开关闭</td>
+      <td>选择可用串口后打开/关闭</td>
+      <td>状态切换正确</td>
+    </tr>
+    <tr>
+      <td>HEX 发送</td>
+      <td>输入合法/非法 HEX</td>
+      <td>合法发送，非法提示</td>
+    </tr>
+    <tr>
+      <td>滑块控制</td>
+      <td>拖动 6 个滑块</td>
+      <td>文本框、串口、3D 模型联动</td>
+    </tr>
+    <tr>
+      <td>图像识别</td>
+      <td>选择焊缝图片</td>
+      <td>原图和结果图正确显示</td>
+    </tr>
+    <tr>
+      <td>识别联动</td>
+      <td>推理成功</td>
+      <td>机械臂进入预设姿态</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="93-数字孪生验证">9.3 数字孪生验证</h3>
+
+<p>数字孪生验证建议包含：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>验证项</th>
+      <th>方法</th>
+      <th>通过标准</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>STL 加载</td>
+      <td>启动控制界面</td>
+      <td>所有关节模型存在，无缺失</td>
+    </tr>
+    <tr>
+      <td>初始姿态</td>
+      <td>对比实物或论文截图</td>
+      <td>基本姿态一致</td>
+    </tr>
+    <tr>
+      <td>单关节运动</td>
+      <td>分别拖动各滑块</td>
+      <td>对应关节运动方向正确</td>
+    </tr>
+    <tr>
+      <td>视角旋转</td>
+      <td>左键拖动</td>
+      <td>模型可旋转</td>
+    </tr>
+    <tr>
+      <td>缩放</td>
+      <td>右键拖动</td>
+      <td>视图距离变化</td>
+    </tr>
+    <tr>
+      <td>平移</td>
+      <td>中键拖动</td>
+      <td>观察中心移动</td>
+    </tr>
+    <tr>
+      <td>深度遮挡</td>
+      <td>多角度观察</td>
+      <td>前后关系正确，无严重穿模</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="10-已知限制与改进方向">10. 已知限制与改进方向</h2>
+
+<h3 id="101-当前限制">10.1 当前限制</h3>
+
+<ol>
+  <li>焊缝识别结果仍停留在二维像素级分割，尚未转换为真实三维坐标。</li>
+  <li>分割成功后机械臂移动到固定预设姿态，而不是根据焊缝形状动态规划轨迹。</li>
+  <li>OpenGL 渲染使用立即模式 <code class="language-plaintext highlighter-rouge">glBegin/glEnd</code>，适合演示但不适合大规模模型高性能渲染。</li>
+  <li>登录功能为演示级本地校验，不应作为生产级权限系统。</li>
+  <li>串口协议当前以单舵机滑块控制为主，多舵机同步控制和校验机制仍可扩展。</li>
+  <li>STL 文件因授权边界不公开分发，复现 3D 显示需要用户自行准备合法模型文件。</li>
+  <li>Python 依赖版本较旧，迁移到新版 PyTorch/Python 时需要重新验证训练和推理流程。</li>
+</ol>
+
+<h3 id="102-后续扩展">10.2 后续扩展</h3>
+
+<p>建议后续从以下方向完善：</p>
+
+<ol>
+  <li>增加相机标定和手眼标定，将二维分割结果映射到机械臂坐标系。</li>
+  <li>在上位机中加入焊缝中心线提取、边缘拟合和打磨轨迹生成模块。</li>
+  <li>将固定姿态触发改为基于识别结果的动态目标点或轨迹序列。</li>
+  <li>使用 VBO/VAO 或 Qt 现代 OpenGL 管线优化 STL 渲染效率。</li>
+  <li>增加串口协议校验、超时重试、下位机状态回读和错误状态显示。</li>
+  <li>引入更轻量的推理部署方式，如 TorchScript、ONNX Runtime 或 C++ 推理引擎。</li>
+  <li>增加数据集版本管理和实验记录，确保模型指标可追溯。</li>
+</ol>
+
+<h2 id="11-源码定位表">11. 源码定位表</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>技术点</th>
+      <th>主要文件</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>应用入口与自测</td>
+      <td><code class="language-plaintext highlighter-rouge">main.cpp</code></td>
+      <td>正常启动 <code class="language-plaintext highlighter-rouge">Secinterface</code>，自测模式验证登录、推理和输出</td>
+    </tr>
+    <tr>
+      <td>登录窗口</td>
+      <td><code class="language-plaintext highlighter-rouge">logon.cpp</code>、<code class="language-plaintext highlighter-rouge">logon.h</code>、<code class="language-plaintext highlighter-rouge">logon.ui</code></td>
+      <td>默认账号密码、checkbox 状态保存</td>
+    </tr>
+    <tr>
+      <td>二级界面</td>
+      <td><code class="language-plaintext highlighter-rouge">secinterface.cpp</code>、<code class="language-plaintext highlighter-rouge">secinterface.h</code>、<code class="language-plaintext highlighter-rouge">secinterface.ui</code></td>
+      <td>控制窗口和识别窗口入口</td>
+    </tr>
+    <tr>
+      <td>控制窗口</td>
+      <td><code class="language-plaintext highlighter-rouge">mainwindow.cpp</code>、<code class="language-plaintext highlighter-rouge">mainwindow.h</code>、<code class="language-plaintext highlighter-rouge">mainwindow.ui</code></td>
+      <td>串口检测、滑块控制、舵机协议、数字孪生联动</td>
+    </tr>
+    <tr>
+      <td>识别窗口</td>
+      <td><code class="language-plaintext highlighter-rouge">seamtest.cpp</code>、<code class="language-plaintext highlighter-rouge">seamtest.h</code>、<code class="language-plaintext highlighter-rouge">seamtest.ui</code></td>
+      <td>图片选择、QProcess 推理、结果显示</td>
+    </tr>
+    <tr>
+      <td>事件总线</td>
+      <td><code class="language-plaintext highlighter-rouge">globaleventbus.h</code></td>
+      <td>识别成功事件中继</td>
+    </tr>
+    <tr>
+      <td>路径管理</td>
+      <td><code class="language-plaintext highlighter-rouge">runtime_paths.cpp</code>、<code class="language-plaintext highlighter-rouge">runtime_paths.h</code></td>
+      <td>项目根目录、Python 环境、输出目录定位</td>
+    </tr>
+    <tr>
+      <td>OpenGL 基类</td>
+      <td><code class="language-plaintext highlighter-rouge">rrglwidget.cpp</code>、<code class="language-plaintext highlighter-rouge">rrglwidget.h</code></td>
+      <td>光照、投影、鼠标交互、基础绘制</td>
+    </tr>
+    <tr>
+      <td>机械臂孪生</td>
+      <td><code class="language-plaintext highlighter-rouge">ddr6robotwidget.cpp</code>、<code class="language-plaintext highlighter-rouge">ddr6robotwidget.h</code></td>
+      <td>STL 加载、DH 参数、关节级渲染</td>
+    </tr>
+    <tr>
+      <td>STL 解析</td>
+      <td><code class="language-plaintext highlighter-rouge">stlfileloader.cpp</code>、<code class="language-plaintext highlighter-rouge">stlfileloader.h</code></td>
+      <td>二进制 STL 读取、三角面片绘制</td>
+    </tr>
+    <tr>
+      <td>推理入口</td>
+      <td><code class="language-plaintext highlighter-rouge">predict.py</code></td>
+      <td>命令行接收图片路径，保存 <code class="language-plaintext highlighter-rouge">segmented_image.png</code></td>
+    </tr>
+    <tr>
+      <td>推理封装</td>
+      <td><code class="language-plaintext highlighter-rouge">unet.py</code></td>
+      <td>加载 <code class="language-plaintext highlighter-rouge">seam_unet.pth</code>，执行预处理、推理和融合</td>
+    </tr>
+    <tr>
+      <td>网络结构</td>
+      <td><code class="language-plaintext highlighter-rouge">nets/unet.py</code>、<code class="language-plaintext highlighter-rouge">nets/vgg.py</code></td>
+      <td>VGG-UNet 和原始 U-Net 结构</td>
+    </tr>
+    <tr>
+      <td>训练脚本</td>
+      <td><code class="language-plaintext highlighter-rouge">train.py</code></td>
+      <td>冻结/解冻训练、Adam、StepLR、权重保存</td>
+    </tr>
+    <tr>
+      <td>数据加载</td>
+      <td><code class="language-plaintext highlighter-rouge">utils/dataloader.py</code></td>
+      <td>VOC 数据读取、增强、one-hot 标签</td>
+    </tr>
+    <tr>
+      <td>训练循环</td>
+      <td><code class="language-plaintext highlighter-rouge">utils/utils_fit.py</code></td>
+      <td>训练、验证、损失计算、权重保存</td>
+    </tr>
+    <tr>
+      <td>指标计算</td>
+      <td><code class="language-plaintext highlighter-rouge">get_miou.py</code>、<code class="language-plaintext highlighter-rouge">utils/utils_metrics.py</code></td>
+      <td>mIoU、Recall、Precision</td>
+    </tr>
+    <tr>
+      <td>标注转换</td>
+      <td><code class="language-plaintext highlighter-rouge">json_to_dataset.py</code></td>
+      <td>LabelMe JSON 转 VOC 风格图像和 mask</td>
+    </tr>
+    <tr>
+      <td>构建配置</td>
+      <td><code class="language-plaintext highlighter-rouge">HMI.pro</code></td>
+      <td>Qt 模块、Python 链接、源码和资源</td>
+    </tr>
+  </tbody>
+</table>
+
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="page__footer">
+      <footer>
+        <div class="page__footer-copyright">
+          <p>&copy; 2026 Jianming Xing<br> 邢鉴明. 版权所有。</p>
+          <p><a href="https://beian.miit.gov.cn" target="_blank">津ICP备2023005601号-1</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="/assets/js/mermaid-init.js"></script>
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "");
+</script>
+
+
+<script>
+    
+</script>
+
+
+
+  </body>
+</html>

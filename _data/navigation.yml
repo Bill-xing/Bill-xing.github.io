@@ -1,0 +1,25 @@
+# main links
+main:
+  - title: "About Me"
+    url: "/#about-me"
+    anchor: "#about-me"
+
+  - title: "News"
+    url: "/#-news"
+    anchor: "#-news"
+
+  - title: "Education"
+    url: "/#education"
+    anchor: "#education"
+
+  - title: "Projects"
+    url: "/#projects"
+    anchor: "#projects"
+
+  - title: "Experience"
+    url: "/#experience"
+    anchor: "#experience"
+
+  - title: "Awards"
+    url: "/#-awards"
+    anchor: "#-awards"

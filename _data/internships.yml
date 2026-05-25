@@ -1,0 +1,23 @@
+- org: "Xbotics Embodied AI Community Internship"
+  location: ""
+  start: "2025.10"
+  end: "2026.01"
+  role: "MotrixLab, Isaac Lab, quadruped robotics, reinforcement learning"
+  repo:
+    label: "Bill-xing/MotrixLab"
+    url: "https://github.com/Bill-xing/MotrixLab"
+  logos: []
+  bullets:
+    - "Migrated Isaac Lab's ANYmal-C navigation task to a MotrixLab NumPy environment, rebuilding reset/step, command sampling, observation assembly, reward calculation, and termination checks while preserving the 12-D joint-position action space, 54-D policy observation, and goal position/yaw navigation interface."
+    - "Implemented MuJoCo Heightfield terrain height/slope queries with Y-axis frame correction, spawn/goal filtering by elevation and slope, spawn Z alignment, and boundary termination; added vertical-velocity, body-attitude, and foot-contact rewards plus registry, RL config, zero-action rollout, and reward/termination regression tests."
+
+- org: "HERO Robomaster Team"
+  location: "Harbin Institute of Technology, Weihai"
+  start: "2023.09"
+  end: "2024.02"
+  role: "Vision Framework and ROS2 Migration Developer"
+  logos: []
+  bullets:
+    - "Migrated and modularized the Robomaster vision framework to ROS2 nodes, replacing native C++ threading to improve real-time image acquisition, maintainability, and development scalability."
+    - "Handled MCU-to-Linux host receiving, ROS2 node message exchange, and time synchronization with the MCU."
+    - "Adjusted the communication protocol for new competition-season requirements and improved the foundation for later perception and aiming modules."

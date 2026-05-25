@@ -1,0 +1,9 @@
+<script src="/assets/js/main.min.js"></script>
+
+{% if content contains "language-mermaid" or content contains "```mermaid" %}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="/assets/js/mermaid-init.js"></script>
+{% endif %}
+
+{% include analytics.html %}
+{% include fetch_google_scholar_stats.html %}
